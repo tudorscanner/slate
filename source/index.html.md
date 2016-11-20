@@ -1,119 +1,118 @@
 ---
 title: API Reference
 
-language_tabs:
-  - shell
-  - ruby
-  - python
-  - javascript
-
 toc_footers:
-  - <a href='#'>Sign Up for a Developer Key</a>
-  - <a href='https://github.com/tripit/slate'>Documentation Powered by Slate</a>
-
+  - <a href='http://portal.business.skyscanner.net/en-gb/accounts/login/'>Sign in to your Skyscanner account</a>
+  - <a href='https://support.business.skyscanner.net/hc/en-us'>FAQ and Support</a>
 includes:
+  - currencies
   - errors
 
-search: true
+search: false
 ---
 
-# Introduction
+# API Reference
 
-Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
 
-We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
 
-This example API documentation page was created with [Slate](https://github.com/tripit/slate). Feel free to edit it and use it as a base for your own API's documentation.
+Skyscanner Travel APIs connect you to all the data you need to build an innovative website or app.
+Your customers will be able to take advantage of the best flights and
+car hire deals, from wherever they are in the world - either as independent travel solutions or integrated together.
+
+<pre><strong>API endpoint</strong>
+<code>
+http://partners.api.skyscanner.net/apiservices/
+</code>
+</pre>
 
 # Authentication
 
 > To authorize, use this code:
 
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-```
-
 ```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
+from skyscanner.skyscanner import Flights
+flights_service = Flights('<Your API Key>')
 ```
 
 ```shell
-# With shell, you can just pass the correct header with each request
+# You can pass your API key as a parameter in the POST form with each request
 curl "api_endpoint_here"
-  -H "Authorization: meowmeowmeow"
+  -H "Authorization: <apiKey>"
 ```
 
-```javascript
-const kittn = require('kittn');
+> Make sure to replace `<apiKey>` with your API key.
 
-let api = kittn.authorize('meowmeowmeow');
-```
+Skyscanner uses API keys to allow access to the APIs. You can register a new Skyscanner API key at our [developer portal](http://portal.business.skyscanner.net/en-gb/accounts/login/).
 
-> Make sure to replace `meowmeowmeow` with your API key.
+The API key needs to be included in all API requests as a parameter:
 
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
-
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
-
-`Authorization: meowmeowmeow`
+Parameter | Description | Data Type |
+--------- | ------- | ----------- |
+apiKey | The API Key to identify the customer | String |
 
 <aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
+You must replace <code>akiKey</code> with your personal API key.
 </aside>
 
-# Kittens
+# Flights Live Prices
 
-## Get All Kittens
+## Creating the session
 
-```ruby
-require 'kittn'
+The Live Pricing Service Session must be created before any pricing data can be obtained. The request contains details of the locations, dates, passengers, cabin class and user details. These parameters define the session, and cannot be changed within the session (with the exception of passenger numbers).
+![diagram](/images/Skyscanner_UMLDiagram_v3_EJ-01-01.png)
+<aside class="success">
+Note
+We do not support client-side implementation of our Live Prices API using CORS requests due to the potential security
+risk of exposing account API keys.
+</aside>
 
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
-```
+Request Details
 
-```python
-import kittn
+This is an HTTP POST request.
 
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
-```
+The following must be specified in the header:
+
+HTTP Content-Type header: ‘application/x-www-form-urlencoded’.
+HTTP Accept header: ‘application/json’ or ‘application/xml’.
+URL Format
+
+The form should be posted to this URL. The API Key may be specified in the form or the querystring.
 
 ```shell
-curl "http://example.com/api/kittens"
-  -H "Authorization: meowmeowmeow"
+curl -X POST - H "Content-Type: application/x-www-form-urlencoded"
+    -d 'cabinclass=Economy
+    &country=UK
+    &currency=GBP
+    &locale=en-GB
+    &locationSchema=iata
+    &originplace=EDI
+    &destinationplace=LHR
+    &outbounddate=2017-05-30
+    &inbounddate=2017-06-02
+    &adults=1
+    &children=0
+    &infants=0
+    &apikey=prtl6749387986743898559646983194'
+    "http://partners.api.skyscanner.net/apiservices/pricing/v1.0"
 ```
 
-```javascript
-const kittn = require('kittn');
+Response Details
 
-let api = kittn.authorize('meowmeowmeow');
-let kittens = api.kittens.get();
-```
+A successful response contains no content. The URL to poll the booking details is specified in the Location header of the response.
 
-> The above command returns JSON structured like this:
+An unsuccessful response will detail the validation failure or state that there was an error.
 
-```json
-[
-  {
-    "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
-  },
-  {
-    "id": 2,
-    "name": "Max",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
-  }
-]
+| Element | Detail |
+| ------- | ------ |
+| Location Header | Contains the URL for polling the newly created session |
+
+
+> The response header contains the polling url:
+
+```shell
+Location → "http://partners.api.skyscanner.net/apiservices/
+    pricing/uk1/v1.0/
+    162291a498134dbd97d1db3d881f825c_ecilpojl_E99B7A7B8E258EA9AE2AE21956F01677"
 ```
 
 This endpoint retrieves all kittens.
@@ -133,14 +132,7 @@ available | true | If set to false, the result will include kittens that have al
 Remember — a happy kitten is an authenticated kitten!
 </aside>
 
-## Get a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get(2)
-```
+## Poll results
 
 ```python
 import kittn

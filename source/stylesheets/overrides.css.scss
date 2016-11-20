@@ -1,0 +1,72 @@
+@charset "utf-8";
+@import 'normalize';
+@import 'variables';
+@import 'icon-font';
+
+@import 'variables_overrides.css.scss';
+
+#toc {
+  margin-top: 1.5em;
+}
+
+.tocify-wrapper {
+  font-size: 15px;
+  font-weight: normal;
+
+  // This is the logo at the top of the ToC
+  & > img {
+    margin-top:1.5em;
+    display: block;
+    max-width: 90%;
+  }
+
+  &:hover {
+    text-decoration: none;
+    //background-color: #666;
+    //padding-left: 3px;
+  }
+
+  .tocify-focus {
+    font-weight: bold;
+    box-shadow: none;
+    background-color: $nav-active-bg;
+    color: $nav-active-text;
+  }
+
+  a {
+    margin-top: 0px;
+  }
+
+  ul, li {
+    line-height: 38px;
+  }
+
+  .tocify-subheader {
+    .tocify-item > a {
+        font-size:14px;
+        font-weight: normal;
+    }
+
+  }
+}
+
+.content {
+  h1 {
+    padding-top: 1em;
+    border: none;
+    background-image: none;
+  }
+
+  pre {
+    padding-top: 1em;
+  }
+
+  blockquote {
+    p {
+      background-color: transparent;
+      border: none;
+      padding: 0;
+      font-size:14px;
+    }
+  }
+}

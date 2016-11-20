@@ -3,6 +3,8 @@
 @import 'variables';
 @import 'icon-font';
 
+@import 'variables_overrides.css.scss';
+
 /*
 Copyright 2008-2013 Concur Technologies, Inc.
 
@@ -128,7 +130,7 @@ html, body {
       margin-bottom: 1em;
     }
 
-    @include embossed-bg;
+    //@include embossed-bg;
 
     li {
       margin: 1em $nav-padding;
@@ -190,7 +192,7 @@ html, body {
     }
 
     // for embossed look:
-    @include embossed-bg;
+    //@include embossed-bg;
     &>li:last-child {
       box-shadow: none; // otherwise it'll overflow out of the subheader
     }
