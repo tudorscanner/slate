@@ -5,9 +5,8 @@
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>API Reference</title>
+    <link rel="icon" type="image/png" href="https://logos.skyscnr.com/framework/images/icons/favicon-96x96.png" sizes="96x96">
 
-    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
-    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
     <style>
       .highlight table td { padding: 5px; }
 .highlight table pre { margin: 0; }
@@ -88,10 +87,12 @@
   color: #90a959;
 }
     </style>
-      <script src="javascripts/all.js"></script>
+    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" /><link href="stylesheets/overrides.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
+      <script src="javascripts/all_nosearch.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;shell&quot;,&quot;ruby&quot;,&quot;python&quot;]">
+  <body class="index" data-languages="[]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -99,103 +100,332 @@
       </span>
     </a>
     <div class="tocify-wrapper">
-      <img src="images/logo.png" />
+      <a href="http://business.skyscanner.net"><img src="images/logo.png" /></a>
         <div class="lang-selector">
-              <a href="#" data-language-name="shell">shell</a>
-              <a href="#" data-language-name="ruby">ruby</a>
-              <a href="#" data-language-name="python">python</a>
         </div>
-        <div class="search">
-          <input type="text" class="search" id="input-search" placeholder="Search">
-        </div>
-        <ul class="search-results"></ul>
+
       <div id="toc">
       </div>
         <ul class="toc-footer">
-            <li><a href='#'>Sign Up for a Developer Key</a></li>
-            <li><a href='https://github.com/tripit/slate'>Documentation Powered by Slate</a></li>
+            <li><a href='http://portal.business.skyscanner.net/en-gb/accounts/login/'>Sign in to your Skyscanner account</a></li>
+            <li><a href='https://support.business.skyscanner.net/hc/en-us'>FAQ and Support</a></li>
         </ul>
     </div>
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id="introduction">Introduction</h1>
-
-<p>Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.</p>
-
-<p>We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
-
-<p>This example API documentation page was created with <a href="https://github.com/tripit/slate">Slate</a>. Feel free to edit it and use it as a base for your own API&rsquo;s documentation.</p>
-
-<h1 id="authentication">Authentication</h1>
+        <h1 id="api-documentation">API Documentation</h1>
 
 <blockquote>
-<p>To authorize, use this code:</p>
+<p>API endpoint</p>
 </blockquote>
-<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<pre class="highlight shell"><code>http://partners.api.skyscanner.net/apiservices/
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre>
-<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre>
-<pre class="highlight shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl <span class="s2">"api_endpoint_here"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
 </code></pre>
 
-<blockquote>
-<p>Make sure to replace <code class="prettyprint">meowmeowmeow</code> with your API key.</p>
-</blockquote>
+<p>Build tools that solve problems for millions of travellers and travel retail businesses around the world.</p>
 
-<p>Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our <a href="http://example.com/developers">developer portal</a>.</p>
-
-<p>Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
-
-<p><code class="prettyprint">Authorization: meowmeowmeow</code></p>
+<p>Skyscanner Travel APIs connect you to all the data you need to build an innovative website or app.</p>
 
 <aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
+<b>Nerds only!</b>
+If you&rsquo;re not a developer or don&rsquo;t have access to one, our <a href="http://en.business.skyscanner.net/en-gb/products/travel-widgets/" target="_blank">
+Travel Widgets</a> and <a href="http://en.business.skyscanner.net/en-gb/products/white-label/" target="_blank">White Label</a> are options that don&rsquo;t involve using
+our APIs directly. For
 </aside>
 
-<h1 id="kittens">Kittens</h1>
+          <h1 id="authentication">Authentication</h1>
 
-<h2 id="get-all-kittens">Get All Kittens</h2>
-<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<p>Skyscanner uses API keys to allow access to the APIs. You can create API keys through your <a href="http://portal.business.skyscanner.net/en-gb/accounts/login/">Skyscanner account</a>.</p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span>
-</code></pre>
-<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+<p>You must include the API key in all API requests to the server, either as a parameter in the query or in the query header. Please refer to each endpoint for details.</p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+          <h1 id="getting-started">Getting Started</h1>
+
+<p>The APIs we provide are:</p>
+
+<p><em>Flights Cheapest Prices</em></p>
+
+<table><thead>
+<tr>
+<th>API endpoint</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><a href="#cheapest-prices">Browse Quotes</a></td>
+<td>Returns a list of the cheapest destinations (countries, cities or airports) from cache data.</td>
+</tr>
+<tr>
+<td><a href="#cheapest-prices">Browse Routes</a></td>
+<td>Returns a view of flights  the level of precision.</td>
+</tr>
+<tr>
+<td><a href="#cheapest-prices">Browse Dates</a></td>
+<td>Returns the lowest price on the specified route across either a month / 12 month period.</td>
+</tr>
+<tr>
+<td><a href="#cheapest-prices">Browse<br> Grid</a></td>
+<td>Similar to Browse Dates but outputs a two-dimensional array to be easily displayed as a table.</td>
+</tr>
+</tbody></table>
+
+<p><em>Flights Live Prices</em></p>
+
+<table><thead>
+<tr>
+<th>API endpoint</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><a href="#flights-live-prices">Live prices</a></td>
+<td>Returns live prices from all our suppliers (in the selected market) for the requested route. May take up to a minute</td>
+</tr>
+</tbody></table>
+
+<aside class="warning">
+The Live Pricing API requires a good handling of APIs. You must first create a session and then poll for results. Given the volume of suppliers that we query, it may take up to a minute to retrieve all the results.
+</aside>
+
+<p><em>Car Hire</em></p>
+
+<table><thead>
+<tr>
+<th>API endpoint</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><a href="#flights-live-prices">Live prices</a></td>
+<td>Returns live prices from all our suppliers (in the selected market). May take up to a minute</td>
+</tr>
+</tbody></table>
+
+<p>Before you get started consider how our data fits into your project. Use the Browse Cache Pricing API if your project:</p>
+
+<ul>
+<li>Requires a single price between specific airports or a list of prices between all airports in a city or country (to another city, country or worldwide)</li>
+<li>Doesn&rsquo;t require any comparison of prices on specific routes</li>
+<li>Requires minimal setup, or if you&rsquo;re new to HTTP APIs, Response Headers and Polling.</li>
+</ul>
+
+<aside class="notice">
+We encourage you to start with the Browse Cached Pricing API unless you definitely need Live Pricing and are comfortable with HTTP APIs.
+Upgrading from Browse Cached Pricing to Live Pricing can always be done later!
+</aside>
+
+          <h1 id="flights-cheapest-prices">Flights Cheapest Prices</h1>
+
+<h2 id="browse-quotes">Browse Quotes</h2>
+
+<p>Retrieve the cheapes quotes from our cache.</p>
+<pre class="highlight shell"><code>GET <span class="s2">"http://partners.api.skyscanner.net/apiservices/browsequotes/v1.0/{market}/{currency}/{locale}/
+{originPlace}/
+{destinationPlace}/
+{outboundPartialDate}/
+{inboundPartialDate}?
+apiKey={apiKey}"</span>
 </code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"http://example.com/api/kittens"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
+
+<p><em>API endpoint</em></p>
+
+<p><code class="prettyprint">/browsequotes/v1.0/{market}/{currency}/{locale}/{originPlace}/{destinationPlace}/{outboundPartialDate}/{inboundPartialDate}</code></p>
+
+<p><em>REQUEST PARAMETERS</em></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">market</code> <br><span class="required">REQUIRED</span></td>
+<td>The market/country your user is in</td>
+</tr>
+<tr>
+<td><code class="prettyprint">currency</code> <br><span class="required">REQUIRED</span></td>
+<td>The currency you want the prices in</td>
+</tr>
+<tr>
+<td><code class="prettyprint">locale</code> <br><span class="required">REQUIRED</span></td>
+<td>The language you want the results in (ISO locale)</td>
+</tr>
+<tr>
+<td><code class="prettyprint">originPlace</code> <br><span class="required">REQUIRED</span></td>
+<td>The language you want the results in (ISO locale)</td>
+</tr>
+<tr>
+<td><code class="prettyprint">destinationPlace</code> <br><span class="required">REQUIRED</span></td>
+<td>The language you want the results in (ISO locale)</td>
+</tr>
+<tr>
+<td><code class="prettyprint">outboundPartialDate</code> <br><span class="required">REQUIRED</span></td>
+<td>The language you want the results in (ISO locale)</td>
+</tr>
+<tr>
+<td><code class="prettyprint">inboundPartialDate</code> <br><span class="required">REQUIRED</span></td>
+<td>The language you want the results in (ISO locale)</td>
+</tr>
+<tr>
+<td><code class="prettyprint">apiKey</code> <br><span class="required">REQUIRED</span></td>
+<td>The API Key to identify the customer</td>
+</tr>
+</tbody></table>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"Quotes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"QuoteId"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"MinPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">381</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"Direct"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"OutboundLeg"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"CarrierIds"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="mi">470</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"OriginId"</span><span class="p">:</span><span class="w"> </span><span class="mi">68033</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"DestinationId"</span><span class="p">:</span><span class="w"> </span><span class="mi">42833</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"DepartureDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-02-03T00:00:00"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"InboundLeg"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"CarrierIds"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="mi">470</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"OriginId"</span><span class="p">:</span><span class="w"> </span><span class="mi">42833</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"DestinationId"</span><span class="p">:</span><span class="w"> </span><span class="mi">68033</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"DepartureDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-02-06T00:00:00"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"QuoteDateTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11-09T21:20:00"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+  </span><span class="err">...</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"Places"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"PlaceId"</span><span class="p">:</span><span class="w"> </span><span class="mi">837</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"United Arab Emirates"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"Type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Country"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"SkyscannerCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AE"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+  </span><span class="err">...</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"Carriers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"CarrierId"</span><span class="p">:</span><span class="w"> </span><span class="mi">29</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mombasa Air Safari"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"CarrierId"</span><span class="p">:</span><span class="w"> </span><span class="mi">173</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Silver Airways"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+  </span><span class="err">#...#</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"Currencies"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"Code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"Symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"€"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"ThousandsSeparator"</span><span class="p">:</span><span class="w"> </span><span class="s2">" "</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"DecimalSeparator"</span><span class="p">:</span><span class="w"> </span><span class="s2">","</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"SymbolOnLeft"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"SpaceBetweenAmountAndSymbol"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"RoundingCoefficient"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"DecimalDigits"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p><em>RESPONSE PARAMETERS</em></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">Quotes</code></td>
+<td>Contains the list of markets (array of countries as name-value pairs).</td>
+</tr>
+<tr>
+<td><code class="prettyprint">Places</code></td>
+<td>Contains the list of markets (array of countries as name-value pairs).</td>
+</tr>
+<tr>
+<td><code class="prettyprint">Carriers</code></td>
+<td>Contains the list of markets (array of countries as name-value pairs).</td>
+</tr>
+<tr>
+<td><code class="prettyprint">Currencies</code></td>
+<td>Contains the list of markets (array of countries as name-value pairs).</td>
+</tr>
+</tbody></table>
+
+          <h1 id="flights-live-prices">Flights Live Prices</h1>
+
+<h2 id="creating-the-session">Creating the session</h2>
+
+<p>The Live Pricing Service Session must be created before any pricing data can be obtained. The request contains details of the locations, dates, passengers, cabin class and user details. These parameters define the session, and cannot be changed within the session (with the exception of passenger numbers).</p>
+
+<p><img alt="diagram" src="images/Skyscanner_UMLDiagram_v3_EJ-01-01.png" /></p>
+
+<aside class="warning">
+We do not support client-side implementation of our Live Prices API using CORS requests due to the potential security
+risk of exposing account API keys.
+</aside>
+
+<p>Request Details</p>
+
+<p>This is an HTTP POST request.</p>
+
+<p>The following must be specified in the header:</p>
+
+<p>HTTP Content-Type header: ‘application/x-www-form-urlencoded’.
+HTTP Accept header: ‘application/json’ or ‘application/xml’.
+URL Format</p>
+
+<p>The form should be posted to this URL. The API Key may be specified in the form or the querystring.</p>
+<pre class="highlight shell"><code>curl -X POST - H <span class="s2">"Content-Type: application/x-www-form-urlencoded"</span>
+    -d <span class="s1">'cabinclass=Economy
+    &amp;country=UK
+    &amp;currency=GBP
+    &amp;locale=en-GB
+    &amp;locationSchema=iata
+    &amp;originplace=EDI
+    &amp;destinationplace=LHR
+    &amp;outbounddate=2017-05-30
+    &amp;inbounddate=2017-06-02
+    &amp;adults=1
+    &amp;children=0
+    &amp;infants=0
+    &amp;apikey=prtl6749387986743898559646983194'</span>
+    <span class="s2">"http://partners.api.skyscanner.net/apiservices/pricing/v1.0"</span>
 </code></pre>
+
+<p>Response Details</p>
+
+<p>A successful response contains no content. The URL to poll the booking details is specified in the Location header of the response.</p>
+
+<p>An unsuccessful response will detail the validation failure or state that there was an error.</p>
+
+<table><thead>
+<tr>
+<th>Element</th>
+<th>Detail</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">Location Header</code></td>
+<td>Contains the URL for polling the newly created session</td>
+</tr>
+</tbody></table>
 
 <blockquote>
-<p>The above command returns JSON structured like this:</p>
+<p>The response header contains the polling url:</p>
 </blockquote>
-<pre class="highlight json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fluffums"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"calico"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
-</span></code></pre>
+<pre class="highlight shell"><code>Location → <span class="s2">"http://partners.api.skyscanner.net/apiservices/
+    pricing/uk1/v1.0/
+    162291a498134dbd97d1db3d881f825c_ecilpojl_E99B7A7B8E258EA9AE2AE21956F01677"</span>
+</code></pre>
 
 <p>This endpoint retrieves all kittens.</p>
 
@@ -203,37 +433,7 @@ You must replace <code>meowmeowmeow</code> with your personal API key.
 
 <p><code class="prettyprint">GET http://example.com/api/kittens</code></p>
 
-<h3 id="query-parameters">Query Parameters</h3>
-
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Default</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>include_cats</td>
-<td>false</td>
-<td>If set to true, the result will also include cats.</td>
-</tr>
-<tr>
-<td>available</td>
-<td>true</td>
-<td>If set to false, the result will include kittens that have already been adopted.</td>
-</tr>
-</tbody></table>
-
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
-
-<h2 id="get-a-specific-kitten">Get a Specific Kitten</h2>
-<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre>
+<h2 id="poll-results">Poll results</h2>
 <pre class="highlight python"><code><span class="kn">import</span> <span class="nn">kittn</span>
 
 <span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
@@ -241,6 +441,11 @@ Remember — a happy kitten is an authenticated kitten!
 </code></pre>
 <pre class="highlight shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
   -H <span class="s2">"Authorization: meowmeowmeow"</span>
+</code></pre>
+<pre class="highlight javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
+
+<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
 </code></pre>
 
 <blockquote>
@@ -277,70 +482,345 @@ Remember — a happy kitten is an authenticated kitten!
 </tr>
 </tbody></table>
 
-          <h1 id="errors">Errors</h1>
+          <h1 id="localisation">Localisation</h1>
 
-<aside class="notice">This error section is stored in a separate file in `includes/_errors.md`. Slate allows you to optionally separate out your docs into many files&hellip;just save them to the `includes` folder and add them to the top of your `index.md`&rsquo;s frontmatter. Files are included in the order listed.</aside>
+<p>All Skyscanner services are localised by market, language and currency, so these three parameters must be added to every request.</p>
 
-<p>The Kittn API uses the following error codes:</p>
+<h2 id="locales">Locales</h2>
+
+<p>Retrieve the locales that we support to translate your content.</p>
+<pre class="highlight shell"><code>GET <span class="s2">"http://partners.api.skyscanner.net/apiservices/
+    reference/v1.0/locales?
+    apiKey={apiKey}"</span>
+</code></pre>
+
+<p><em>API endpoint</em></p>
+
+<p><code class="prettyprint">/reference/v1.0/locales</code></p>
+
+<p><em>REQUEST PARAMETERS</em></p>
 
 <table><thead>
 <tr>
-<th>Error Code</th>
-<th>Meaning</th>
+<th>Parameter</th>
+<th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>400</td>
-<td>Bad Request &ndash; Your request sucks</td>
+<td><code class="prettyprint">apiKey</code> <br><span class="required">REQUIRED</span></td>
+<td>The API Key to identify the customer</td>
+</tr>
+</tbody></table>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"Locales"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"Code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ar-AE"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"العربية (الإمارات العربية المتحدة)"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"Code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"az-AZ"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Azərbaycan­ılı (Azərbaycan)"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"Code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bg-BG"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"български (България)"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"Code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ca-ES"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"català (català)"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+  </span><span class="err">...</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p><em>RESPONSE PARAMETERS</em></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">Locales</code></td>
+<td>Contains the list of markets (array of countries as name-value pairs).</td>
+</tr>
+</tbody></table>
+
+<h2 id="currencies">Currencies</h2>
+
+<p>Retrieve the currencies that we support.</p>
+<pre class="highlight shell"><code>GET <span class="s2">"http://partners.api.skyscanner.net/apiservices/
+    reference/v1.0/currencies?
+    apiKey={apiKey}"</span>
+</code></pre>
+
+<p><em>API endpoint</em></p>
+
+<p><code class="prettyprint">/reference/v1.0/currencies</code></p>
+
+<p><em>REQUEST PARAMETERS</em></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">apiKey</code> <br><span class="required">REQUIRED</span></td>
+<td>The API Key to identify the customer</td>
+</tr>
+</tbody></table>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"Currencies"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"Code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"Symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"ThousandsSeparator"</span><span class="p">:</span><span class="w"> </span><span class="s2">","</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"DecimalSeparator"</span><span class="p">:</span><span class="w"> </span><span class="s2">"."</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"SymbolOnLeft"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"SpaceBetweenAmountAndSymbol"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"RoundingCoefficient"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"DecimalDigits"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+  </span><span class="err">...</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p><em>RESPONSE PARAMETERS</em></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">Currencies</code></td>
+<td>The list of currencies that we support, with corresponding symbol and formatting information for internationalisation.</td>
+</tr>
+</tbody></table>
+
+<h2 id="markets">Markets</h2>
+
+<p>Retrieve the market countries that we support.</p>
+
+<p>Most suppliers (airlines, travel agents and car hire dealers) set their fares based on the market (or country of purchase). It is therefore necessary to specify the market country in every query.</p>
+<pre class="highlight shell"><code>GET <span class="s2">"http://partners.api.skyscanner.net/apiservices/
+    reference/v1.0/countries/
+     </span><span class="sb">`</span><span class="o">{</span>locale<span class="o">}</span><span class="sb">`</span><span class="s2"> ?
+    apiKey={apiKey}"</span>
+</code></pre>
+
+<p><em>API endpoint</em></p>
+
+<p><code class="prettyprint">/reference/v1.0/countries</code></p>
+
+<p><em>REQUEST PARAMETERS</em></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">locale</code> <br><span class="required">REQUIRED</span></td>
+<td>The language you want the results in (ISO locale)</td>
 </tr>
 <tr>
-<td>401</td>
-<td>Unauthorized &ndash; Your API key is wrong</td>
+<td><code class="prettyprint">apiKey</code> <br><span class="required">REQUIRED</span></td>
+<td>The API Key to identify the customer</td>
+</tr>
+</tbody></table>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"Countries"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"Code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AD"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Andorra"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"Code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AE"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"United Arab Emirates"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"Code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AF"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Afghanistan"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+  </span><span class="err">...</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p><em>RESPONSE PARAMETERS</em></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">Countries</code></td>
+<td>Contains the list of markets (array of countries as name-value pairs).</td>
+</tr>
+</tbody></table>
+
+          <h1 id="places">Places</h1>
+
+<p>Two types of requests can be made through the autosuggest:</p>
+
+<ul>
+<li><p>list of places (with corresponding IDs) that match the query string</p></li>
+<li><p>information about a specific place given its ID (for example city name and country name for an airport)</p></li>
+</ul>
+
+<p>The country and language must be included in the query so that the most relevant results can be returned, in the correct language.</p>
+
+<p><em>API endpoint</em></p>
+
+<p><code class="prettyprint">/autosuggest/v1.0/{market}/{currency}/{locale}</code></p>
+
+<h2 id="list-of-places">List of places</h2>
+<pre class="highlight shell"><code>GET <span class="s2">"http://partners.api.skyscanner.net/apiservices/
+    autosuggest/v1.0/
+     </span><span class="sb">`</span><span class="o">{</span>market<span class="o">}</span><span class="sb">`</span><span class="s2">/
+     </span><span class="sb">`</span><span class="o">{</span>currency<span class="o">}</span><span class="sb">`</span><span class="s2">/
+      </span><span class="sb">`</span><span class="o">{</span>locale<span class="o">}</span><span class="sb">`</span><span class="s2">?
+    query={query}&amp;
+    apiKey={apiKey}"</span>
+</code></pre>
+
+<p><em>REQUEST PARAMETERS</em></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">query</code> <br><span class="required">REQUIRED</span></td>
+<td>The query string, must be at least 2 characters long.</td>
 </tr>
 <tr>
-<td>403</td>
-<td>Forbidden &ndash; The kitten requested is hidden for administrators only</td>
+<td><code class="prettyprint">apiKey</code> <br><span class="required">REQUIRED</span></td>
+<td>The API Key to identify the customer</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Example response for query=pari</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"Places"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"PlaceId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PARI-sky"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"PlaceName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Paris"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"CountryId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FR-sky"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"RegionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"CityId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PARI-sky"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"CountryName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"France"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"PlaceId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CDG-sky"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"PlaceName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Paris Charles de Gaulle"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"CountryId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FR-sky"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"RegionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"CityId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PARI-sky"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"CountryName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"France"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"PlaceId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ORY-sky"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"PlaceName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Paris Orly"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"CountryId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FR-sky"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"RegionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"CityId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PARI-sky"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"CountryName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"France"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+  </span><span class="err">...</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p><em>RESPONSE PARAMETERS</em></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">Places</code></td>
+<td>Contains the list of markets (array of countries as name-value pairs).</td>
+</tr>
+</tbody></table>
+
+<h2 id="place-information">Place Information</h2>
+<pre class="highlight shell"><code>GET <span class="s2">"http://partners.api.skyscanner.net/apiservices/
+    autosuggest/v1.0/
+     </span><span class="sb">`</span><span class="o">{</span>market<span class="o">}</span><span class="sb">`</span><span class="s2">/
+     </span><span class="sb">`</span><span class="o">{</span>currency<span class="o">}</span><span class="sb">`</span><span class="s2">/
+      </span><span class="sb">`</span><span class="o">{</span>locale<span class="o">}</span><span class="sb">`</span><span class="s2">?
+    id={place_id}&amp;
+    apiKey={apiKey}"</span>
+</code></pre>
+
+<p><em>REQUEST PARAMETERS</em></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">id</code> <br><span class="required">REQUIRED</span></td>
+<td>The place id.</td>
 </tr>
 <tr>
-<td>404</td>
-<td>Not Found &ndash; The specified kitten could not be found</td>
+<td><code class="prettyprint">apiKey</code> <br><span class="required">REQUIRED</span></td>
+<td>The API Key to identify the customer</td>
 </tr>
+</tbody></table>
+
+<blockquote>
+<p>Example response for id=cdg</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"Places"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"PlaceId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CDG-sky"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"PlaceName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Paris Charles de Gaulle"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"CountryId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FR-sky"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"CityId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PARI-sky"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"CountryName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"France"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p><em>RESPONSE PARAMETERS</em></p>
+
+<table><thead>
 <tr>
-<td>405</td>
-<td>Method Not Allowed &ndash; You tried to access a kitten with an invalid method</td>
+<th>Parameter</th>
+<th>Description</th>
 </tr>
+</thead><tbody>
 <tr>
-<td>406</td>
-<td>Not Acceptable &ndash; You requested a format that isn&rsquo;t json</td>
-</tr>
-<tr>
-<td>410</td>
-<td>Gone &ndash; The kitten requested has been removed from our servers</td>
-</tr>
-<tr>
-<td>418</td>
-<td>I&rsquo;m a teapot</td>
-</tr>
-<tr>
-<td>429</td>
-<td>Too Many Requests &ndash; You&rsquo;re requesting too many kittens! Slow down!</td>
-</tr>
-<tr>
-<td>500</td>
-<td>Internal Server Error &ndash; We had a problem with our server. Try again later.</td>
-</tr>
-<tr>
-<td>503</td>
-<td>Service Unavailable &ndash; We&rsquo;re temporarially offline for maintanance. Please try again later.</td>
+<td><code class="prettyprint">Places</code></td>
+<td>Contains the information about the place such as name (in chosen locale), city, country.</td>
 </tr>
 </tbody></table>
 
       </div>
       <div class="dark-box">
           <div class="lang-selector">
-                <a href="#" data-language-name="shell">shell</a>
-                <a href="#" data-language-name="ruby">ruby</a>
-                <a href="#" data-language-name="python">python</a>
           </div>
       </div>
     </div>
