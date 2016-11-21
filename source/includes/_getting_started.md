@@ -4,8 +4,8 @@
 
 | API endpoint | Description  |
 | --- | ---|
-| [Browse Quotes](#cheapest-prices) | Returns a list of the cheapest quotes <b>for each segment</b> of the possible routes. The prices come from our cached prices from our users' searches. |
-| [Browse Routes](#cheapest-prices) | Similar to the Browse Quotes but with <b>the full routes</b> constructed from the individual quotes. These are the cheapest destinations (countries, cities or airports) from our cached data. |
+| [Browse Quotes](#cheapest-prices) | Returns a list of the cheapest quotes <b>for each segment</b> of the possible routes. The prices come from our cached prices resulting from our users' searches. |
+| [Browse Routes](#cheapest-prices) | Similar to the Browse Quotes but with <b>the full routes</b> constructed from the individual segment quotes. This provides the cheapest destinations (countries, cities or airports) from our cached data. |
 | [Browse Dates](#cheapest-prices) | Returns the lowest price that users have found for the requested route, over either a month or a 12 month period. |
 | [Browse<br> Grid](#cheapest-prices) | Similar to Browse Dates but with some pre-processing on our side to output a two-dimensional array to be easily displayed as a table. |
 
