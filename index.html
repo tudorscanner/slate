@@ -108,7 +108,7 @@
       </div>
         <ul class="toc-footer">
             <li><a href='http://portal.business.skyscanner.net/en-gb/accounts/login/'>Sign in to your account</a></li>
-            <li><a href='https://support.business.skyscanner.net/hc/en-us'>FAQ and Support</a></li>
+            <li><a href='https://support.business.skyscanner.net/hc/en-us' target="_blank">FAQ and Support</a></li>
         </ul>
     </div>
     <div class="page-wrapper">
@@ -123,11 +123,15 @@
 
 </code></pre>
 
-<p>Build tools that solve problems for millions of travellers and travel retail businesses around the world.</p>
-
 <p>Skyscanner Travel APIs connect you to all the data you need to build an innovative website or app.</p>
 
+<p>Build tools that solve problems for millions of travellers and travel retail businesses around the world.</p>
+
 <aside class="notice">
+If you get stuck and need more help you can find more information and answers to questions in our <a href='https://support.business.skyscanner.net/hc/en-us' target="_blank">FAQ</a> which we continuously update.
+</aside>
+
+<aside class="warning">
 APIs are complicated and difficult to use for people without programming experience. If you&rsquo;re not a developer or don&rsquo;t have access to one, our <a href="http://en.business.skyscanner.net/en-gb/products/travel-widgets/" target="_blank">
 Travel Widgets</a> and <a href="http://en.business.skyscanner.net/en-gb/products/white-label/" target="_blank">White Label</a> are options that don&rsquo;t involve using
 our APIs directly.
@@ -135,13 +139,11 @@ our APIs directly.
 
           <h1 id="authentication">Authentication</h1>
 
-<p>Skyscanner uses API keys to allow access to the APIs. You can create API keys through your <a href="http://portal.business.skyscanner.net/en-gb/accounts/login/">Skyscanner account</a>.</p>
+<p>Skyscanner uses API keys to allow access to the APIs. You can create API keys through your <a href="http://portal.business.skyscanner.net/en-gb/accounts/login/">Skyscanner account</a>. Simply click &lsquo;Travel APIs&rsquo; and enter your app name.</p>
 
 <p>You must include the API key in all API requests to the server, either as a parameter in the query or in the query header. Please refer to each endpoint for details.</p>
 
           <h1 id="getting-started">Getting Started</h1>
-
-<p>The APIs we provide are:</p>
 
 <p><em>Flights Cache Prices</em></p>
 
@@ -153,19 +155,19 @@ our APIs directly.
 </thead><tbody>
 <tr>
 <td><a href="#cheapest-prices">Browse Quotes</a></td>
-<td>Returns a list of the cheapest destinations (countries, cities or airports) from cache data.</td>
+<td>Returns a list of the cheapest quotes <b>for each segment</b> of the possible routes. The prices come from our cached prices resulting from our users&rsquo; searches.</td>
 </tr>
 <tr>
 <td><a href="#cheapest-prices">Browse Routes</a></td>
-<td>Returns a view of flights  the level of precision.</td>
+<td>Similar to the Browse Quotes but with <b>the full routes</b> constructed from the individual segment quotes. This provides the cheapest destinations (countries, cities or airports) from our cached data.</td>
 </tr>
 <tr>
 <td><a href="#cheapest-prices">Browse Dates</a></td>
-<td>Returns the lowest price on the specified route across either a month / 12 month period.</td>
+<td>Returns the lowest price that users have found for the requested route, over either a month or a 12 month period.</td>
 </tr>
 <tr>
 <td><a href="#cheapest-prices">Browse<br> Grid</a></td>
-<td>Similar to Browse Dates but outputs a two-dimensional array to be easily displayed as a table.</td>
+<td>Similar to Browse Dates but with some pre-processing on our side to output a two-dimensional array to be easily displayed as a table.</td>
 </tr>
 </tbody></table>
 
@@ -179,7 +181,7 @@ our APIs directly.
 </thead><tbody>
 <tr>
 <td><a href="#flights-live-prices">Live prices</a></td>
-<td>Returns live prices for the request flight itinery from all our suppliers (in the selected market).</td>
+<td>Returns live prices from all our suppliers for the requested flight itinerary (in the selected market).</td>
 </tr>
 </tbody></table>
 
@@ -193,7 +195,7 @@ our APIs directly.
 </thead><tbody>
 <tr>
 <td><a href="#">Live prices</a></td>
-<td>Returns live prices for car hire deals from all our suppliers (in the selected market).</td>
+<td>Returns live prices from all our suppliers for car hire deals (in the selected market).</td>
 </tr>
 </tbody></table>
 
@@ -207,7 +209,7 @@ our APIs directly.
 </thead><tbody>
 <tr>
 <td><a href="#">Live prices</a><br><span class="required">PRIVATE BETA</span></td>
-<td>Returns live prices for hotel deals from all our suppliers (in the selected market).</td>
+<td>Returns live prices from all our suppliers for hotel deals (in the selected market).</td>
 </tr>
 </tbody></table>
 
