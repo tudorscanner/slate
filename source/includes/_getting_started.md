@@ -1,13 +1,11 @@
 # Getting Started
 
-The APIs we provide are:
-
 *Flights Cache Prices*
 
 | API endpoint | Description  |
 | --- | ---|
-| [Browse Quotes](#cheapest-prices) | Returns a list of the cheapest destinations (countries, cities or airports) from cache data. |
-| [Browse Routes](#cheapest-prices) | Returns a view of flights  the level of precision. |
+| [Browse Quotes](#cheapest-prices) | Returns a list of the cheapest quotes from our cache data. |
+| [Browse Routes](#cheapest-prices) | Returns a list of the cheapest destinations (countries, cities or airports) from cache data. |
 | [Browse Dates](#cheapest-prices) | Returns the lowest price on the specified route across either a month / 12 month period. |
 | [Browse<br> Grid](#cheapest-prices) | Similar to Browse Dates but outputs a two-dimensional array to be easily displayed as a table. |
 
