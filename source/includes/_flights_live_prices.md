@@ -1,7 +1,5 @@
 # Flights Live Prices
 
-## Creating the session
-
 The Live Pricing Service Session must be created before any pricing data can be obtained. The request contains details of the locations, dates, passengers, cabin class and user details. These parameters define the session, and cannot be changed within the session (with the exception of passenger numbers).
 
 ![diagram](/images/Skyscanner_UMLDiagram_v3_EJ-01-01.png)
@@ -11,28 +9,12 @@ We do not support client-side implementation of our Live Prices API using CORS r
 risk of exposing account API keys.
 </aside>
 
-Request Details
-
-*HEADER VALUES*
-
-| Header | Value |
-| --- | --- |
-| ```Accept```<br><span class="optional">OPTIONAL</span> | ```application/json``` or ```application/xml```<br>The default response format is XML |
-| ```X-Forwarded-For```<br><span class="required">REQUIRED</span> | ```user's IP address ``` |
-
-
-This is an HTTP POST request.
-
-The following must be specified in the header:
-
-HTTP Content-Type header: ‘application/x-www-form-urlencoded’.
-HTTP Accept header: ‘application/json’ or ‘application/xml’.
-URL Format
-
-The form should be posted to this URL. The API Key may be specified in the form or the querystring.
+## Creating the session
 
 ```shell
-curl -X POST - H "Content-Type: application/x-www-form-urlencoded"
+curl "http://partners.api.skyscanner.net/apiservices/pricing/v1.0"
+    -X POST
+    -H "Content-Type: application/x-www-form-urlencoded"
     -d 'cabinclass=Economy
     &country=UK
     &currency=GBP
@@ -46,79 +28,57 @@ curl -X POST - H "Content-Type: application/x-www-form-urlencoded"
     &children=0
     &infants=0
     &apikey=prtl6749387986743898559646983194'
-    "http://partners.api.skyscanner.net/apiservices/pricing/v1.0"
+
 ```
 
-Response Details
+*API endpoint*
 
-A successful response contains no content. The URL to poll the booking details is specified in the Location header of the response.
+`POST /pricing/v1.0`
 
-An unsuccessful response will detail the validation failure or state that there was an error.
+*HEADER VALUES*
+
+| Header | Value |
+| --- | --- |
+| `Content-Type header` <br><span class="required">REQUIRED</span> | `application/x-www-form-urlencoded` |
+| `X-Forwarded-For` <br><span class="required">REQUIRED</span> | user's IP address |
+| `Accept` <br><span class="optional">OPTIONAL</span> | `application/json` or `application/xml` <br>The default response format is XML |
+
+*REQUEST PARAMETERS (FORM)*
+
+| Parameter | Description |
+| --------- | ------- |
+| ```market``` <br><span class="required">REQUIRED</span> | The [market/country](#markets) your user is in |
+| ```currency``` <br><span class="required">REQUIRED</span> | The [currency](#currencies) you want the prices in |
+| ```locale``` <br><span class="required">REQUIRED</span> | The [locale](#locales) you want the results in (ISO locale) |
+| ```originPlace``` <br><span class="required">REQUIRED</span> | The origin place (see [places](#places)) |
+| ```destinationPlace``` <br><span class="required">REQUIRED</span> | The destination place (see [places](#places)) |
+| ```outboundDate``` <br><span class="required">REQUIRED</span> | The outbound date. Format "yyyy-mm-dd". |
+| ```inboundDate``` <br><span class="optional">OPTIONAL</span> | The return date. Format "yyyy-mm-dd". Use empty string for oneway trip. |
+| ```cabinClass``` <br><span class="optional">OPTIONAL</span> | The cabin class  |
+| ```adults``` <br><span class="required">REQUIRED</span> | Number between 1 and 8.  |
+| ```children``` <br><span class="optional">OPTIONAL</span> | Number between 0 and 8.  |
+| ```infants``` <br><span class="optional">OPTIONAL</span> | Number between 0 and 8.  |
+| ```apiKey``` <br><span class="required">REQUIRED</span> | Your API Key. |
+
+
+> Example response with polling url:
+
+```shell
+Location "http://partners.api.skyscanner.net/apiservices/pricing/uk1/v1.0/{sessionID}"
+```
+
+*RESPONSE PARAMETERS*
 
 | Element | Detail |
 | ------- | ------ |
-| `Location Header` | Contains the URL for polling the newly created session |
+| `Location Header` | Contains the URL for polling the results in the newly created session |
 
+A successful response contains no content. The URL to poll the booking details is specified in the Location header of the response.
 
-> The response header contains the polling url:
+Please refer to our [response codes](#response-codes) in case of unsuccessful response.
 
-```shell
-Location → "http://partners.api.skyscanner.net/apiservices/
-    pricing/uk1/v1.0/
-    162291a498134dbd97d1db3d881f825c_ecilpojl_E99B7A7B8E258EA9AE2AE21956F01677"
-```
+## Polling the results
 
-This endpoint retrieves all kittens.
+## Get booking details
 
-### HTTP Request
-
-`GET http://example.com/api/kittens`
-
-
-## Poll results
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/2"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.get(2);
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-  "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
-}
-```
-
-This endpoint retrieves a specific kitten.
-
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
-
-### HTTP Request
-
-`GET http://example.com/kittens/<ID>`
-
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to retrieve
-
+## Polling the booking details
