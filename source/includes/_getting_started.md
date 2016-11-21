@@ -4,30 +4,30 @@
 
 | API endpoint | Description  |
 | --- | ---|
-| [Browse Quotes](#cheapest-prices) | Returns a list of the cheapest quotes from our cache data. |
-| [Browse Routes](#cheapest-prices) | Returns a list of the cheapest destinations (countries, cities or airports) from cache data. |
-| [Browse Dates](#cheapest-prices) | Returns the lowest price on the specified route across either a month / 12 month period. |
-| [Browse<br> Grid](#cheapest-prices) | Similar to Browse Dates but outputs a two-dimensional array to be easily displayed as a table. |
+| [Browse Quotes](#cheapest-prices) | Returns a list of the cheapest quotes <b>for each segment</b> of the possible routes. The prices come from our cached prices from our users' searches. |
+| [Browse Routes](#cheapest-prices) | Similar to the Browse Quotes but with <b>the full routes</b> constructed from the individual quotes. These are the cheapest destinations (countries, cities or airports) from our cached data. |
+| [Browse Dates](#cheapest-prices) | Returns the lowest price that users have found for the requested route, over either a month or a 12 month period. |
+| [Browse<br> Grid](#cheapest-prices) | Similar to Browse Dates but with some pre-processing on our side to output a two-dimensional array to be easily displayed as a table. |
 
 
 *Flights Live Prices*
 
 | API endpoint | Description  |
 | --- | ---|
-| [Live prices](#flights-live-prices) | Returns live prices for the request flight itinery from all our suppliers (in the selected market). |
+| [Live prices](#flights-live-prices) | Returns live prices from all our suppliers for the requested flight itinerary (in the selected market). |
 
 
 *Car Hire Live Prices*
 
 | API endpoint | Description  |
 | --- | ---|
-| [Live prices](#) | Returns live prices for car hire deals from all our suppliers (in the selected market). |
+| [Live prices](#) | Returns live prices from all our suppliers for car hire deals (in the selected market). |
 
 *Hotels Live Prices*
 
 | API endpoint | Description  |
 | --- | ---|
-| [Live prices](#)<br><span class="required">PRIVATE BETA</span> | Returns live prices for hotel deals from all our suppliers (in the selected market). |
+| [Live prices](#)<br><span class="required">PRIVATE BETA</span> | Returns live prices from all our suppliers for hotel deals (in the selected market). |
 
 <aside class="warning">
 Given the large number of suppliers that we query for quotes, the Live Pricing may take up to a minute to return all the results.
