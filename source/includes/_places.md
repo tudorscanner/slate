@@ -2,17 +2,90 @@
 
 Places can be of 3 different types:
 
-1. country
-2. city
-3. airport
+1. Country
+2. City
+3. Airport
 
-Our Autosuggest endpoint can be used to obtain:
+You can use any of the following endpoints to get information about places:
 
-* a list of places and corresponding IDs that match a query string
+* our [Geo catalog](#geo-catalog) to get the full list of places that we support
 
-* information about a specific place given its ID (for example city name and country name for an airport)
+* our [Autosuggest](#list-of-places) endpoint to obtain a list of places and corresponding IDs that match a query string
 
-The country and language must be included in the query so that the most relevant results can be returned, in the correct language.
+* our [Autosuggest](#place-information) endpoint to get information about a specific place given its ID (for example city name and country name for an airport)
+
+<aside class="warning">
+The country and language must be included in the Autosuggest query so that the most relevant results can be returned, in the correct language.
+</aside>
+
+## Geo Catalog
+
+Get the full list of all the places that we support.
+
+```shell
+GET "http://partners.api.skyscanner.net/apiservices/
+    geo/v1.0?
+    apiKey={apiKey}"
+```
+
+*API endpoint*
+
+`GET /geo/v1.0`
+
+*REQUEST PARAMETERS*
+
+| Parameter | Description |
+| --------- | ------- |
+| ```apiKey``` <br><span class="required">REQUIRED</span> | Your API Key. |
+
+> Response extract:
+
+```json
+{
+  "Continents": [
+    {
+      "Countries": [
+        {
+          "CurrencyId": "AFN",
+          "Regions": [],
+          "Cities": [
+            {
+              "SingleAirportCity": true,
+              "Airports": [
+                {
+                  "CityId": "BINA",
+                  "CountryId": "AF",
+                  "Location": "67.823611, 34.804167",
+                  "Id": "BIN",
+                  "Name": "Bamiyan"
+                }
+              ],
+              "CountryId": "AF",
+              "Location": "67.823611, 34.804167",
+              "IataCode": "BIN",
+              "Id": "BINA",
+              "Name": "Bamiyan"
+            },
+            ...
+          ]
+        },
+        ...
+      ]
+    },
+    ...
+  ]
+ }
+
+```
+
+*RESPONSE PARAMETERS*
+
+| Parameter | Description |
+| --- | --- |
+| ```Continents``` | Contains the list of all the continents. |
+| ```Countries``` | Contains the list of all the continents. |
+
+
 
 
 ## List of places
@@ -156,6 +229,9 @@ EDIN-sky
 ```shell
 CDG-iata
 ```
+```sell
+-37.4849,144.5747-latlong
+```
 
 Each place can be referred to via different schemas, described below.
 
@@ -167,7 +243,6 @@ Each place can be referred to via different schemas, described below.
 | iata / iso | Airports and cities often use the internationally recognized IATA and ISO schemas.<br>Although we support these schemas we recommend that you use the Skyscanner code which is very similar but solves ambiguous cases where a city and one of its airports share the same code.|
 | latlong |	Latitude and longitude of the place in the following form: "latitude,longitude". The nearest city with airport will be used. |
 | ip | IP of a user. The nearest city with airport will be used. |
-| rnid | A unique ID for a location in Skyscanner. For example EDIN is the Skyscanner code for Edinburgh City and its Rnid is 2343. |
 | GeoNameCodes | GeoNameCodes from the GeoNames schema (see [geonames.org](www.geonames.org))|
 | GeoNameIDs | GeoNameIDs from the GeoNames schema (see [geonames.org](www.geonames.org))|
 

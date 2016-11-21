@@ -13,6 +13,14 @@ risk of exposing account API keys.
 
 Request Details
 
+*HEADER VALUES*
+
+| Header | Value |
+| --- | --- |
+| ```Accept```<br><span class="optional">OPTIONAL</span> | ```application/json``` or ```application/xml```<br>The default response format is XML |
+| ```X-Forwarded-For```<br><span class="required">REQUIRED</span> | ```user's IP address ``` |
+
+
 This is an HTTP POST request.
 
 The following must be specified in the header:

@@ -7,12 +7,12 @@ toc_footers:
 
 includes:
   - authentication
-  - errors
   - getting_started
   - flights_cache_prices
   - flights_live_prices
   - localisation
   - places
+  - response_codes
 search: false
 ---
 
@@ -34,6 +34,10 @@ APIs are complicated and difficult to use for people without programming experie
 Travel Widgets</a> and <a href="http://en.business.skyscanner.net/en-gb/products/white-label/" target="_blank">White Label</a> are options that don't involve using
 our APIs directly.
 </aside>
+
+
+
+
 
 
 

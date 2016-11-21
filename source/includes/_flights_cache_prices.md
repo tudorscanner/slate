@@ -5,7 +5,7 @@
 Retrieve the cheapest quotes from our cache.
 
 ```shell
-GET "http://partners.api.skyscanner.net/apiservices/browsequotes/v1.0/{market}/{currency}/{locale}/
+curl -X GET -H "Accept: application/json" "http://partners.api.skyscanner.net/apiservices/browsequotes/v1.0/{market}/{currency}/{locale}/
 {originPlace}/
 {destinationPlace}/
 {outboundPartialDate}/
@@ -22,7 +22,6 @@ GET `/browsequotes/v1.0/{market}/{currency}/{locale}/{originPlace}/{destinationP
 | Header | Value |
 | --- | --- |
 | ```Accept```<br><span class="optional">OPTIONAL</span> | ```application/json``` or ```application/xml```<br>The default response format is XML |
-| ```X-Forwarded-For```<br><span class="required">REQUIRED</span> | ```user's IP address ``` |
 
 <aside class="warning">
 We perform robot detection and reserve the right to suspend access to the service without prior notification.
