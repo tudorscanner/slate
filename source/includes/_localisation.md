@@ -14,13 +14,15 @@ GET "http://partners.api.skyscanner.net/apiservices/
 
 *API endpoint*
 
-`/reference/v1.0/locales`
+`GET /reference/v1.0/locales`
 
 *REQUEST PARAMETERS*
 
 | Parameter | Description |
 | --------- | ------- |
-| ```apiKey``` <br><span class="required">REQUIRED</span> | The API Key to identify the customer |
+| ```apiKey``` <br><span class="required">REQUIRED</span> | Your API Key. |
+
+> Example response
 
 ```json
 {
@@ -51,7 +53,7 @@ GET "http://partners.api.skyscanner.net/apiservices/
 
 | Parameter | Description |
 | --- | --- |
-| ```Locales``` | Contains the list of markets (array of countries as name-value pairs). |
+| ```Locales``` | Contains the list of locales that we support with name and code. |
 
 
 ## Currencies
@@ -65,13 +67,15 @@ GET "http://partners.api.skyscanner.net/apiservices/
 ```
 *API endpoint*
 
-`/reference/v1.0/currencies`
+`GET /reference/v1.0/currencies`
 
 *REQUEST PARAMETERS*
 
 Parameter | Description |
 --------- | ------- |
-```apiKey``` <br><span class="required">REQUIRED</span> | The API Key to identify the customer |
+```apiKey``` <br><span class="required">REQUIRED</span> | Your API Key. |
+
+> Example response
 
 ```json
 {
@@ -108,20 +112,22 @@ Most suppliers (airlines, travel agents and car hire dealers) set their fares ba
 ```shell
 GET "http://partners.api.skyscanner.net/apiservices/
     reference/v1.0/countries/
-     `{locale}` ?
+    {locale}?
     apiKey={apiKey}"
 ```
 
 *API endpoint*
 
-`/reference/v1.0/countries`
+`GET /reference/v1.0/countries/{locale}`
 
 *REQUEST PARAMETERS*
 
 | Parameter | Description |
 | --------- | ------- |
-| ```locale``` <br><span class="required">REQUIRED</span> | The language you want the results in (ISO locale) |
-| ```apiKey``` <br><span class="required">REQUIRED</span> | The API Key to identify the customer |
+| ```locale``` <br><span class="required">REQUIRED</span> | The language you want the results in (ISO locale). See [locales](#locales) for locales that we support. |
+| ```apiKey``` <br><span class="required">REQUIRED</span> | Your API Key. |
+
+> Example response
 
 ```json
 {

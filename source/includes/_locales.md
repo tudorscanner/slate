@@ -10,7 +10,7 @@ GET "http://partners.api.skyscanner.net/apiservices/
 
 *API endpoint*
 
-`/reference/v1.0/locales`
+`GET /reference/v1.0/locales`
 
 *REQUEST PARAMETERS*
 

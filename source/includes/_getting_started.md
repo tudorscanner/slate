@@ -2,7 +2,7 @@
 
 The APIs we provide are:
 
-*Flights Cheapest Prices*
+*Flights Cache Prices*
 
 | API endpoint | Description  |
 | --- | ---|
@@ -16,17 +16,26 @@ The APIs we provide are:
 
 | API endpoint | Description  |
 | --- | ---|
-| [Live prices](#flights-live-prices) | Returns live prices from all our suppliers (in the selected market) for the requested route. May take up to a minute |
+| [Live prices](#flights-live-prices) | Returns live prices for the request flight itinery from all our suppliers (in the selected market). |
 
-<aside class="warning">
-The Live Pricing API requires a good handling of APIs. You must first create a session and then poll for results. Given the volume of suppliers that we query, it may take up to a minute to retrieve all the results.
-</aside>
 
-*Car Hire*
+*Car Hire Live Prices*
 
 | API endpoint | Description  |
 | --- | ---|
-| [Live prices](#flights-live-prices) | Returns live prices from all our suppliers (in the selected market). May take up to a minute |
+| [Live prices](#) | Returns live prices for car hire deals from all our suppliers (in the selected market). |
+
+*Hotels Live Prices*
+
+| API endpoint | Description  |
+| --- | ---|
+| [Live prices](#)<br><span class="required">PRIVATE BETA</span> | Returns live prices for hotel deals from all our suppliers (in the selected market). |
+
+<aside class="warning">
+Given the large number of suppliers that we query for quotes, the Live Pricing may take up to a minute to return all the results.
+
+Unless you require exact prices, we recommend you start with the cache prices API.
+</aside>
 
 Before you get started consider how our data fits into your project. Use the Browse Cache Pricing API if your project:
 

@@ -26,7 +26,7 @@ under the License.
     <style>
       <%= Rouge::Themes::Base16::Monokai.render(:scope => '.highlight') %>
     </style>
-    <%= stylesheet_link_tag :screen, :overrides, media: :screen %>
+    <%= stylesheet_link_tag :overrides, media: :screen %>
     <%= stylesheet_link_tag :print, media: :print %>
     <% if current_page.data.search %>
       <%= javascript_include_tag  "all" %>

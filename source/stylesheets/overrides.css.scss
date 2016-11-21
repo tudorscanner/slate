@@ -5,6 +5,8 @@
 
 @import 'variables_overrides.css.scss';
 
+@import 'screen.css.scss';
+
 #toc {
   margin-top: 1.5em;
 }
@@ -19,7 +21,7 @@ body {
 
   // This is the logo at the top of the ToC
   & > a > img {
-    margin-top:1.5em;
+    margin-top:1em;
     display: block;
     max-width: 90%;
   }
@@ -52,11 +54,15 @@ body {
     }
 
   }
+
+  .toc-footer li {
+    padding-top: 10px;
+  }
 }
 
 .content {
   h1 {
-    padding-top: 1em;
+    padding-top: 1.2em;
     border: none;
     background-image: none;
     font-size: 26px;
@@ -98,7 +104,6 @@ body {
   table {
     margin-top: -1.5em;
     margin-bottom: 2.5em;
-    /* width: calc(50% - 28px*2); */
 
     th {
       font-size: 5px;
@@ -125,6 +130,14 @@ body {
 
     .required {
       color: darkred;
+      text-transform: uppercase;
+      font-size: 10px;
+      float: right;
+      padding-top: 6px;
+    }
+
+    .optional {
+      color: #29a8bb;
       text-transform: uppercase;
       font-size: 10px;
       float: right;

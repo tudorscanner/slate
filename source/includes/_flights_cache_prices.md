@@ -1,8 +1,8 @@
-# Flights Cheapest Prices
+# Flights Cache Prices
 
 ## Browse Quotes
 
-Retrieve the cheapes quotes from our cache.
+Retrieve the cheapest quotes from our cache.
 
 ```shell
 GET "http://partners.api.skyscanner.net/apiservices/browsequotes/v1.0/{market}/{currency}/{locale}/
@@ -15,21 +15,34 @@ apiKey={apiKey}"
 
 *API endpoint*
 
-`/browsequotes/v1.0/{market}/{currency}/{locale}/{originPlace}/{destinationPlace}/{outboundPartialDate}/{inboundPartialDate}`
+GET `/browsequotes/v1.0/{market}/{currency}/{locale}/{originPlace}/{destinationPlace}/{outboundPartialDate}/{inboundPartialDate}`
+
+*HEADER VALUES*
+
+| Header | Value |
+| --- | --- |
+| ```Accept```<br><span class="optional">OPTIONAL</span> | ```application/json``` or ```application/xml```<br>The default response format is XML |
+| ```X-Forwarded-For```<br><span class="required">REQUIRED</span> | ```user's IP address ``` |
+
+<aside class="warning">
+We perform robot detection and reserve the right to suspend access to the service without prior notification.
+</aside>
 
 *REQUEST PARAMETERS*
 
 | Parameter | Description |
 | --------- | ------- |
-| ```market``` <br><span class="required">REQUIRED</span> | The market/country your user is in |
-| ```currency``` <br><span class="required">REQUIRED</span> | The currency you want the prices in |
-| ```locale``` <br><span class="required">REQUIRED</span> | The language you want the results in (ISO locale) |
-| ```originPlace``` <br><span class="required">REQUIRED</span> | The language you want the results in (ISO locale) |
-| ```destinationPlace``` <br><span class="required">REQUIRED</span> | The language you want the results in (ISO locale) |
-| ```outboundPartialDate``` <br><span class="required">REQUIRED</span> | The language you want the results in (ISO locale) |
-| ```inboundPartialDate``` <br><span class="required">REQUIRED</span> | The language you want the results in (ISO locale) |
+| ```market``` <br><span class="required">REQUIRED</span> | The [market/country](#markets) your user is in |
+| ```currency``` <br><span class="required">REQUIRED</span> | The [currency](#currencies) you want the prices in |
+| ```locale``` <br><span class="required">REQUIRED</span> | The [locale](#locales) you want the results in (ISO locale) |
+| ```originPlace``` <br><span class="required">REQUIRED</span> | The origin place (see [places](#places)) |
+| ```destinationPlace``` <br><span class="required">REQUIRED</span> | The destination place (see [places](#places)) |
+| ```outboundPartialDate``` <br><span class="required">REQUIRED</span> | The outbound date. Format "yyyy-mm-dd", "yyyy-mm" or "anytime". |
+| ```inboundPartialDate``` <br><span class="optional">OPTIONAL</span> | The return date. Format "yyyy-mm-dd", "yyyy-mm" or "anytime". Use empty string for oneway trip. |
 | ```apiKey``` <br><span class="required">REQUIRED</span> | The API Key to identify the customer |
 
+
+> Example response from US to anywhere:
 
 ```json
 {
