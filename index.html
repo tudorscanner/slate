@@ -397,9 +397,13 @@ We perform robot detection and reserve the right to suspend access to the servic
 </tr>
 </tbody></table>
 
-          <h1 id="flights-live-prices">Flights Live Prices</h1>
+<h2 id="browse-routes">Browse Routes</h2>
 
-<h2 id="creating-the-session">Creating the session</h2>
+<h2 id="browse-dates">Browse Dates</h2>
+
+<h2 id="browse-dates-grid">Browse Dates (Grid)</h2>
+
+          <h1 id="flights-live-prices">Flights Live Prices</h1>
 
 <p>The Live Pricing Service Session must be created before any pricing data can be obtained. The request contains details of the locations, dates, passengers, cabin class and user details. These parameters define the session, and cannot be changed within the session (with the exception of passenger numbers).</p>
 
@@ -410,36 +414,10 @@ We do not support client-side implementation of our Live Prices API using CORS r
 risk of exposing account API keys.
 </aside>
 
-<p>Request Details</p>
-
-<p><em>HEADER VALUES</em></p>
-
-<table><thead>
-<tr>
-<th>Header</th>
-<th>Value</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><code class="prettyprint">Accept</code><br><span class="optional">OPTIONAL</span></td>
-<td><code class="prettyprint">application/json</code> or <code class="prettyprint">application/xml</code><br>The default response format is XML</td>
-</tr>
-<tr>
-<td><code class="prettyprint">X-Forwarded-For</code><br><span class="required">REQUIRED</span></td>
-<td><code class="prettyprint">user&#39;s IP address</code></td>
-</tr>
-</tbody></table>
-
-<p>This is an HTTP POST request.</p>
-
-<p>The following must be specified in the header:</p>
-
-<p>HTTP Content-Type header: ‘application/x-www-form-urlencoded’.
-HTTP Accept header: ‘application/json’ or ‘application/xml’.
-URL Format</p>
-
-<p>The form should be posted to this URL. The API Key may be specified in the form or the querystring.</p>
-<pre class="highlight shell"><code>curl -X POST - H <span class="s2">"Content-Type: application/x-www-form-urlencoded"</span>
+<h2 id="creating-the-session">Creating the session</h2>
+<pre class="highlight shell"><code>curl <span class="s2">"http://partners.api.skyscanner.net/apiservices/pricing/v1.0"</span>
+    -X POST
+    -H <span class="s2">"Content-Type: application/x-www-form-urlencoded"</span>
     -d <span class="s1">'cabinclass=Economy
     &amp;country=UK
     &amp;currency=GBP
@@ -453,14 +431,100 @@ URL Format</p>
     &amp;children=0
     &amp;infants=0
     &amp;apikey=prtl6749387986743898559646983194'</span>
-    <span class="s2">"http://partners.api.skyscanner.net/apiservices/pricing/v1.0"</span>
+
 </code></pre>
 
-<p>Response Details</p>
+<p><em>API endpoint</em></p>
 
-<p>A successful response contains no content. The URL to poll the booking details is specified in the Location header of the response.</p>
+<p><code class="prettyprint">POST /pricing/v1.0</code></p>
 
-<p>An unsuccessful response will detail the validation failure or state that there was an error.</p>
+<p><em>HEADER VALUES</em></p>
+
+<table><thead>
+<tr>
+<th>Header</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">Content-Type header</code> <br><span class="required">REQUIRED</span></td>
+<td><code class="prettyprint">application/x-www-form-urlencoded</code></td>
+</tr>
+<tr>
+<td><code class="prettyprint">X-Forwarded-For</code> <br><span class="required">REQUIRED</span></td>
+<td>user&rsquo;s IP address</td>
+</tr>
+<tr>
+<td><code class="prettyprint">Accept</code> <br><span class="optional">OPTIONAL</span></td>
+<td><code class="prettyprint">application/json</code> or <code class="prettyprint">application/xml</code> <br>The default response format is XML</td>
+</tr>
+</tbody></table>
+
+<p><em>REQUEST PARAMETERS (FORM)</em></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">market</code> <br><span class="required">REQUIRED</span></td>
+<td>The <a href="#markets">market/country</a> your user is in</td>
+</tr>
+<tr>
+<td><code class="prettyprint">currency</code> <br><span class="required">REQUIRED</span></td>
+<td>The <a href="#currencies">currency</a> you want the prices in</td>
+</tr>
+<tr>
+<td><code class="prettyprint">locale</code> <br><span class="required">REQUIRED</span></td>
+<td>The <a href="#locales">locale</a> you want the results in (ISO locale)</td>
+</tr>
+<tr>
+<td><code class="prettyprint">originPlace</code> <br><span class="required">REQUIRED</span></td>
+<td>The origin place (see <a href="#places">places</a>)</td>
+</tr>
+<tr>
+<td><code class="prettyprint">destinationPlace</code> <br><span class="required">REQUIRED</span></td>
+<td>The destination place (see <a href="#places">places</a>)</td>
+</tr>
+<tr>
+<td><code class="prettyprint">outboundDate</code> <br><span class="required">REQUIRED</span></td>
+<td>The outbound date. Format &ldquo;yyyy-mm-dd&rdquo;.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">inboundDate</code> <br><span class="optional">OPTIONAL</span></td>
+<td>The return date. Format &ldquo;yyyy-mm-dd&rdquo;. Use empty string for oneway trip.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">cabinClass</code> <br><span class="optional">OPTIONAL</span></td>
+<td>The cabin class</td>
+</tr>
+<tr>
+<td><code class="prettyprint">adults</code> <br><span class="required">REQUIRED</span></td>
+<td>Number between 1 and 8.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">children</code> <br><span class="optional">OPTIONAL</span></td>
+<td>Number between 0 and 8.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">infants</code> <br><span class="optional">OPTIONAL</span></td>
+<td>Number between 0 and 8.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">apiKey</code> <br><span class="required">REQUIRED</span></td>
+<td>Your API Key.</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Example response with polling url:</p>
+</blockquote>
+<pre class="highlight shell"><code>Location <span class="s2">"http://partners.api.skyscanner.net/apiservices/pricing/uk1/v1.0/{sessionID}"</span>
+</code></pre>
+
+<p><em>RESPONSE PARAMETERS</em></p>
 
 <table><thead>
 <tr>
@@ -470,72 +534,19 @@ URL Format</p>
 </thead><tbody>
 <tr>
 <td><code class="prettyprint">Location Header</code></td>
-<td>Contains the URL for polling the newly created session</td>
+<td>Contains the URL for polling the results in the newly created session</td>
 </tr>
 </tbody></table>
 
-<blockquote>
-<p>The response header contains the polling url:</p>
-</blockquote>
-<pre class="highlight shell"><code>Location → <span class="s2">"http://partners.api.skyscanner.net/apiservices/
-    pricing/uk1/v1.0/
-    162291a498134dbd97d1db3d881f825c_ecilpojl_E99B7A7B8E258EA9AE2AE21956F01677"</span>
-</code></pre>
+<p>A successful response contains no content. The URL to poll the booking details is specified in the Location header of the response.</p>
 
-<p>This endpoint retrieves all kittens.</p>
+<p>Please refer to our <a href="#response-codes">response codes</a> in case of unsuccessful response.</p>
 
-<h3 id="http-request">HTTP Request</h3>
+<h2 id="polling-the-results">Polling the results</h2>
 
-<p><code class="prettyprint">GET http://example.com/api/kittens</code></p>
+<h2 id="get-booking-details">Get booking details</h2>
 
-<h2 id="poll-results">Poll results</h2>
-<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre>
-<pre class="highlight javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
-</code></pre>
-
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<p>This endpoint retrieves a specific kitten.</p>
-
-<aside class="warning">Inside HTML code blocks like this one, you can&rsquo;t use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
-
-<h3 id="http-request">HTTP Request</h3>
-
-<p><code class="prettyprint">GET http://example.com/kittens/&lt;ID&gt;</code></p>
-
-<h3 id="url-parameters">URL Parameters</h3>
-
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>ID</td>
-<td>The ID of the kitten to retrieve</td>
-</tr>
-</tbody></table>
+<h2 id="polling-the-booking-details">Polling the booking details</h2>
 
           <h1 id="localisation">Localisation</h1>
 
