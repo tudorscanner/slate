@@ -139,68 +139,6 @@ our APIs directly.
 
 <p>You must include the API key in all API requests to the server, either as a parameter in the query or in the query header. Please refer to each endpoint for details.</p>
 
-          <h1 id="errors">Errors</h1>
-
-<p>Our APIs use the following error codes:</p>
-
-<p><em>ERROR CODES</em></p>
-
-<table><thead>
-<tr>
-<th>Error Code</th>
-<th>Meaning</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>400</td>
-<td>Bad Request &ndash; Your request sucks</td>
-</tr>
-<tr>
-<td>401</td>
-<td>Unauthorized &ndash; Your API key is wrong</td>
-</tr>
-<tr>
-<td>403</td>
-<td>Forbidden &ndash; The kitten requested is hidden for administrators only</td>
-</tr>
-<tr>
-<td>404</td>
-<td>Not Found &ndash; The specified kitten could not be found</td>
-</tr>
-<tr>
-<td>405</td>
-<td>Method Not Allowed &ndash; You tried to access a kitten with an invalid method</td>
-</tr>
-<tr>
-<td>406</td>
-<td>Not Acceptable &ndash; You requested a format that isn&rsquo;t json</td>
-</tr>
-<tr>
-<td>410</td>
-<td>Gone &ndash; The kitten requested has been removed from our servers</td>
-</tr>
-<tr>
-<td>418</td>
-<td>I&rsquo;m a teapot</td>
-</tr>
-<tr>
-<td>429</td>
-<td>Too Many Requests &ndash; You&rsquo;re requesting too many kittens! Slow down!</td>
-</tr>
-<tr>
-<td>500</td>
-<td>Internal Server Error &ndash; We had a problem with our server. Try again later.</td>
-</tr>
-<tr>
-<td>503</td>
-<td>Service Unavailable &ndash; We&rsquo;re temporarially offline for maintanance. Please try again later.</td>
-</tr>
-</tbody></table>
-
-<aside class="notice">
-<b>304</b><br>You may occasionally get a 304 status response. Please note that this is not an error and simply indicates that your cache has not expired and that there were no changes to the response.
-</aside>
-
           <h1 id="getting-started">Getting Started</h1>
 
 <p>The APIs we provide are:</p>
@@ -297,7 +235,7 @@ Upgrading from Browse Cached Pricing to Live Pricing can always be done later!
 <h2 id="browse-quotes">Browse Quotes</h2>
 
 <p>Retrieve the cheapest quotes from our cache.</p>
-<pre class="highlight shell"><code>GET <span class="s2">"http://partners.api.skyscanner.net/apiservices/browsequotes/v1.0/{market}/{currency}/{locale}/
+<pre class="highlight shell"><code>curl -X GET -H <span class="s2">"Accept: application/json"</span> <span class="s2">"http://partners.api.skyscanner.net/apiservices/browsequotes/v1.0/{market}/{currency}/{locale}/
 {originPlace}/
 {destinationPlace}/
 {outboundPartialDate}/
@@ -320,10 +258,6 @@ apiKey={apiKey}"</span>
 <tr>
 <td><code class="prettyprint">Accept</code><br><span class="optional">OPTIONAL</span></td>
 <td><code class="prettyprint">application/json</code> or <code class="prettyprint">application/xml</code><br>The default response format is XML</td>
-</tr>
-<tr>
-<td><code class="prettyprint">X-Forwarded-For</code><br><span class="required">REQUIRED</span></td>
-<td><code class="prettyprint">user&#39;s IP address</code></td>
 </tr>
 </tbody></table>
 
@@ -477,6 +411,24 @@ risk of exposing account API keys.
 </aside>
 
 <p>Request Details</p>
+
+<p><em>HEADER VALUES</em></p>
+
+<table><thead>
+<tr>
+<th>Header</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">Accept</code><br><span class="optional">OPTIONAL</span></td>
+<td><code class="prettyprint">application/json</code> or <code class="prettyprint">application/xml</code><br>The default response format is XML</td>
+</tr>
+<tr>
+<td><code class="prettyprint">X-Forwarded-For</code><br><span class="required">REQUIRED</span></td>
+<td><code class="prettyprint">user&#39;s IP address</code></td>
+</tr>
+</tbody></table>
 
 <p>This is an HTTP POST request.</p>
 
@@ -789,19 +741,106 @@ URL Format</p>
 <p>Places can be of 3 different types:</p>
 
 <ol>
-<li>country</li>
-<li>city</li>
-<li>airport</li>
+<li>Country</li>
+<li>City</li>
+<li>Airport</li>
 </ol>
 
-<p>Our Autosuggest endpoint can be used to obtain:</p>
+<p>You can use any of the following endpoints to get information about places:</p>
 
 <ul>
-<li><p>a list of places and corresponding IDs that match a query string</p></li>
-<li><p>information about a specific place given its ID (for example city name and country name for an airport)</p></li>
+<li><p>our <a href="#geo-catalog">Geo catalog</a> to get the full list of places that we support</p></li>
+<li><p>our <a href="#list-of-places">Autosuggest</a> endpoint to obtain a list of places and corresponding IDs that match a query string</p></li>
+<li><p>our <a href="#place-information">Autosuggest</a> endpoint to get information about a specific place given its ID (for example city name and country name for an airport)</p></li>
 </ul>
 
-<p>The country and language must be included in the query so that the most relevant results can be returned, in the correct language.</p>
+<aside class="warning">
+The country and language must be included in the Autosuggest query so that the most relevant results can be returned, in the correct language.
+</aside>
+
+<h2 id="geo-catalog">Geo Catalog</h2>
+
+<p>Get the full list of all the places that we support.</p>
+<pre class="highlight shell"><code>GET <span class="s2">"http://partners.api.skyscanner.net/apiservices/
+    geo/v1.0?
+    apiKey={apiKey}"</span>
+</code></pre>
+
+<p><em>API endpoint</em></p>
+
+<p><code class="prettyprint">GET /geo/v1.0</code></p>
+
+<p><em>REQUEST PARAMETERS</em></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">apiKey</code> <br><span class="required">REQUIRED</span></td>
+<td>Your API Key.</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Response extract:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"Continents"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"Countries"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"CurrencyId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AFN"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"Regions"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+          </span><span class="nt">"Cities"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"SingleAirportCity"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"Airports"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                  </span><span class="nt">"CityId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BINA"</span><span class="p">,</span><span class="w">
+                  </span><span class="nt">"CountryId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AF"</span><span class="p">,</span><span class="w">
+                  </span><span class="nt">"Location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"67.823611, 34.804167"</span><span class="p">,</span><span class="w">
+                  </span><span class="nt">"Id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BIN"</span><span class="p">,</span><span class="w">
+                  </span><span class="nt">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bamiyan"</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+              </span><span class="p">],</span><span class="w">
+              </span><span class="nt">"CountryId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AF"</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"Location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"67.823611, 34.804167"</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"IataCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BIN"</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"Id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BINA"</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bamiyan"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="err">...</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="err">...</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="err">...</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+ </span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+
+<p><em>RESPONSE PARAMETERS</em></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">Continents</code></td>
+<td>Contains the list of all the continents.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">Countries</code></td>
+<td>Contains the list of all the continents.</td>
+</tr>
+</tbody></table>
 
 <h2 id="list-of-places">List of places</h2>
 
@@ -992,6 +1031,8 @@ URL Format</p>
 </code></pre>
 <pre class="highlight shell"><code>CDG-iata
 </code></pre>
+<pre class="highlight plaintext"><code>-37.4849,144.5747-latlong
+</code></pre>
 
 <p>Each place can be referred to via different schemas, described below.</p>
 
@@ -1020,10 +1061,6 @@ URL Format</p>
 <td>IP of a user. The nearest city with airport will be used.</td>
 </tr>
 <tr>
-<td>rnid</td>
-<td>A unique ID for a location in Skyscanner. For example EDIN is the Skyscanner code for Edinburgh City and its Rnid is 2343.</td>
-</tr>
-<tr>
 <td>GeoNameCodes</td>
 <td>GeoNameCodes from the GeoNames schema (see <a href="www.geonames.org">geonames.org</a>)</td>
 </tr>
@@ -1035,6 +1072,56 @@ URL Format</p>
 
 <p>If the default Skyscanner schema is not used, the schema name must be appended to the place id as follows:
 <code class="prettyprint">placeCode-locationSchema</code></p>
+
+          <h1 id="response-codes">Response Codes</h1>
+
+<p>Our APIs use the following response codes:</p>
+
+<p><em>RESPONSE CODES</em></p>
+
+<table><thead>
+<tr>
+<th>Error Code</th>
+<th>Meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td><b>Success</b></td>
+</tr>
+<tr>
+<td>204</td>
+<td><b>No content</b> - the session is still being created (wait and try again).</td>
+</tr>
+<tr>
+<td>304</td>
+<td><b>Not Modified</b> – the results have not been modified since the last poll.</td>
+</tr>
+<tr>
+<td>400</td>
+<td><b>Bad Request</b> &ndash; Input validation failed.</td>
+</tr>
+<tr>
+<td>403</td>
+<td><b>Forbidden</b> &ndash; The API Key was not supplied, or it was invalid, or it is not authorized to access the service.</td>
+</tr>
+<tr>
+<td>410</td>
+<td><b>Gone</b> – the session has expired. A new session must be created.</td>
+</tr>
+<tr>
+<td>429</td>
+<td><b>Too Many Requests</b> – There have been too many requests in the last minute.</td>
+</tr>
+<tr>
+<td>500</td>
+<td><b>Server Error</b> – An internal server error has occurred which has been logged.</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+<b>304</b><br>You may occasionally get a 304 status response. Please note that this is not an error and simply indicates that your cache has not expired and that there were no changes to the response.
+</aside>
 
       </div>
       <div class="dark-box">
