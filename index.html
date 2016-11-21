@@ -87,7 +87,7 @@
   color: #90a959;
 }
     </style>
-    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" /><link href="stylesheets/overrides.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/overrides.css" rel="stylesheet" media="screen" />
     <link href="stylesheets/print.css" rel="stylesheet" media="print" />
       <script src="javascripts/all_nosearch.js"></script>
   </head>
@@ -107,7 +107,7 @@
       <div id="toc">
       </div>
         <ul class="toc-footer">
-            <li><a href='http://portal.business.skyscanner.net/en-gb/accounts/login/'>Sign in to your Skyscanner account</a></li>
+            <li><a href='http://portal.business.skyscanner.net/en-gb/accounts/login/'>Sign in to your account</a></li>
             <li><a href='https://support.business.skyscanner.net/hc/en-us'>FAQ and Support</a></li>
         </ul>
     </div>
@@ -128,10 +128,9 @@
 <p>Skyscanner Travel APIs connect you to all the data you need to build an innovative website or app.</p>
 
 <aside class="notice">
-<b>Nerds only!</b>
-If you&rsquo;re not a developer or don&rsquo;t have access to one, our <a href="http://en.business.skyscanner.net/en-gb/products/travel-widgets/" target="_blank">
+APIs are complicated and difficult to use for people without programming experience. If you&rsquo;re not a developer or don&rsquo;t have access to one, our <a href="http://en.business.skyscanner.net/en-gb/products/travel-widgets/" target="_blank">
 Travel Widgets</a> and <a href="http://en.business.skyscanner.net/en-gb/products/white-label/" target="_blank">White Label</a> are options that don&rsquo;t involve using
-our APIs directly. For
+our APIs directly.
 </aside>
 
           <h1 id="authentication">Authentication</h1>
@@ -140,11 +139,73 @@ our APIs directly. For
 
 <p>You must include the API key in all API requests to the server, either as a parameter in the query or in the query header. Please refer to each endpoint for details.</p>
 
+          <h1 id="errors">Errors</h1>
+
+<p>Our APIs use the following error codes:</p>
+
+<p><em>ERROR CODES</em></p>
+
+<table><thead>
+<tr>
+<th>Error Code</th>
+<th>Meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>400</td>
+<td>Bad Request &ndash; Your request sucks</td>
+</tr>
+<tr>
+<td>401</td>
+<td>Unauthorized &ndash; Your API key is wrong</td>
+</tr>
+<tr>
+<td>403</td>
+<td>Forbidden &ndash; The kitten requested is hidden for administrators only</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Not Found &ndash; The specified kitten could not be found</td>
+</tr>
+<tr>
+<td>405</td>
+<td>Method Not Allowed &ndash; You tried to access a kitten with an invalid method</td>
+</tr>
+<tr>
+<td>406</td>
+<td>Not Acceptable &ndash; You requested a format that isn&rsquo;t json</td>
+</tr>
+<tr>
+<td>410</td>
+<td>Gone &ndash; The kitten requested has been removed from our servers</td>
+</tr>
+<tr>
+<td>418</td>
+<td>I&rsquo;m a teapot</td>
+</tr>
+<tr>
+<td>429</td>
+<td>Too Many Requests &ndash; You&rsquo;re requesting too many kittens! Slow down!</td>
+</tr>
+<tr>
+<td>500</td>
+<td>Internal Server Error &ndash; We had a problem with our server. Try again later.</td>
+</tr>
+<tr>
+<td>503</td>
+<td>Service Unavailable &ndash; We&rsquo;re temporarially offline for maintanance. Please try again later.</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+<b>304</b><br>You may occasionally get a 304 status response. Please note that this is not an error and simply indicates that your cache has not expired and that there were no changes to the response.
+</aside>
+
           <h1 id="getting-started">Getting Started</h1>
 
 <p>The APIs we provide are:</p>
 
-<p><em>Flights Cheapest Prices</em></p>
+<p><em>Flights Cache Prices</em></p>
 
 <table><thead>
 <tr>
@@ -180,15 +241,11 @@ our APIs directly. For
 </thead><tbody>
 <tr>
 <td><a href="#flights-live-prices">Live prices</a></td>
-<td>Returns live prices from all our suppliers (in the selected market) for the requested route. May take up to a minute</td>
+<td>Returns live prices for the request flight itinery from all our suppliers (in the selected market).</td>
 </tr>
 </tbody></table>
 
-<aside class="warning">
-The Live Pricing API requires a good handling of APIs. You must first create a session and then poll for results. Given the volume of suppliers that we query, it may take up to a minute to retrieve all the results.
-</aside>
-
-<p><em>Car Hire</em></p>
+<p><em>Car Hire Live Prices</em></p>
 
 <table><thead>
 <tr>
@@ -197,10 +254,30 @@ The Live Pricing API requires a good handling of APIs. You must first create a s
 </tr>
 </thead><tbody>
 <tr>
-<td><a href="#flights-live-prices">Live prices</a></td>
-<td>Returns live prices from all our suppliers (in the selected market). May take up to a minute</td>
+<td><a href="#">Live prices</a></td>
+<td>Returns live prices for car hire deals from all our suppliers (in the selected market).</td>
 </tr>
 </tbody></table>
+
+<p><em>Hotels Live Prices</em></p>
+
+<table><thead>
+<tr>
+<th>API endpoint</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><a href="#">Live prices</a><br><span class="required">PRIVATE BETA</span></td>
+<td>Returns live prices for hotel deals from all our suppliers (in the selected market).</td>
+</tr>
+</tbody></table>
+
+<aside class="warning">
+Given the large number of suppliers that we query for quotes, the Live Pricing may take up to a minute to return all the results.
+
+Unless you require exact prices, we recommend you start with the cache prices API.
+</aside>
 
 <p>Before you get started consider how our data fits into your project. Use the Browse Cache Pricing API if your project:</p>
 
@@ -215,11 +292,11 @@ We encourage you to start with the Browse Cached Pricing API unless you definite
 Upgrading from Browse Cached Pricing to Live Pricing can always be done later!
 </aside>
 
-          <h1 id="flights-cheapest-prices">Flights Cheapest Prices</h1>
+          <h1 id="flights-cache-prices">Flights Cache Prices</h1>
 
 <h2 id="browse-quotes">Browse Quotes</h2>
 
-<p>Retrieve the cheapes quotes from our cache.</p>
+<p>Retrieve the cheapest quotes from our cache.</p>
 <pre class="highlight shell"><code>GET <span class="s2">"http://partners.api.skyscanner.net/apiservices/browsequotes/v1.0/{market}/{currency}/{locale}/
 {originPlace}/
 {destinationPlace}/
@@ -230,7 +307,29 @@ apiKey={apiKey}"</span>
 
 <p><em>API endpoint</em></p>
 
-<p><code class="prettyprint">/browsequotes/v1.0/{market}/{currency}/{locale}/{originPlace}/{destinationPlace}/{outboundPartialDate}/{inboundPartialDate}</code></p>
+<p>GET <code class="prettyprint">/browsequotes/v1.0/{market}/{currency}/{locale}/{originPlace}/{destinationPlace}/{outboundPartialDate}/{inboundPartialDate}</code></p>
+
+<p><em>HEADER VALUES</em></p>
+
+<table><thead>
+<tr>
+<th>Header</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">Accept</code><br><span class="optional">OPTIONAL</span></td>
+<td><code class="prettyprint">application/json</code> or <code class="prettyprint">application/xml</code><br>The default response format is XML</td>
+</tr>
+<tr>
+<td><code class="prettyprint">X-Forwarded-For</code><br><span class="required">REQUIRED</span></td>
+<td><code class="prettyprint">user&#39;s IP address</code></td>
+</tr>
+</tbody></table>
+
+<aside class="warning">
+We perform robot detection and reserve the right to suspend access to the service without prior notification.
+</aside>
 
 <p><em>REQUEST PARAMETERS</em></p>
 
@@ -242,37 +341,41 @@ apiKey={apiKey}"</span>
 </thead><tbody>
 <tr>
 <td><code class="prettyprint">market</code> <br><span class="required">REQUIRED</span></td>
-<td>The market/country your user is in</td>
+<td>The <a href="#markets">market/country</a> your user is in</td>
 </tr>
 <tr>
 <td><code class="prettyprint">currency</code> <br><span class="required">REQUIRED</span></td>
-<td>The currency you want the prices in</td>
+<td>The <a href="#currencies">currency</a> you want the prices in</td>
 </tr>
 <tr>
 <td><code class="prettyprint">locale</code> <br><span class="required">REQUIRED</span></td>
-<td>The language you want the results in (ISO locale)</td>
+<td>The <a href="#locales">locale</a> you want the results in (ISO locale)</td>
 </tr>
 <tr>
 <td><code class="prettyprint">originPlace</code> <br><span class="required">REQUIRED</span></td>
-<td>The language you want the results in (ISO locale)</td>
+<td>The origin place (see <a href="#places">places</a>)</td>
 </tr>
 <tr>
 <td><code class="prettyprint">destinationPlace</code> <br><span class="required">REQUIRED</span></td>
-<td>The language you want the results in (ISO locale)</td>
+<td>The destination place (see <a href="#places">places</a>)</td>
 </tr>
 <tr>
 <td><code class="prettyprint">outboundPartialDate</code> <br><span class="required">REQUIRED</span></td>
-<td>The language you want the results in (ISO locale)</td>
+<td>The outbound date. Format &ldquo;yyyy-mm-dd&rdquo;, &ldquo;yyyy-mm&rdquo; or &ldquo;anytime&rdquo;.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">inboundPartialDate</code> <br><span class="required">REQUIRED</span></td>
-<td>The language you want the results in (ISO locale)</td>
+<td><code class="prettyprint">inboundPartialDate</code> <br><span class="optional">OPTIONAL</span></td>
+<td>The return date. Format &ldquo;yyyy-mm-dd&rdquo;, &ldquo;yyyy-mm&rdquo; or &ldquo;anytime&rdquo;. Use empty string for oneway trip.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">apiKey</code> <br><span class="required">REQUIRED</span></td>
 <td>The API Key to identify the customer</td>
 </tr>
 </tbody></table>
+
+<blockquote>
+<p>Example response from US to anywhere:</p>
+</blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"Quotes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
@@ -496,7 +599,7 @@ URL Format</p>
 
 <p><em>API endpoint</em></p>
 
-<p><code class="prettyprint">/reference/v1.0/locales</code></p>
+<p><code class="prettyprint">GET /reference/v1.0/locales</code></p>
 
 <p><em>REQUEST PARAMETERS</em></p>
 
@@ -508,9 +611,13 @@ URL Format</p>
 </thead><tbody>
 <tr>
 <td><code class="prettyprint">apiKey</code> <br><span class="required">REQUIRED</span></td>
-<td>The API Key to identify the customer</td>
+<td>Your API Key.</td>
 </tr>
 </tbody></table>
+
+<blockquote>
+<p>Example response</p>
+</blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"Locales"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
@@ -544,7 +651,7 @@ URL Format</p>
 </thead><tbody>
 <tr>
 <td><code class="prettyprint">Locales</code></td>
-<td>Contains the list of markets (array of countries as name-value pairs).</td>
+<td>Contains the list of locales that we support with name and code.</td>
 </tr>
 </tbody></table>
 
@@ -558,7 +665,7 @@ URL Format</p>
 
 <p><em>API endpoint</em></p>
 
-<p><code class="prettyprint">/reference/v1.0/currencies</code></p>
+<p><code class="prettyprint">GET /reference/v1.0/currencies</code></p>
 
 <p><em>REQUEST PARAMETERS</em></p>
 
@@ -570,9 +677,13 @@ URL Format</p>
 </thead><tbody>
 <tr>
 <td><code class="prettyprint">apiKey</code> <br><span class="required">REQUIRED</span></td>
-<td>The API Key to identify the customer</td>
+<td>Your API Key.</td>
 </tr>
 </tbody></table>
+
+<blockquote>
+<p>Example response</p>
+</blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"Currencies"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="p">{</span><span class="w">
@@ -611,13 +722,13 @@ URL Format</p>
 <p>Most suppliers (airlines, travel agents and car hire dealers) set their fares based on the market (or country of purchase). It is therefore necessary to specify the market country in every query.</p>
 <pre class="highlight shell"><code>GET <span class="s2">"http://partners.api.skyscanner.net/apiservices/
     reference/v1.0/countries/
-     </span><span class="sb">`</span><span class="o">{</span>locale<span class="o">}</span><span class="sb">`</span><span class="s2"> ?
+    {locale}?
     apiKey={apiKey}"</span>
 </code></pre>
 
 <p><em>API endpoint</em></p>
 
-<p><code class="prettyprint">/reference/v1.0/countries</code></p>
+<p><code class="prettyprint">GET /reference/v1.0/countries/{locale}</code></p>
 
 <p><em>REQUEST PARAMETERS</em></p>
 
@@ -629,13 +740,17 @@ URL Format</p>
 </thead><tbody>
 <tr>
 <td><code class="prettyprint">locale</code> <br><span class="required">REQUIRED</span></td>
-<td>The language you want the results in (ISO locale)</td>
+<td>The language you want the results in (ISO locale). See <a href="#locales">locales</a> for locales that we support.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">apiKey</code> <br><span class="required">REQUIRED</span></td>
-<td>The API Key to identify the customer</td>
+<td>Your API Key.</td>
 </tr>
 </tbody></table>
+
+<blockquote>
+<p>Example response</p>
+</blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"Countries"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
@@ -671,28 +786,35 @@ URL Format</p>
 
           <h1 id="places">Places</h1>
 
-<p>Two types of requests can be made through the autosuggest:</p>
+<p>Places can be of 3 different types:</p>
+
+<ol>
+<li>country</li>
+<li>city</li>
+<li>airport</li>
+</ol>
+
+<p>Our Autosuggest endpoint can be used to obtain:</p>
 
 <ul>
-<li><p>list of places (with corresponding IDs) that match the query string</p></li>
+<li><p>a list of places and corresponding IDs that match a query string</p></li>
 <li><p>information about a specific place given its ID (for example city name and country name for an airport)</p></li>
 </ul>
 
 <p>The country and language must be included in the query so that the most relevant results can be returned, in the correct language.</p>
 
-<p><em>API endpoint</em></p>
-
-<p><code class="prettyprint">/autosuggest/v1.0/{market}/{currency}/{locale}</code></p>
-
 <h2 id="list-of-places">List of places</h2>
+
+<p>Get a list of places that match a query string.</p>
 <pre class="highlight shell"><code>GET <span class="s2">"http://partners.api.skyscanner.net/apiservices/
-    autosuggest/v1.0/
-     </span><span class="sb">`</span><span class="o">{</span>market<span class="o">}</span><span class="sb">`</span><span class="s2">/
-     </span><span class="sb">`</span><span class="o">{</span>currency<span class="o">}</span><span class="sb">`</span><span class="s2">/
-      </span><span class="sb">`</span><span class="o">{</span>locale<span class="o">}</span><span class="sb">`</span><span class="s2">?
+    autosuggest/v1.0/{market}/{currency}/{locale}?
     query={query}&amp;
     apiKey={apiKey}"</span>
 </code></pre>
+
+<p><em>API endpoint</em></p>
+
+<p><code class="prettyprint">GET /autosuggest/v1.0/{market}/{currency}/{locale}</code></p>
 
 <p><em>REQUEST PARAMETERS</em></p>
 
@@ -703,12 +825,24 @@ URL Format</p>
 </tr>
 </thead><tbody>
 <tr>
+<td><code class="prettyprint">market</code> <br><span class="required">REQUIRED</span></td>
+<td>The <a href="#markets">market/country</a> your user is in</td>
+</tr>
+<tr>
+<td><code class="prettyprint">currency</code> <br><span class="required">REQUIRED</span></td>
+<td>The <a href="#currencies">currency</a> you want the prices in</td>
+</tr>
+<tr>
+<td><code class="prettyprint">locale</code> <br><span class="required">REQUIRED</span></td>
+<td>The <a href="#locales">locale</a> you want the results in (ISO locale)</td>
+</tr>
+<tr>
 <td><code class="prettyprint">query</code> <br><span class="required">REQUIRED</span></td>
 <td>The query string, must be at least 2 characters long.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">apiKey</code> <br><span class="required">REQUIRED</span></td>
-<td>The API Key to identify the customer</td>
+<td>Your API Key.</td>
 </tr>
 </tbody></table>
 
@@ -756,16 +890,19 @@ URL Format</p>
 </thead><tbody>
 <tr>
 <td><code class="prettyprint">Places</code></td>
-<td>Contains the list of markets (array of countries as name-value pairs).</td>
+<td>Contains the list of places that match the query string. The places can be countries, cities or airports.</td>
 </tr>
 </tbody></table>
 
 <h2 id="place-information">Place Information</h2>
+
+<p>Get information about a country, city or airport using its ID.</p>
+
+<p><em>API endpoint</em></p>
+
+<p><code class="prettyprint">GET /autosuggest/v1.0/{market}/{currency}/{locale}</code></p>
 <pre class="highlight shell"><code>GET <span class="s2">"http://partners.api.skyscanner.net/apiservices/
-    autosuggest/v1.0/
-     </span><span class="sb">`</span><span class="o">{</span>market<span class="o">}</span><span class="sb">`</span><span class="s2">/
-     </span><span class="sb">`</span><span class="o">{</span>currency<span class="o">}</span><span class="sb">`</span><span class="s2">/
-      </span><span class="sb">`</span><span class="o">{</span>locale<span class="o">}</span><span class="sb">`</span><span class="s2">?
+    autosuggest/v1.0/{market}/{currency}/{locale}?
     id={place_id}&amp;
     apiKey={apiKey}"</span>
 </code></pre>
@@ -779,17 +916,45 @@ URL Format</p>
 </tr>
 </thead><tbody>
 <tr>
+<td><code class="prettyprint">market</code> <br><span class="required">REQUIRED</span></td>
+<td>The <a href="#markets">market/country</a> your user is in</td>
+</tr>
+<tr>
+<td><code class="prettyprint">currency</code> <br><span class="required">REQUIRED</span></td>
+<td>The <a href="#currencies">currency</a> you want the prices in</td>
+</tr>
+<tr>
+<td><code class="prettyprint">locale</code> <br><span class="required">REQUIRED</span></td>
+<td>The <a href="#locales">locale</a> you want the results in (ISO locale)</td>
+</tr>
+<tr>
 <td><code class="prettyprint">id</code> <br><span class="required">REQUIRED</span></td>
 <td>The place id.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">apiKey</code> <br><span class="required">REQUIRED</span></td>
-<td>The API Key to identify the customer</td>
+<td>Your API Key</td>
 </tr>
 </tbody></table>
 
 <blockquote>
-<p>Example response for id=cdg</p>
+<p>Example response for United Kingdom: id=uk</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"Places"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"PlaceId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UK-sky"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"PlaceName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"United Kingdom"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"CountryId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UK-sky"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"CityId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-sky"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"CountryName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"United Kingdom"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>Example response for Charles de Gaulle airport: id=cdg</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"Places"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -817,6 +982,59 @@ URL Format</p>
 <td>Contains the information about the place such as name (in chosen locale), city, country.</td>
 </tr>
 </tbody></table>
+
+<h2 id="schemas">Schemas</h2>
+
+<blockquote>
+<p>Example place codes:</p>
+</blockquote>
+<pre class="highlight shell"><code>EDIN-sky
+</code></pre>
+<pre class="highlight shell"><code>CDG-iata
+</code></pre>
+
+<p>Each place can be referred to via different schemas, described below.</p>
+
+<p><em>SCHEMAS</em></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>sky</td>
+<td>Skyscanner code. The response from <a href="#place-information">Autosuggest</a> provides these ids.</td>
+</tr>
+<tr>
+<td>iata / iso</td>
+<td>Airports and cities often use the internationally recognized IATA and ISO schemas.<br>Although we support these schemas we recommend that you use the Skyscanner code which is very similar but solves ambiguous cases where a city and one of its airports share the same code.</td>
+</tr>
+<tr>
+<td>latlong</td>
+<td>Latitude and longitude of the place in the following form: &ldquo;latitude,longitude&rdquo;. The nearest city with airport will be used.</td>
+</tr>
+<tr>
+<td>ip</td>
+<td>IP of a user. The nearest city with airport will be used.</td>
+</tr>
+<tr>
+<td>rnid</td>
+<td>A unique ID for a location in Skyscanner. For example EDIN is the Skyscanner code for Edinburgh City and its Rnid is 2343.</td>
+</tr>
+<tr>
+<td>GeoNameCodes</td>
+<td>GeoNameCodes from the GeoNames schema (see <a href="www.geonames.org">geonames.org</a>)</td>
+</tr>
+<tr>
+<td>GeoNameIDs</td>
+<td>GeoNameIDs from the GeoNames schema (see <a href="www.geonames.org">geonames.org</a>)</td>
+</tr>
+</tbody></table>
+
+<p>If the default Skyscanner schema is not used, the schema name must be appended to the place id as follows:
+<code class="prettyprint">placeCode-locationSchema</code></p>
 
       </div>
       <div class="dark-box">
