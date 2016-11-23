@@ -143,6 +143,10 @@ our APIs directly.
 
 <p>You must include the API key in all API requests to the server, either as a parameter in the query or in the query header. Please refer to each endpoint for details.</p>
 
+<aside class="warning">
+Be careful when sharing bot user tokens with applications. Do not publish bot user tokens in public code repositories.
+</aside>
+
           <h1 id="getting-started">Getting Started</h1>
 
 <p><em>Flights Cache Prices</em></p>
@@ -237,12 +241,15 @@ Upgrading from Browse Cached Pricing to Live Pricing can always be done later!
 <h2 id="browse-quotes">Browse Quotes</h2>
 
 <p>Retrieve the cheapest quotes from our cache.</p>
-<pre class="highlight shell"><code>curl -X GET -H <span class="s2">"Accept: application/json"</span> <span class="s2">"http://partners.api.skyscanner.net/apiservices/browsequotes/v1.0/{market}/{currency}/{locale}/
-{originPlace}/
-{destinationPlace}/
-{outboundPartialDate}/
-{inboundPartialDate}?
-apiKey={apiKey}"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"http://partners.api.skyscanner.net/apiservices/browsequotes/v1.0/{market}/{currency}/{locale}/
+  {originPlace}/
+  {destinationPlace}/
+  {outboundPartialDate}/
+  {inboundPartialDate}?
+  apiKey={apiKey}"</span>
+  -X GET
+  -H <span class="s2">"Accept: application/json"</span>
+
 </code></pre>
 
 <p><em>API endpoint</em></p>
@@ -263,9 +270,195 @@ apiKey={apiKey}"</span>
 </tr>
 </tbody></table>
 
-<aside class="warning">
-We perform robot detection and reserve the right to suspend access to the service without prior notification.
-</aside>
+<p><em>REQUEST PARAMETERS</em></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">market</code> <br><span class="required">REQUIRED</span></td>
+<td>The <a href="#markets">market/country</a> your user is in</td>
+</tr>
+<tr>
+<td><code class="prettyprint">currency</code> <br><span class="required">REQUIRED</span></td>
+<td>The <a href="#currencies">currency</a> you want the prices in</td>
+</tr>
+<tr>
+<td><code class="prettyprint">locale</code> <br><span class="required">REQUIRED</span></td>
+<td>The <a href="#locales">locale</a> you want the results in (ISO locale)</td>
+</tr>
+<tr>
+<td><code class="prettyprint">originPlace</code> <br><span class="required">REQUIRED</span></td>
+<td>The origin place (see <a href="#places">places</a>)</td>
+</tr>
+<tr>
+<td><code class="prettyprint">destinationPlace</code> <br><span class="required">REQUIRED</span></td>
+<td>The destination place (see <a href="#places">places</a>)</td>
+</tr>
+<tr>
+<td><code class="prettyprint">outboundPartialDate</code> <br><span class="required">REQUIRED</span></td>
+<td>The outbound date. Format &ldquo;yyyy-mm-dd&rdquo;, &ldquo;yyyy-mm&rdquo; or &ldquo;anytime&rdquo;.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">inboundPartialDate</code> <br><span class="optional">OPTIONAL</span></td>
+<td>The return date. Format &ldquo;yyyy-mm-dd&rdquo;, &ldquo;yyyy-mm&rdquo; or &ldquo;anytime&rdquo;. Use empty string for oneway trip.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">apiKey</code> <br><span class="required">REQUIRED</span></td>
+<td>The API Key to identify the customer</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Example response from US to anywhere:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"Routes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"OriginId"</span><span class="p">:</span><span class="w"> </span><span class="mi">1811</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"DestinationId"</span><span class="p">:</span><span class="w"> </span><span class="mi">1845</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"QuoteIds"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="mi">2</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"Price"</span><span class="p">:</span><span class="w"> </span><span class="mi">326</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"QuoteDateTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11-13T01:30:00"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"OriginId"</span><span class="p">:</span><span class="w"> </span><span class="mi">1811</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"DestinationId"</span><span class="p">:</span><span class="w"> </span><span class="mi">929</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"QuoteIds"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="mi">3</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"Price"</span><span class="p">:</span><span class="w"> </span><span class="mi">150</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"QuoteDateTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11-09T17:44:00"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+  </span><span class="err">...</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"Quotes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"QuoteId"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"MinPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">381</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"Direct"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"OutboundLeg"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"CarrierIds"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="mi">470</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"OriginId"</span><span class="p">:</span><span class="w"> </span><span class="mi">68033</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"DestinationId"</span><span class="p">:</span><span class="w"> </span><span class="mi">42833</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"DepartureDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-02-03T00:00:00"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"InboundLeg"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"CarrierIds"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="mi">470</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"OriginId"</span><span class="p">:</span><span class="w"> </span><span class="mi">42833</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"DestinationId"</span><span class="p">:</span><span class="w"> </span><span class="mi">68033</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"DepartureDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-02-06T00:00:00"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"QuoteDateTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11-09T21:20:00"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+  </span><span class="err">...</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"Places"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"PlaceId"</span><span class="p">:</span><span class="w"> </span><span class="mi">837</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"United Arab Emirates"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"Type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Country"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"SkyscannerCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AE"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+  </span><span class="err">...</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"Carriers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"CarrierId"</span><span class="p">:</span><span class="w"> </span><span class="mi">29</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mombasa Air Safari"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"CarrierId"</span><span class="p">:</span><span class="w"> </span><span class="mi">173</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Silver Airways"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+  </span><span class="err">#...#</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"Currencies"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"Code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"Symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"€"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"ThousandsSeparator"</span><span class="p">:</span><span class="w"> </span><span class="s2">" "</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"DecimalSeparator"</span><span class="p">:</span><span class="w"> </span><span class="s2">","</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"SymbolOnLeft"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"SpaceBetweenAmountAndSymbol"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"RoundingCoefficient"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"DecimalDigits"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p><em>RESPONSE PARAMETERS</em></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">Routes</code></td>
+<td>Contains the routes which are assembled from the individual quotes.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">Quotes</code></td>
+<td>Contains the list of markets (array of countries as name-value pairs).</td>
+</tr>
+<tr>
+<td><code class="prettyprint">Places</code></td>
+<td>Contains the list of markets (array of countries as name-value pairs).</td>
+</tr>
+<tr>
+<td><code class="prettyprint">Carriers</code></td>
+<td>Contains the list of markets (array of countries as name-value pairs).</td>
+</tr>
+<tr>
+<td><code class="prettyprint">Currencies</code></td>
+<td>Contains the list of markets (array of countries as name-value pairs).</td>
+</tr>
+</tbody></table>
+
+          <h2 id="browse-routes">Browse Routes</h2>
+
+<p>Retrieve the cheapest routes from our cache.</p>
+<pre class="highlight shell"><code>curl <span class="s2">"http://partners.api.skyscanner.net/apiservices/browseroutes/v1.0/{market}/{currency}/{locale}/
+  {originPlace}/
+  {destinationPlace}/
+  {outboundPartialDate}/
+  {inboundPartialDate}?
+  apiKey={apiKey}"</span>
+  -X GET
+  -H <span class="s2">"Accept: application/json"</span>
+
+</code></pre>
+
+<p><em>API endpoint</em></p>
+
+<p>GET <code class="prettyprint">/browseroutes/v1.0/{market}/{currency}/{locale}/{originPlace}/{destinationPlace}/{outboundPartialDate}/{inboundPartialDate}</code></p>
+
+<p><em>HEADER VALUES</em></p>
+
+<table><thead>
+<tr>
+<th>Header</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">Accept</code><br><span class="optional">OPTIONAL</span></td>
+<td><code class="prettyprint">application/json</code> or <code class="prettyprint">application/xml</code><br>The default response format is XML</td>
+</tr>
+</tbody></table>
 
 <p><em>REQUEST PARAMETERS</em></p>
 
@@ -399,11 +592,369 @@ We perform robot detection and reserve the right to suspend access to the servic
 </tr>
 </tbody></table>
 
-<h2 id="browse-routes">Browse Routes</h2>
+          <h2 id="browse-dates">Browse Dates</h2>
 
-<h2 id="browse-dates">Browse Dates</h2>
+<p>Retrieve the cheapest routes from our cache.</p>
+<pre class="highlight shell"><code>curl <span class="s2">"http://partners.api.skyscanner.net/apiservices/browsedates/v1.0/{market}/{currency}/{locale}/
+  {originPlace}/
+  {destinationPlace}/
+  {outboundPartialDate}/
+  {inboundPartialDate}?
+  apiKey={apiKey}"</span>
+  -X GET
+  -H <span class="s2">"Accept: application/json"</span>
 
-<h2 id="browse-dates-grid">Browse Dates (Grid)</h2>
+</code></pre>
+
+<p><em>API endpoint</em></p>
+
+<p>GET <code class="prettyprint">/browsedates/v1.0/{market}/{currency}/{locale}/{originPlace}/{destinationPlace}/{outboundPartialDate}/{inboundPartialDate}</code></p>
+
+<p><em>HEADER VALUES</em></p>
+
+<table><thead>
+<tr>
+<th>Header</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">Accept</code><br><span class="optional">OPTIONAL</span></td>
+<td><code class="prettyprint">application/json</code> or <code class="prettyprint">application/xml</code><br>The default response format is XML</td>
+</tr>
+</tbody></table>
+
+<p><em>REQUEST PARAMETERS</em></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">market</code> <br><span class="required">REQUIRED</span></td>
+<td>The <a href="#markets">market/country</a> your user is in</td>
+</tr>
+<tr>
+<td><code class="prettyprint">currency</code> <br><span class="required">REQUIRED</span></td>
+<td>The <a href="#currencies">currency</a> you want the prices in</td>
+</tr>
+<tr>
+<td><code class="prettyprint">locale</code> <br><span class="required">REQUIRED</span></td>
+<td>The <a href="#locales">locale</a> you want the results in (ISO locale)</td>
+</tr>
+<tr>
+<td><code class="prettyprint">originPlace</code> <br><span class="required">REQUIRED</span></td>
+<td>The origin place (see <a href="#places">places</a>)</td>
+</tr>
+<tr>
+<td><code class="prettyprint">destinationPlace</code> <br><span class="required">REQUIRED</span></td>
+<td>The destination place (see <a href="#places">places</a>)</td>
+</tr>
+<tr>
+<td><code class="prettyprint">outboundPartialDate</code> <br><span class="required">REQUIRED</span></td>
+<td>The outbound date. Format &ldquo;yyyy-mm-dd&rdquo;, &ldquo;yyyy-mm&rdquo; or &ldquo;anytime&rdquo;.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">inboundPartialDate</code> <br><span class="optional">OPTIONAL</span></td>
+<td>The return date. Format &ldquo;yyyy-mm-dd&rdquo;, &ldquo;yyyy-mm&rdquo; or &ldquo;anytime&rdquo;. Use empty string for oneway trip.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">apiKey</code> <br><span class="required">REQUIRED</span></td>
+<td>The API Key to identify the customer</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Example response from London to Paris:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"Dates"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"OutboundDates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"PartialDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"QuoteIds"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="mi">1</span><span class="p">,</span><span class="w">
+          </span><span class="mi">2</span><span class="p">,</span><span class="w">
+          </span><span class="mi">3</span><span class="p">,</span><span class="w">
+          </span><span class="mi">4</span><span class="p">,</span><span class="w">
+          </span><span class="mi">5</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"Price"</span><span class="p">:</span><span class="w"> </span><span class="mi">66</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"QuoteDateTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11-08T17:28:00"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+    </span><span class="err">...</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"InboundDates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"PartialDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"QuoteIds"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="mi">1</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"Price"</span><span class="p">:</span><span class="w"> </span><span class="mi">93</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"QuoteDateTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11-21T17:19:00"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="err">...</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"Quotes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"QuoteId"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"MinPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">381</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"Direct"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"OutboundLeg"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"CarrierIds"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="mi">470</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"OriginId"</span><span class="p">:</span><span class="w"> </span><span class="mi">68033</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"DestinationId"</span><span class="p">:</span><span class="w"> </span><span class="mi">42833</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"DepartureDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-02-03T00:00:00"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"InboundLeg"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"CarrierIds"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="mi">470</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"OriginId"</span><span class="p">:</span><span class="w"> </span><span class="mi">42833</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"DestinationId"</span><span class="p">:</span><span class="w"> </span><span class="mi">68033</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"DepartureDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-02-06T00:00:00"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"QuoteDateTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11-09T21:20:00"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+  </span><span class="err">...</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"Places"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"PlaceId"</span><span class="p">:</span><span class="w"> </span><span class="mi">837</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"United Arab Emirates"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"Type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Country"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"SkyscannerCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AE"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+  </span><span class="err">...</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"Carriers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"CarrierId"</span><span class="p">:</span><span class="w"> </span><span class="mi">29</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mombasa Air Safari"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"CarrierId"</span><span class="p">:</span><span class="w"> </span><span class="mi">173</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Silver Airways"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+  </span><span class="err">#...#</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"Currencies"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"Code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"Symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"€"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"ThousandsSeparator"</span><span class="p">:</span><span class="w"> </span><span class="s2">" "</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"DecimalSeparator"</span><span class="p">:</span><span class="w"> </span><span class="s2">","</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"SymbolOnLeft"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"SpaceBetweenAmountAndSymbol"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"RoundingCoefficient"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"DecimalDigits"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p><em>RESPONSE PARAMETERS</em></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">Quotes</code></td>
+<td>Contains the list of markets (array of countries as name-value pairs).</td>
+</tr>
+<tr>
+<td><code class="prettyprint">Places</code></td>
+<td>Contains the list of markets (array of countries as name-value pairs).</td>
+</tr>
+<tr>
+<td><code class="prettyprint">Carriers</code></td>
+<td>Contains the list of markets (array of countries as name-value pairs).</td>
+</tr>
+<tr>
+<td><code class="prettyprint">Currencies</code></td>
+<td>Contains the list of markets (array of countries as name-value pairs).</td>
+</tr>
+</tbody></table>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"ValidationErrors"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"For this query please use the following service [BrowseRoutes]"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="err">```</span><span class="w">
+</span></code></pre>
+
+          <h2 id="browse-dates-grid">Browse Dates (grid)</h2>
+
+<p>Retrieve the cheapest routes from our cache.</p>
+<pre class="highlight shell"><code>curl <span class="s2">"http://partners.api.skyscanner.net/apiservices/browsegrid/v1.0/{market}/{currency}/{locale}/
+  {originPlace}/
+  {destinationPlace}/
+  {outboundPartialDate}/
+  {inboundPartialDate}?
+  apiKey={apiKey}"</span>
+  -X GET
+  -H <span class="s2">"Accept: application/json"</span>
+
+</code></pre>
+
+<p><em>API endpoint</em></p>
+
+<p>GET <code class="prettyprint">/browsegrid/v1.0/{market}/{currency}/{locale}/{originPlace}/{destinationPlace}/{outboundPartialDate}/{inboundPartialDate}</code></p>
+
+<p><em>HEADER VALUES</em></p>
+
+<table><thead>
+<tr>
+<th>Header</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">Accept</code><br><span class="optional">OPTIONAL</span></td>
+<td><code class="prettyprint">application/json</code> or <code class="prettyprint">application/xml</code><br>The default response format is XML</td>
+</tr>
+</tbody></table>
+
+<p><em>REQUEST PARAMETERS</em></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">market</code> <br><span class="required">REQUIRED</span></td>
+<td>The <a href="#markets">market/country</a> your user is in</td>
+</tr>
+<tr>
+<td><code class="prettyprint">currency</code> <br><span class="required">REQUIRED</span></td>
+<td>The <a href="#currencies">currency</a> you want the prices in</td>
+</tr>
+<tr>
+<td><code class="prettyprint">locale</code> <br><span class="required">REQUIRED</span></td>
+<td>The <a href="#locales">locale</a> you want the results in (ISO locale)</td>
+</tr>
+<tr>
+<td><code class="prettyprint">originPlace</code> <br><span class="required">REQUIRED</span></td>
+<td>The origin place (see <a href="#places">places</a>)</td>
+</tr>
+<tr>
+<td><code class="prettyprint">destinationPlace</code> <br><span class="required">REQUIRED</span></td>
+<td>The destination place (see <a href="#places">places</a>)</td>
+</tr>
+<tr>
+<td><code class="prettyprint">outboundPartialDate</code> <br><span class="required">REQUIRED</span></td>
+<td>The outbound date. Format &ldquo;yyyy-mm-dd&rdquo;, &ldquo;yyyy-mm&rdquo; or &ldquo;anytime&rdquo;.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">inboundPartialDate</code> <br><span class="optional">OPTIONAL</span></td>
+<td>The return date. Format &ldquo;yyyy-mm-dd&rdquo;, &ldquo;yyyy-mm&rdquo; or &ldquo;anytime&rdquo;. Use empty string for oneway trip.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">apiKey</code> <br><span class="required">REQUIRED</span></td>
+<td>The API Key to identify the customer</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Example response from US to anywhere:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"Quotes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"QuoteId"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"MinPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">381</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"Direct"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"OutboundLeg"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"CarrierIds"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="mi">470</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"OriginId"</span><span class="p">:</span><span class="w"> </span><span class="mi">68033</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"DestinationId"</span><span class="p">:</span><span class="w"> </span><span class="mi">42833</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"DepartureDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-02-03T00:00:00"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"InboundLeg"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"CarrierIds"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="mi">470</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"OriginId"</span><span class="p">:</span><span class="w"> </span><span class="mi">42833</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"DestinationId"</span><span class="p">:</span><span class="w"> </span><span class="mi">68033</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"DepartureDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-02-06T00:00:00"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"QuoteDateTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11-09T21:20:00"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+  </span><span class="err">...</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"Places"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"PlaceId"</span><span class="p">:</span><span class="w"> </span><span class="mi">837</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"United Arab Emirates"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"Type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Country"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"SkyscannerCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AE"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+  </span><span class="err">...</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"Carriers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"CarrierId"</span><span class="p">:</span><span class="w"> </span><span class="mi">29</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mombasa Air Safari"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"CarrierId"</span><span class="p">:</span><span class="w"> </span><span class="mi">173</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Silver Airways"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+  </span><span class="err">#...#</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"Currencies"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"Code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"Symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"€"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"ThousandsSeparator"</span><span class="p">:</span><span class="w"> </span><span class="s2">" "</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"DecimalSeparator"</span><span class="p">:</span><span class="w"> </span><span class="s2">","</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"SymbolOnLeft"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"SpaceBetweenAmountAndSymbol"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"RoundingCoefficient"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"DecimalDigits"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p><em>RESPONSE PARAMETERS</em></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">Quotes</code></td>
+<td>Contains the list of markets (array of countries as name-value pairs).</td>
+</tr>
+<tr>
+<td><code class="prettyprint">Places</code></td>
+<td>Contains the list of markets (array of countries as name-value pairs).</td>
+</tr>
+<tr>
+<td><code class="prettyprint">Carriers</code></td>
+<td>Contains the list of markets (array of countries as name-value pairs).</td>
+</tr>
+<tr>
+<td><code class="prettyprint">Currencies</code></td>
+<td>Contains the list of markets (array of countries as name-value pairs).</td>
+</tr>
+</tbody></table>
 
           <h1 id="flights-live-prices">Flights Live Prices</h1>
 
