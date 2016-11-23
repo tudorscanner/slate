@@ -8,7 +8,10 @@ toc_footers:
 includes:
   - authentication
   - getting_started
-  - flights_cache_prices
+  - flights_browse_quotes
+  - flights_browse_routes
+  - flights_browse_dates
+  - flights_browse_grid
   - flights_live_prices
   - localisation
   - places

@@ -5,12 +5,15 @@
 Retrieve the cheapest quotes from our cache.
 
 ```shell
-curl -X GET -H "Accept: application/json" "http://partners.api.skyscanner.net/apiservices/browsequotes/v1.0/{market}/{currency}/{locale}/
-{originPlace}/
-{destinationPlace}/
-{outboundPartialDate}/
-{inboundPartialDate}?
-apiKey={apiKey}"
+curl "http://partners.api.skyscanner.net/apiservices/browsequotes/v1.0/{market}/{currency}/{locale}/
+  {originPlace}/
+  {destinationPlace}/
+  {outboundPartialDate}/
+  {inboundPartialDate}?
+  apiKey={apiKey}"
+  -X GET
+  -H "Accept: application/json"
+
 ```
 
 *API endpoint*
@@ -22,10 +25,6 @@ GET `/browsequotes/v1.0/{market}/{currency}/{locale}/{originPlace}/{destinationP
 | Header | Value |
 | --- | --- |
 | ```Accept```<br><span class="optional">OPTIONAL</span> | ```application/json``` or ```application/xml```<br>The default response format is XML |
-
-<aside class="warning">
-We perform robot detection and reserve the right to suspend access to the service without prior notification.
-</aside>
 
 *REQUEST PARAMETERS*
 
@@ -45,6 +44,28 @@ We perform robot detection and reserve the right to suspend access to the servic
 
 ```json
 {
+  "Routes": [
+    {
+      "OriginId": 1811,
+      "DestinationId": 1845,
+      "QuoteIds": [
+        1,
+        2
+      ],
+      "Price": 326,
+      "QuoteDateTime": "2016-11-13T01:30:00"
+    },
+    {
+      "OriginId": 1811,
+      "DestinationId": 929,
+      "QuoteIds": [
+        3
+      ],
+      "Price": 150,
+      "QuoteDateTime": "2016-11-09T17:44:00"
+    },
+  ...
+  ],
   "Quotes": [
     {
       "QuoteId": 1,
@@ -110,14 +131,9 @@ We perform robot detection and reserve the right to suspend access to the servic
 
 | Parameter | Description |
 | --- | --- |
+| `Routes`| Contains the routes which are assembled from the individual quotes. |
 | ```Quotes``` | Contains the list of markets (array of countries as name-value pairs). |
 | ```Places``` | Contains the list of markets (array of countries as name-value pairs). |
 | ```Carriers``` | Contains the list of markets (array of countries as name-value pairs). |
 | ```Currencies``` | Contains the list of markets (array of countries as name-value pairs). |
 
-
-## Browse Routes
-
-## Browse Dates
-
-## Browse Dates (Grid)
