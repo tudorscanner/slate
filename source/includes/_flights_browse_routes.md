@@ -51,6 +51,28 @@ The following tables show the level of precision supported for the origin and de
 
 ```json
 {
+  "Routes": [
+    {
+      "OriginId": 1811,
+      "DestinationId": 1845,
+      "QuoteIds": [
+        1,
+        2
+      ],
+      "Price": 326,
+      "QuoteDateTime": "2016-11-13T01:30:00"
+    },
+    {
+      "OriginId": 1811,
+      "DestinationId": 929,
+      "QuoteIds": [
+        3
+      ],
+      "Price": 150,
+      "QuoteDateTime": "2016-11-09T17:44:00"
+    },
+  ...
+  ],
   "Quotes": [
     {
       "QuoteId": 1,
