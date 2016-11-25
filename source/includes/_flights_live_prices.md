@@ -35,6 +35,11 @@ curl "http://partners.api.skyscanner.net/apiservices/pricing/v1.0"
 
 `POST /pricing/v1.0`
 
+
+*TRY IT OUT*
+
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/31ff523d2ff9186107e1)
+
 *HEADER VALUES*
 
 | Header | Value |

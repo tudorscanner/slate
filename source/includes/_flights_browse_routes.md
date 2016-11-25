@@ -1,6 +1,6 @@
 ## Browse Routes
 
-Retrieve the cheapest routes from our cache.
+Retrieve the cheapest routes from our cache prices. Similar to the Browse Quotes API but with the routes built for you from the individual quotes.
 
 ```shell
 curl "http://partners.api.skyscanner.net/apiservices/browseroutes/v1.0/{market}/{currency}/{locale}/
@@ -17,6 +17,10 @@ curl "http://partners.api.skyscanner.net/apiservices/browseroutes/v1.0/{market}/
 *API endpoint*
 
 GET `/browseroutes/v1.0/{market}/{currency}/{locale}/{originPlace}/{destinationPlace}/{outboundPartialDate}/{inboundPartialDate}`
+
+*TRY IT OUT*
+
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/80ff19efbe2c736a4dfd)
 
 *HEADER VALUES*
 
@@ -37,6 +41,11 @@ GET `/browseroutes/v1.0/{market}/{currency}/{locale}/{originPlace}/{destinationP
 | ```inboundPartialDate``` <br><span class="optional">OPTIONAL</span> | The return date. Format "yyyy-mm-dd", "yyyy-mm" or "anytime". Use empty string for oneway trip. |
 | ```apiKey``` <br><span class="required">REQUIRED</span> | The API Key to identify the customer |
 
+The following tables show the level of precision supported for the origin and destination places, and the outbound and return dates:
+
+![diagram](/images/browseroutes_places.png)
+
+![diagram](/images/browseroutes_dates.png)
 
 > Example response from US to anywhere:
 

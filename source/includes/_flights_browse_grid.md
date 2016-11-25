@@ -18,6 +18,10 @@ curl "http://partners.api.skyscanner.net/apiservices/browsegrid/v1.0/{market}/{c
 
 GET `/browsegrid/v1.0/{market}/{currency}/{locale}/{originPlace}/{destinationPlace}/{outboundPartialDate}/{inboundPartialDate}`
 
+*TRY IT OUT*
+
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/80ff19efbe2c736a4dfd)
+
 *HEADER VALUES*
 
 | Header | Value |
@@ -37,35 +41,31 @@ GET `/browsegrid/v1.0/{market}/{currency}/{locale}/{originPlace}/{destinationPla
 | ```inboundPartialDate``` <br><span class="optional">OPTIONAL</span> | The return date. Format "yyyy-mm-dd", "yyyy-mm" or "anytime". Use empty string for oneway trip. |
 | ```apiKey``` <br><span class="required">REQUIRED</span> | The API Key to identify the customer |
 
+The following tables show the level of precision supported for the origin and destination places, and the outbound and return dates:
+
+![diagram](/images/browsegrid_places.png)
+
+![diagram](/images/browsegrid_dates.png)
 
 > Example response from US to anywhere:
 
 ```json
 {
-  "Quotes": [
-    {
-      "QuoteId": 1,
-      "MinPrice": 381,
-      "Direct": true,
-      "OutboundLeg": {
-        "CarrierIds": [
-          470
-        ],
-        "OriginId": 68033,
-        "DestinationId": 42833,
-        "DepartureDate": "2017-02-03T00:00:00"
+  "Dates": [
+    [
+      null,
+      {
+        "DateString": "2017-01"
       },
-      "InboundLeg": {
-        "CarrierIds": [
-          470
-        ],
-        "OriginId": 42833,
-        "DestinationId": 68033,
-        "DepartureDate": "2017-02-06T00:00:00"
+      {
+        "DateString": "2017-02"
       },
-      "QuoteDateTime": "2016-11-09T21:20:00"
-    },
-  ...
+      {
+        "DateString": "2017-03"
+      },
+    ...
+    ],
+    ...
   ],
   "Places": [
     {
@@ -107,7 +107,7 @@ GET `/browsegrid/v1.0/{market}/{currency}/{locale}/{originPlace}/{destinationPla
 
 | Parameter | Description |
 | --- | --- |
-| ```Quotes``` | Contains the list of markets (array of countries as name-value pairs). |
+| ```Dates``` | Matrix of all the dates available with associated price. |
 | ```Places``` | Contains the list of markets (array of countries as name-value pairs). |
 | ```Carriers``` | Contains the list of markets (array of countries as name-value pairs). |
 | ```Currencies``` | Contains the list of markets (array of countries as name-value pairs). |

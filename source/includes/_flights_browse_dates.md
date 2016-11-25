@@ -18,6 +18,11 @@ curl "http://partners.api.skyscanner.net/apiservices/browsedates/v1.0/{market}/{
 
 GET `/browsedates/v1.0/{market}/{currency}/{locale}/{originPlace}/{destinationPlace}/{outboundPartialDate}/{inboundPartialDate}`
 
+
+*TRY IT OUT*
+
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/80ff19efbe2c736a4dfd)
+
 *HEADER VALUES*
 
 | Header | Value |
@@ -37,6 +42,12 @@ GET `/browsedates/v1.0/{market}/{currency}/{locale}/{originPlace}/{destinationPl
 | ```inboundPartialDate``` <br><span class="optional">OPTIONAL</span> | The return date. Format "yyyy-mm-dd", "yyyy-mm" or "anytime". Use empty string for oneway trip. |
 | ```apiKey``` <br><span class="required">REQUIRED</span> | The API Key to identify the customer |
 
+
+The following tables show the level of precision supported for the origin and destination places, and the outbound and return dates:
+
+![diagram](/images/browsedates_places.png)
+
+![diagram](/images/browsedates_dates.png)
 
 > Example response from London to Paris:
 
@@ -135,6 +146,7 @@ GET `/browsedates/v1.0/{market}/{currency}/{locale}/{originPlace}/{destinationPl
 
 | Parameter | Description |
 | --- | --- |
+| `Dates`| The list of outbound and inbound dates for which quotes are available. |
 | ```Quotes``` | Contains the list of markets (array of countries as name-value pairs). |
 | ```Places``` | Contains the list of markets (array of countries as name-value pairs). |
 | ```Carriers``` | Contains the list of markets (array of countries as name-value pairs). |
