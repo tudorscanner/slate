@@ -240,7 +240,7 @@ Upgrading from Browse Cached Pricing to Live Pricing can always be done later!
 
 <h2 id="browse-quotes">Browse Quotes</h2>
 
-<p>Retrieve the cheapest quotes from our cache.</p>
+<p>Retrieve the cheapest quotes from our cache prices.</p>
 <pre class="highlight shell"><code>curl <span class="s2">"http://partners.api.skyscanner.net/apiservices/browsequotes/v1.0/{market}/{currency}/{locale}/
   {originPlace}/
   {destinationPlace}/
@@ -255,6 +255,10 @@ Upgrading from Browse Cached Pricing to Live Pricing can always be done later!
 <p><em>API endpoint</em></p>
 
 <p>GET <code class="prettyprint">/browsequotes/v1.0/{market}/{currency}/{locale}/{originPlace}/{destinationPlace}/{outboundPartialDate}/{inboundPartialDate}</code></p>
+
+<p><em>TRY IT OUT</em></p>
+
+<p><a href="https://app.getpostman.com/run-collection/80ff19efbe2c736a4dfd"><img alt="Run in Postman" src="https://run.pstmn.io/button.svg" /></a></p>
 
 <p><em>HEADER VALUES</em></p>
 
@@ -312,32 +316,16 @@ Upgrading from Browse Cached Pricing to Live Pricing can always be done later!
 </tr>
 </tbody></table>
 
+<p>The following tables show the level of precision supported for the origin and destination places, and the outbound and return dates:</p>
+
+<p><img alt="diagram" src="images/browsequotes_places.png" /></p>
+
+<p><img alt="diagram" src="images/browsequotes_dates.png" /></p>
+
 <blockquote>
 <p>Example response from US to anywhere:</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"Routes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"OriginId"</span><span class="p">:</span><span class="w"> </span><span class="mi">1811</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"DestinationId"</span><span class="p">:</span><span class="w"> </span><span class="mi">1845</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"QuoteIds"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="mi">1</span><span class="p">,</span><span class="w">
-        </span><span class="mi">2</span><span class="w">
-      </span><span class="p">],</span><span class="w">
-      </span><span class="nt">"Price"</span><span class="p">:</span><span class="w"> </span><span class="mi">326</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"QuoteDateTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11-13T01:30:00"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"OriginId"</span><span class="p">:</span><span class="w"> </span><span class="mi">1811</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"DestinationId"</span><span class="p">:</span><span class="w"> </span><span class="mi">929</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"QuoteIds"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="mi">3</span><span class="w">
-      </span><span class="p">],</span><span class="w">
-      </span><span class="nt">"Price"</span><span class="p">:</span><span class="w"> </span><span class="mi">150</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"QuoteDateTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11-09T17:44:00"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-  </span><span class="err">...</span><span class="w">
-  </span><span class="p">],</span><span class="w">
   </span><span class="nt">"Quotes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="nt">"QuoteId"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
@@ -407,10 +395,6 @@ Upgrading from Browse Cached Pricing to Live Pricing can always be done later!
 </tr>
 </thead><tbody>
 <tr>
-<td><code class="prettyprint">Routes</code></td>
-<td>Contains the routes which are assembled from the individual quotes.</td>
-</tr>
-<tr>
 <td><code class="prettyprint">Quotes</code></td>
 <td>Contains the list of markets (array of countries as name-value pairs).</td>
 </tr>
@@ -430,7 +414,7 @@ Upgrading from Browse Cached Pricing to Live Pricing can always be done later!
 
           <h2 id="browse-routes">Browse Routes</h2>
 
-<p>Retrieve the cheapest routes from our cache.</p>
+<p>Retrieve the cheapest routes from our cache prices. Similar to the Browse Quotes API but with the routes built for you from the individual quotes.</p>
 <pre class="highlight shell"><code>curl <span class="s2">"http://partners.api.skyscanner.net/apiservices/browseroutes/v1.0/{market}/{currency}/{locale}/
   {originPlace}/
   {destinationPlace}/
@@ -445,6 +429,10 @@ Upgrading from Browse Cached Pricing to Live Pricing can always be done later!
 <p><em>API endpoint</em></p>
 
 <p>GET <code class="prettyprint">/browseroutes/v1.0/{market}/{currency}/{locale}/{originPlace}/{destinationPlace}/{outboundPartialDate}/{inboundPartialDate}</code></p>
+
+<p><em>TRY IT OUT</em></p>
+
+<p><a href="https://app.getpostman.com/run-collection/80ff19efbe2c736a4dfd"><img alt="Run in Postman" src="https://run.pstmn.io/button.svg" /></a></p>
 
 <p><em>HEADER VALUES</em></p>
 
@@ -501,6 +489,12 @@ Upgrading from Browse Cached Pricing to Live Pricing can always be done later!
 <td>The API Key to identify the customer</td>
 </tr>
 </tbody></table>
+
+<p>The following tables show the level of precision supported for the origin and destination places, and the outbound and return dates:</p>
+
+<p><img alt="diagram" src="images/browseroutes_places.png" /></p>
+
+<p><img alt="diagram" src="images/browseroutes_dates.png" /></p>
 
 <blockquote>
 <p>Example response from US to anywhere:</p>
@@ -610,6 +604,10 @@ Upgrading from Browse Cached Pricing to Live Pricing can always be done later!
 
 <p>GET <code class="prettyprint">/browsedates/v1.0/{market}/{currency}/{locale}/{originPlace}/{destinationPlace}/{outboundPartialDate}/{inboundPartialDate}</code></p>
 
+<p><em>TRY IT OUT</em></p>
+
+<p><a href="https://app.getpostman.com/run-collection/80ff19efbe2c736a4dfd"><img alt="Run in Postman" src="https://run.pstmn.io/button.svg" /></a></p>
+
 <p><em>HEADER VALUES</em></p>
 
 <table><thead>
@@ -665,6 +663,12 @@ Upgrading from Browse Cached Pricing to Live Pricing can always be done later!
 <td>The API Key to identify the customer</td>
 </tr>
 </tbody></table>
+
+<p>The following tables show the level of precision supported for the origin and destination places, and the outbound and return dates:</p>
+
+<p><img alt="diagram" src="images/browsedates_places.png" /></p>
+
+<p><img alt="diagram" src="images/browsedates_dates.png" /></p>
 
 <blockquote>
 <p>Example response from London to Paris:</p>
@@ -767,6 +771,10 @@ Upgrading from Browse Cached Pricing to Live Pricing can always be done later!
 </tr>
 </thead><tbody>
 <tr>
+<td><code class="prettyprint">Dates</code></td>
+<td>The list of outbound and inbound dates for which quotes are available.</td>
+</tr>
+<tr>
 <td><code class="prettyprint">Quotes</code></td>
 <td>Contains the list of markets (array of countries as name-value pairs).</td>
 </tr>
@@ -809,6 +817,10 @@ Upgrading from Browse Cached Pricing to Live Pricing can always be done later!
 <p><em>API endpoint</em></p>
 
 <p>GET <code class="prettyprint">/browsegrid/v1.0/{market}/{currency}/{locale}/{originPlace}/{destinationPlace}/{outboundPartialDate}/{inboundPartialDate}</code></p>
+
+<p><em>TRY IT OUT</em></p>
+
+<p><a href="https://app.getpostman.com/run-collection/80ff19efbe2c736a4dfd"><img alt="Run in Postman" src="https://run.pstmn.io/button.svg" /></a></p>
 
 <p><em>HEADER VALUES</em></p>
 
@@ -866,34 +878,31 @@ Upgrading from Browse Cached Pricing to Live Pricing can always be done later!
 </tr>
 </tbody></table>
 
+<p>The following tables show the level of precision supported for the origin and destination places, and the outbound and return dates:</p>
+
+<p><img alt="diagram" src="images/browsegrid_places.png" /></p>
+
+<p><img alt="diagram" src="images/browsegrid_dates.png" /></p>
+
 <blockquote>
 <p>Example response from US to anywhere:</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"Quotes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"QuoteId"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"MinPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">381</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"Direct"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"OutboundLeg"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"CarrierIds"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-          </span><span class="mi">470</span><span class="w">
-        </span><span class="p">],</span><span class="w">
-        </span><span class="nt">"OriginId"</span><span class="p">:</span><span class="w"> </span><span class="mi">68033</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"DestinationId"</span><span class="p">:</span><span class="w"> </span><span class="mi">42833</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"DepartureDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-02-03T00:00:00"</span><span class="w">
+  </span><span class="nt">"Dates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">[</span><span class="w">
+      </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"DateString"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-01"</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="nt">"InboundLeg"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"CarrierIds"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-          </span><span class="mi">470</span><span class="w">
-        </span><span class="p">],</span><span class="w">
-        </span><span class="nt">"OriginId"</span><span class="p">:</span><span class="w"> </span><span class="mi">42833</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"DestinationId"</span><span class="p">:</span><span class="w"> </span><span class="mi">68033</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"DepartureDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-02-06T00:00:00"</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"DateString"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-02"</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="nt">"QuoteDateTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11-09T21:20:00"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-  </span><span class="err">...</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"DateString"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+    </span><span class="err">...</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="err">...</span><span class="w">
   </span><span class="p">],</span><span class="w">
   </span><span class="nt">"Places"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
@@ -939,8 +948,8 @@ Upgrading from Browse Cached Pricing to Live Pricing can always be done later!
 </tr>
 </thead><tbody>
 <tr>
-<td><code class="prettyprint">Quotes</code></td>
-<td>Contains the list of markets (array of countries as name-value pairs).</td>
+<td><code class="prettyprint">Dates</code></td>
+<td>Matrix of all the dates available with associated price.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">Places</code></td>
@@ -990,6 +999,10 @@ risk of exposing account API keys.
 <p><em>API endpoint</em></p>
 
 <p><code class="prettyprint">POST /pricing/v1.0</code></p>
+
+<p><em>TRY IT OUT</em></p>
+
+<p><a href="https://app.getpostman.com/run-collection/31ff523d2ff9186107e1"><img alt="Run in Postman" src="https://run.pstmn.io/button.svg" /></a></p>
 
 <p><em>HEADER VALUES</em></p>
 
