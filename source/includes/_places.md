@@ -32,6 +32,10 @@ GET "http://partners.api.skyscanner.net/apiservices/
 
 `GET /geo/v1.0`
 
+*Try it out*
+
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/9c973db787e866c966f2)
+
 *REQUEST PARAMETERS*
 
 | Parameter | Description |
@@ -102,6 +106,10 @@ GET "http://partners.api.skyscanner.net/apiservices/
 
 `GET /autosuggest/v1.0/{market}/{currency}/{locale}`
 
+*Try it out*
+
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/9c973db787e866c966f2)
+
 *REQUEST PARAMETERS*
 
 | Parameter | Description |
@@ -161,6 +169,10 @@ Get information about a country, city or airport using its ID.
 *API endpoint*
 
 `GET /autosuggest/v1.0/{market}/{currency}/{locale}`
+
+*Try it out*
+
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/9c973db787e866c966f2)
 
 ```shell
 GET "http://partners.api.skyscanner.net/apiservices/

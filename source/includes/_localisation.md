@@ -16,6 +16,11 @@ GET "http://partners.api.skyscanner.net/apiservices/
 
 `GET /reference/v1.0/locales`
 
+*Try it out*
+
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/e9563a0d506b15cf35d3)
+
+
 *REQUEST PARAMETERS*
 
 | Parameter | Description |
@@ -69,6 +74,11 @@ GET "http://partners.api.skyscanner.net/apiservices/
 
 `GET /reference/v1.0/currencies`
 
+*Try it out*
+
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/e9563a0d506b15cf35d3)
+
+
 *REQUEST PARAMETERS*
 
 Parameter | Description |
@@ -119,6 +129,11 @@ GET "http://partners.api.skyscanner.net/apiservices/
 *API endpoint*
 
 `GET /reference/v1.0/countries/{locale}`
+
+*Try it out*
+
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/e9563a0d506b15cf35d3)
+
 
 *REQUEST PARAMETERS*
 
