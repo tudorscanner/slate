@@ -500,6 +500,28 @@ Upgrading from Browse Cached Pricing to Live Pricing can always be done later!
 <p>Example response from US to anywhere:</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"Routes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"OriginId"</span><span class="p">:</span><span class="w"> </span><span class="mi">1811</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"DestinationId"</span><span class="p">:</span><span class="w"> </span><span class="mi">1845</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"QuoteIds"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="mi">2</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"Price"</span><span class="p">:</span><span class="w"> </span><span class="mi">326</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"QuoteDateTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11-13T01:30:00"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"OriginId"</span><span class="p">:</span><span class="w"> </span><span class="mi">1811</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"DestinationId"</span><span class="p">:</span><span class="w"> </span><span class="mi">929</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"QuoteIds"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="mi">3</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"Price"</span><span class="p">:</span><span class="w"> </span><span class="mi">150</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"QuoteDateTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11-09T17:44:00"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+  </span><span class="err">...</span><span class="w">
+  </span><span class="p">],</span><span class="w">
   </span><span class="nt">"Quotes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="nt">"QuoteId"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
@@ -568,6 +590,10 @@ Upgrading from Browse Cached Pricing to Live Pricing can always be done later!
 <th>Description</th>
 </tr>
 </thead><tbody>
+<tr>
+<td><code class="prettyprint">Routes</code></td>
+<td>Contains the list of routes available, assembled from the individual quotes.</td>
+</tr>
 <tr>
 <td><code class="prettyprint">Quotes</code></td>
 <td>Contains the list of markets (array of countries as name-value pairs).</td>
@@ -1130,6 +1156,10 @@ risk of exposing account API keys.
 
 <p><code class="prettyprint">GET /reference/v1.0/locales</code></p>
 
+<p><em>Try it out</em></p>
+
+<p><a href="https://app.getpostman.com/run-collection/e9563a0d506b15cf35d3"><img alt="Run in Postman" src="https://run.pstmn.io/button.svg" /></a></p>
+
 <p><em>REQUEST PARAMETERS</em></p>
 
 <table><thead>
@@ -1196,6 +1226,10 @@ risk of exposing account API keys.
 
 <p><code class="prettyprint">GET /reference/v1.0/currencies</code></p>
 
+<p><em>Try it out</em></p>
+
+<p><a href="https://app.getpostman.com/run-collection/e9563a0d506b15cf35d3"><img alt="Run in Postman" src="https://run.pstmn.io/button.svg" /></a></p>
+
 <p><em>REQUEST PARAMETERS</em></p>
 
 <table><thead>
@@ -1258,6 +1292,10 @@ risk of exposing account API keys.
 <p><em>API endpoint</em></p>
 
 <p><code class="prettyprint">GET /reference/v1.0/countries/{locale}</code></p>
+
+<p><em>Try it out</em></p>
+
+<p><a href="https://app.getpostman.com/run-collection/e9563a0d506b15cf35d3"><img alt="Run in Postman" src="https://run.pstmn.io/button.svg" /></a></p>
 
 <p><em>REQUEST PARAMETERS</em></p>
 
@@ -1347,6 +1385,10 @@ The country and language must be included in the Autosuggest query so that the m
 
 <p><code class="prettyprint">GET /geo/v1.0</code></p>
 
+<p><em>Try it out</em></p>
+
+<p><a href="https://app.getpostman.com/run-collection/9c973db787e866c966f2"><img alt="Run in Postman" src="https://run.pstmn.io/button.svg" /></a></p>
+
 <p><em>REQUEST PARAMETERS</em></p>
 
 <table><thead>
@@ -1431,6 +1473,10 @@ The country and language must be included in the Autosuggest query so that the m
 <p><em>API endpoint</em></p>
 
 <p><code class="prettyprint">GET /autosuggest/v1.0/{market}/{currency}/{locale}</code></p>
+
+<p><em>Try it out</em></p>
+
+<p><a href="https://app.getpostman.com/run-collection/9c973db787e866c966f2"><img alt="Run in Postman" src="https://run.pstmn.io/button.svg" /></a></p>
 
 <p><em>REQUEST PARAMETERS</em></p>
 
@@ -1517,6 +1563,10 @@ The country and language must be included in the Autosuggest query so that the m
 <p><em>API endpoint</em></p>
 
 <p><code class="prettyprint">GET /autosuggest/v1.0/{market}/{currency}/{locale}</code></p>
+
+<p><em>Try it out</em></p>
+
+<p><a href="https://app.getpostman.com/run-collection/9c973db787e866c966f2"><img alt="Run in Postman" src="https://run.pstmn.io/button.svg" /></a></p>
 <pre class="highlight shell"><code>GET <span class="s2">"http://partners.api.skyscanner.net/apiservices/
     autosuggest/v1.0/{market}/{currency}/{locale}?
     id={place_id}&amp;
