@@ -151,13 +151,3 @@ The following tables show the level of precision supported for the origin and de
 | ```Places``` | Contains the list of markets (array of countries as name-value pairs). |
 | ```Carriers``` | Contains the list of markets (array of countries as name-value pairs). |
 | ```Currencies``` | Contains the list of markets (array of countries as name-value pairs). |
-
-
-```json
-{
-  "ValidationErrors": [
-    {
-      "Message": "For this query please use the following service [BrowseRoutes]"
-    }
-  ]
-}```
