@@ -144,7 +144,7 @@ our APIs directly.
 <p>You must include the API key in all API requests to the server, either as a parameter in the query or in the query header. Please refer to each endpoint for details.</p>
 
 <aside class="warning">
-Be careful when sharing bot user tokens with applications. Do not publish bot user tokens in public code repositories.
+Be careful when sharing API keys. Do not publish them in public code repositories or add them to client-side API calls.
 </aside>
 
           <h1 id="getting-started">Getting Started</h1>
@@ -817,14 +817,6 @@ Upgrading from Browse Cached Pricing to Live Pricing can always be done later!
 <td>Contains the list of markets (array of countries as name-value pairs).</td>
 </tr>
 </tbody></table>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"ValidationErrors"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"For this query please use the following service [BrowseRoutes]"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">]</span><span class="w">
-</span><span class="p">}</span><span class="err">```</span><span class="w">
-</span></code></pre>
 
           <h2 id="browse-dates-grid">Browse Dates (grid)</h2>
 
@@ -1135,6 +1127,118 @@ risk of exposing account API keys.
 <p>Please refer to our <a href="#response-codes">response codes</a> in case of unsuccessful response.</p>
 
 <h2 id="polling-the-results">Polling the results</h2>
+
+<p><em>API endpoint</em></p>
+
+<p><code class="prettyprint">GET /pricing/v1.0/{sessionKey}</code></p>
+
+<p><em>TRY IT OUT</em></p>
+
+<p><a href="https://app.getpostman.com/run-collection/31ff523d2ff9186107e1"><img alt="Run in Postman" src="https://run.pstmn.io/button.svg" /></a></p>
+
+<p><em>HEADER VALUES</em></p>
+
+<table><thead>
+<tr>
+<th>Header</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">Accept</code> <br><span class="optional">OPTIONAL</span></td>
+<td><code class="prettyprint">application/json</code> or <code class="prettyprint">application/xml</code> <br>The default response format is XML</td>
+</tr>
+</tbody></table>
+
+<p><em>REQUEST PARAMETERS (FORM)</em></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">sorttype</code> <br><span class="optional">OPTIONAL</span></td>
+<td>The parameter to sort results on. Can be carrier, duration, outboundarrivetime, outbounddeparttime, inboundarrivetime, inbounddeparttime, price*</td>
+</tr>
+<tr>
+<td><code class="prettyprint">includecarriers</code> <br><span class="optional">OPTIONAL</span></td>
+<td>Filter flights by the specified carriers</td>
+</tr>
+<tr>
+<td><code class="prettyprint">excludecarriers</code> <br><span class="optional">OPTIONAL</span></td>
+<td>Filter flights by any but the specified carriers</td>
+</tr>
+<tr>
+<td><code class="prettyprint">originairports</code> <br><span class="optional">OPTIONAL</span></td>
+<td></td>
+</tr>
+<tr>
+<td><code class="prettyprint">destinationairports</code> <br><span class="optional">OPTIONAL</span></td>
+<td></td>
+</tr>
+<tr>
+<td><code class="prettyprint">stops</code> <br><span class="optional">OPTIONAL</span></td>
+<td></td>
+</tr>
+<tr>
+<td><code class="prettyprint">originairports</code> <br><span class="optional">OPTIONAL</span></td>
+<td></td>
+</tr>
+<tr>
+<td><code class="prettyprint">originairports</code> <br><span class="optional">OPTIONAL</span></td>
+<td></td>
+</tr>
+<tr>
+<td><code class="prettyprint">originairports</code> <br><span class="optional">OPTIONAL</span></td>
+<td></td>
+</tr>
+<tr>
+<td><code class="prettyprint">originairports</code> <br><span class="optional">OPTIONAL</span></td>
+<td></td>
+</tr>
+<tr>
+<td><code class="prettyprint">originairports</code> <br><span class="optional">OPTIONAL</span></td>
+<td></td>
+</tr>
+<tr>
+<td><code class="prettyprint">originairports</code> <br><span class="optional">OPTIONAL</span></td>
+<td></td>
+</tr>
+<tr>
+<td><code class="prettyprint">originairports</code> <br><span class="optional">OPTIONAL</span></td>
+<td></td>
+</tr>
+<tr>
+<td><code class="prettyprint">originairports</code> <br><span class="optional">OPTIONAL</span></td>
+<td></td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Example response with polling url:</p>
+</blockquote>
+<pre class="highlight shell"><code>Location <span class="s2">"http://partners.api.skyscanner.net/apiservices/pricing/uk1/v1.0/{sessionID}"</span>
+</code></pre>
+
+<p><em>RESPONSE PARAMETERS</em></p>
+
+<table><thead>
+<tr>
+<th>Element</th>
+<th>Detail</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">Location Header</code></td>
+<td>Contains the URL for polling the results in the newly created session</td>
+</tr>
+</tbody></table>
+
+<p>A successful response contains no content. The URL to poll the booking details is specified in the Location header of the response.</p>
+
+<p>Please refer to our <a href="#response-codes">response codes</a> in case of unsuccessful response.</p>
 
 <h2 id="get-booking-details">Get booking details</h2>
 
