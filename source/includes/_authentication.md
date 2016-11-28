@@ -5,5 +5,5 @@ Skyscanner uses API keys to allow access to the APIs. You can create API keys th
 You must include the API key in all API requests to the server, either as a parameter in the query or in the query header. Please refer to each endpoint for details.
 
 <aside class="warning">
-Be careful when sharing bot user tokens with applications. Do not publish bot user tokens in public code repositories.
+Be careful when sharing API keys. Do not publish them in public code repositories or add them to client-side API calls.
 </aside>
