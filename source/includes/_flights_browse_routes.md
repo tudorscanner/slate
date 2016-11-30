@@ -3,7 +3,7 @@
 Retrieve the cheapest routes from our cache prices. Similar to the Browse Quotes API but with the routes built for you from the individual quotes.
 
 ```shell
-curl "http://partners.api.skyscanner.net/apiservices/browseroutes/v1.0/{market}/{currency}/{locale}/
+curl "http://partners.api.skyscanner.net/apiservices/browseroutes/v1.0/{country}/{currency}/{locale}/
   {originPlace}/
   {destinationPlace}/
   {outboundPartialDate}/
@@ -16,7 +16,7 @@ curl "http://partners.api.skyscanner.net/apiservices/browseroutes/v1.0/{market}/
 
 *API endpoint*
 
-GET `/browseroutes/v1.0/{market}/{currency}/{locale}/{originPlace}/{destinationPlace}/{outboundPartialDate}/{inboundPartialDate}`
+GET `/browseroutes/v1.0/{country}/{currency}/{locale}/{originPlace}/{destinationPlace}/{outboundPartialDate}/{inboundPartialDate}`
 
 *TRY IT OUT*
 
@@ -32,7 +32,7 @@ GET `/browseroutes/v1.0/{market}/{currency}/{locale}/{originPlace}/{destinationP
 
 | Parameter | Description |
 | --------- | ------- |
-| ```market``` <br><span class="required">REQUIRED</span> | The [market/country](#markets) your user is in |
+| ```country``` <br><span class="required">REQUIRED</span> | The [market country](#markets) your user is in |
 | ```currency``` <br><span class="required">REQUIRED</span> | The [currency](#currencies) you want the prices in |
 | ```locale``` <br><span class="required">REQUIRED</span> | The [locale](#locales) you want the results in (ISO locale) |
 | ```originPlace``` <br><span class="required">REQUIRED</span> | The origin place (see [places](#places)) |
