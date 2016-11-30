@@ -241,7 +241,7 @@ Upgrading from Browse Cached Pricing to Live Pricing can always be done later!
 <h2 id="browse-quotes">Browse Quotes</h2>
 
 <p>Retrieve the cheapest quotes from our cache prices.</p>
-<pre class="highlight shell"><code>curl <span class="s2">"http://partners.api.skyscanner.net/apiservices/browsequotes/v1.0/{market}/{currency}/{locale}/
+<pre class="highlight shell"><code>curl <span class="s2">"http://partners.api.skyscanner.net/apiservices/browsequotes/v1.0/{country}/{currency}/{locale}/
   {originPlace}/
   {destinationPlace}/
   {outboundPartialDate}/
@@ -254,7 +254,7 @@ Upgrading from Browse Cached Pricing to Live Pricing can always be done later!
 
 <p><em>API endpoint</em></p>
 
-<p>GET <code class="prettyprint">/browsequotes/v1.0/{market}/{currency}/{locale}/{originPlace}/{destinationPlace}/{outboundPartialDate}/{inboundPartialDate}</code></p>
+<p>GET <code class="prettyprint">/browsequotes/v1.0/{country}/{currency}/{locale}/{originPlace}/{destinationPlace}/{outboundPartialDate}/{inboundPartialDate}</code></p>
 
 <p><em>TRY IT OUT</em></p>
 
@@ -283,8 +283,8 @@ Upgrading from Browse Cached Pricing to Live Pricing can always be done later!
 </tr>
 </thead><tbody>
 <tr>
-<td><code class="prettyprint">market</code> <br><span class="required">REQUIRED</span></td>
-<td>The <a href="#markets">market/country</a> your user is in</td>
+<td><code class="prettyprint">country</code> <br><span class="required">REQUIRED</span></td>
+<td>The <a href="#markets">market country</a> your user is in</td>
 </tr>
 <tr>
 <td><code class="prettyprint">currency</code> <br><span class="required">REQUIRED</span></td>
@@ -415,7 +415,7 @@ Upgrading from Browse Cached Pricing to Live Pricing can always be done later!
           <h2 id="browse-routes">Browse Routes</h2>
 
 <p>Retrieve the cheapest routes from our cache prices. Similar to the Browse Quotes API but with the routes built for you from the individual quotes.</p>
-<pre class="highlight shell"><code>curl <span class="s2">"http://partners.api.skyscanner.net/apiservices/browseroutes/v1.0/{market}/{currency}/{locale}/
+<pre class="highlight shell"><code>curl <span class="s2">"http://partners.api.skyscanner.net/apiservices/browseroutes/v1.0/{country}/{currency}/{locale}/
   {originPlace}/
   {destinationPlace}/
   {outboundPartialDate}/
@@ -428,7 +428,7 @@ Upgrading from Browse Cached Pricing to Live Pricing can always be done later!
 
 <p><em>API endpoint</em></p>
 
-<p>GET <code class="prettyprint">/browseroutes/v1.0/{market}/{currency}/{locale}/{originPlace}/{destinationPlace}/{outboundPartialDate}/{inboundPartialDate}</code></p>
+<p>GET <code class="prettyprint">/browseroutes/v1.0/{country}/{currency}/{locale}/{originPlace}/{destinationPlace}/{outboundPartialDate}/{inboundPartialDate}</code></p>
 
 <p><em>TRY IT OUT</em></p>
 
@@ -457,8 +457,8 @@ Upgrading from Browse Cached Pricing to Live Pricing can always be done later!
 </tr>
 </thead><tbody>
 <tr>
-<td><code class="prettyprint">market</code> <br><span class="required">REQUIRED</span></td>
-<td>The <a href="#markets">market/country</a> your user is in</td>
+<td><code class="prettyprint">country</code> <br><span class="required">REQUIRED</span></td>
+<td>The <a href="#markets">market country</a> your user is in</td>
 </tr>
 <tr>
 <td><code class="prettyprint">currency</code> <br><span class="required">REQUIRED</span></td>
@@ -615,7 +615,7 @@ Upgrading from Browse Cached Pricing to Live Pricing can always be done later!
           <h2 id="browse-dates">Browse Dates</h2>
 
 <p>Retrieve the cheapest routes from our cache.</p>
-<pre class="highlight shell"><code>curl <span class="s2">"http://partners.api.skyscanner.net/apiservices/browsedates/v1.0/{market}/{currency}/{locale}/
+<pre class="highlight shell"><code>curl <span class="s2">"http://partners.api.skyscanner.net/apiservices/browsedates/v1.0/{country}/{currency}/{locale}/
   {originPlace}/
   {destinationPlace}/
   {outboundPartialDate}/
@@ -628,7 +628,7 @@ Upgrading from Browse Cached Pricing to Live Pricing can always be done later!
 
 <p><em>API endpoint</em></p>
 
-<p>GET <code class="prettyprint">/browsedates/v1.0/{market}/{currency}/{locale}/{originPlace}/{destinationPlace}/{outboundPartialDate}/{inboundPartialDate}</code></p>
+<p>GET <code class="prettyprint">/browsedates/v1.0/{country}/{currency}/{locale}/{originPlace}/{destinationPlace}/{outboundPartialDate}/{inboundPartialDate}</code></p>
 
 <p><em>TRY IT OUT</em></p>
 
@@ -657,8 +657,8 @@ Upgrading from Browse Cached Pricing to Live Pricing can always be done later!
 </tr>
 </thead><tbody>
 <tr>
-<td><code class="prettyprint">market</code> <br><span class="required">REQUIRED</span></td>
-<td>The <a href="#markets">market/country</a> your user is in</td>
+<td><code class="prettyprint">country</code> <br><span class="required">REQUIRED</span></td>
+<td>The <a href="#markets">market country</a> your user is in</td>
 </tr>
 <tr>
 <td><code class="prettyprint">currency</code> <br><span class="required">REQUIRED</span></td>
@@ -711,7 +711,7 @@ Upgrading from Browse Cached Pricing to Live Pricing can always be done later!
           </span><span class="mi">4</span><span class="p">,</span><span class="w">
           </span><span class="mi">5</span><span class="w">
         </span><span class="p">],</span><span class="w">
-        </span><span class="nt">"Price"</span><span class="p">:</span><span class="w"> </span><span class="mi">66</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"Price"</span><span class="p">:</span><span class="w"> </span><span class="mi">66</span><span class="p">,</span><span class="err">./sss</span><span class="w">
         </span><span class="nt">"QuoteDateTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11-08T17:28:00"</span><span class="w">
       </span><span class="p">},</span><span class="w">
     </span><span class="err">...</span><span class="w">
@@ -821,7 +821,7 @@ Upgrading from Browse Cached Pricing to Live Pricing can always be done later!
           <h2 id="browse-dates-grid">Browse Dates (grid)</h2>
 
 <p>Retrieve the cheapest routes from our cache.</p>
-<pre class="highlight shell"><code>curl <span class="s2">"http://partners.api.skyscanner.net/apiservices/browsegrid/v1.0/{market}/{currency}/{locale}/
+<pre class="highlight shell"><code>curl <span class="s2">"http://partners.api.skyscanner.net/apiservices/browsegrid/v1.0/{country}/{currency}/{locale}/
   {originPlace}/
   {destinationPlace}/
   {outboundPartialDate}/
@@ -834,7 +834,7 @@ Upgrading from Browse Cached Pricing to Live Pricing can always be done later!
 
 <p><em>API endpoint</em></p>
 
-<p>GET <code class="prettyprint">/browsegrid/v1.0/{market}/{currency}/{locale}/{originPlace}/{destinationPlace}/{outboundPartialDate}/{inboundPartialDate}</code></p>
+<p>GET <code class="prettyprint">/browsegrid/v1.0/{country}/{currency}/{locale}/{originPlace}/{destinationPlace}/{outboundPartialDate}/{inboundPartialDate}</code></p>
 
 <p><em>TRY IT OUT</em></p>
 
@@ -863,8 +863,8 @@ Upgrading from Browse Cached Pricing to Live Pricing can always be done later!
 </tr>
 </thead><tbody>
 <tr>
-<td><code class="prettyprint">market</code> <br><span class="required">REQUIRED</span></td>
-<td>The <a href="#markets">market/country</a> your user is in</td>
+<td><code class="prettyprint">country</code> <br><span class="required">REQUIRED</span></td>
+<td>The <a href="#markets">market country</a> your user is in</td>
 </tr>
 <tr>
 <td><code class="prettyprint">currency</code> <br><span class="required">REQUIRED</span></td>
@@ -1053,7 +1053,7 @@ risk of exposing account API keys.
 </tr>
 </thead><tbody>
 <tr>
-<td><code class="prettyprint">market</code> <br><span class="required">REQUIRED</span></td>
+<td><code class="prettyprint">country</code> <br><span class="required">REQUIRED</span></td>
 <td>The <a href="#markets">market/country</a> your user is in</td>
 </tr>
 <tr>
