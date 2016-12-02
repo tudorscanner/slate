@@ -995,6 +995,8 @@ risk of exposing account API keys.
 </aside>
 
 <h2 id="creating-the-session">Creating the session</h2>
+
+<h3 id="request">Request</h3>
 <pre class="highlight shell"><code>curl <span class="s2">"http://partners.api.skyscanner.net/apiservices/pricing/v1.0"</span>
     -X POST
     -H <span class="s2">"Content-Type: application/x-www-form-urlencoded"</span>
@@ -1082,19 +1084,19 @@ risk of exposing account API keys.
 </tr>
 <tr>
 <td><code class="prettyprint">cabinClass</code> <br><span class="optional">OPTIONAL</span></td>
-<td>The cabin class</td>
+<td>The cabin class. Can be &ldquo;economy&rdquo;, &ldquo;premiumeconomy&rdquo;, &ldquo;business&rdquo;, &ldquo;first&rdquo;</td>
 </tr>
 <tr>
 <td><code class="prettyprint">adults</code> <br><span class="required">REQUIRED</span></td>
-<td>Number between 1 and 8.</td>
+<td>Number of adults (16+ years). Must be between 1 and 8.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">children</code> <br><span class="optional">OPTIONAL</span></td>
-<td>Number between 0 and 8.</td>
+<td>Number of children (1-16 years). Can be between 0 and 8.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">infants</code> <br><span class="optional">OPTIONAL</span></td>
-<td>Number between 0 and 8.</td>
+<td>Number of infants (under 12 months). Can be between 0 and 8.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">apiKey</code> <br><span class="required">REQUIRED</span></td>
@@ -1107,6 +1109,14 @@ risk of exposing account API keys.
 </blockquote>
 <pre class="highlight shell"><code>Location <span class="s2">"http://partners.api.skyscanner.net/apiservices/pricing/uk1/v1.0/{sessionID}"</span>
 </code></pre>
+
+<h3 id="response">Response</h3>
+
+<p>A successful response contains no content. The URL to poll the booking details is specified in the Location header of the response.</p>
+
+<aside class="warning">
+Please refer to our <a href="#response-codes">response codes</a> in case of unsuccessful response.
+</aside>
 
 <p><em>RESPONSE PARAMETERS</em></p>
 
@@ -1122,11 +1132,18 @@ risk of exposing account API keys.
 </tr>
 </tbody></table>
 
-<p>A successful response contains no content. The URL to poll the booking details is specified in the Location header of the response.</p>
-
-<p>Please refer to our <a href="#response-codes">response codes</a> in case of unsuccessful response.</p>
-
 <h2 id="polling-the-results">Polling the results</h2>
+
+<h3 id="request">Request</h3>
+
+<blockquote>
+<p>Example request with polling url:</p>
+</blockquote>
+<pre class="highlight shell"><code>Location <span class="s2">"http://partners.api.skyscanner.net/apiservices/pricing/uk1/v1.0/{sessionID}?apiKey={apiKey}
+    &amp;stops=0
+    &amp;duration=360
+    &amp;includeCarriers=ba;u2;af"</span>
+</code></pre>
 
 <p><em>API endpoint</em></p>
 
@@ -1163,82 +1180,321 @@ risk of exposing account API keys.
 <td>The parameter to sort results on. Can be carrier, duration, outboundarrivetime, outbounddeparttime, inboundarrivetime, inbounddeparttime, price*</td>
 </tr>
 <tr>
+<td><code class="prettyprint">sortorder</code> <br><span class="optional">OPTIONAL</span></td>
+<td>The sort order. &lsquo;asc&rsquo; or &#39;desc&rsquo;</td>
+</tr>
+<tr>
+<td><code class="prettyprint">duration</code> <br><span class="optional">OPTIONAL</span></td>
+<td>Filter for maximum duration in minutes. Integer between 0 and 1800</td>
+</tr>
+<tr>
 <td><code class="prettyprint">includecarriers</code> <br><span class="optional">OPTIONAL</span></td>
-<td>Filter flights by the specified carriers</td>
+<td>Filter flights by the specified carriers. Must be semicolon-separated <a href="http://www.iata.org/publications/Pages/code-search.aspx">IATA codes</a>.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">excludecarriers</code> <br><span class="optional">OPTIONAL</span></td>
-<td>Filter flights by any but the specified carriers</td>
+<td>Filter flights by any but the specified carriers. Must be semicolon-separated <a href="http://www.iata.org/publications/Pages/code-search.aspx">IATA codes</a>.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">originairports</code> <br><span class="optional">OPTIONAL</span></td>
-<td></td>
+<td>Origin airports to filter on. List of airport codes delimited by ‘;’</td>
 </tr>
 <tr>
 <td><code class="prettyprint">destinationairports</code> <br><span class="optional">OPTIONAL</span></td>
-<td></td>
+<td>Destination airports to filter on. List of airport codes delimited by ‘;’</td>
 </tr>
 <tr>
 <td><code class="prettyprint">stops</code> <br><span class="optional">OPTIONAL</span></td>
-<td></td>
+<td>Filter for maximum number of stops.<br>0 for direct flights only<br>1 for flights with maximum one stop<br>omit for all flights (direct and indirect)</td>
 </tr>
 <tr>
-<td><code class="prettyprint">originairports</code> <br><span class="optional">OPTIONAL</span></td>
-<td></td>
+<td><code class="prettyprint">outboundDepartTime</code> <br><span class="optional">OPTIONAL</span></td>
+<td>Filter for outbound departure time by time period of the day (i.e. morning, afternoon, evening). List of day time period delimited by ‘;’ (acceptable values are M, A, E)</td>
 </tr>
 <tr>
-<td><code class="prettyprint">originairports</code> <br><span class="optional">OPTIONAL</span></td>
-<td></td>
+<td><code class="prettyprint">outboundDepartStartTime</code> <br><span class="optional">OPTIONAL</span></td>
+<td>Filter for start of range for outbound departure time. Format ‘hh:mm’.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">originairports</code> <br><span class="optional">OPTIONAL</span></td>
-<td></td>
+<td><code class="prettyprint">outboundDepartEndTime</code> <br><span class="optional">OPTIONAL</span></td>
+<td>Filter for end of range for outbound departure time. Format ‘hh:mm’.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">originairports</code> <br><span class="optional">OPTIONAL</span></td>
-<td></td>
+<td><code class="prettyprint">outboundArriveStartTime</code> <br><span class="optional">OPTIONAL</span></td>
+<td>Filter for start of range for outbound arrival time. Format ‘hh:mm’.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">originairports</code> <br><span class="optional">OPTIONAL</span></td>
-<td></td>
+<td><code class="prettyprint">outboundArriveEndTime</code> <br><span class="optional">OPTIONAL</span></td>
+<td>Filter for end of range for outbound arrival time. Format ‘hh:mm’.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">originairports</code> <br><span class="optional">OPTIONAL</span></td>
-<td></td>
+<td><code class="prettyprint">inboundDepartTime</code> <br><span class="optional">OPTIONAL</span></td>
+<td>Filter for inbound departure time by time period of the day (i.e. morning, afternoon, evening). List of day time period delimited by ‘;’ (acceptable values are M, A, E)</td>
 </tr>
 <tr>
-<td><code class="prettyprint">originairports</code> <br><span class="optional">OPTIONAL</span></td>
-<td></td>
+<td><code class="prettyprint">inboundDepartStartTime</code> <br><span class="optional">OPTIONAL</span></td>
+<td>Filter for start of range for inbound departure time. Format ‘hh:mm’.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">originairports</code> <br><span class="optional">OPTIONAL</span></td>
-<td></td>
+<td><code class="prettyprint">inboundDepartEndTime</code> <br><span class="optional">OPTIONAL</span></td>
+<td>Filter for start of range for inbound departure time. Format ‘hh:mm’.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">inboundArriveStartTime</code> <br><span class="optional">OPTIONAL</span></td>
+<td>Filter for start of range for inbound departure time. Format ‘hh:mm’.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">inboundArriveEndTime</code> <br><span class="optional">OPTIONAL</span></td>
+<td>Filter for end of range for inbound arrival time. Format ‘hh:mm’.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">apiKey</code> <br><span class="required">REQUIRED</span></td>
+<td>Your API Key.</td>
 </tr>
 </tbody></table>
 
+<h3 id="response">Response</h3>
+
 <blockquote>
-<p>Example response with polling url:</p>
+<p>Example request with polling url:</p>
 </blockquote>
-<pre class="highlight shell"><code>Location <span class="s2">"http://partners.api.skyscanner.net/apiservices/pricing/uk1/v1.0/{sessionID}"</span>
-</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"SessionKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ab5b948d616e41fb954a4a2f6b8dde1a_ecilpojl_7CAAD17D0CFC34BFDE68DEBFDFD548C7"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"Query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"Country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GB"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"Currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GBP"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"Locale"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en-gb"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"Adults"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"Children"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"Infants"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"OriginPlace"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2343"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"DestinationPlace"</span><span class="p">:</span><span class="w"> </span><span class="s2">"13554"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"OutboundDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-05-30"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"InboundDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-06-02"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"LocationSchema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Default"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"CabinClass"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Economy"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"GroupPricing"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"Status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UpdatesComplete"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"Itineraries"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"OutboundLegId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"11235-1705301925--32480-0-13554-1705302055"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"InboundLegId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"13554-1706020700--32480-0-11235-1706020820"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"PricingOptions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"Agents"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="mi">4499211</span><span class="w">
+          </span><span class="p">],</span><span class="w">
+          </span><span class="nt">"QuoteAgeInMinutes"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"Price"</span><span class="p">:</span><span class="w"> </span><span class="mf">83.41</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"DeeplinkUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://partners.api.skyscanner.net/apiservices/deeplink/v2?_cje=jzj5DawL5zJyT%2bnfe1..."</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="err">...</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+      </span><span class="s2">"BookingDetailsLink"</span><span class="err">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"Uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/apiservices/pricing/v1.0/ab5b948d616e41fb954a4a2f6b8dde1a_ecilpojl_7CAAD17D0CFC34BFDE68DEBFDFD548C7/booking"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"Body"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OutboundLegId=11235-1705301925--32480-0-13554-1705302055&amp;InboundLegId=13554-1706020700--32480-0-11235-1706020820"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"Method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PUT"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="err">...</span><span class="w">
+   </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"Legs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"Id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"11235-1705300650--32302,-32480-1-13554-1705301100"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"SegmentIds"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="mi">1</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"OriginStation"</span><span class="p">:</span><span class="w"> </span><span class="mi">11235</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"DestinationStation"</span><span class="p">:</span><span class="w"> </span><span class="mi">13554</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"Departure"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-05-30T06:50:00"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"Arrival"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-05-30T11:00:00"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"Duration"</span><span class="p">:</span><span class="w"> </span><span class="mi">250</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"JourneyMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Flight"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"Stops"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="mi">13880</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"Carriers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="mi">885</span><span class="p">,</span><span class="w">
+        </span><span class="mi">881</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"OperatingCarriers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="mi">885</span><span class="p">,</span><span class="w">
+        </span><span class="mi">881</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"Directionality"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Outbound"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"FlightNumbers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"FlightNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"290"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"CarrierId"</span><span class="p">:</span><span class="w"> </span><span class="mi">885</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"FlightNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1389"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"CarrierId"</span><span class="p">:</span><span class="w"> </span><span class="mi">881</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="err">...</span><span class="w">
+   </span><span class="p">],</span><span class="w">
+   </span><span class="nt">"Segments"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"Id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"OriginStation"</span><span class="p">:</span><span class="w"> </span><span class="mi">11235</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"DestinationStation"</span><span class="p">:</span><span class="w"> </span><span class="mi">13880</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"DepartureDateTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-05-30T06:50:00"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"ArrivalDateTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-05-30T07:55:00"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"Carrier"</span><span class="p">:</span><span class="w"> </span><span class="mi">885</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"OperatingCarrier"</span><span class="p">:</span><span class="w"> </span><span class="mi">885</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"Duration"</span><span class="p">:</span><span class="w"> </span><span class="mi">65</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"FlightNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"290"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"JourneyMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Flight"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"Directionality"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Outbound"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="err">...</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"Carriers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"Id"</span><span class="p">:</span><span class="w"> </span><span class="mi">885</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"Code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BE"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Flybe"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"ImageUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://s1.apideeplink.com/images/airlines/BE.png"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"DisplayCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BE"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="err">...</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"Agents"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"Id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1963108</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mytrip"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"ImageUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://s1.apideeplink.com/images/websites/at24.png"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"Status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UpdatesComplete"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"OptimisedForMobile"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"BookingNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+448447747881"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"Type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TravelAgent"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="err">...</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"Places"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"Id"</span><span class="p">:</span><span class="w"> </span><span class="mi">11235</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"ParentId"</span><span class="p">:</span><span class="w"> </span><span class="mi">2343</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"Code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EDI"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"Type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Airport"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Edinburgh"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="err">...</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"Currencies"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"Code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GBP"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"Symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"£"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"ThousandsSeparator"</span><span class="p">:</span><span class="w"> </span><span class="s2">","</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"DecimalSeparator"</span><span class="p">:</span><span class="w"> </span><span class="s2">"."</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"SymbolOnLeft"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"SpaceBetweenAmountAndSymbol"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"RoundingCoefficient"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"DecimalDigits"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="err">...</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>The response contains a list of itineraries with, for each one, a list of pricing options containing:</p>
+
+<ul>
+<li>the price</li>
+<li>the quote age</li>
+<li>the agent selling the itinerary</li>
+<li>the deeplink to the agent</li>
+</ul>
 
 <p><em>RESPONSE PARAMETERS</em></p>
 
 <table><thead>
 <tr>
-<th>Element</th>
-<th>Detail</th>
+<th>Parameter</th>
+<th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td><code class="prettyprint">Location Header</code></td>
-<td>Contains the URL for polling the results in the newly created session</td>
+<td><code class="prettyprint">SessionKey</code></td>
+<td>The Session key to identify the session.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">Query</code></td>
+<td>A copy of the query which was submitted.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">Status</code></td>
+<td>The status of the session – ‘UpdatesPending’ or ‘UpdatesComplete’.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">Itineraries</code></td>
+<td>A list of itineraries - see below for the itinerary object.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">Legs</code></td>
+<td>Details of the legs that make up the itineraries: airports, times, overall duration, stops and carrier ids.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">Segements</code></td>
+<td>Details of the segments of each leg. Including the carrier (or marketing carrier) and the operating carrier.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">Carriers</code></td>
+<td>Details of the carriers.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">Agents</code></td>
+<td>Details of the agents who sell the tickets. Can be an airline or a travel agent.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">Places</code></td>
+<td>A list of all the places that appear in the itineraries.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">Currencies</code></td>
+<td>A list of the currencies shown in the response.</td>
 </tr>
 </tbody></table>
 
-<p>A successful response contains no content. The URL to poll the booking details is specified in the Location header of the response.</p>
+<aside class="notice">
+You must keep polling the results until you get 'UpdatesComplete&rsquo;. The results may take up to a minute to update.
+</aside>
 
-<p>Please refer to our <a href="#response-codes">response codes</a> in case of unsuccessful response.</p>
+<p><em>ITINERARY PARAMETERS</em></p>
+
+<table><thead>
+<tr>
+<th>Element</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">OutboundLegId</code></td>
+<td>Id of the Outbound Leg</td>
+</tr>
+<tr>
+<td><code class="prettyprint">InboundLegId</code></td>
+<td>Id of the Inbound Leg</td>
+</tr>
+<tr>
+<td><code class="prettyprint">PricingOptions</code></td>
+<td>pricing options with agent(s)<br>the quote age<br> price (total for all passengers)<br>deeplink URL (the absolute URL needed to make the booking).  The deeplink URL is not supplied for multi-booking itineraries.<br>In the case where deeplinks are not supplied, you can obtain them with a further step. Refer to the Create/Poll Booking Details documentation.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">BookingDetailsLink</code></td>
+<td>In some cases (multiple bookings or group prices) you will need to make a second call to retrieve the deeplinks. See the next section <a href="#get-booking-details">Get booking details</a> for details</td>
+</tr>
+</tbody></table>
+
+<p>Please note that you must not force users to your deeplink. Once they have made a search you should provide them with a list of results, and an option to filter that list, in order to pick the flight that best suits their needs.</p>
+
+<aside class="warning">
+Please add the no-follow attribute when you link to the deeplink. See <a href="https://support.business.skyscanner.net/hc/en-us/articles/206800309-How-do-I-add-the-nofollow-attribute-to-the-deeplinks-calls-" target="_blank">How do I add the nofollow attribute?</a> in the FAQ section.
+</aside>
 
 <h2 id="get-booking-details">Get booking details</h2>
 
