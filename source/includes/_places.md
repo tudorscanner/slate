@@ -87,7 +87,10 @@ GET "http://partners.api.skyscanner.net/apiservices/
 | Parameter | Description |
 | --- | --- |
 | ```Continents``` | Contains the list of all the continents. |
-| ```Countries``` | Contains the list of all the continents. |
+| ```Countries``` | Contains the list of all the countries. |
+| ```Regions``` | Contains the list of all the regions. |
+| ```Cities``` | Contains the list of all the cities. |
+| ```Airports``` | Contains the list of all the airports. |
 
 
 

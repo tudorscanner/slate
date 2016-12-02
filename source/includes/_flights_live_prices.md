@@ -68,15 +68,16 @@ curl "http://partners.api.skyscanner.net/apiservices/pricing/v1.0"
 | ```apiKey``` <br><span class="required">REQUIRED</span> | Your API Key. |
 
 
+### Response
+
 > Example response with polling url:
 
 ```shell
-Location "http://partners.api.skyscanner.net/apiservices/pricing/uk1/v1.0/{sessionID}"
+Location "http://partners.api.skyscanner.net/apiservices/pricing/uk1/v1.0/
+    {SessionKey}"
 ```
 
-### Response
-
-A successful response contains no content. The URL to poll the booking details is specified in the Location header of the response.
+A successful response contains no content. The URL to poll the results is provided in the Location header of the response.
 
 <aside class="warning">
 Please refer to our <a href="#response-codes">response codes</a> in case of unsuccessful response.
@@ -101,7 +102,8 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 > Example request with polling url:
 
 ```shell
-Location "http://partners.api.skyscanner.net/apiservices/pricing/uk1/v1.0/{sessionID}?apiKey={apiKey}
+Location "http://partners.api.skyscanner.net/apiservices/pricing/uk1/v1.0/
+    {SessionKey}?apiKey={apiKey}
     &stops=0
     &duration=360
     &includeCarriers=ba;u2;af"
@@ -109,7 +111,7 @@ Location "http://partners.api.skyscanner.net/apiservices/pricing/uk1/v1.0/{sessi
 
 *API endpoint*
 
-`GET /pricing/v1.0/{sessionKey}`
+`GET /pricing/v1.0/{SessionKey}`
 
 
 *TRY IT OUT*
@@ -126,13 +128,13 @@ Location "http://partners.api.skyscanner.net/apiservices/pricing/uk1/v1.0/{sessi
 
 | Parameter | Description |
 | --------- | ------- |
-| ```sorttype``` <br><span class="optional">OPTIONAL</span> | The parameter to sort results on. Can be carrier, duration, outboundarrivetime, outbounddeparttime, inboundarrivetime, inbounddeparttime, price* |
-| ```sortorder``` <br><span class="optional">OPTIONAL</span> | The sort order. 'asc' or 'desc' |
+| ```sortType``` <br><span class="optional">OPTIONAL</span> | The parameter to sort results on. Can be carrier, duration, outboundarrivetime, outbounddeparttime, inboundarrivetime, inbounddeparttime, price* |
+| ```sortOrder``` <br><span class="optional">OPTIONAL</span> | The sort order. 'asc' or 'desc' |
 | ```duration``` <br><span class="optional">OPTIONAL</span> | Filter for maximum duration in minutes. Integer between 0 and 1800  |
-| ```includecarriers``` <br><span class="optional">OPTIONAL</span> | Filter flights by the specified carriers. Must be semicolon-separated [IATA codes](http://www.iata.org/publications/Pages/code-search.aspx). |
-| ```excludecarriers``` <br><span class="optional">OPTIONAL</span> | Filter flights by any but the specified carriers. Must be semicolon-separated [IATA codes](http://www.iata.org/publications/Pages/code-search.aspx). |
-| ```originairports``` <br><span class="optional">OPTIONAL</span> | Origin airports to filter on. List of airport codes delimited by ‘;’  |
-| ```destinationairports``` <br><span class="optional">OPTIONAL</span> | Destination airports to filter on. List of airport codes delimited by ‘;’  |
+| ```includeCarriers``` <br><span class="optional">OPTIONAL</span> | Filter flights by the specified carriers. Must be semicolon-separated [IATA codes](http://www.iata.org/publications/Pages/code-search.aspx). |
+| ```excludeCarriers``` <br><span class="optional">OPTIONAL</span> | Filter flights by any but the specified carriers. Must be semicolon-separated [IATA codes](http://www.iata.org/publications/Pages/code-search.aspx). |
+| ```originAirports``` <br><span class="optional">OPTIONAL</span> | Origin airports to filter on. List of airport codes delimited by ‘;’  |
+| ```destinationAirports``` <br><span class="optional">OPTIONAL</span> | Destination airports to filter on. List of airport codes delimited by ‘;’  |
 | ```stops``` <br><span class="optional">OPTIONAL</span> | Filter for maximum number of stops.<br>0 for direct flights only<br>1 for flights with maximum one stop<br>omit for all flights (direct and indirect)  |
 | ```outboundDepartTime``` <br><span class="optional">OPTIONAL</span> | Filter for outbound departure time by time period of the day (i.e. morning, afternoon, evening). List of day time period delimited by ‘;’ (acceptable values are M, A, E) |
 | ```outboundDepartStartTime``` <br><span class="optional">OPTIONAL</span> | Filter for start of range for outbound departure time. Format ‘hh:mm’. |
@@ -343,4 +345,216 @@ Please add the no-follow attribute when you link to the deeplink. See <a href="h
 
 ## Get booking details
 
+### Request
+
+```shell
+curl "http://partners.api.skyscanner.net/apiservices/pricing/v1.0/
+    {SessionKey}/booking&apikey={apiKey}"
+    -d 'OutboundLegId={OutboundLegId}&InboundLegId={InboundLegId}'
+    -X PUT
+    -H "Content-Type: application/x-www-form-urlencoded"
+```
+
+In cases where more than one booking is required (for example when buying from 2 or more different airlines or travel agents) or for group pricing,
+a Booking Details request must be made to get the list of all the deeplinks or update the deeplink with additional information such as number of passengers.
+
+> The url is provided in the response of the live prices:
+
+```json
+"BookingDetailsLink": {
+        "Uri": "/apiservices/pricing/v1.0/abb2a69708624a7ca82762ed73493598_ecilpojl_DCE634A426CBDA30CE7EA3E9068CD053/booking",
+        "Body": "OutboundLegId=11235-1705301925--32480-0-13554-1705302055&InboundLegId=13554-1706020700--32480-0-11235-1706020820",
+        "Method": "PUT"
+      }
+```
+
+The full url and body content are provided in the response from the live pricing results.
+
+
+
+*API endpoint*
+
+`PUT /pricing/v1.0/{SessionKey}/booking`
+
+
+*TRY IT OUT*
+
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/31ff523d2ff9186107e1)
+
+
+*REQUEST PARAMETERS*
+
+| Parameter | Description |
+| --------- | ------- |
+| ```apiKey``` <br><span class="required">REQUIRED</span> | Your API Key. |
+
+*REQUEST BODY (from live pricing response)*
+
+| Parameter | Description |
+| --------- | ------- |
+| ```OutboundLegId``` <br><span class="required">REQUIRED</span> | The outbound leg Id of the itinerary |
+| ```InboundLegId``` <br><span class="optional">OPTIONAL</span> | The inbound leg Id of the itinerary for return flights |
+| ```adults``` <br><span class="optional">OPTIONAL</span> | Number of adults (16+ years). Must be between 1 and 8.  |
+| ```children``` <br><span class="optional">OPTIONAL</span> | Number of children (1-16 years). Can be between 0 and 8.  |
+| ```infants``` <br><span class="optional">OPTIONAL</span> | Number of infants (under 12 months). Can be between 0 and 8.  |
+
+
+### Response
+
+> Example response:
+
+```shell
+Location "http://partners.api.skyscanner.net/apiservices/pricing/uk1/v1.0/
+    {SessionKey}/booking/
+    {OutboundLegId};{InboundLegId}"
+```
+
+A successful response contains no content. The URL to poll the booking details is specified in the Location header of the response.
+
+<aside class="warning">
+Please refer to our <a href="#response-codes">response codes</a> in case of unsuccessful response.
+</aside>
+
+*RESPONSE PARAMETERS*
+
+| Element | Detail |
+| ------- | ------ |
+| `Location Header` | Contains the URL for polling the booking details results |
+
+
+
 ## Polling the booking details
+
+### Request
+
+```shell
+curl "http://partners.api.skyscanner.net/apiservices/pricing/uk1/v1.0/
+    {SessionKey}/booking/
+    {OutboundLegId};{InboundLegId}
+    ?apiKey={apiKey}"
+    -X GET
+```
+
+*API endpoint*
+
+`GET /pricing/v1.0/{SessionKey}/booking/{OutboundLegId};{InboundLegId}`
+
+
+*TRY IT OUT*
+
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/31ff523d2ff9186107e1)
+
+
+*REQUEST PARAMETERS*
+
+| Parameter | Description |
+| --------- | ------- |
+| ```apiKey``` <br><span class="required">REQUIRED</span> | Your API Key. |
+
+*REQUEST BODY (from live pricing response)*
+
+| Parameter | Description |
+| --------- | ------- |
+| ```OutboundLegId``` <br><span class="required">REQUIRED</span> | The outbound leg Id of the itinerary |
+| ```InboundLegId``` <br><span class="optional">OPTIONAL</span> | The inbound leg Id of the itinerary for return flights |
+| ```adults``` <br><span class="optional">OPTIONAL</span> | Number of adults (16+ years). Must be between 1 and 8.  |
+| ```children``` <br><span class="optional">OPTIONAL</span> | Number of children (1-16 years). Can be between 0 and 8.  |
+| ```infants``` <br><span class="optional">OPTIONAL</span> | Number of infants (under 12 months). Can be between 0 and 8.  |
+
+
+
+
+### Response
+
+```json
+{
+  "Segments": [
+    {
+      "Id": 1,
+      "OriginStation": 11235,
+      "DestinationStation": 13554,
+      "DepartureDateTime": "2017-05-30T19:25:00",
+      "ArrivalDateTime": "2017-05-30T20:55:00",
+      "Carrier": 881,
+      "OperatingCarrier": 881,
+      "Duration": 90,
+      "FlightNumber": "1463",
+      "JourneyMode": "Flight",
+      "Directionality": "Outbound"
+    },
+    ...
+  ],
+  "BookingOptions": [
+    {
+      "BookingItems": [
+        {
+          "AgentID": 4499211,
+          "Status": "Current",
+          "Price": 83.41,
+          "Deeplink": "http://partners.api.skyscanner.net/apiservices/deeplink/v2?_cje=jzj5DawL5[...]"
+          "SegmentIds": [
+            1,
+            2
+          ]
+        }
+      ]
+    },
+  ],
+    "Places": [
+    {
+      "Id": 13554,
+      "ParentId": 4698,
+      "Code": "LHR",
+      "Type": "Airport",
+      "Name": "London Heathrow"
+    },
+    ...
+  ],
+  "Carriers": [
+    {
+      "Id": 881,
+      "Code": "BA",
+      "Name": "British Airways",
+      "ImageUrl": "http://s1.apideeplink.com/images/airlines/BA.png"
+    }
+  ],
+  "Query": {
+    "Country": "GB",
+    "Currency": "GBP",
+    "Locale": "en-gb",
+    "Adults": 1,
+    "Children": 0,
+    "Infants": 0,
+    "OriginPlace": "2343",
+    "DestinationPlace": "13554",
+    "OutboundDate": "2017-05-30",
+    "InboundDate": "2017-06-02",
+    "LocationSchema": "Default",
+    "CabinClass": "Economy",
+    "GroupPricing": false
+  }
+ }
+```
+
+The response contains a list of itineraries with, for each one, a list of pricing options containing:
+
+* the price
+* the quote age
+* the agent selling the itinerary
+* the deeplink to the agent
+
+
+*RESPONSE PARAMETERS*
+
+| Parameter | Description |
+| ------- | ------ |
+| `SessionKey` | The Session key to identify the session. |
+| `Query` | A copy of the query which was submitted. |
+| `Status` | The status of the session – ‘UpdatesPending’ or ‘UpdatesComplete’. |
+| `Itineraries` | A list of itineraries - see below for the itinerary object. |
+| `Legs` | Details of the legs that make up the itineraries: airports, times, overall duration, stops and carrier ids. |
+| `Segements` | Details of the segments of each leg. Including the carrier (or marketing carrier) and the operating carrier. |
+| `Carriers` | Details of the carriers.  |
+| `Agents` | Details of the agents who sell the tickets. Can be an airline or a travel agent. |
+| `Places` | A list of all the places that appear in the itineraries. |
+| `Currencies` | A list of the currencies shown in the response. |
