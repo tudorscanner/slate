@@ -13,6 +13,7 @@ includes:
   - flights_browse_dates
   - flights_browse_grid
   - flights_live_prices
+  - car_hire
   - localisation
   - places
   - response_codes

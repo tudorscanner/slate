@@ -46,7 +46,7 @@ curl "http://partners.api.skyscanner.net/apiservices/pricing/v1.0"
 
 | Header | Value |
 | --- | --- |
-| `Content-Type header` <br><span class="required">REQUIRED</span> | `application/x-www-form-urlencoded` |
+| `Content-Type` <br><span class="required">REQUIRED</span> | `application/x-www-form-urlencoded` |
 | `X-Forwarded-For` <br><span class="required">REQUIRED</span> | user's IP address |
 | `Accept` <br><span class="optional">OPTIONAL</span> | `application/json` or `application/xml` <br>The default response format is XML |
 
