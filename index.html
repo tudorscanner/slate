@@ -144,7 +144,7 @@ our APIs directly.
 <p>You must include the API key in all API requests to the server, either as a parameter in the query or in the query header. Please refer to each endpoint for details.</p>
 
 <aside class="warning">
-Be careful when sharing API keys. Do not publish them in public code repositories or add them to client-side API calls.
+Be careful when sharing API keys. Do not publish them in public code repositories or add them to client-side API calls. When you need to make a client-side call (e.g. redirect) please insure that you use your short API key (the first 16 characters of you key).
 </aside>
 
           <h1 id="getting-started">Getting Started</h1>
@@ -2589,6 +2589,103 @@ The country and language must be included in the Autosuggest query so that the m
 
 <p>If the default Skyscanner schema is not used, the schema name must be appended to the place id as follows:
 <code class="prettyprint">placeCode-locationSchema</code></p>
+
+          <h1 id="booking-redirects">Booking Redirects</h1>
+
+<p>In addition to price information, your users will need a url that redirects them to where they can book their ticket. </p>
+
+<p>You can either:</p>
+
+<ul>
+<li>redirect your users to the Skyscanner website </li>
+<li>redirect them directly to the supplier&rsquo;s website (airline or travel agent)</li>
+</ul>
+
+<aside class="notice" >
+  We recommend that you redirect users to Skyscanner&rsquo;s website as this helps with trust and therefore will enhance your conversion rate. For more information please see <a href="#improving-your-conversions">improving your conversions</a>
+
+</aside>
+
+<h2 id="to-skyscanner">To Skyscanner</h2>
+
+<p>Link to the Skyscanner website with the details of the search query pre-populated. This provides a more straightforward option for partners who do not require a full implementation of a travel search product within their applications.</p>
+
+<p>If the query isn&rsquo;t specific enough to link to a specific &lsquo;day view&rsquo; page, it will link to a more general browse page, where the user will be asked to refine the search criteria (by date, origin and/or destination).</p>
+<pre class="highlight shell"><code>GET <span class="s2">"http://partners.api.skyscanner.net/apiservices/
+    referral/v1.0/{country}/{currency}/{locale}/
+    {originPlace}/{destinationPlace}/
+    {outboundPartialDate}/{inboundPartialDate}
+    ?apiKey={shortApiKey}"</span>
+</code></pre>
+
+<p><em>API endpoint</em></p>
+
+<p><code class="prettyprint">/referral/v1.0/{country}/{currency}/{locale}/{originPlace}/{destinationPlace}/{outboundPartialDate}/{inboundPartialDate}</code></p>
+
+<p><em>REQUEST PARAMETERS</em></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">country</code> <br><span class="required">REQUIRED</span></td>
+<td>The <a href="#markets">market country</a> your user is in</td>
+</tr>
+<tr>
+<td><code class="prettyprint">currency</code> <br><span class="required">REQUIRED</span></td>
+<td>The <a href="#currencies">currency</a> you want the prices in</td>
+</tr>
+<tr>
+<td><code class="prettyprint">locale</code> <br><span class="required">REQUIRED</span></td>
+<td>The <a href="#locales">locale</a> you want the results in (ISO locale)</td>
+</tr>
+<tr>
+<td><code class="prettyprint">originPlace</code> <br><span class="required">REQUIRED</span></td>
+<td>The origin place (see <a href="#places">places</a>)</td>
+</tr>
+<tr>
+<td><code class="prettyprint">destinationPlace</code> <br><span class="required">REQUIRED</span></td>
+<td>The destination place (see <a href="#places">places</a>)</td>
+</tr>
+<tr>
+<td><code class="prettyprint">outboundPartialDate</code> <br><span class="required">REQUIRED</span></td>
+<td>The outbound date. Format &ldquo;yyyy-mm-dd&rdquo;, &ldquo;yyyy-mm&rdquo; or &ldquo;anytime&rdquo;.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">inboundPartialDate</code> <br><span class="optional">OPTIONAL</span></td>
+<td>The return date. Format &ldquo;yyyy-mm-dd&rdquo;, &ldquo;yyyy-mm&rdquo; or &ldquo;anytime&rdquo;. Use empty string for oneway trip.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">shortApiKey</code> <br><span class="required">REQUIRED</span></td>
+<td>The first 16 characters of your API Key</td>
+</tr>
+</tbody></table>
+
+<aside class="warning">
+  Please insure that you use the short API key (the first 16 characters of your full API key) to avoid exposing your key. Please see <a href="#authentication">authentication</a> for more information.
+
+</aside>
+
+<p><em>EXAMPLE REDIRECT</em></p>
+
+<p><a href="http://partners.api.skyscanner.net/apiservices/referral/v1.0/GB/GBP/en-GB/EDI/CDG/2014-12-12/2014-12-20?apiKey=prtl674938798674" target="_blank">http://partners.api.skyscanner.net/apiservices/referral/v1.0/GB/GBP/en-GB/EDI/CDG/2017-12-12/2017-12-20?apiKey=prtl674938798674</a></p>
+
+<h2 id="to-the-supplier">To the supplier</h2>
+
+<p>When using <a href="#flights-live-prices">flights live prices</a> or <a href="#car-hire-live-prices">car hire live prices</a>, urls or deeplinks will be provided in the response. They will link the user straight through to the supplier&rsquo;s website.</p>
+
+<p>The URL is an unbranded version of Skyscanner’s own deeplinking service that redirects users to the third-party supplier&rsquo;s website, with the details of the itinerary that was selected. </p>
+
+<p><img alt="deeplink page" src="images/deeplink.png" /></p>
+
+<p>You can customise the redirect page by replacing the default logo with the logo of your website. Please send us a logo in size 122x65px in PNG format and we will set this up for you. </p>
+
+<aside class="warning">
+Skyscanner has no control over how the third-party website consumes the link. In some cases the selected itinerary will be ready to book. In other cases the search criteria will be pre-populated, but the end-user will have to search through the results on the third-party website to find their itinerary.
+</aside>
 
           <h1 id="response-codes">Response Codes</h1>
 
