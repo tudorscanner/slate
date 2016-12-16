@@ -65,7 +65,7 @@ The URL is an unbranded version of Skyscanner’s own deeplinking service that r
 ![deeplink page](/images/deeplink.png)
 
 
-You can customise the redirect page by replacing the default logo with the logo of your website. Please send us a logo in size 122x65px in PNG format and we will set this up for you. 
+You can customise the redirect page by replacing the default logo with the logo of your website. Please send us a logo in size 122x65px in PNG format and we will set this up for you. Please see [How can I put my logo on the redirect page?](https://support.business.skyscanner.net/hc/en-us/articles/208180985-How-can-I-put-my-logo-on-the-redirect-page-) for more information.
 
 <aside class="warning">
 Skyscanner has no control over how the third-party website consumes the link. In some cases the selected itinerary will be ready to book. In other cases the search criteria will be pre-populated, but the end-user will have to search through the results on the third-party website to find their itinerary.
