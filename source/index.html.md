@@ -16,6 +16,7 @@ includes:
   - car_hire
   - localisation
   - places
+  - redirects
   - response_codes
 search: false
 ---
