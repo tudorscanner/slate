@@ -28,11 +28,13 @@ curl "http://partners.api.skyscanner.net/apiservices/carhire/liveprices/v2/
 
 *API endpoint*
 
-GET `/carhire/liveprices/v2/{market}/{currency}/{locale}/{pickupplace}/{dropoffplace}/{pickupdatetime}/{dropoffdatetime}/{driverage}`
+`GET /carhire/liveprices/v2/{market}/{currency}/{locale}/{pickupplace}/{dropoffplace}/{pickupdatetime}/{dropoffdatetime}/{driverage}`
 
 *TRY IT OUT*
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/eb787038fadc6e9607d6)
+
+or go to the [test harness](http://business.skyscanner.net/portal/en-GB/Documentation/CarHireLivePricingQuickStart)
 
 *HEADER VALUES*
 
@@ -98,7 +100,14 @@ curl "http://partners.api.skyscanner.net/apiservices/carhire/liveprices/v2/{sess
 
 *API ENDPOINT*
 
-GET `/carhire/liveprices/v2/{sessionKey}`
+`GET /carhire/liveprices/v2/{sessionKey}`
+
+*TRY IT OUT*
+
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/eb787038fadc6e9607d6)
+
+or go to the [test harness](http://business.skyscanner.net/portal/en-GB/Documentation/CarHireLivePricingQuickStart)
+
 
 *REQUEST PARAMETERS*
 
@@ -106,6 +115,7 @@ GET `/carhire/liveprices/v2/{sessionKey}`
 | --------- | ------- |
 | ```deltaExcludeWebsites ``` <br><span class="optional">OPTIONAL</span> | A list of website IDs whose results you want to discard, or an empty string. CSV or semicolon-separated values. |
 | ```apiKey``` <br><span class="required">REQUIRED</span> | Your API key |
+
 
 > Example response with polling url in the header:
 

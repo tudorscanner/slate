@@ -42,6 +42,9 @@ curl "http://partners.api.skyscanner.net/apiservices/pricing/v1.0"
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/31ff523d2ff9186107e1)
 
+or go to our [test harness](http://business.skyscanner.net/portal/en-GB/Documentation/FlightsLivePricingQuickStart)
+
+
 *HEADER VALUES*
 
 | Header | Value |
@@ -117,6 +120,9 @@ Location "http://partners.api.skyscanner.net/apiservices/pricing/uk1/v1.0/
 *TRY IT OUT*
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/31ff523d2ff9186107e1)
+
+or go to our [test harness](http://business.skyscanner.net/portal/en-GB/Documentation/FlightsLivePricingQuickStart)
+
 
 *HEADER VALUES*
 
@@ -380,7 +386,8 @@ The full url and body content are provided in the response from the live pricing
 *TRY IT OUT*
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/31ff523d2ff9186107e1)
-
+ 
+ or go to our [test harness](http://business.skyscanner.net/portal/en-GB/Documentation/FlightsLivePricingQuickStart)
 
 *REQUEST PARAMETERS*
 
@@ -443,6 +450,8 @@ curl "http://partners.api.skyscanner.net/apiservices/pricing/uk1/v1.0/
 *TRY IT OUT*
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/31ff523d2ff9186107e1)
+
+or go to our [test harness](http://business.skyscanner.net/portal/en-GB/Documentation/FlightsLivePricingQuickStart)
 
 
 *REQUEST PARAMETERS*
