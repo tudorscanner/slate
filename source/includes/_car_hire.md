@@ -119,9 +119,8 @@ or go to the [test harness](http://business.skyscanner.net/portal/en-GB/Document
 
 > Example response with polling url in the header:
 
-```shell
+```json
 {
-  {
   "submitted_query": {
     "market": "GB",
     "currency": "GBP",
