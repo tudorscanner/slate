@@ -500,7 +500,7 @@ or go to our [test harness](http://business.skyscanner.net/portal/en-GB/Document
           "AgentID": 4499211,
           "Status": "Current",
           "Price": 83.41,
-          "Deeplink": "http://partners.api.skyscanner.net/apiservices/deeplink/v2?_cje=jzj5DawL5[...]"
+          "Deeplink": "http://partners.api.skyscanner.net/apiservices/deeplink/v2?_cje=jzj5DawL5[...]",
           "SegmentIds": [
             1,
             2
