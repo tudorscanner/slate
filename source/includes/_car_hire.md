@@ -50,10 +50,10 @@ or go to the [test harness](http://business.skyscanner.net/portal/en-GB/Document
 | ```country``` <br><span class="required">REQUIRED</span> | The [market country](#markets) your user is in |
 | ```currency``` <br><span class="required">REQUIRED</span> | The [currency](#currencies) you want the prices in |
 | ```locale``` <br><span class="required">REQUIRED</span> | The [locale](#locales) you want the results in (ISO locale) |
-| ```pickupPlace``` <br><span class="required">REQUIRED</span> | The pickup location. [IATA code](#schemas) or a latitude,longitude pair formatted like this: lat,lon-latlong e.g. /55.95,-3.37-latlong/ |
-| ```dropoffPlace``` <br><span class="required">REQUIRED</span> | The dropoff location. [IATA code](#schemas) or a latitude,longitude pair formatted like this: lat,lon-latlong e.g. /55.95,-3.37-latlong/ |
-| ```pickupDateTime``` <br><span class="required">REQUIRED</span> | Date and time for pickup. Formatted as ISO Date and Time format (YYYY-MM-DDThh:mm) |
-| ```dropoffDateTime``` <br><span class="optional">OPTIONAL</span> | Date and time for dropoff. Formatted as ISO Date and Time format (YYYY-MM-DDThh:mm) |
+| ```pickupPlace``` <br><span class="required">REQUIRED</span> | The pickup location. [IATA code](#schemas) or a latitude,longitude pair formatted as lat,lon-latlong e.g. `/55.95,-3.37-latlong/` |
+| ```dropoffPlace``` <br><span class="required">REQUIRED</span> | The dropoff location. [IATA code](#schemas) or a latitude,longitude pair formatted as lat,lon-latlong e.g. `/55.95,-3.37-latlong/` |
+| ```pickupDateTime``` <br><span class="required">REQUIRED</span> | Date and time for pickup. Formatted as ISO Date and Time format: `YYYY-MM-DDThh:mm` |
+| ```dropoffDateTime``` <br><span class="optional">OPTIONAL</span> | Date and time for dropoff. Formatted as ISO Date and Time format: `YYYY-MM-DDThh:mm` |
 | ```driverAge``` <br><span class="required">REQUIRED</span> | Must be between 21 and 75 (inclusive). |
 | ```userIp ``` <br><span class="required">REQUIRED</span> | The IP address of the end user (IPv4 only). Format: `188.39.95.93`|
 | ```apiKey``` <br><span class="required">REQUIRED</span> | Your API key |
