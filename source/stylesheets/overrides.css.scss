@@ -1,0 +1,170 @@
+@charset "utf-8";
+@import 'normalize';
+@import 'variables';
+@import 'icon-font';
+
+@import 'variables_overrides.css.scss';
+
+@import 'screen.css.scss';
+
+#toc {
+  margin-top: 1.5em;
+}
+
+body {
+  font-size: 14px;
+}
+
+.tocify-wrapper {
+  font-size: 15px;
+  font-weight: normal;
+
+  // This is the logo at the top of the ToC
+  & > a > img {
+    margin-top:1em;
+    display: block;
+    max-width: 90%;
+  }
+
+  &:hover {
+    text-decoration: none;
+    //background-color: #666;
+    //padding-left: 3px;
+  }
+
+  .tocify-focus {
+    font-weight: bold;
+    box-shadow: none;
+    background-color: $nav-active-bg;
+    color: $nav-active-text;
+    border-left: 3px solid $nav-active-border;
+  }
+
+  a {
+    margin-top: 0px;
+  }
+
+  ul, li {
+    line-height: 38px;
+  }
+
+  .tocify-subheader {
+    .tocify-item > a {
+        font-size:14px;
+    }
+
+  }
+
+  .toc-footer li {
+    padding-top: 10px;
+  }
+}
+
+.content {
+  h1 {
+    padding-top: 1.2em;
+    border: none;
+    background-image: none;
+    font-size: 26px;
+    border-top: 1px solid $nav-active-bg;
+  }
+
+  h2 {
+    border-top: 1px dotted $nav-active-bg;
+    margin-top: 2em;
+  }
+
+  h3 {
+    margin-top:1em;
+    margin-bottom:2em;
+  }
+
+  a {
+    text-decoration: none;
+    color: $nav-active-border;
+    font-weight: bold;
+  }
+
+  pre {
+    padding-top: 1em;
+  }
+
+  blockquote {
+    p {
+      background-color: transparent;
+      border: none;
+      padding: 0;
+      font-size:14px;
+    }
+  }
+
+  em {
+    font-style: normal;
+    color: #999;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  table {
+    margin-top: -1.5em;
+    margin-bottom: 2.5em;
+
+    th {
+      font-size: 5px;
+      color: #fff;
+    }
+
+    td:first-child {
+      text-align: right;
+      width: 30%;
+      border-right: 1px solid #ccc;
+    }
+
+    tr:nth-child(odd)>td {
+      background-color: lighten($main-bg,4.2%);
+    }
+
+    tr:nth-child(even)>td {
+      background-color: lighten($nav-active-bg,2.4%);
+    }
+
+    code {
+      word-break: keep-all;
+    }
+
+    .required {
+      color: darkred;
+      text-transform: uppercase;
+      font-size: 10px;
+      float: right;
+      padding-top: 6px;
+    }
+
+    .optional {
+      color: #29a8bb;
+      text-transform: uppercase;
+      font-size: 10px;
+      float: right;
+      padding-top: 6px;
+    }
+  }
+
+  aside {
+    text-shadow: none;
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+    background: $aside-notice-bg;
+    line-height: 1.6;
+    
+    &.warning {
+      background-color: $aside-warning-bg;
+      text-shadow: none;
+    }
+
+    &.success {
+      background-color: $aside-success-bg;
+      text-shadow: none;
+    }
+  }
+}
