@@ -208,7 +208,7 @@ Unless you require exact prices, we recommend you start with the cache prices AP
 </tr>
 </thead><tbody>
 <tr>
-<td><a href="#">Live prices</a></td>
+<td><a href="#car-hire-live-prices">Live prices</a></td>
 <td>Returns live prices from all our suppliers for car hire deals (in the selected market).</td>
 </tr>
 </tbody></table>
@@ -1872,11 +1872,11 @@ Please note that it may take up to a minute to update all the results. After you
 </tr>
 <tr>
 <td><code class="prettyprint">pickupPlace</code> <br><span class="required">REQUIRED</span></td>
-<td>The pickup location. IATA code or autosuggest place ID or a latitude,longitude pair formatted like this: lat,lon-latlong e.g. /55.95,-3.37-latlong/</td>
+<td>The pickup location. IATA code or a latitude,longitude pair formatted like this: lat,lon-latlong e.g. /55.95,-3.37-latlong/</td>
 </tr>
 <tr>
 <td><code class="prettyprint">dropoffPlace</code> <br><span class="required">REQUIRED</span></td>
-<td>The dropoff location. IATA code or autosuggest place ID or a latitude,longitude pair formatted like this: lat,lon-latlong e.g. /55.95,-3.37-latlong/</td>
+<td>The dropoff location. IATA code or a latitude,longitude pair formatted like this: lat,lon-latlong e.g. /55.95,-3.37-latlong/</td>
 </tr>
 <tr>
 <td><code class="prettyprint">pickupDateTime</code> <br><span class="required">REQUIRED</span></td>
@@ -1892,7 +1892,7 @@ Please note that it may take up to a minute to update all the results. After you
 </tr>
 <tr>
 <td><code class="prettyprint">userIp</code> <br><span class="required">REQUIRED</span></td>
-<td>The IP address of the end user (IPv4 only)</td>
+<td>The IP address of the end user (IPv4 only). Format: <code class="prettyprint">188.39.95.93</code></td>
 </tr>
 <tr>
 <td><code class="prettyprint">apiKey</code> <br><span class="required">REQUIRED</span></td>
@@ -2757,7 +2757,7 @@ The country and language must be included in the Autosuggest query so that the m
 </tr>
 <tr>
 <td>iata / iso</td>
-<td>Airports and cities often use the internationally recognized IATA and ISO schemas.<br>Although we support these schemas we recommend that you use the Skyscanner code which is very similar but solves ambiguous cases where a city and one of its airports share the same code.</td>
+<td>Airports and cities often use the internationally recognized IATA and ISO schemas.<br>For <b>Flights</b> we recommend that you use the Skyscanner code which is very similar but solves ambiguous cases where a city and one of its airports share the same code. For <b>Car Hire</b> please use the IATA code.</td>
 </tr>
 <tr>
 <td>latlong</td>
@@ -2765,7 +2765,7 @@ The country and language must be included in the Autosuggest query so that the m
 </tr>
 <tr>
 <td>ip</td>
-<td>IP of a user. The nearest city with airport will be used.</td>
+<td>IP of a user. The nearest city with airport will be used. Format: <code class="prettyprint">188.39.95.93</code></td>
 </tr>
 <tr>
 <td>GeoNameCodes</td>
