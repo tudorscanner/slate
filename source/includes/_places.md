@@ -255,9 +255,9 @@ Each place can be referred to via different schemas, described below.
 | Parameter | Description |
 | --- | --- |
 | sky | Skyscanner code. The response from [Autosuggest](#place-information) provides these ids. |
-| iata / iso | Airports and cities often use the internationally recognized IATA and ISO schemas.<br>Although we support these schemas we recommend that you use the Skyscanner code which is very similar but solves ambiguous cases where a city and one of its airports share the same code.|
+| iata / iso | Airports and cities often use the internationally recognized IATA and ISO schemas.<br>For <b>Flights</b> we recommend that you use the Skyscanner code which is very similar but solves ambiguous cases where a city and one of its airports share the same code. For <b>Car Hire</b> please use the IATA code.|
 | latlong |	Latitude and longitude of the place in the following form: "latitude,longitude". The nearest city with airport will be used. |
-| ip | IP of a user. The nearest city with airport will be used. |
+| ip | IP of a user. The nearest city with airport will be used. Format: `188.39.95.93`|
 | GeoNameCodes | GeoNameCodes from the GeoNames schema (see [geonames.org](www.geonames.org))|
 | GeoNameIDs | GeoNameIDs from the GeoNames schema (see [geonames.org](www.geonames.org))|
 

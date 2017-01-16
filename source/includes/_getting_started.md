@@ -30,7 +30,7 @@ Unless you require exact prices, we recommend you start with the cache prices AP
 
 | API endpoint | Description  |
 | --- | ---|
-| [Live prices](#) | Returns live prices from all our suppliers for car hire deals (in the selected market). |
+| [Live prices](#car-hire-live-prices) | Returns live prices from all our suppliers for car hire deals (in the selected market). |
 
 ## Hotels
 
