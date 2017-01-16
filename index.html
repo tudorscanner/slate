@@ -15,11 +15,11 @@
   background-color: #272822;
 }
 .highlight .err {
-  color: #151515;
-  background-color: #ac4142;
+  color: #272822;
+  background-color: #f92672;
 }
 .highlight .c, .highlight .cd, .highlight .cm, .highlight .c1, .highlight .cs {
-  color: #505050;
+  color: #75715e;
 }
 .highlight .cp {
   color: #f4bf75;
@@ -28,45 +28,45 @@
   color: #f4bf75;
 }
 .highlight .o, .highlight .ow {
-  color: #d0d0d0;
+  color: #f8f8f2;
 }
 .highlight .p, .highlight .pi {
-  color: #d0d0d0;
+  color: #f8f8f2;
 }
 .highlight .gi {
-  color: #90a959;
+  color: #a6e22e;
 }
 .highlight .gd {
-  color: #ac4142;
+  color: #f92672;
 }
 .highlight .gh {
-  color: #6a9fb5;
-  background-color: #151515;
+  color: #66d9ef;
+  background-color: #272822;
   font-weight: bold;
 }
 .highlight .k, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kv {
-  color: #aa759f;
+  color: #ae81ff;
 }
 .highlight .kc {
-  color: #d28445;
+  color: #fd971f;
 }
 .highlight .kt {
-  color: #d28445;
+  color: #fd971f;
 }
 .highlight .kd {
-  color: #d28445;
+  color: #fd971f;
 }
 .highlight .s, .highlight .sb, .highlight .sc, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .sx, .highlight .s1 {
-  color: #90a959;
+  color: #a6e22e;
 }
 .highlight .sr {
-  color: #75b5aa;
+  color: #a1efe4;
 }
 .highlight .si {
-  color: #8f5536;
+  color: #cc6633;
 }
 .highlight .se {
-  color: #8f5536;
+  color: #cc6633;
 }
 .highlight .nn {
   color: #f4bf75;
@@ -78,13 +78,13 @@
   color: #f4bf75;
 }
 .highlight .na {
-  color: #6a9fb5;
+  color: #66d9ef;
 }
 .highlight .m, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mb, .highlight .mx {
-  color: #90a959;
+  color: #a6e22e;
 }
 .highlight .ss {
-  color: #90a959;
+  color: #a6e22e;
 }
     </style>
     <link href="stylesheets/overrides.css" rel="stylesheet" media="screen" />
@@ -96,13 +96,11 @@
     <a href="#" id="nav-button">
       <span>
         NAV
-        <img src="images/navbar.png" />
+        <img src="images/navbar.png" alt="Navbar" />
       </span>
     </a>
     <div class="tocify-wrapper">
-      <a href="http://business.skyscanner.net"><img src="images/logo.png" /></a>
-        <div class="lang-selector">
-        </div>
+      <a href="http://business.skyscanner.net"><img src="images/logo.png" alt="Logo" /></a>
 
       <div id="toc">
       </div>
@@ -122,7 +120,6 @@
 <pre class="highlight shell"><code>http://partners.api.skyscanner.net/apiservices/
 
 </code></pre>
-
 <p>Skyscanner Travel APIs connect you to all the data you need to build an innovative website or app.</p>
 
 <p>Build tools that solve problems for millions of travellers and travel retail businesses around the world.</p>
@@ -244,14 +241,13 @@ Unless you require exact prices, we recommend you start with the cache prices AP
   -H <span class="s2">"Accept: application/json"</span>
 
 </code></pre>
-
 <p><em>API endpoint</em></p>
 
 <p>GET <code class="prettyprint">/browsequotes/v1.0/{country}/{currency}/{locale}/{originPlace}/{destinationPlace}/{outboundPartialDate}/{inboundPartialDate}</code></p>
 
 <p><em>TRY IT OUT</em></p>
 
-<p><a href="https://app.getpostman.com/run-collection/80ff19efbe2c736a4dfd"><img alt="Run in Postman" src="https://run.pstmn.io/button.svg" /></a></p>
+<p><a href="https://app.getpostman.com/run-collection/80ff19efbe2c736a4dfd"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
 
 <p><em>HEADER VALUES</em></p>
 
@@ -311,9 +307,9 @@ Unless you require exact prices, we recommend you start with the cache prices AP
 
 <p>The following tables show the level of precision supported for the origin and destination places, and the outbound and return dates:</p>
 
-<p><img alt="diagram" src="images/browsequotes_places.png" /></p>
+<p><img src="images/browsequotes_places.png" alt="diagram" /></p>
 
-<p><img alt="diagram" src="images/browsequotes_dates.png" /></p>
+<p><img src="images/browsequotes_dates.png" alt="diagram" /></p>
 
 <blockquote>
 <p>Example response from US to anywhere:</p>
@@ -378,7 +374,6 @@ Unless you require exact prices, we recommend you start with the cache prices AP
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-
 <p><em>RESPONSE PARAMETERS</em></p>
 
 <table><thead>
@@ -418,14 +413,13 @@ Unless you require exact prices, we recommend you start with the cache prices AP
   -H <span class="s2">"Accept: application/json"</span>
 
 </code></pre>
-
 <p><em>API endpoint</em></p>
 
 <p>GET <code class="prettyprint">/browseroutes/v1.0/{country}/{currency}/{locale}/{originPlace}/{destinationPlace}/{outboundPartialDate}/{inboundPartialDate}</code></p>
 
 <p><em>TRY IT OUT</em></p>
 
-<p><a href="https://app.getpostman.com/run-collection/80ff19efbe2c736a4dfd"><img alt="Run in Postman" src="https://run.pstmn.io/button.svg" /></a></p>
+<p><a href="https://app.getpostman.com/run-collection/80ff19efbe2c736a4dfd"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
 
 <p><em>HEADER VALUES</em></p>
 
@@ -485,9 +479,9 @@ Unless you require exact prices, we recommend you start with the cache prices AP
 
 <p>The following tables show the level of precision supported for the origin and destination places, and the outbound and return dates:</p>
 
-<p><img alt="diagram" src="images/browseroutes_places.png" /></p>
+<p><img src="images/browseroutes_places.png" alt="diagram" /></p>
 
-<p><img alt="diagram" src="images/browseroutes_dates.png" /></p>
+<p><img src="images/browseroutes_dates.png" alt="diagram" /></p>
 
 <blockquote>
 <p>Example response from US to anywhere:</p>
@@ -574,7 +568,6 @@ Unless you require exact prices, we recommend you start with the cache prices AP
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-
 <p><em>RESPONSE PARAMETERS</em></p>
 
 <table><thead>
@@ -618,14 +611,13 @@ Unless you require exact prices, we recommend you start with the cache prices AP
   -H <span class="s2">"Accept: application/json"</span>
 
 </code></pre>
-
 <p><em>API endpoint</em></p>
 
 <p>GET <code class="prettyprint">/browsedates/v1.0/{country}/{currency}/{locale}/{originPlace}/{destinationPlace}/{outboundPartialDate}/{inboundPartialDate}</code></p>
 
 <p><em>TRY IT OUT</em></p>
 
-<p><a href="https://app.getpostman.com/run-collection/80ff19efbe2c736a4dfd"><img alt="Run in Postman" src="https://run.pstmn.io/button.svg" /></a></p>
+<p><a href="https://app.getpostman.com/run-collection/80ff19efbe2c736a4dfd"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
 
 <p><em>HEADER VALUES</em></p>
 
@@ -685,9 +677,9 @@ Unless you require exact prices, we recommend you start with the cache prices AP
 
 <p>The following tables show the level of precision supported for the origin and destination places, and the outbound and return dates:</p>
 
-<p><img alt="diagram" src="images/browsedates_places.png" /></p>
+<p><img src="images/browsedates_places.png" alt="diagram" /></p>
 
-<p><img alt="diagram" src="images/browsedates_dates.png" /></p>
+<p><img src="images/browsedates_dates.png" alt="diagram" /></p>
 
 <blockquote>
 <p>Example response from London to Paris:</p>
@@ -780,7 +772,6 @@ Unless you require exact prices, we recommend you start with the cache prices AP
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-
 <p><em>RESPONSE PARAMETERS</em></p>
 
 <table><thead>
@@ -824,14 +815,13 @@ Unless you require exact prices, we recommend you start with the cache prices AP
   -H <span class="s2">"Accept: application/json"</span>
 
 </code></pre>
-
 <p><em>API endpoint</em></p>
 
 <p>GET <code class="prettyprint">/browsegrid/v1.0/{country}/{currency}/{locale}/{originPlace}/{destinationPlace}/{outboundPartialDate}/{inboundPartialDate}</code></p>
 
 <p><em>TRY IT OUT</em></p>
 
-<p><a href="https://app.getpostman.com/run-collection/80ff19efbe2c736a4dfd"><img alt="Run in Postman" src="https://run.pstmn.io/button.svg" /></a></p>
+<p><a href="https://app.getpostman.com/run-collection/80ff19efbe2c736a4dfd"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
 
 <p><em>HEADER VALUES</em></p>
 
@@ -891,9 +881,9 @@ Unless you require exact prices, we recommend you start with the cache prices AP
 
 <p>The following tables show the level of precision supported for the origin and destination places, and the outbound and return dates:</p>
 
-<p><img alt="diagram" src="images/browsegrid_places.png" /></p>
+<p><img src="images/browsegrid_places.png" alt="diagram" /></p>
 
-<p><img alt="diagram" src="images/browsegrid_dates.png" /></p>
+<p><img src="images/browsegrid_dates.png" alt="diagram" /></p>
 
 <blockquote>
 <p>Example response from US to anywhere:</p>
@@ -949,7 +939,6 @@ Unless you require exact prices, we recommend you start with the cache prices AP
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-
 <p><em>RESPONSE PARAMETERS</em></p>
 
 <table><thead>
@@ -980,7 +969,7 @@ Unless you require exact prices, we recommend you start with the cache prices AP
 
 <p>The Live Pricing Service Session must be created before any pricing data can be obtained. The request contains details of the locations, dates, passengers, cabin class and user details. These parameters define the session, and cannot be changed within the session (with the exception of passenger numbers).</p>
 
-<p><img alt="diagram" src="images/Skyscanner_UMLDiagram_v3_EJ-01-01.png" /></p>
+<p><img src="images/Skyscanner_UMLDiagram_v3_EJ-01-01.png" alt="diagram" /></p>
 
 <aside class="warning">
 We do not support client-side implementation of our Live Prices API using CORS requests due to the potential security
@@ -1008,14 +997,13 @@ risk of exposing account API keys.
     &amp;apikey=prtl6749387986743898559646983194'</span>
 
 </code></pre>
-
 <p><em>API endpoint</em></p>
 
 <p><code class="prettyprint">POST /pricing/v1.0</code></p>
 
 <p><em>TRY IT OUT</em></p>
 
-<p><a href="https://app.getpostman.com/run-collection/31ff523d2ff9186107e1"><img alt="Run in Postman" src="https://run.pstmn.io/button.svg" /></a></p>
+<p><a href="https://app.getpostman.com/run-collection/31ff523d2ff9186107e1"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
 
 <p>or go to our <a href="http://business.skyscanner.net/portal/en-GB/Documentation/FlightsLivePricingQuickStart">test harness</a></p>
 
@@ -1107,7 +1095,6 @@ risk of exposing account API keys.
 <pre class="highlight shell"><code>Location <span class="s2">"http://partners.api.skyscanner.net/apiservices/pricing/uk1/v1.0/
     {SessionKey}"</span>
 </code></pre>
-
 <p>A successful response contains no content. The URL to poll the results is provided in the Location header of the response.</p>
 
 <aside class="warning">
@@ -1141,14 +1128,13 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
     &amp;duration=360
     &amp;includeCarriers=ba;u2;af"</span>
 </code></pre>
-
 <p><em>API endpoint</em></p>
 
 <p><code class="prettyprint">GET /pricing/v1.0/{SessionKey}</code></p>
 
 <p><em>TRY IT OUT</em></p>
 
-<p><a href="https://app.getpostman.com/run-collection/31ff523d2ff9186107e1"><img alt="Run in Postman" src="https://run.pstmn.io/button.svg" /></a></p>
+<p><a href="https://app.getpostman.com/run-collection/31ff523d2ff9186107e1"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
 
 <p>or go to our <a href="http://business.skyscanner.net/portal/en-GB/Documentation/FlightsLivePricingQuickStart">test harness</a></p>
 
@@ -1399,7 +1385,6 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-
 <p>The response contains a list of itineraries with, for each one, a list of pricing options containing:</p>
 
 <ul>
@@ -1504,7 +1489,6 @@ Please add the no-follow attribute when you link to the deeplink. See <a href="h
     -X PUT
     -H <span class="s2">"Content-Type: application/x-www-form-urlencoded"</span>
 </code></pre>
-
 <p>In cases where more than one booking is required (for example when buying from 2 or more different airlines or travel agents) or for group pricing,
 a Booking Details request must be made to get the list of all the deeplinks or update the deeplink with additional information such as number of passengers.</p>
 
@@ -1517,7 +1501,6 @@ a Booking Details request must be made to get the list of all the deeplinks or u
         </span><span class="nt">"Method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PUT"</span><span class="w">
       </span><span class="p">}</span><span class="w">
 </span></code></pre>
-
 <p>The full url and body content are provided in the response from the live pricing results.</p>
 
 <p><em>API endpoint</em></p>
@@ -1526,7 +1509,7 @@ a Booking Details request must be made to get the list of all the deeplinks or u
 
 <p><em>TRY IT OUT</em></p>
 
-<p><a href="https://app.getpostman.com/run-collection/31ff523d2ff9186107e1"><img alt="Run in Postman" src="https://run.pstmn.io/button.svg" /></a></p>
+<p><a href="https://app.getpostman.com/run-collection/31ff523d2ff9186107e1"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
 
 <p>or go to our <a href="http://business.skyscanner.net/portal/en-GB/Documentation/FlightsLivePricingQuickStart">test harness</a></p>
 
@@ -1583,7 +1566,6 @@ a Booking Details request must be made to get the list of all the deeplinks or u
     {SessionKey}/booking/
     {OutboundLegId};{InboundLegId}"</span>
 </code></pre>
-
 <p>A successful response contains no content. The URL to poll the booking details is specified in the Location header of the response.</p>
 
 <aside class="warning">
@@ -1613,14 +1595,13 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
     ?apiKey={apiKey}"</span>
     -X GET
 </code></pre>
-
 <p><em>API endpoint</em></p>
 
 <p><code class="prettyprint">GET /pricing/v1.0/{SessionKey}/booking/{OutboundLegId};{InboundLegId}</code></p>
 
 <p><em>TRY IT OUT</em></p>
 
-<p><a href="https://app.getpostman.com/run-collection/31ff523d2ff9186107e1"><img alt="Run in Postman" src="https://run.pstmn.io/button.svg" /></a></p>
+<p><a href="https://app.getpostman.com/run-collection/31ff523d2ff9186107e1"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
 
 <p>or go to our <a href="http://business.skyscanner.net/portal/en-GB/Documentation/FlightsLivePricingQuickStart">test harness</a></p>
 
@@ -1737,7 +1718,6 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
   </span><span class="p">}</span><span class="w">
  </span><span class="p">}</span><span class="w">
 </span></code></pre>
-
 <p>The response contains a list of itineraries with, for each one, a list of pricing options containing:</p>
 
 <ul>
@@ -1819,7 +1799,6 @@ Please note that it may take up to a minute to update all the results. After you
   -H <span class="s2">"Accept: application/jsonp"</span>
 
 </code></pre>
-
 <h3 id="request">Request</h3>
 
 <p><em>API endpoint</em></p>
@@ -1828,7 +1807,7 @@ Please note that it may take up to a minute to update all the results. After you
 
 <p><em>TRY IT OUT</em></p>
 
-<p><a href="https://app.getpostman.com/run-collection/eb787038fadc6e9607d6"><img alt="Run in Postman" src="https://run.pstmn.io/button.svg" /></a></p>
+<p><a href="https://app.getpostman.com/run-collection/eb787038fadc6e9607d6"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
 
 <p>or go to the <a href="http://business.skyscanner.net/portal/en-GB/Documentation/CarHireLivePricingQuickStart">test harness</a></p>
 
@@ -1907,7 +1886,6 @@ Please note that it may take up to a minute to update all the results. After you
 </blockquote>
 <pre class="highlight shell"><code>Location <span class="s2">"/apiservices/carhire/liveprices/v2/eyJvIjpbImRhdGFhcGkiLCJHQiIsImVuLUdCIiwiR0JQIiwiRURJIiwiMjAxNy0wNy0wMVQxMDowMDowMCIsIjIwMTctMDctMDdUMTc6MDA6MDAiLCJFREkiLDM1LCIxMjcuMC4wLjEiXSwibiI6LTI1OTAzfQ2?apikey=_aiX_D_g9kkg_cu_2ybJepzeH7dUcY0gh8q-oXHKdD0RuHu1itrfqIeyKIaVJ5m8vkR5euhcsN4XDFGFk1ofaDw%3D%3D&amp;deltaExcludeWebsites=easc%2Cecon"</span>
 </code></pre>
-
 <p>A successful session creation will immediately 302 to the first poll. This poll will respond as follows, with the URL to subsequently poll the session included in the Location header.
 <aside class="warning">
 Please refer to our <a href="#response-codes">response codes</a> in case of unsuccessful response.
@@ -1938,7 +1916,6 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 <p>In your polling requests you may specify a parameter called &lsquo;deltaExcludeWebsites&rsquo;. This is a CSV or semicolon-separated list of website IDs. The server will set this in the Location headers to exclude whatever websites have finished sending results (inProgress equal to false). Excluding any given provider will remove its cars and website information from your result. Merely supplying&amp;deltaExcludeWebsites= removes all images, the query, and the car classes lookup. The Location header in the first poll will include this parameter, even if it&rsquo;s an empty string, in order that you don&rsquo;t fetch that information multiple times.</p>
 <pre class="highlight shell"><code>curl <span class="s2">"http://partners.api.skyscanner.net/apiservices/carhire/liveprices/v2/{sessionKey}?apiKey={apiKey}&amp;deltaExcludeWebsites={a,b,c...}""
 </span></code></pre>
-
 <h3 id="request">Request</h3>
 
 <p><em>API ENDPOINT</em></p>
@@ -1947,7 +1924,7 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 
 <p><em>TRY IT OUT</em></p>
 
-<p><a href="https://app.getpostman.com/run-collection/eb787038fadc6e9607d6"><img alt="Run in Postman" src="https://run.pstmn.io/button.svg" /></a></p>
+<p><a href="https://app.getpostman.com/run-collection/eb787038fadc6e9607d6"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
 
 <p>or go to the <a href="http://business.skyscanner.net/portal/en-GB/Documentation/CarHireLivePricingQuickStart">test harness</a></p>
 
@@ -2061,7 +2038,6 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-
 <h3 id="response">Response</h3>
 
 <table><thead>
@@ -2219,14 +2195,13 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
     reference/v1.0/locales?
     apiKey={apiKey}"</span>
 </code></pre>
-
 <p><em>API endpoint</em></p>
 
 <p><code class="prettyprint">GET /reference/v1.0/locales</code></p>
 
 <p><em>Try it out</em></p>
 
-<p><a href="https://app.getpostman.com/run-collection/e9563a0d506b15cf35d3"><img alt="Run in Postman" src="https://run.pstmn.io/button.svg" /></a></p>
+<p><a href="https://app.getpostman.com/run-collection/e9563a0d506b15cf35d3"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
 
 <p><em>REQUEST PARAMETERS</em></p>
 
@@ -2267,7 +2242,6 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-
 <p><em>RESPONSE PARAMETERS</em></p>
 
 <table><thead>
@@ -2289,14 +2263,13 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
     reference/v1.0/currencies?
     apiKey={apiKey}"</span>
 </code></pre>
-
 <p><em>API endpoint</em></p>
 
 <p><code class="prettyprint">GET /reference/v1.0/currencies</code></p>
 
 <p><em>Try it out</em></p>
 
-<p><a href="https://app.getpostman.com/run-collection/e9563a0d506b15cf35d3"><img alt="Run in Postman" src="https://run.pstmn.io/button.svg" /></a></p>
+<p><a href="https://app.getpostman.com/run-collection/e9563a0d506b15cf35d3"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
 
 <p><em>REQUEST PARAMETERS</em></p>
 
@@ -2331,7 +2304,6 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-
 <p><em>RESPONSE PARAMETERS</em></p>
 
 <table><thead>
@@ -2356,14 +2328,13 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
     {locale}?
     apiKey={apiKey}"</span>
 </code></pre>
-
 <p><em>API endpoint</em></p>
 
 <p><code class="prettyprint">GET /reference/v1.0/countries/{locale}</code></p>
 
 <p><em>Try it out</em></p>
 
-<p><a href="https://app.getpostman.com/run-collection/e9563a0d506b15cf35d3"><img alt="Run in Postman" src="https://run.pstmn.io/button.svg" /></a></p>
+<p><a href="https://app.getpostman.com/run-collection/e9563a0d506b15cf35d3"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
 
 <p><em>REQUEST PARAMETERS</em></p>
 
@@ -2404,7 +2375,6 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-
 <p><em>RESPONSE PARAMETERS</em></p>
 
 <table><thead>
@@ -2448,14 +2418,13 @@ The country and language must be included in the Autosuggest query so that the m
     geo/v1.0?
     apiKey={apiKey}"</span>
 </code></pre>
-
 <p><em>API endpoint</em></p>
 
 <p><code class="prettyprint">GET /geo/v1.0</code></p>
 
 <p><em>Try it out</em></p>
 
-<p><a href="https://app.getpostman.com/run-collection/9c973db787e866c966f2"><img alt="Run in Postman" src="https://run.pstmn.io/button.svg" /></a></p>
+<p><a href="https://app.getpostman.com/run-collection/9c973db787e866c966f2"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
 
 <p><em>REQUEST PARAMETERS</em></p>
 
@@ -2510,7 +2479,6 @@ The country and language must be included in the Autosuggest query so that the m
  </span><span class="p">}</span><span class="w">
 
 </span></code></pre>
-
 <p><em>RESPONSE PARAMETERS</em></p>
 
 <table><thead>
@@ -2549,14 +2517,13 @@ The country and language must be included in the Autosuggest query so that the m
     query={query}&amp;
     apiKey={apiKey}"</span>
 </code></pre>
-
 <p><em>API endpoint</em></p>
 
 <p><code class="prettyprint">GET /autosuggest/v1.0/{market}/{currency}/{locale}</code></p>
 
 <p><em>Try it out</em></p>
 
-<p><a href="https://app.getpostman.com/run-collection/9c973db787e866c966f2"><img alt="Run in Postman" src="https://run.pstmn.io/button.svg" /></a></p>
+<p><a href="https://app.getpostman.com/run-collection/9c973db787e866c966f2"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
 
 <p><em>REQUEST PARAMETERS</em></p>
 
@@ -2621,7 +2588,6 @@ The country and language must be included in the Autosuggest query so that the m
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-
 <p><em>RESPONSE PARAMETERS</em></p>
 
 <table><thead>
@@ -2646,13 +2612,12 @@ The country and language must be included in the Autosuggest query so that the m
 
 <p><em>Try it out</em></p>
 
-<p><a href="https://app.getpostman.com/run-collection/9c973db787e866c966f2"><img alt="Run in Postman" src="https://run.pstmn.io/button.svg" /></a></p>
+<p><a href="https://app.getpostman.com/run-collection/9c973db787e866c966f2"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
 <pre class="highlight shell"><code>GET <span class="s2">"http://partners.api.skyscanner.net/apiservices/
     autosuggest/v1.0/{market}/{currency}/{locale}?
     id={place_id}&amp;
     apiKey={apiKey}"</span>
 </code></pre>
-
 <p><em>REQUEST PARAMETERS</em></p>
 
 <table><thead>
@@ -2698,7 +2663,6 @@ The country and language must be included in the Autosuggest query so that the m
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-
 <blockquote>
 <p>Example response for Charles de Gaulle airport: id=cdg</p>
 </blockquote>
@@ -2714,7 +2678,6 @@ The country and language must be included in the Autosuggest query so that the m
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-
 <p><em>RESPONSE PARAMETERS</em></p>
 
 <table><thead>
@@ -2735,12 +2698,9 @@ The country and language must be included in the Autosuggest query so that the m
 <p>Example place codes:</p>
 </blockquote>
 <pre class="highlight shell"><code>EDIN-sky
+</code></pre><pre class="highlight shell"><code>CDG-iata
+</code></pre><pre class="highlight plaintext"><code>-37.4849,144.5747-latlong
 </code></pre>
-<pre class="highlight shell"><code>CDG-iata
-</code></pre>
-<pre class="highlight plaintext"><code>-37.4849,144.5747-latlong
-</code></pre>
-
 <p>Each place can be referred to via different schemas, described below.</p>
 
 <p><em>SCHEMAS</em></p>
@@ -2807,7 +2767,6 @@ The country and language must be included in the Autosuggest query so that the m
     {outboundPartialDate}/{inboundPartialDate}
     ?apiKey={shortApiKey}"</span>
 </code></pre>
-
 <p><em>API endpoint</em></p>
 
 <p><code class="prettyprint">/referral/v1.0/{country}/{currency}/{locale}/{originPlace}/{destinationPlace}/{outboundPartialDate}/{inboundPartialDate}</code></p>
@@ -2869,7 +2828,7 @@ The country and language must be included in the Autosuggest query so that the m
 
 <p>The URL is an unbranded version of Skyscanner’s own deeplinking service that redirects users to the third-party supplier&rsquo;s website, with the details of the itinerary that was selected. </p>
 
-<p><img alt="deeplink page" src="images/deeplink.png" /></p>
+<p><img src="images/deeplink.png" alt="deeplink page" /></p>
 
 <p>You can customise the redirect page by replacing the default logo with the logo of your website. Please send us a logo in size 122x65px in PNG format and we will set this up for you. Please see <a href="https://support.business.skyscanner.net/hc/en-us/articles/208180985-How-can-I-put-my-logo-on-the-redirect-page-">How can I put my logo on the redirect page?</a> for more information.</p>
 
@@ -2929,8 +2888,6 @@ Skyscanner has no control over how the third-party website consumes the link. In
 
       </div>
       <div class="dark-box">
-          <div class="lang-selector">
-          </div>
       </div>
     </div>
   </body>
