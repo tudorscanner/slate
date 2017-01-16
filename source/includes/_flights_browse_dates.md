@@ -1,6 +1,6 @@
 ## Browse Dates
 
-Retrieve the cheapest routes from our cache.
+Retrieve the cheapest dates for a given route from our cache.
 
 ```shell
 curl "http://partners.api.skyscanner.net/apiservices/browsedates/v1.0/{country}/{currency}/{locale}/

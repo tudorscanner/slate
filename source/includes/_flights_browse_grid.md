@@ -1,6 +1,6 @@
 ## Browse Dates (grid)
 
-Retrieve the cheapest routes from our cache.
+Retrieve the cheapest dates for a given route from our cache, with the results formatted as a two-dimensional array to be easily displayed as a calendar.
 
 ```shell
 curl "http://partners.api.skyscanner.net/apiservices/browsegrid/v1.0/{country}/{currency}/{locale}/
