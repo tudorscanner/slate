@@ -9,7 +9,7 @@
 | [Browse Quotes](#browse-quotes) | Returns the <b>cheapest quotes</b> that meet your query. The prices come from our cached prices resulting from our users' searches. |
 | [Browse Routes](#browse-routes) | Similar to Browse Quotes but with the quotes grouped by routes. This provides the <b>cheapest destinations</b> (countries, cities or airports) from our cached data. |
 | [Browse Dates](#browse-dates) | Similar to Browse Quotes but with the quotes grouped by outbound and inbound date. Useful to find the <b>lowest price</b> for a given route, over either a month or a 12 month period. |
-| [Browse<br> Grid](#browse-dates-grid) | Similar to Browse Dates but with some pre-processing on our side to output a two-dimensional array to easily display the response in <b>calendar format</b>. |
+| [Browse Grid](#browse-dates-grid) | Similar to Browse Dates but with some pre-processing on our side to output a two-dimensional array to easily display the response in <b>calendar format</b>. |
 
 
 *Flights Live Prices*
