@@ -1311,8 +1311,8 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
           </span><span class="nt">"DeeplinkUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://partners.api.skyscanner.net/apiservices/deeplink/v2?_cje=jzj5DawL5zJyT%2bnfe1..."</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="err">...</span><span class="w">
-        </span><span class="p">]</span><span class="w">
-      </span><span class="s2">"BookingDetailsLink"</span><span class="err">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"BookingDetailsLink"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"Uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/apiservices/pricing/v1.0/ab5b948d616e41fb954a4a2f6b8dde1a_ecilpojl_7CAAD17D0CFC34BFDE68DEBFDFD548C7/booking"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"Body"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OutboundLegId=11235-1705301925--32480-0-13554-1705302055&amp;InboundLegId=13554-1706020700--32480-0-11235-1706020820"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"Method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PUT"</span><span class="w">
@@ -1531,11 +1531,13 @@ a Booking Details request must be made to get the list of all the deeplinks or u
 <blockquote>
 <p>The url is provided in the response of the live prices:</p>
 </blockquote>
-<pre class="highlight json"><code><span class="s2">"BookingDetailsLink"</span><span class="err">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"Uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/apiservices/pricing/v1.0/abb2a69708624a7ca82762ed73493598_ecilpojl_DCE634A426CBDA30CE7EA3E9068CD053/booking"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"Body"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OutboundLegId=11235-1705301925--32480-0-13554-1705302055&amp;InboundLegId=13554-1706020700--32480-0-11235-1706020820"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"Method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PUT"</span><span class="w">
-      </span><span class="p">}</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"BookingDetailsLink"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"Uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/apiservices/pricing/v1.0/abb2a69708624a7ca82762ed73493598_ecilpojl_DCE634A426CBDA30CE7EA3E9068CD053/booking"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"Body"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OutboundLegId=11235-1705301925--32480-0-13554-1705302055&amp;InboundLegId=13554-1706020700--32480-0-11235-1706020820"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"Method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PUT"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>The full url and body content are provided in the response from the live pricing results.</p>
 
@@ -2919,7 +2921,7 @@ Skyscanner has no control over how the third-party website consumes the link. In
 </tbody></table>
 
 <aside class="notice">
-<b>304</b><br>You may occasionally get a 304 status response. Please note that this is not an error and simply indicates that your cache has not expired and that there were no changes to the response.
+<b>304</b><br>You may occasionally get a 304 status response. Please note that this is not an error and simply indicates that your cache has not expired and that there were no changes to the response. For more information please read our <a href="https://support.business.skyscanner.net/hc/en-us/articles/213646405?flash_digest=ed288242734b6a4dfe55488cf080c1e94e3fd100" target="_blank">FAQ</a>
 </aside>
 
       </div>
