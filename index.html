@@ -352,7 +352,7 @@ Unless you require exact prices, we recommend you start with the cache prices AP
       </span><span class="nt">"CarrierId"</span><span class="p">:</span><span class="w"> </span><span class="mi">173</span><span class="p">,</span><span class="w">
       </span><span class="nt">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Silver Airways"</span><span class="w">
     </span><span class="p">},</span><span class="w">
-  </span><span class="err">#...#</span><span class="w">
+  </span><span class="err">...</span><span class="w">
   </span><span class="p">],</span><span class="w">
   </span><span class="nt">"Currencies"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
@@ -546,7 +546,7 @@ Unless you require exact prices, we recommend you start with the cache prices AP
       </span><span class="nt">"CarrierId"</span><span class="p">:</span><span class="w"> </span><span class="mi">173</span><span class="p">,</span><span class="w">
       </span><span class="nt">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Silver Airways"</span><span class="w">
     </span><span class="p">},</span><span class="w">
-  </span><span class="err">#...#</span><span class="w">
+  </span><span class="err">...</span><span class="w">
   </span><span class="p">],</span><span class="w">
   </span><span class="nt">"Currencies"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
@@ -750,7 +750,7 @@ Unless you require exact prices, we recommend you start with the cache prices AP
       </span><span class="nt">"CarrierId"</span><span class="p">:</span><span class="w"> </span><span class="mi">173</span><span class="p">,</span><span class="w">
       </span><span class="nt">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Silver Airways"</span><span class="w">
     </span><span class="p">},</span><span class="w">
-  </span><span class="err">#...#</span><span class="w">
+  </span><span class="err">...</span><span class="w">
   </span><span class="p">],</span><span class="w">
   </span><span class="nt">"Currencies"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
@@ -917,7 +917,7 @@ Unless you require exact prices, we recommend you start with the cache prices AP
       </span><span class="nt">"CarrierId"</span><span class="p">:</span><span class="w"> </span><span class="mi">173</span><span class="p">,</span><span class="w">
       </span><span class="nt">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Silver Airways"</span><span class="w">
     </span><span class="p">},</span><span class="w">
-  </span><span class="err">#...#</span><span class="w">
+  </span><span class="err">...</span><span class="w">
   </span><span class="p">],</span><span class="w">
   </span><span class="nt">"Currencies"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
@@ -1232,10 +1232,50 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 </tr>
 </tbody></table>
 
+<h3 id="pagination-and-payload">Pagination and payload</h3>
+
+<blockquote>
+<p>Example polling request with pagination:</p>
+</blockquote>
+<pre class="highlight shell"><code>Location <span class="s2">"http://partners.api.skyscanner.net/apiservices/pricing/uk1/v1.0/
+    {SessionKey}?apiKey={apiKey}
+    &amp;pageIndex=0
+    &amp;pageSize=10"</span>
+</code></pre>
+<p>If you want to supply results in pages, rather than show all the results available, you can use the parameters below.</p>
+
+<p><em>REQUEST PARAMETERS (PAGINATION)</em></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">pageIndex</code></td>
+<td>The desired page number.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">pageSize</code></td>
+<td>The number of itineraries per page. Defaults to 10 if not specified.</td>
+</tr>
+</tbody></table>
+
+<p>Keep requesting page 0 until you get <code class="prettyprint">UpdatesComplete</code> with <code class="prettyprint">pageIndex=0</code>.</p>
+
+<p>Once you get <code class="prettyprint">UpdatesComplete</code> you may request any page and page size. </p>
+
+<aside class="notice">
+  While the status is <em>UpdatesPending</em>, you should <b>request only page 0</b> because the contents of each page are liable to change until updates are complete.
+</aside>
+
+<p>We have no facility to tell you how many pages exist. Beyond the end of results, you will receive successful, empty, responses.</p>
+
 <h3 id="response">Response</h3>
 
 <blockquote>
-<p>Example request with polling url:</p>
+<p>Example polling request response:</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"SessionKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ab5b948d616e41fb954a4a2f6b8dde1a_ecilpojl_7CAAD17D0CFC34BFDE68DEBFDFD548C7"</span><span class="p">,</span><span class="w">
