@@ -226,7 +226,7 @@ We have no facility to tell you how many pages exist. Beyond the end of results,
           "DeeplinkUrl": "http://partners.api.skyscanner.net/apiservices/deeplink/v2?_cje=jzj5DawL5zJyT%2bnfe1..."
         },
         ...
-        ]
+        ],
       "BookingDetailsLink": {
         "Uri": "/apiservices/pricing/v1.0/ab5b948d616e41fb954a4a2f6b8dde1a_ecilpojl_7CAAD17D0CFC34BFDE68DEBFDFD548C7/booking",
         "Body": "OutboundLegId=11235-1705301925--32480-0-13554-1705302055&InboundLegId=13554-1706020700--32480-0-11235-1706020820",
@@ -401,11 +401,13 @@ a Booking Details request must be made to get the list of all the deeplinks or u
 > The url is provided in the response of the live prices:
 
 ```json
-"BookingDetailsLink": {
-        "Uri": "/apiservices/pricing/v1.0/abb2a69708624a7ca82762ed73493598_ecilpojl_DCE634A426CBDA30CE7EA3E9068CD053/booking",
-        "Body": "OutboundLegId=11235-1705301925--32480-0-13554-1705302055&InboundLegId=13554-1706020700--32480-0-11235-1706020820",
-        "Method": "PUT"
-      }
+{
+  "BookingDetailsLink": {
+      "Uri": "/apiservices/pricing/v1.0/abb2a69708624a7ca82762ed73493598_ecilpojl_DCE634A426CBDA30CE7EA3E9068CD053/booking",
+      "Body": "OutboundLegId=11235-1705301925--32480-0-13554-1705302055&InboundLegId=13554-1706020700--32480-0-11235-1706020820",
+      "Method": "PUT"
+  }
+}
 ```
 
 The full url and body content are provided in the response from the live pricing results.

@@ -16,5 +16,5 @@ Error Code | Meaning
 500 | <b>Server Error</b> – An internal server error has occurred which has been logged.
 
 <aside class="notice">
-<b>304</b><br>You may occasionally get a 304 status response. Please note that this is not an error and simply indicates that your cache has not expired and that there were no changes to the response.
+<b>304</b><br>You may occasionally get a 304 status response. Please note that this is not an error and simply indicates that your cache has not expired and that there were no changes to the response. For more information please read our <a href="https://support.business.skyscanner.net/hc/en-us/articles/213646405?flash_digest=ed288242734b6a4dfe55488cf080c1e94e3fd100" target="_blank">FAQ</a>
 </aside>
