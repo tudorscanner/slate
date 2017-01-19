@@ -155,9 +155,43 @@ or go to our [test harness](http://business.skyscanner.net/portal/en-GB/Document
 | ```apiKey``` <br><span class="required">REQUIRED</span> | Your API Key. |
 
 
+### Pagination and payload 
+
+> Example polling request with pagination:
+
+```shell
+Location "http://partners.api.skyscanner.net/apiservices/pricing/uk1/v1.0/
+    {SessionKey}?apiKey={apiKey}
+    &pageIndex=0
+    &pageSize=10"
+```
+
+If you want to supply results in pages, rather than show all the results available, you can use the parameters below.
+
+*REQUEST PARAMETERS (PAGINATION)*
+
+| Parameter | Description |
+| --------- | ------- |
+| ```pageIndex```| The desired page number. |
+| ```pageSize``` | The number of itineraries per page. Defaults to 10 if not specified.|
+
+
+Keep requesting page 0 until you get `UpdatesComplete` with `pageIndex=0`.
+
+Once you get `UpdatesComplete` you may request any page and page size. 
+
+<aside class="notice">
+  While the status is <em>UpdatesPending</em>, you should <b>request only page 0</b> because the contents of each page are liable to change until updates are complete.
+</aside>
+
+We have no facility to tell you how many pages exist. Beyond the end of results, you will receive successful, empty, responses.
+
+
+
+
 ### Response
 
-> Example request with polling url:
+> Example polling request response:
 
 ```json
 {

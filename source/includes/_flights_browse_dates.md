@@ -124,7 +124,7 @@ The following tables show the level of precision supported for the origin and de
       "CarrierId": 173,
       "Name": "Silver Airways"
     },
-  #...#
+  ...
   ],
   "Currencies": [
     {
