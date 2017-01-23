@@ -5,6 +5,7 @@ Places can be of 3 different types:
 1. Country
 2. City
 3. Airport
+4. Anywehere (flights browse API)
 
 You can use any of the following endpoints to get information about places:
 
