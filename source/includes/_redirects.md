@@ -57,10 +57,22 @@ Parameter | Description |
 
 ## To the supplier
 
+> Example deeplink
 
-When using [flights live prices](#flights-live-prices) or [car hire live prices](#car-hire-live-prices) urls (or deeplinks) are provided in the response to take the user straight through to the supplier's website.
+```json
+"PricingOptions": [
+        {
+          "Agents": [
+            4499211
+          ],
+          "QuoteAgeInMinutes": 0,
+          "Price": 83.41,
+          "DeeplinkUrl": "http://partners.api.skyscanner.net/apiservices/deeplink/v2?_cje=jzj5DawL5zJyT%2bnfe1..."
+        },
+      
+```
 
-These urls are an unbranded version of Skyscanner’s own deeplinking service that redirects users to the third-party supplier's website with the details of the itinerary that was selected. 
+When using [flights live prices](#flights-live-prices) or [car hire live prices](#car-hire-live-prices) urls (or deeplinks) are provided in the response to redirect users to the third-party supplier's website with the details of the itinerary that was selected. 
 
 ![deeplink page](/images/deeplink.png)
 
