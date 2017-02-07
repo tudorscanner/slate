@@ -58,15 +58,18 @@ Parameter | Description |
 ## To the supplier
 
 
-When using [flights live prices](#flights-live-prices) or [car hire live prices](#car-hire-live-prices), urls or deeplinks will be provided in the response. They will link the user straight through to the supplier's website.
+When using [flights live prices](#flights-live-prices) or [car hire live prices](#car-hire-live-prices) urls (or deeplinks) are provided in the response to take the user straight through to the supplier's website.
 
-The URL is an unbranded version of Skyscanner’s own deeplinking service that redirects users to the third-party supplier's website, with the details of the itinerary that was selected. 
+These urls are an unbranded version of Skyscanner’s own deeplinking service that redirects users to the third-party supplier's website with the details of the itinerary that was selected. 
 
 ![deeplink page](/images/deeplink.png)
 
+You can customise the redirect page by replacing the default logo with your own logo. Please see [How can I put my logo on the redirect page?](https://support.business.skyscanner.net/hc/en-us/articles/208180985-How-can-I-put-my-logo-on-the-redirect-page-) for more information.
 
-You can customise the redirect page by replacing the default logo with the logo of your website. Please send us a logo in size 122x65px in PNG format and we will set this up for you. Please see [How can I put my logo on the redirect page?](https://support.business.skyscanner.net/hc/en-us/articles/208180985-How-can-I-put-my-logo-on-the-redirect-page-) for more information.
+<aside class="notice">
+Skyscanner has no control over the third-party website. In some cases the selected itinerary will be ready to book. In other cases the search criteria will be pre-populated but the end-user will have to search through the results to find their itinerary.
+</aside>
 
 <aside class="warning">
-Skyscanner has no control over how the third-party website consumes the link. In some cases the selected itinerary will be ready to book. In other cases the search criteria will be pre-populated, but the end-user will have to search through the results on the third-party website to find their itinerary.
-</aside>
+Please <b>do not cache the deeplinks</b> as they are only valid while your session is active. Once the session has timed out you will need to create a new session and refresh all the results and deeplink urls. 
+</aside>  
