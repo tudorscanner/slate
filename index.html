@@ -2863,9 +2863,21 @@ The country and language must be included in the Autosuggest query so that the m
 
 <h2 id="to-the-supplier">To the supplier</h2>
 
-<p>When using <a href="#flights-live-prices">flights live prices</a> or <a href="#car-hire-live-prices">car hire live prices</a> urls (or deeplinks) are provided in the response to take the user straight through to the supplier&rsquo;s website.</p>
+<blockquote>
+<p>Example deeplink</p>
+</blockquote>
+<pre class="highlight json"><code><span class="s2">"PricingOptions"</span><span class="err">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"Agents"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="mi">4499211</span><span class="w">
+          </span><span class="p">],</span><span class="w">
+          </span><span class="nt">"QuoteAgeInMinutes"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"Price"</span><span class="p">:</span><span class="w"> </span><span class="mf">83.41</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"DeeplinkUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://partners.api.skyscanner.net/apiservices/deeplink/v2?_cje=jzj5DawL5zJyT%2bnfe1..."</span><span class="w">
+        </span><span class="p">},</span><span class="w">
 
-<p>These urls are an unbranded version of Skyscanner’s own deeplinking service that redirects users to the third-party supplier&rsquo;s website with the details of the itinerary that was selected. </p>
+</span></code></pre>
+<p>When using <a href="#flights-live-prices">flights live prices</a> or <a href="#car-hire-live-prices">car hire live prices</a> urls (or deeplinks) are provided in the response to redirect users to the third-party supplier&rsquo;s website with the details of the itinerary that was selected. </p>
 
 <p><img src="images/deeplink.png" alt="deeplink page" /></p>
 
