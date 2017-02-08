@@ -342,7 +342,7 @@ The response contains a list of itineraries with, for each one, a list of pricin
 * the price
 * the quote age
 * the agent selling the itinerary
-* the deeplink to the agent
+* the [deeplink to the agent](#to-the-supplier)
 
 
 *RESPONSE PARAMETERS*
@@ -370,12 +370,12 @@ You must keep polling the results until you get 'UpdatesComplete'. The results m
 | ------- | ------ |
 | `OutboundLegId` | Id of the Outbound Leg |
 | `InboundLegId` | Id of the Inbound Leg |
-| `PricingOptions` | pricing options with agent(s)<br>the quote age<br> price (total for all passengers)<br>deeplink URL (the absolute URL needed to make the booking).  The deeplink URL is not supplied for multi-booking itineraries.<br>In the case where deeplinks are not supplied, you can obtain them with a further step. Refer to the Create/Poll Booking Details documentation. |
+| `PricingOptions` | pricing options with agent(s)<br>the quote age<br> price (total for all passengers)<br>[deeplink to the agent](#to-the-supplier) (the absolute URL needed to make the booking).  The deeplink URL is not supplied for multi-booking itineraries.<br>In the case where deeplinks are not supplied, you can obtain them with a further step. Refer to the Create/Poll Booking Details documentation. |
 | `BookingDetailsLink` | In some cases (multiple bookings or group prices) you will need to make a second call to retrieve the deeplinks. See the next section [Get booking details](#get-booking-details) for details |
 
 
 
-Please note that you must not force users to your deeplink. Once they have made a search you should provide them with a list of results, and an option to filter that list, in order to pick the flight that best suits their needs.
+Please note that you must not force users to your [deeplink](#to-the-supplier). Once they have made a search you should provide them with a list of results, and an option to filter that list, in order to pick the flight that best suits their needs.
 
 <aside class="warning">
 Please add the no-follow attribute when you link to the deeplink. See <a href="https://support.business.skyscanner.net/hc/en-us/articles/206800309-How-do-I-add-the-nofollow-attribute-to-the-deeplinks-calls-" target="_blank">How do I add the nofollow attribute?</a> in the FAQ section.
