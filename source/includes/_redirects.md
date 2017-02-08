@@ -78,6 +78,13 @@ When using [flights live prices](#flights-live-prices) or [car hire live prices]
 
 You can customise the redirect page by replacing the default logo with your own logo. Please see [How can I put my logo on the redirect page?](https://support.business.skyscanner.net/hc/en-us/articles/208180985-How-can-I-put-my-logo-on-the-redirect-page-) for more information.
 
+See how it looks with your logo
+
+<form action="redirect_page.html" method="GET" style="margin: 0 30px">
+  <input type="text" name="logo_url" value="logo url"/>
+  <input type="submit" value="test"/>
+</form>
+
 <aside class="notice">
 Skyscanner has no control over the third-party website. In some cases the selected itinerary will be ready to book. In other cases the search criteria will be pre-populated but the end-user will have to search through the results to find their itinerary.
 </aside>
