@@ -1427,7 +1427,7 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 <li>the price</li>
 <li>the quote age</li>
 <li>the agent selling the itinerary</li>
-<li>the deeplink to the agent</li>
+<li>the <a href="#to-the-supplier">deeplink to the agent</a></li>
 </ul>
 
 <p><em>RESPONSE PARAMETERS</em></p>
@@ -1502,7 +1502,7 @@ You must keep polling the results until you get 'UpdatesComplete&rsquo;. The res
 </tr>
 <tr>
 <td><code class="prettyprint">PricingOptions</code></td>
-<td>pricing options with agent(s)<br>the quote age<br> price (total for all passengers)<br>deeplink URL (the absolute URL needed to make the booking).  The deeplink URL is not supplied for multi-booking itineraries.<br>In the case where deeplinks are not supplied, you can obtain them with a further step. Refer to the Create/Poll Booking Details documentation.</td>
+<td>pricing options with agent(s)<br>the quote age<br> price (total for all passengers)<br><a href="#to-the-supplier">deeplink to the agent</a> (the absolute URL needed to make the booking).  The deeplink URL is not supplied for multi-booking itineraries.<br>In the case where deeplinks are not supplied, you can obtain them with a further step. Refer to the Create/Poll Booking Details documentation.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">BookingDetailsLink</code></td>
@@ -1510,7 +1510,7 @@ You must keep polling the results until you get 'UpdatesComplete&rsquo;. The res
 </tr>
 </tbody></table>
 
-<p>Please note that you must not force users to your deeplink. Once they have made a search you should provide them with a list of results, and an option to filter that list, in order to pick the flight that best suits their needs.</p>
+<p>Please note that you must not force users to your <a href="#to-the-supplier">deeplink</a>. Once they have made a search you should provide them with a list of results, and an option to filter that list, in order to pick the flight that best suits their needs.</p>
 
 <aside class="warning">
 Please add the no-follow attribute when you link to the deeplink. See <a href="https://support.business.skyscanner.net/hc/en-us/articles/206800309-How-do-I-add-the-nofollow-attribute-to-the-deeplinks-calls-" target="_blank">How do I add the nofollow attribute?</a> in the FAQ section.
@@ -2889,8 +2889,6 @@ The country and language must be included in the Autosuggest query so that the m
   <input type="text" name="logo_url" value="logo url"/>
   <input type="submit" value="test"/>
 </form>
-
-<p><img src="images/default.png" /></p>
 
 <aside class="notice">
 Skyscanner has no control over the third-party website. In some cases the selected itinerary will be ready to book. In other cases the search criteria will be pre-populated but the end-user will have to search through the results to find their itinerary.
