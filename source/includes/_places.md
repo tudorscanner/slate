@@ -102,7 +102,7 @@ Get a list of places that match a query string.
 
 ```shell
 GET "http://partners.api.skyscanner.net/apiservices/
-    autosuggest/v1.0/{market}/{currency}/{locale}?
+    autosuggest/v1.0/{country}/{currency}/{locale}?
     query={query}&
     apiKey={apiKey}"
 ```
@@ -118,7 +118,7 @@ GET "http://partners.api.skyscanner.net/apiservices/
 
 | Parameter | Description |
 | --------- | ------- |
-| ```market``` <br><span class="required">REQUIRED</span> | The [market/country](#markets) your user is in |
+| ```country``` <br><span class="required">REQUIRED</span> | The [market/country](#markets) your user is in |
 | ```currency``` <br><span class="required">REQUIRED</span> | The [currency](#currencies) you want the prices in |
 | ```locale``` <br><span class="required">REQUIRED</span> | The [locale](#locales) you want the results in (ISO locale) |
 | ```query``` <br><span class="required">REQUIRED</span> | The query string, must be at least 2 characters long. |
@@ -172,7 +172,7 @@ Get information about a country, city or airport using its ID.
 
 *API endpoint*
 
-`GET /autosuggest/v1.0/{market}/{currency}/{locale}`
+`GET /autosuggest/v1.0/{country}/{currency}/{locale}`
 
 *Try it out*
 
@@ -189,7 +189,7 @@ GET "http://partners.api.skyscanner.net/apiservices/
 
 | Parameter | Description |
 | --------- | ------- |
-| ```market``` <br><span class="required">REQUIRED</span> | The [market/country](#markets) your user is in |
+| ```country``` <br><span class="required">REQUIRED</span> | The [market/country](#markets) your user is in |
 | ```currency``` <br><span class="required">REQUIRED</span> | The [currency](#currencies) you want the prices in |
 | ```locale``` <br><span class="required">REQUIRED</span> | The [locale](#locales) you want the results in (ISO locale) |
 | ```id``` <br><span class="required">REQUIRED</span> | The place id. |
@@ -265,6 +265,82 @@ Each place can be referred to via different schemas, described below.
 
 If the default Skyscanner schema is not used, the schema name must be appended to the place id as follows:
 `placeCode-locationSchema`
+
+## Car Hire and Hotels
+
+Retrieve a list of hotels and/or geographical locations which can then be used witht the hotels and car hire APIs. In the case of car hire, use this if you want downtown (non-airport) searches.
+
+```shell
+GET "http://partners.api.skyscanner.net/hotels/autosuggest/v2/{country}/{currency}/{locale}/{query}?
+    apiKey={apiKey}"
+```
+
+*API endpoint*
+
+`GET /hotels/autosuggest/v2/`
+
+*Try it out*
+
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/bdc1b26caf8b51e5c21a)
+
+*REQUEST PARAMETERS*
+
+| Parameter | Description |
+| --------- | ------- |
+| ```country``` <br><span class="required">REQUIRED</span> | The [market country](#markets) your user is in |
+| ```currency``` <br><span class="required">REQUIRED</span> | The [currency](#currencies) you want the prices in |
+| ```locale``` <br><span class="required">REQUIRED</span> | The [locale](#locales) you want the results in (ISO locale) |
+| ```query``` <br><span class="required">REQUIRED</span> | The query string, must be at least 2 characters long. |
+| ```apiKey``` <br><span class="required">REQUIRED</span> | The API Key to identify the customer |
+
+
+> Example response for 'pari'
+
+```json
+{
+  "places": [
+    {
+      "place_id": 1,
+      "city_name": "Paris",
+      "admin_level1": "Île-de-France",
+      "country_name": "France"
+    },
+    {
+      "place_id": 2,
+      "admin_level1": "Île-de-France",
+      "country_name": "France"
+    },
+  ...
+  ],
+  "results": [
+    {
+      "display_name": "Paris",
+      "parent_place_id": 1,
+      "individual_id": "27539733",
+      "geo_type": "City",
+      "localised_geo_type": "City",
+      "is_bookable": false
+    },
+    {
+      "display_name": "Paris 08 Élysée",
+      "parent_place_id": 1,
+      "individual_id": "27562771",
+      "geo_type": "District",
+      "localised_geo_type": "District",
+      "is_bookable": false
+    },
+    ...
+  ]
+}
+```
+
+
+*RESPONSE PARAMETERS*
+
+| Parameter | Description |
+| --- | --- |
+| ```places``` | Contains a list of places that represent lookup geographic places (e.g. cities, countries) for the query. |
+| ```results``` | Contains a list of results for the query with:<br>- geo_type to identify the type (City, District, Hotel, ...)<br>- localised_geo_type which contains the geo_type in the locale used in the query<br>- display_name<br>- individual_id which can be used as an input to the Hotels Pricing Service<br>- parent_place_id which can be used to lookup the place information |
 
 
 

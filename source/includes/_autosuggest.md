@@ -10,7 +10,7 @@ The country and language must be included in the query so that the most relevant
 
 *API endpoint*
 
-`/autosuggest/v1.0/{market}/{currency}/{locale}`
+`/autosuggest/v1.0/{country}/{currency}/{locale}`
 
 ## List of places
 
