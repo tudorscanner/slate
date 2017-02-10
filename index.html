@@ -2552,7 +2552,7 @@ The country and language must be included in the Autosuggest query so that the m
 
 <p>Get a list of places that match a query string.</p>
 <pre class="highlight shell"><code>GET <span class="s2">"http://partners.api.skyscanner.net/apiservices/
-    autosuggest/v1.0/{market}/{currency}/{locale}?
+    autosuggest/v1.0/{country}/{currency}/{locale}?
     query={query}&amp;
     apiKey={apiKey}"</span>
 </code></pre>
@@ -2573,7 +2573,7 @@ The country and language must be included in the Autosuggest query so that the m
 </tr>
 </thead><tbody>
 <tr>
-<td><code class="prettyprint">market</code> <br><span class="required">REQUIRED</span></td>
+<td><code class="prettyprint">country</code> <br><span class="required">REQUIRED</span></td>
 <td>The <a href="#markets">market/country</a> your user is in</td>
 </tr>
 <tr>
@@ -2647,7 +2647,7 @@ The country and language must be included in the Autosuggest query so that the m
 
 <p><em>API endpoint</em></p>
 
-<p><code class="prettyprint">GET /autosuggest/v1.0/{market}/{currency}/{locale}</code></p>
+<p><code class="prettyprint">GET /autosuggest/v1.0/{country}/{currency}/{locale}</code></p>
 
 <p><em>Try it out</em></p>
 
@@ -2666,7 +2666,7 @@ The country and language must be included in the Autosuggest query so that the m
 </tr>
 </thead><tbody>
 <tr>
-<td><code class="prettyprint">market</code> <br><span class="required">REQUIRED</span></td>
+<td><code class="prettyprint">country</code> <br><span class="required">REQUIRED</span></td>
 <td>The <a href="#markets">market/country</a> your user is in</td>
 </tr>
 <tr>
@@ -2778,6 +2778,107 @@ The country and language must be included in the Autosuggest query so that the m
 
 <p>If the default Skyscanner schema is not used, the schema name must be appended to the place id as follows:
 <code class="prettyprint">placeCode-locationSchema</code></p>
+
+<h2 id="car-hire-and-hotels">Car Hire and Hotels</h2>
+
+<p>Retrieve a list of hotels and/or geographical locations which can then be used witht the hotels and car hire APIs. In the case of car hire, use this if you want downtown (non-airport) searches.</p>
+<pre class="highlight shell"><code>GET <span class="s2">"http://partners.api.skyscanner.net/hotels/autosuggest/v2/{country}/{currency}/{locale}/{query}?
+    apiKey={apiKey}"</span>
+</code></pre>
+<p><em>API endpoint</em></p>
+
+<p><code class="prettyprint">GET /hotels/autosuggest/v2/</code></p>
+
+<p><em>Try it out</em></p>
+
+<p><a href="https://app.getpostman.com/run-collection/bdc1b26caf8b51e5c21a"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
+
+<p><em>REQUEST PARAMETERS</em></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">country</code> <br><span class="required">REQUIRED</span></td>
+<td>The <a href="#markets">market country</a> your user is in</td>
+</tr>
+<tr>
+<td><code class="prettyprint">currency</code> <br><span class="required">REQUIRED</span></td>
+<td>The <a href="#currencies">currency</a> you want the prices in</td>
+</tr>
+<tr>
+<td><code class="prettyprint">locale</code> <br><span class="required">REQUIRED</span></td>
+<td>The <a href="#locales">locale</a> you want the results in (ISO locale)</td>
+</tr>
+<tr>
+<td><code class="prettyprint">query</code> <br><span class="required">REQUIRED</span></td>
+<td>The query string, must be at least 2 characters long.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">apiKey</code> <br><span class="required">REQUIRED</span></td>
+<td>The API Key to identify the customer</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Example response for &lsquo;pari&rsquo;</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"places"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"place_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"city_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Paris"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"admin_level1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Île-de-France"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"country_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"France"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"place_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"admin_level1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Île-de-France"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"country_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"France"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+  </span><span class="err">...</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"results"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Paris"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"parent_place_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"individual_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"27539733"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"geo_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"City"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"localised_geo_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"City"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"is_bookable"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Paris 08 Élysée"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"parent_place_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"individual_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"27562771"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"geo_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"District"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"localised_geo_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"District"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"is_bookable"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="err">...</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p><em>RESPONSE PARAMETERS</em></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">places</code></td>
+<td>Contains a list of places that represent lookup geographic places (e.g. cities, countries) for the query.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">results</code></td>
+<td>Contains a list of results for the query with:<br>- geo_type to identify the type (City, District, Hotel, &hellip;)<br>- localised_geo_type which contains the geo_type in the locale used in the query<br>- display_name<br>- individual_id which can be used as an input to the Hotels Pricing Service<br>- parent_place_id which can be used to lookup the place information</td>
+</tr>
+</tbody></table>
 
           <h1 id="booking-redirects">Booking Redirects</h1>
 
