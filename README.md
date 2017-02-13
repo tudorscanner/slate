@@ -1,3 +1,65 @@
+Getting Started with the Slate Skyscanner API documentation
+-----------------------------------------------------------
+
+### Getting Set Up
+
+1. Clone *this repository* to your hard drive with `git clone https://github.com/Skyscanner/slate.git`
+2. Create a new branch
+3. `cd slate`
+4. Initialize and start Slate. You can either do this locally, or with Vagrant:
+
+```shell
+# either run this to run locally
+bundle install
+bundle exec middleman server
+
+# OR run this to run with vagrant
+vagrant up
+```
+
+You can now see the docs at http://localhost:4567. Whoa! That was fast!
+
+### Add an API endpoint to the docs
+
+1. Create a new file in the ```includes``` folder: e.g. ```_new_api.md```
+
+2. Write your documentation in markdown. For all markdown syntax please see the official Slate docs: [editing Slate markdown](https://github.com/lord/slate/wiki/Markdown-Syntax).
+
+3. Add your new documentation to ```index.html.erb```
+
+add a link to your include in the includes section:
+
+```
+includes:
+  - authentication
+  - getting_started
+  - flights_browse_quotes
+  - flights_browse_routes
+  - flights_browse_dates
+  - flights_browse_grid
+  - flights_live_prices
+  - car_hire
+  - localisation
+  - places
+  - redirects
+  - response_codes
+search: false
+---
+```
+
+
+Contributors
+--------------------
+
+This Skyscanner documentation was built by [Sam Heyman].
+
+
+
+Official Slate README
+---------------------
+
+
+
 <p align="center">
   <img src="https://raw.githubusercontent.com/lord/img/master/logo-slate.png" alt="Slate: API Documentation Generator" width="226">
   <br>
