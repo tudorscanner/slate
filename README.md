@@ -25,9 +25,7 @@ You can now see the docs at ```http://localhost:4567```
 
 2. Write your documentation in markdown. For all markdown syntax please see the official Slate docs: [editing Slate markdown](https://github.com/lord/slate/wiki/Markdown-Syntax).
 
-3. Add a link to your new documentation in ```index.html.erb```
-
-add a link to your include in the includes section:
+3. Add a link to your new documentation file in ```index.html.erb```
 
 ```
 includes:
@@ -39,6 +37,7 @@ includes:
   - flights_browse_grid
   - flights_live_prices
   - car_hire
+  - <new_api>
   - localisation
   - places
   - redirects
