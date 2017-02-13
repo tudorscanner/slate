@@ -17,7 +17,7 @@ bundle exec middleman server
 vagrant up
 ```
 
-You can now see the docs at http://localhost:4567. Whoa! That was fast!
+You can now see the docs at ```http://localhost:4567```
 
 ### Add an API endpoint to the docs
 
@@ -25,7 +25,7 @@ You can now see the docs at http://localhost:4567. Whoa! That was fast!
 
 2. Write your documentation in markdown. For all markdown syntax please see the official Slate docs: [editing Slate markdown](https://github.com/lord/slate/wiki/Markdown-Syntax).
 
-3. Add your new documentation to ```index.html.erb```
+3. Add a link to your new documentation in ```index.html.erb```
 
 add a link to your include in the includes section:
 
@@ -51,7 +51,7 @@ search: false
 Contributors
 --------------------
 
-This Skyscanner documentation was built by [Sam Heyman].
+This Skyscanner documentation was built by [Sam Heyman](sam.heyman@skyscanner.net).
 
 
 
