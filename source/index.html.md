@@ -14,6 +14,7 @@ includes:
   - flights_browse_grid
   - flights_live_prices
   - car_hire
+  - hotels
   - localisation
   - places
   - redirects

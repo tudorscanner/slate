@@ -38,5 +38,8 @@ Unless you require exact prices, we recommend you start with the cache prices AP
 
 | API endpoint | Description  |
 | --- | ---|
-| [Live prices](#)<br><span class="required">PRIVATE BETA</span> | Returns live prices from all our suppliers for hotel deals (in the selected market). |
+| [Live prices](#hotels-live-prices)<br><span class="required">PRIVATE BETA</span> | Returns live prices from all our suppliers for hotel deals (in the selected market). |
 
+<aside class="warning">
+	Please note that the Skyscanner Hotels API is being reworked, and is currently unavailable. Legacy documentation is available <a href="https://support.business.skyscanner.net/hc/en-us/articles/212098705-Hotels-Price-List-and-Hotels-Details-service" target="_blank">here</a>
+</aside>
