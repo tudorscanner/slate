@@ -176,7 +176,9 @@ If you want to supply results in pages, rather than show all the results availab
 | ```pageSize``` | The number of itineraries per page. Defaults to 10 if not specified.|
 
 
-Keep requesting page 0 until you get `UpdatesComplete` with `pageIndex=0`.
+Keep requesting page 0 until you get `UpdatesComplete` with `pageIndex=0` at half a second to one second interval.
+
+For more information please see our [FAQ](https://support.business.skyscanner.net/hc/en-us/articles/206800439-What-polling-intervals-should-I-use-)
 
 Once you get `UpdatesComplete` you may request any page and page size. 
 

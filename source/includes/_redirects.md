@@ -14,6 +14,8 @@ You can either:
 
 ## To Skyscanner
 
+### Flights
+
 Link to the Skyscanner website with the details of the search query pre-populated. This provides a more straightforward option for partners who do not require a full implementation of a travel search product within their applications.
 
 If the query isn't specific enough to link to a specific 'day view' page, it will link to a more general browse page, where the user will be asked to refine the search criteria (by date, origin and/or destination).
@@ -53,6 +55,54 @@ Parameter | Description |
 
 <a href="http://partners.api.skyscanner.net/apiservices/referral/v1.0/GB/GBP/en-GB/EDI/CDG/2014-12-12/2014-12-20?apiKey=prtl674938798674" target="_blank">http://partners.api.skyscanner.net/apiservices/referral/v1.0/GB/GBP/en-GB/EDI/CDG/2017-12-12/2017-12-20?apiKey=prtl674938798674</a>
 
+<br>
+
+### Car Hire
+
+Link to the Skyscanner website with the details of the car hire search query pre-populated. 
+ 
+
+```shell
+GET "http://partners.api.skyscanner.net/apiservices/
+    referral/v1.0/{country}/{currency}/{locale}/
+    {pickupPlace}/{dropoffPlace}/
+    {pickupDateTime}/{dropoffDateTime}
+    ?product=carhire
+    &pickUpTime={pickupTime}&dropOffTime={dropoffTime}
+    &driverAge={driverAge}
+    &apiKey={shortApiKey}"
+```
+*API endpoint*
+
+`/referral/v1.0/{country}/{currency}/{locale}/{pickupPlace}/{dropoffPlace}/{pickupDateTime}/{dropoffDateTime}`
+
+*REQUEST PARAMETERS*
+
+Parameter | Description |
+--------- | ------- |
+| ```country``` <br><span class="required">REQUIRED</span> | The [market country](#markets) your user is in |
+| ```currency``` <br><span class="required">REQUIRED</span> | The [currency](#currencies) you want the prices in |
+| ```locale``` <br><span class="required">REQUIRED</span> | The [locale](#locales) you want the results in (ISO locale) |
+| ```pickupPlace``` <br><span class="required">REQUIRED</span> | The pickup location. [IATA code](#schemas) or a latitude,longitude pair formatted as lat,lon-latlong e.g. `/55.95,-3.37-latlong/` |
+| ```dropoffPlace``` <br><span class="required">REQUIRED</span> | The dropoff location. [IATA code](#schemas) or a latitude,longitude pair formatted as lat,lon-latlong e.g. `/55.95,-3.37-latlong/` |
+| ```pickupDateTime``` <br><span class="required">REQUIRED</span> | Date for pickup. Formatted as ISO Date and Time format: `YYYY-MM-DD` |
+| ```dropoffDateTime``` <br><span class="optional">OPTIONAL</span> | Date for dropoff. Formatted as ISO Date and Time format: `YYYY-MM-DD` |
+| ```shortApiKey``` <br><span class="required">REQUIRED</span> | The first 16 characters of your API Key |
+| ```driverAge``` <br><span class="required">REQUIRED</span> | Must be between 21 and 75 (inclusive). |
+| ```product``` <br><span class="required">REQUIRED</span>| Must be set to `carhire` |
+| ```pickUpTime``` <br><span class="optional">OPTIONAL</span>| Time for pickup. Formatted as ISO Date and Time format: `hh:mm` |
+| ```dropOffTime``` <br><span class="optional">OPTIONAL</span>| Time for pickup. Formatted as ISO Date and Time format: `hh:mm` |
+
+
+
+<aside class="warning">
+  Please insure that you use the short API key (the first 16 characters of your full API key) to avoid exposing your key. Please see <a href="#authentication">authentication</a> for more information.
+
+</aside>
+
+*EXAMPLE REDIRECT*
+
+<a href="http://www.api.prod.skyscanner.local/apiservices/referral/v1.0/UK/GBP/en-GB/LHR/EDI/2017-04-02/2017-04-16?product=carhire&pickUpTime=10:00&dropOffTime=12:00&driverAge=27&apiKey=prtl674938798674" target="_blank">http://www.api.prod.skyscanner.local/apiservices/referral/v1.0/UK/GBP/en-GB/LHR/EDI/2017-04-02/2017-04-16?product=carhire&pickUpTime=10:00&dropOffTime=12:00&driverAge=27?apiKey=prtl674938798674</a>
 
 
 ## To the supplier
