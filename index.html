@@ -1266,7 +1266,9 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 </tr>
 </tbody></table>
 
-<p>Keep requesting page 0 until you get <code class="prettyprint">UpdatesComplete</code> with <code class="prettyprint">pageIndex=0</code>.</p>
+<p>Keep requesting page 0 until you get <code class="prettyprint">UpdatesComplete</code> with <code class="prettyprint">pageIndex=0</code> at half a second to one second interval.</p>
+
+<p>For more information please see our <a href="https://support.business.skyscanner.net/hc/en-us/articles/206800439-What-polling-intervals-should-I-use-">FAQ</a></p>
 
 <p>Once you get <code class="prettyprint">UpdatesComplete</code> you may request any page and page size. </p>
 
@@ -2908,6 +2910,8 @@ The country and language must be included in the Autosuggest query so that the m
 
 <h2 id="to-skyscanner">To Skyscanner</h2>
 
+<h3 id="flights">Flights</h3>
+
 <p>Link to the Skyscanner website with the details of the search query pre-populated. This provides a more straightforward option for partners who do not require a full implementation of a travel search product within their applications.</p>
 
 <p>If the query isn&rsquo;t specific enough to link to a specific &lsquo;day view&rsquo; page, it will link to a more general browse page, where the user will be asked to refine the search criteria (by date, origin and/or destination).</p>
@@ -2971,6 +2975,91 @@ The country and language must be included in the Autosuggest query so that the m
 <p><em>EXAMPLE REDIRECT</em></p>
 
 <p><a href="http://partners.api.skyscanner.net/apiservices/referral/v1.0/GB/GBP/en-GB/EDI/CDG/2014-12-12/2014-12-20?apiKey=prtl674938798674" target="_blank">http://partners.api.skyscanner.net/apiservices/referral/v1.0/GB/GBP/en-GB/EDI/CDG/2017-12-12/2017-12-20?apiKey=prtl674938798674</a></p>
+
+<p><br></p>
+
+<h3 id="car-hire">Car Hire</h3>
+
+<p>Link to the Skyscanner website with the details of the car hire search query pre-populated. </p>
+<pre class="highlight shell"><code>GET <span class="s2">"http://partners.api.skyscanner.net/apiservices/
+    referral/v1.0/{country}/{currency}/{locale}/
+    {pickupPlace}/{dropoffPlace}/
+    {pickupDateTime}/{dropoffDateTime}
+    ?product=carhire
+    &amp;pickUpTime={pickupTime}&amp;dropOffTime={dropoffTime}
+    &amp;driverAge={driverAge}
+    &amp;apiKey={shortApiKey}"</span>
+</code></pre>
+<p><em>API endpoint</em></p>
+
+<p><code class="prettyprint">/referral/v1.0/{country}/{currency}/{locale}/{pickupPlace}/{dropoffPlace}/{pickupDateTime}/{dropoffDateTime}</code></p>
+
+<p><em>REQUEST PARAMETERS</em></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">country</code> <br><span class="required">REQUIRED</span></td>
+<td>The <a href="#markets">market country</a> your user is in</td>
+</tr>
+<tr>
+<td><code class="prettyprint">currency</code> <br><span class="required">REQUIRED</span></td>
+<td>The <a href="#currencies">currency</a> you want the prices in</td>
+</tr>
+<tr>
+<td><code class="prettyprint">locale</code> <br><span class="required">REQUIRED</span></td>
+<td>The <a href="#locales">locale</a> you want the results in (ISO locale)</td>
+</tr>
+<tr>
+<td><code class="prettyprint">pickupPlace</code> <br><span class="required">REQUIRED</span></td>
+<td>The pickup location. <a href="#schemas">IATA code</a> or a latitude,longitude pair formatted as lat,lon-latlong e.g. <code class="prettyprint">/55.95,-3.37-latlong/</code></td>
+</tr>
+<tr>
+<td><code class="prettyprint">dropoffPlace</code> <br><span class="required">REQUIRED</span></td>
+<td>The dropoff location. <a href="#schemas">IATA code</a> or a latitude,longitude pair formatted as lat,lon-latlong e.g. <code class="prettyprint">/55.95,-3.37-latlong/</code></td>
+</tr>
+<tr>
+<td><code class="prettyprint">pickupDateTime</code> <br><span class="required">REQUIRED</span></td>
+<td>Date for pickup. Formatted as ISO Date and Time format: <code class="prettyprint">YYYY-MM-DD</code></td>
+</tr>
+<tr>
+<td><code class="prettyprint">dropoffDateTime</code> <br><span class="optional">OPTIONAL</span></td>
+<td>Date for dropoff. Formatted as ISO Date and Time format: <code class="prettyprint">YYYY-MM-DD</code></td>
+</tr>
+<tr>
+<td><code class="prettyprint">shortApiKey</code> <br><span class="required">REQUIRED</span></td>
+<td>The first 16 characters of your API Key</td>
+</tr>
+<tr>
+<td><code class="prettyprint">driverAge</code> <br><span class="required">REQUIRED</span></td>
+<td>Must be between 21 and 75 (inclusive).</td>
+</tr>
+<tr>
+<td><code class="prettyprint">product</code> <br><span class="required">REQUIRED</span></td>
+<td>Must be set to <code class="prettyprint">carhire</code></td>
+</tr>
+<tr>
+<td><code class="prettyprint">pickUpTime</code> <br><span class="optional">OPTIONAL</span></td>
+<td>Time for pickup. Formatted as ISO Date and Time format: <code class="prettyprint">hh:mm</code></td>
+</tr>
+<tr>
+<td><code class="prettyprint">dropOffTime</code> <br><span class="optional">OPTIONAL</span></td>
+<td>Time for pickup. Formatted as ISO Date and Time format: <code class="prettyprint">hh:mm</code></td>
+</tr>
+</tbody></table>
+
+<aside class="warning">
+  Please insure that you use the short API key (the first 16 characters of your full API key) to avoid exposing your key. Please see <a href="#authentication">authentication</a> for more information.
+
+</aside>
+
+<p><em>EXAMPLE REDIRECT</em></p>
+
+<p><a href="http://www.api.prod.skyscanner.local/apiservices/referral/v1.0/UK/GBP/en-GB/LHR/EDI/2017-04-02/2017-04-16?product=carhire&pickUpTime=10:00&dropOffTime=12:00&driverAge=27&apiKey=prtl674938798674" target="_blank">http://www.api.prod.skyscanner.local/apiservices/referral/v1.0/UK/GBP/en-GB/LHR/EDI/2017-04-02/2017-04-16?product=carhire&amp;pickUpTime=10:00&amp;dropOffTime=12:00&amp;driverAge=27?apiKey=prtl674938798674</a></p>
 
 <h2 id="to-the-supplier">To the supplier</h2>
 
