@@ -1,6 +1,6 @@
 # Places
 
-Places can be of 3 different types:
+Places can be of 4 different types:
 
 1. Country
 2. City
