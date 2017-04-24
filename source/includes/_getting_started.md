@@ -2,7 +2,7 @@
 
 ## Flights
 
-*Flights Cache Prices*
+*Flights - Browse Prices*
 
 | API endpoint | Description  |
 | --- | ---|
@@ -12,7 +12,7 @@
 | [Browse Grid](#browse-dates-grid) | Similar to Browse Dates but with some pre-processing on our side to output a two-dimensional array to easily display the response in <b>calendar format</b>. |
 
 
-*Flights Live Prices*
+*Flights - Live Prices*
 
 | API endpoint | Description  |
 | --- | ---|

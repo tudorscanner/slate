@@ -1,4 +1,4 @@
-# Flights Cache Prices
+# Flights Browse Prices
 
 ## Browse Quotes
 
