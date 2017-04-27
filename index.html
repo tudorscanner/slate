@@ -2691,7 +2691,7 @@ The country and language must be included in the Autosuggest query so that the m
 </tr>
 <tr>
 <td><code class="prettyprint">id</code> <br><span class="required">REQUIRED</span></td>
-<td>The place id.</td>
+<td>The place id (e.g. &ldquo;CDG-sky&rdquo;) <b>or</b> the user&rsquo;s ip address (e.g. &ldquo;188.39.95.140-ip&rdquo;)</td>
 </tr>
 <tr>
 <td><code class="prettyprint">apiKey</code> <br><span class="required">REQUIRED</span></td>
@@ -2729,6 +2729,21 @@ The country and language must be included in the Autosuggest query so that the m
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
+<blockquote>
+<p>Example response for user IP address 188.39.95.140: id=188.39.95.140-ip</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"Places"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"PlaceId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LOND-sky"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"PlaceName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"London"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"CountryId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UK-sky"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"CityId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LOND-sky"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"CountryName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"United Kingdom"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
 <p><em>RESPONSE PARAMETERS</em></p>
 
 <table><thead>
@@ -2742,6 +2757,11 @@ The country and language must be included in the Autosuggest query so that the m
 <td>Contains the information about the place such as name (in chosen locale), city, country.</td>
 </tr>
 </tbody></table>
+
+<aside class="notice">
+You can use this endpoint to retrieve the user&rsquo;s location from their IP address:
+<code>http://partners.api.skyscanner.net/apiservices/autosuggest/v1.0/UK/GBP/en?id=188.39.95.140-ip&apikey=&lt;apiKey&gt;</code>
+</aside>
 
 <h2 id="schemas">Schemas</h2>
 
