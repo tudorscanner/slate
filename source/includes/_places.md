@@ -124,6 +124,7 @@ GET "http://partners.api.skyscanner.net/apiservices/
 | ```query``` <br><span class="required">REQUIRED</span> | The query string, must be at least 2 characters long. |
 | ```apiKey``` <br><span class="required">REQUIRED</span> | Your API Key. |
 
+
 > Example response for query=pari
 
 ```json
@@ -192,7 +193,7 @@ GET "http://partners.api.skyscanner.net/apiservices/
 | ```country``` <br><span class="required">REQUIRED</span> | The [market/country](#markets) your user is in |
 | ```currency``` <br><span class="required">REQUIRED</span> | The [currency](#currencies) you want the prices in |
 | ```locale``` <br><span class="required">REQUIRED</span> | The [locale](#locales) you want the results in (ISO locale) |
-| ```id``` <br><span class="required">REQUIRED</span> | The place id. |
+| ```id``` <br><span class="required">REQUIRED</span> | The place id (e.g. "CDG-sky") <b>or</b> the user's ip address (e.g. "188.39.95.140-ip") |
 | ```apiKey``` <br><span class="required">REQUIRED</span> | Your API Key |
 
 > Example response for United Kingdom: id=uk
@@ -226,6 +227,21 @@ GET "http://partners.api.skyscanner.net/apiservices/
   ]
 }
 ```
+> Example response for user IP address 188.39.95.140: id=188.39.95.140-ip
+
+```json
+{
+  "Places": [
+    {
+      "PlaceId": "LOND-sky",
+      "PlaceName": "London",
+      "CountryId": "UK-sky",
+      "CityId": "LOND-sky",
+      "CountryName": "United Kingdom"
+    }
+  ]
+}
+```
 
 
 *RESPONSE PARAMETERS*
@@ -234,6 +250,10 @@ GET "http://partners.api.skyscanner.net/apiservices/
 | --- | --- |
 | ```Places``` | Contains the information about the place such as name (in chosen locale), city, country. |
 
+<aside class="notice">
+You can use this endpoint to retrieve the user's location from their IP address:
+<code>http://partners.api.skyscanner.net/apiservices/autosuggest/v1.0/UK/GBP/en?id=188.39.95.140-ip&apikey=&lt;apiKey&gt;</code>
+</aside>
 
 ## Schemas
 
