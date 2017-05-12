@@ -9,90 +9,15 @@ Places can be of 4 different types:
 
 You can use any of the following endpoints to get information about places:
 
-* our [Geo catalog](#geo-catalog) to get the full list of places that we support
-
 * our [Autosuggest](#list-of-places) endpoint to obtain a list of places and corresponding IDs that match a query string
 
 * our [Autosuggest](#place-information) endpoint to get information about a specific place given its ID (for example city name and country name for an airport)
 
+* our [Geo catalog](#geo-catalog) to get the full list of places that we support (please [contact us](https://partners.skyscanner.net/contact/) to request access)
+
 <aside class="warning">
 The country and language must be included in the Autosuggest query so that the most relevant results can be returned, in the correct language.
 </aside>
-
-## Geo Catalog
-
-Get the full list of all the places that we support.
-
-```shell
-GET "http://partners.api.skyscanner.net/apiservices/
-    geo/v1.0?
-    apiKey={apiKey}"
-```
-
-*API endpoint*
-
-`GET /geo/v1.0`
-
-*Try it out*
-
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/9c973db787e866c966f2)
-
-*REQUEST PARAMETERS*
-
-| Parameter | Description |
-| --------- | ------- |
-| ```apiKey``` <br><span class="required">REQUIRED</span> | Your API Key. |
-
-> Response extract:
-
-```json
-{
-  "Continents": [
-    {
-      "Countries": [
-        {
-          "CurrencyId": "AFN",
-          "Regions": [],
-          "Cities": [
-            {
-              "SingleAirportCity": true,
-              "Airports": [
-                {
-                  "CityId": "BINA",
-                  "CountryId": "AF",
-                  "Location": "67.823611, 34.804167",
-                  "Id": "BIN",
-                  "Name": "Bamiyan"
-                }
-              ],
-              "CountryId": "AF",
-              "Location": "67.823611, 34.804167",
-              "IataCode": "BIN",
-              "Id": "BINA",
-              "Name": "Bamiyan"
-            },
-            ...
-          ]
-        },
-        ...
-      ]
-    },
-    ...
-  ]
- }
-
-```
-
-*RESPONSE PARAMETERS*
-
-| Parameter | Description |
-| --- | --- |
-| ```Continents``` | Contains the list of all the continents. |
-| ```Countries``` | Contains the list of all the countries. |
-| ```Regions``` | Contains the list of all the regions. |
-| ```Cities``` | Contains the list of all the cities. |
-| ```Airports``` | Contains the list of all the airports. |
-
 
 
 
@@ -254,6 +179,87 @@ GET "http://partners.api.skyscanner.net/apiservices/
 You can use this endpoint to retrieve the user's location from their IP address:
 <code>http://partners.api.skyscanner.net/apiservices/autosuggest/v1.0/UK/GBP/en?id=188.39.95.140-ip&apikey=&lt;apiKey&gt;</code>
 </aside>
+
+## Geo Catalog 
+
+<aside class="warning">
+Please <a href="https://partners.skyscanner.net/contact/" target="_blank"> contact us</a> to request access.
+</aside>
+
+Get the full list of all the places that we support.
+
+```shell
+GET "http://partners.api.skyscanner.net/apiservices/
+    geo/v1.0?
+    apiKey={apiKey}"
+```
+
+*API endpoint*
+
+`GET /geo/v1.0`
+
+*Try it out*
+
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/9c973db787e866c966f2)
+
+*REQUEST PARAMETERS*
+
+| Parameter | Description |
+| --------- | ------- |
+| ```apiKey``` <br><span class="required">REQUIRED</span> | Your API Key. |
+
+> Response extract:
+
+```json
+{
+  "Continents": [
+    {
+      "Countries": [
+        {
+          "CurrencyId": "AFN",
+          "Regions": [],
+          "Cities": [
+            {
+              "SingleAirportCity": true,
+              "Airports": [
+                {
+                  "CityId": "BINA",
+                  "CountryId": "AF",
+                  "Location": "67.823611, 34.804167",
+                  "Id": "BIN",
+                  "Name": "Bamiyan"
+                }
+              ],
+              "CountryId": "AF",
+              "Location": "67.823611, 34.804167",
+              "IataCode": "BIN",
+              "Id": "BINA",
+              "Name": "Bamiyan"
+            },
+            ...
+          ]
+        },
+        ...
+      ]
+    },
+    ...
+  ]
+ }
+
+```
+
+*RESPONSE PARAMETERS*
+
+| Parameter | Description |
+| --- | --- |
+| ```Continents``` | Contains the list of all the continents. |
+| ```Countries``` | Contains the list of all the countries. |
+| ```Regions``` | Contains the list of all the regions. |
+| ```Cities``` | Contains the list of all the cities. |
+| ```Airports``` | Contains the list of all the airports. |
+
+
+
 
 ## Schemas
 
