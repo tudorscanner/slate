@@ -2453,112 +2453,14 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 <p>You can use any of the following endpoints to get information about places:</p>
 
 <ul>
-<li><p>our <a href="#geo-catalog">Geo catalog</a> to get the full list of places that we support</p></li>
 <li><p>our <a href="#list-of-places">Autosuggest</a> endpoint to obtain a list of places and corresponding IDs that match a query string</p></li>
 <li><p>our <a href="#place-information">Autosuggest</a> endpoint to get information about a specific place given its ID (for example city name and country name for an airport)</p></li>
+<li><p>our <a href="#geo-catalog">Geo catalog</a> to get the full list of places that we support (please <a href="https://partners.skyscanner.net/contact/">contact us</a> to request access)</p></li>
 </ul>
 
 <aside class="warning">
 The country and language must be included in the Autosuggest query so that the most relevant results can be returned, in the correct language.
 </aside>
-
-<h2 id="geo-catalog">Geo Catalog</h2>
-
-<p>Get the full list of all the places that we support.</p>
-<pre class="highlight shell"><code>GET <span class="s2">"http://partners.api.skyscanner.net/apiservices/
-    geo/v1.0?
-    apiKey={apiKey}"</span>
-</code></pre>
-<p><em>API endpoint</em></p>
-
-<p><code class="prettyprint">GET /geo/v1.0</code></p>
-
-<p><em>Try it out</em></p>
-
-<p><a href="https://app.getpostman.com/run-collection/9c973db787e866c966f2"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
-
-<p><em>REQUEST PARAMETERS</em></p>
-
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><code class="prettyprint">apiKey</code> <br><span class="required">REQUIRED</span></td>
-<td>Your API Key.</td>
-</tr>
-</tbody></table>
-
-<blockquote>
-<p>Response extract:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"Continents"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"Countries"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"CurrencyId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AFN"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"Regions"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
-          </span><span class="nt">"Cities"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-            </span><span class="p">{</span><span class="w">
-              </span><span class="nt">"SingleAirportCity"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-              </span><span class="nt">"Airports"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-                </span><span class="p">{</span><span class="w">
-                  </span><span class="nt">"CityId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BINA"</span><span class="p">,</span><span class="w">
-                  </span><span class="nt">"CountryId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AF"</span><span class="p">,</span><span class="w">
-                  </span><span class="nt">"Location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"67.823611, 34.804167"</span><span class="p">,</span><span class="w">
-                  </span><span class="nt">"Id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BIN"</span><span class="p">,</span><span class="w">
-                  </span><span class="nt">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bamiyan"</span><span class="w">
-                </span><span class="p">}</span><span class="w">
-              </span><span class="p">],</span><span class="w">
-              </span><span class="nt">"CountryId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AF"</span><span class="p">,</span><span class="w">
-              </span><span class="nt">"Location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"67.823611, 34.804167"</span><span class="p">,</span><span class="w">
-              </span><span class="nt">"IataCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BIN"</span><span class="p">,</span><span class="w">
-              </span><span class="nt">"Id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BINA"</span><span class="p">,</span><span class="w">
-              </span><span class="nt">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bamiyan"</span><span class="w">
-            </span><span class="p">},</span><span class="w">
-            </span><span class="err">...</span><span class="w">
-          </span><span class="p">]</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="err">...</span><span class="w">
-      </span><span class="p">]</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="err">...</span><span class="w">
-  </span><span class="p">]</span><span class="w">
- </span><span class="p">}</span><span class="w">
-
-</span></code></pre>
-<p><em>RESPONSE PARAMETERS</em></p>
-
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><code class="prettyprint">Continents</code></td>
-<td>Contains the list of all the continents.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">Countries</code></td>
-<td>Contains the list of all the countries.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">Regions</code></td>
-<td>Contains the list of all the regions.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">Cities</code></td>
-<td>Contains the list of all the cities.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">Airports</code></td>
-<td>Contains the list of all the airports.</td>
-</tr>
-</tbody></table>
 
 <h2 id="list-of-places">List of places</h2>
 
@@ -2762,6 +2664,108 @@ The country and language must be included in the Autosuggest query so that the m
 You can use this endpoint to retrieve the user&rsquo;s location from their IP address:
 <code>http://partners.api.skyscanner.net/apiservices/autosuggest/v1.0/UK/GBP/en?id=188.39.95.140-ip&apikey=&lt;apiKey&gt;</code>
 </aside>
+
+<h2 id="geo-catalog">Geo Catalog</h2>
+
+<aside class="warning">
+Please <a href="https://partners.skyscanner.net/contact/" target="_blank"> contact us</a> to request access.
+</aside>
+
+<p>Get the full list of all the places that we support.</p>
+<pre class="highlight shell"><code>GET <span class="s2">"http://partners.api.skyscanner.net/apiservices/
+    geo/v1.0?
+    apiKey={apiKey}"</span>
+</code></pre>
+<p><em>API endpoint</em></p>
+
+<p><code class="prettyprint">GET /geo/v1.0</code></p>
+
+<p><em>Try it out</em></p>
+
+<p><a href="https://app.getpostman.com/run-collection/9c973db787e866c966f2"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
+
+<p><em>REQUEST PARAMETERS</em></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">apiKey</code> <br><span class="required">REQUIRED</span></td>
+<td>Your API Key.</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Response extract:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"Continents"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"Countries"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"CurrencyId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AFN"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"Regions"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+          </span><span class="nt">"Cities"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"SingleAirportCity"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"Airports"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                  </span><span class="nt">"CityId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BINA"</span><span class="p">,</span><span class="w">
+                  </span><span class="nt">"CountryId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AF"</span><span class="p">,</span><span class="w">
+                  </span><span class="nt">"Location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"67.823611, 34.804167"</span><span class="p">,</span><span class="w">
+                  </span><span class="nt">"Id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BIN"</span><span class="p">,</span><span class="w">
+                  </span><span class="nt">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bamiyan"</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+              </span><span class="p">],</span><span class="w">
+              </span><span class="nt">"CountryId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AF"</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"Location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"67.823611, 34.804167"</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"IataCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BIN"</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"Id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BINA"</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bamiyan"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="err">...</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="err">...</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="err">...</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+ </span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<p><em>RESPONSE PARAMETERS</em></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">Continents</code></td>
+<td>Contains the list of all the continents.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">Countries</code></td>
+<td>Contains the list of all the countries.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">Regions</code></td>
+<td>Contains the list of all the regions.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">Cities</code></td>
+<td>Contains the list of all the cities.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">Airports</code></td>
+<td>Contains the list of all the airports.</td>
+</tr>
+</tbody></table>
 
 <h2 id="schemas">Schemas</h2>
 
