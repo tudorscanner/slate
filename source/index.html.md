@@ -36,7 +36,7 @@ Build tools that solve problems for millions of travellers and travel retail bus
 
 
 <aside class="notice">
-In order to use our APIs you need to contact us to request an API key via the following form: https://partners.skyscanner.net/contact/
+In order to use our APIs you need to contact us to request an API key via <a href="https://partners.skyscanner.net/contact/" target="_blank">the following form: </a>
 
 If you get stuck and need more help you can find more information and answers to questions in our <a href='https://support.business.skyscanner.net/hc/en-us' target="_blank">FAQ</a> which we continuously update.
 </aside>
