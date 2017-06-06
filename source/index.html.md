@@ -2,6 +2,7 @@
 title: API Reference
 
 toc_footers:
+  - <a href='https://partners.skyscanner.net/contact/' target="_blank">Request API key</a>
   - <a href='https://support.business.skyscanner.net/hc/en-us' target="_blank">Find answers in our FAQ</a>
   - <a href='https://stackoverflow.com/search?q=skyscanner+api' target="_blank">Ask on Stack Overflow</a> 
   - <a href='https://medium.com/@SkyscannerCodevoyagers' target="_blank">Follow the Code Voyagers blog</a>
