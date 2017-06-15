@@ -120,19 +120,33 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        
-          <h1 id="overview">Overview</h1>
+        <h1 id="api-documentation">API Documentation</h1>
 
-<p>Hello developers</p>
+<blockquote>
+<p>API endpoint</p>
+</blockquote>
+<pre class="highlight shell"><code>http://partners.api.skyscanner.net/apiservices/
 
-<p>The Skyscanner API can be used to:</p>
+</code></pre>
+<p>Skyscanner Travel APIs connect you to all the data you need to build an innovative website or app.</p>
 
-<ol>
-<li><p>Add flight and car hire search functionality</p></li>
-<li><p>Add flight deals and best prices</p></li>
-</ol>
+<p>Build tools that solve problems for millions of travellers and travel retail businesses around the world.</p>
 
-<p>Register for an API and then dive into the getting started.</p>
+<aside class="notice">
+In order to use our APIs you need to contact us to request an API key via <a href="https://partners.skyscanner.net/contact/" target="_blank">the following form.</a>
+<br><br>
+If you need more help you can find more information and answers to questions in our <a href='https://support.business.skyscanner.net/hc/en-us' target="_blank">FAQ</a> which we continuously update.
+</aside>
+
+          <h1 id="authentication">Authentication</h1>
+
+<p>Skyscanner uses API keys to allow access to the APIs. To request an API key please <a href="https://partners.skyscanner.net/contact/">contact us</a>.</p>
+
+<p>You must include the API key in all API requests to the server, either as a parameter in the query or in the query header. Please refer to each endpoint for details.</p>
+
+<aside class="warning">
+Be careful when sharing API keys. Do not publish them in public code repositories or add them to client-side API calls. When you need to make a client-side call (e.g. redirect) please insure that you use your short API key (the first 16 characters of you key).
+</aside>
 
           <h1 id="getting-started">Getting Started</h1>
 
@@ -218,28 +232,6 @@ Unless you require exact prices, we recommend you start with the cache prices AP
 
 <aside class="warning">
     Please note that the Skyscanner Hotels API is being reworked, and is currently unavailable. Legacy documentation is available <a href="https://support.business.skyscanner.net/hc/en-us/articles/212098705-Hotels-Price-List-and-Hotels-Details-service" target="_blank">here</a>
-</aside>
-
-          <h1 id="guides">Guides</h1>
-
-<blockquote>
-<p>API endpoint</p>
-</blockquote>
-<pre class="highlight shell"><code>http://partners.api.skyscanner.net/apiservices/
-
-</code></pre>
-<p>These are where our guides go</p>
-
-          <h1 id="reference">Reference</h1>
-
-          <h2 id="authentication">Authentication</h2>
-
-<p>Skyscanner uses API keys to allow access to the APIs. To request an API key please <a href="https://partners.skyscanner.net/contact/">contact us</a>.</p>
-
-<p>You must include the API key in all API requests to the server, either as a parameter in the query or in the query header. Please refer to each endpoint for details.</p>
-
-<aside class="warning">
-Be careful when sharing API keys. Do not publish them in public code repositories or add them to client-side API calls. When you need to make a client-side call (e.g. redirect) please insure that you use your short API key (the first 16 characters of you key).
 </aside>
 
           <h1 id="flights-browse-prices">Flights Browse Prices</h1>
