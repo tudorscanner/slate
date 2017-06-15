@@ -372,9 +372,8 @@ You must keep polling the results until you get 'UpdatesComplete'. The results m
 | ------- | ------ |
 | `OutboundLegId` | Id of the Outbound Leg |
 | `InboundLegId` | Id of the Inbound Leg |
-| `PricingOptions` | pricing options with agent(s)<br>the quote age<br> price (total for all passengers)<br>[deeplink to the agent](#to-the-supplier) (the absolute URL needed to make the booking).  The deeplink URL is not supplied for multi-booking itineraries.<br>In the case where deeplinks are not supplied, you can obtain them with a further step. Refer to the Create/Poll Booking Details documentation. |
-| `BookingDetailsLink` | In some cases (multiple bookings or group prices) you will need to make a second call to retrieve the deeplinks. See the next section [Get booking details](#get-booking-details) for details |
-
+| `PricingOptions` | pricing options with agent(s)<br>the quote age<br> price (total for all passengers)<br>[deeplink to the agent](#to-the-supplier) (the absolute URL needed to make the booking).<br>In the case where deeplinks are not supplied, you can obtain them with a further step. Refer to the Create/Poll Booking Details documentation. |
+| `BookingDetailsLink` | In some cases such as for group prices you will need to make a second call to retrieve the deeplinks. See the next section [Get booking details](#get-booking-details) for details |
 
 
 Please note that you must not force users to your [deeplink](#to-the-supplier). Once they have made a search you should provide them with a list of results, and an option to filter that list, in order to pick the flight that best suits their needs.
@@ -397,8 +396,7 @@ curl "http://partners.api.skyscanner.net/apiservices/pricing/v1.0/
     -H "Content-Type: application/x-www-form-urlencoded"
 ```
 
-In cases where more than one booking is required (for example when buying from 2 or more different airlines or travel agents) or for group pricing,
-a Booking Details request must be made to get the list of all the deeplinks or update the deeplink with additional information such as number of passengers.
+For group pricing a Booking Details request must be made to get the deeplink with additional information such as number of passengers.
 
 > The url is provided in the response of the live prices:
 
