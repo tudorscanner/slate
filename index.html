@@ -120,33 +120,19 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id="api-documentation">API Documentation</h1>
+        
+          <h1 id="overview">Overview</h1>
 
-<blockquote>
-<p>API endpoint</p>
-</blockquote>
-<pre class="highlight shell"><code>http://partners.api.skyscanner.net/apiservices/
+<p>Hello developers</p>
 
-</code></pre>
-<p>Skyscanner Travel APIs connect you to all the data you need to build an innovative website or app.</p>
+<p>The Skyscanner API can be used to:</p>
 
-<p>Build tools that solve problems for millions of travellers and travel retail businesses around the world.</p>
+<ol>
+<li><p>Add flight and car hire search functionality</p></li>
+<li><p>Add flight deals and best prices</p></li>
+</ol>
 
-<aside class="notice">
-In order to use our APIs you need to contact us to request an API key via <a href="https://partners.skyscanner.net/contact/" target="_blank">the following form.</a>
-<br><br>
-If you need more help you can find more information and answers to questions in our <a href='https://support.business.skyscanner.net/hc/en-us' target="_blank">FAQ</a> which we continuously update.
-</aside>
-
-          <h1 id="authentication">Authentication</h1>
-
-<p>Skyscanner uses API keys to allow access to the APIs. To request an API key please <a href="https://partners.skyscanner.net/contact/">contact us</a>.</p>
-
-<p>You must include the API key in all API requests to the server, either as a parameter in the query or in the query header. Please refer to each endpoint for details.</p>
-
-<aside class="warning">
-Be careful when sharing API keys. Do not publish them in public code repositories or add them to client-side API calls. When you need to make a client-side call (e.g. redirect) please insure that you use your short API key (the first 16 characters of you key).
-</aside>
+<p>Register for an API and then dive into the getting started.</p>
 
           <h1 id="getting-started">Getting Started</h1>
 
@@ -232,6 +218,28 @@ Unless you require exact prices, we recommend you start with the cache prices AP
 
 <aside class="warning">
     Please note that the Skyscanner Hotels API is being reworked, and is currently unavailable. Legacy documentation is available <a href="https://support.business.skyscanner.net/hc/en-us/articles/212098705-Hotels-Price-List-and-Hotels-Details-service" target="_blank">here</a>
+</aside>
+
+          <h1 id="guides">Guides</h1>
+
+<blockquote>
+<p>API endpoint</p>
+</blockquote>
+<pre class="highlight shell"><code>http://partners.api.skyscanner.net/apiservices/
+
+</code></pre>
+<p>These are where our guides go</p>
+
+          <h1 id="reference">Reference</h1>
+
+          <h2 id="authentication">Authentication</h2>
+
+<p>Skyscanner uses API keys to allow access to the APIs. To request an API key please <a href="https://partners.skyscanner.net/contact/">contact us</a>.</p>
+
+<p>You must include the API key in all API requests to the server, either as a parameter in the query or in the query header. Please refer to each endpoint for details.</p>
+
+<aside class="warning">
+Be careful when sharing API keys. Do not publish them in public code repositories or add them to client-side API calls. When you need to make a client-side call (e.g. redirect) please insure that you use your short API key (the first 16 characters of you key).
 </aside>
 
           <h1 id="flights-browse-prices">Flights Browse Prices</h1>
@@ -1518,11 +1526,11 @@ You must keep polling the results until you get 'UpdatesComplete&rsquo;. The res
 </tr>
 <tr>
 <td><code class="prettyprint">PricingOptions</code></td>
-<td>pricing options with agent(s)<br>the quote age<br> price (total for all passengers)<br><a href="#to-the-supplier">deeplink to the agent</a> (the absolute URL needed to make the booking).  The deeplink URL is not supplied for multi-booking itineraries.<br>In the case where deeplinks are not supplied, you can obtain them with a further step. Refer to the Create/Poll Booking Details documentation.</td>
+<td>pricing options with agent(s)<br>the quote age<br> price (total for all passengers)<br><a href="#to-the-supplier">deeplink to the agent</a> (the absolute URL needed to make the booking).<br>In the case where deeplinks are not supplied, you can obtain them with a further step. Refer to the Create/Poll Booking Details documentation.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">BookingDetailsLink</code></td>
-<td>In some cases (multiple bookings or group prices) you will need to make a second call to retrieve the deeplinks. See the next section <a href="#get-booking-details">Get booking details</a> for details</td>
+<td>In some cases such as for group prices you will need to make a second call to retrieve the deeplinks. See the next section <a href="#get-booking-details">Get booking details</a> for details</td>
 </tr>
 </tbody></table>
 
@@ -1541,8 +1549,7 @@ Please add the no-follow attribute when you link to the deeplink. See <a href="h
     -X PUT
     -H <span class="s2">"Content-Type: application/x-www-form-urlencoded"</span>
 </code></pre>
-<p>In cases where more than one booking is required (for example when buying from 2 or more different airlines or travel agents) or for group pricing,
-a Booking Details request must be made to get the list of all the deeplinks or update the deeplink with additional information such as number of passengers.</p>
+<p>For group pricing a Booking Details request must be made to get the deeplink with additional information such as number of passengers.</p>
 
 <blockquote>
 <p>The url is provided in the response of the live prices:</p>
