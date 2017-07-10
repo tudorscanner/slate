@@ -35,7 +35,7 @@ curl "http://partners.api.skyscanner.net/apiservices/pricing/v1.0"
 
 *API endpoint*
 
-`POST /pricing/v1.0`
+`POST http://partners.api.skyscanner.net/apiservices/pricing/v1.0`
 
 
 *TRY IT OUT*
