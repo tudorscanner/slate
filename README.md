@@ -46,6 +46,15 @@ search: false
 ---
 ```
 
+### Publishing
+
+1. Create a merge request  
+
+2. Merge into master
+
+3. Run `./deploy` locally to publish the changes (anyone can do this but do insure you merge to master first!)
+
+
 
 Contributors
 --------------------
