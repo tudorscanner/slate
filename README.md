@@ -19,6 +19,9 @@ vagrant up
 
 You can now see the docs at ```http://localhost:4567```
 
+> Please note that if you are on a MAC with MacOS Sierra you will need to insure you have Ruby 2.2+ and the latest Middleman
+
+
 ### Add an API endpoint to the docs
 
 1. Create a new file in the ```includes``` folder: e.g. ```_new_api.md```
