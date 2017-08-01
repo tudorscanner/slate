@@ -47,13 +47,9 @@ All the /prices endpoints are intended to be queried using a polling mechanism. 
     - Finish the polling after X seconds in the scenarios of having the status *PENDING* for so long.
     - Retry mechanism in the scenario of a Bellboy failure (Ex: retry after 1 seconds)
 
-## Endpoints
+## Search Prices
 
-The following sections will give you the necessary information of all the endpoints implemented in Bellboy.
-
-### Search prices
-
-##### Request /v1/prices/search/entity/{entity_id}
+### Entity Request
 
 Given an entity_id, this endpoint will give back hotels with prices around the provided entity. The supported entities are any, from cities, islands, nations, places to Hotels.
 
@@ -66,11 +62,15 @@ The following URL shows how the search prices endpoint can be used to retrieve p
 
 *API endpoint*
 
-`GET https://gateway.skyscanner.net/hotels/v1/prices/search/entity/{entity_id}
+`GET /v1/prices/search/entity/{entity_id}`
+
+```shell
+GET "https://gateway.skyscanner.net/hotels/v1/prices/search/entity/{entity_id}
   ?market={market}&locale={locale}&checkin_date={checkin_date}&checkout_date={checkout_date}
   &currency={currency}&adults={adults}&rooms={rooms}&images={images}&image_resolution={resolution}
   &image_type={type}&boost_official_partners={boost}&sort={sort_method}&limit={limit}&offset={offset}
-  &partners_per_hotel={num_partners}&enhanced={enhanced}`
+  &partners_per_hotel={num_partners}&enhanced={enhanced}"
+```
 
 *TRY IT OUT*
 
@@ -81,7 +81,7 @@ The following URL shows how the search prices endpoint can be used to retrieve p
 | Header | Value |
 | --- | --- |
 | `apikey` <br><span class="required">REQUIRED</span> | This header is required to be on every single request any client does (it could also be accepted via query parameter) |
-| `x-user-agent` <br><span class="required">REQUIRED</span> | Indicates which is the device and the platform related to the client. The format for that header is `device;B2B`, where:<br>Device<br>`T` for tablet<br>`D` for desktop<br>`M` for mobile<br>`N` if you are not able to detect the device type |
+| `x-user-agent` <br><span class="required">REQUIRED</span> | Indicates which is the device and the platform related to the client. The format for that header is `device;B2B`, where:<br>Device is:<br>`T` for tablet<br>`D` for desktop<br>`M` for mobile<br>`N` if you are not able to detect the device type |
 | `skyscanner-correlation-id` <br><span class="optional">OPTIONAL</span> | This one is intended for enabling tracing across the services |
 
 *URI PARAMETERS*
@@ -126,16 +126,7 @@ The following URL shows how the search prices endpoint can be used to retrieve p
 
 **Note**: The OR and AND filters allow multiple values coma separated. For example: *&amenities=Lift,Bar*
 
-##### Response
-
-*RESPONSE PARAMETERS*
-
-| Element | Detail |
-| ------- | ------ |
-| `correlation_id` | An identifier of the request |
-| `meta` | Contains metadata regarding the search cycle such as it's status |
-| `count` | Number of hotels |
-| `results` | An object containing the hotels and the enhancers if requested |
+### Response
 
 > Example response:
 
@@ -337,7 +328,16 @@ The following URL shows how the search prices endpoint can be used to retrieve p
 }
 ```
 
-##### Request /v1/prices/search/location/{location}
+*RESPONSE PARAMETERS*
+
+| Element | Detail |
+| ------- | ------ |
+| `correlation_id` | An identifier of the request |
+| `meta` | Contains metadata regarding the search cycle such as it's status |
+| `count` | Number of hotels |
+| `results` | An object containing the hotels and the enhancers if requested |
+
+### Location Request
 
 This endpoint gives back hotels with prices too but instead from an entity, around specific coordinates.
 
@@ -345,11 +345,15 @@ Provides the search by current location functionality.
 
 *API endpoint*
 
-`GET https://gateway.skyscanner.net/hotels/v1/prices/search/location/{lon,lat}
+`GET /v1/prices/search/location/{lon,lat}`
+
+```shell
+GET "https://gateway.skyscanner.net/hotels/v1/prices/search/location/{lon,lat}
   ?market={market}&locale={locale}&checkin_date={checkin_date}&checkout_date={checkout_date}
   &currency={currency}&adults={adults}&rooms={rooms}&images={images}&image_resolution={resolution}
   &image_type={type}&boost_official_partners={boost}&sort={sort_method}&limit={limit}&offset={offset}
-  &partners_per_hotel={num_partners}&enhanced={enhanced}`
+  &partners_per_hotel={num_partners}&enhanced={enhanced}"
+```
 
 *TRY IT OUT*
 
@@ -360,7 +364,7 @@ Provides the search by current location functionality.
 | Header | Value |
 | --- | --- |
 | `apikey` <br><span class="required">REQUIRED</span> | This header is required to be on every single request any client does (it could also be accepted via query parameter) |
-| `x-user-agent` <br><span class="required">REQUIRED</span> | Indicates which is the device and the platform related to the client. The format for that header is `device;B2B`, where:<br>Device<br>`T` for tablet<br>`D` for desktop<br>`M` for mobile<br>`N` if you are not able to detect the device type |
+| `x-user-agent` <br><span class="required">REQUIRED</span> | Indicates which is the device and the platform related to the client. The format for that header is `device;B2B`, where:<br>Device is:<br>`T` for tablet<br>`D` for desktop<br>`M` for mobile<br>`N` if you are not able to detect the device type |
 | `skyscanner-correlation-id` <br><span class="optional">OPTIONAL</span> | This one is intended for enabling tracing across the services |
 
 *URI PARAMETERS*
@@ -405,7 +409,9 @@ Provides the search by current location functionality.
 
 **Note**: The OR and AND filters allow multiple values coma separated. For example: *&amenities=Lift,Bar*
 
-##### Response
+### Response
+
+> The response is the same as the search entity one but without the *hotel_pivot*
 
 *RESPONSE PARAMETERS*
 
@@ -416,11 +422,9 @@ Provides the search by current location functionality.
 | `count` | Number of hotels |
 | `results` | An object containing the hotels and the enhancers if requested |
 
-> The response is the same as the search entity one but without the *hotel_pivot*
+## Search Prices, map version
 
-### Search prices, map version
-
-##### Request /v1/prices/map/entity/{entity_id}
+### Entity Request
 
 Given an entity, this endpoint will give you back the hotels with prices around the provided entity, having the same intentions than the regular search prices but modifying the response to suit it in environments where the information has to be rendered in a map.
 These differences can be summarized into the following points:
@@ -431,11 +435,15 @@ These differences can be summarized into the following points:
 
 *API endpoint*
 
-`GET https://gateway.skyscanner.net/hotels/v1/prices/map/entity/{entity_id}
+`GET /v1/prices/map/entity/{entity_id}`
+
+```shell
+GET "https://gateway.skyscanner.net/hotels/v1/prices/map/entity/{entity_id}
   ?market={market}&locale={locale}&checkin_date={checkin_date}&checkout_date={checkout_date}
   &currency={currency}&adults={adults}&rooms={rooms}&images={images}&image_resolution={resolution}
   &image_type={type}&boost_official_partners={boost}&sort={sort_method}&limit={limit}&offset={offset}
-  &partners_per_hotel={num_partners}&enhanced={enhanced}&bbox={left,bottom,right,top}`
+  &partners_per_hotel={num_partners}&enhanced={enhanced}&bbox={left,bottom,right,top}"
+```
 
 *TRY IT OUT*
 
@@ -446,7 +454,7 @@ These differences can be summarized into the following points:
 | Header | Value |
 | --- | --- |
 | `apikey` <br><span class="required">REQUIRED</span> | This header is required to be on every single request any client does (it could also be accepted via query parameter) |
-| `x-user-agent` <br><span class="required">REQUIRED</span> | Indicates which is the device and the platform related to the client. The format for that header is `device;B2B`, where:<br>Device<br>`T` for tablet<br>`D` for desktop<br>`M` for mobile<br>`N` if you are not able to detect the device type |
+| `x-user-agent` <br><span class="required">REQUIRED</span> | Indicates which is the device and the platform related to the client. The format for that header is `device;B2B`, where:<br>Device is:<br>`T` for tablet<br>`D` for desktop<br>`M` for mobile<br>`N` if you are not able to detect the device type |
 | `skyscanner-correlation-id` <br><span class="optional">OPTIONAL</span> | This one is intended for enabling tracing across the services |
 
 *URI PARAMETERS*
@@ -492,16 +500,7 @@ These differences can be summarized into the following points:
 
 **Note**: The OR and AND filters allow multiple values coma separated. For example: *&amenities=Lift,Bar*
 
-##### Response
-
-*RESPONSE PARAMETERS*
-
-| Element | Detail |
-| ------- | ------ |
-| `correlation_id` | An identifier of the request |
-| `meta` | Contains metadata regarding the search cycle such as it's status |
-| `count` | Number of hotels |
-| `results` | An object containing the hotels and the enhancers if requested |
+### Response
 
 > Example response:
 
@@ -651,7 +650,16 @@ These differences can be summarized into the following points:
 }
 ```
 
-##### Request /v1/prices/map/location/{location}
+*RESPONSE PARAMETERS*
+
+| Element | Detail |
+| ------- | ------ |
+| `correlation_id` | An identifier of the request |
+| `meta` | Contains metadata regarding the search cycle such as it's status |
+| `count` | Number of hotels |
+| `results` | An object containing the hotels and the enhancers if requested |
+
+### Location Request
 
 This endpoint gives back hotels with prices too with map specific features but instead from an entity, around specific coordinates.
 
@@ -659,11 +667,15 @@ Provides the search by current location functionality.
 
 *API endpoint*
 
-`GET https://gateway.skyscanner.net/hotels/v1/prices/map/location/{lon,lat}
+`GET /v1/prices/map/location/{lon,lat}`
+
+```shell
+GET "https://gateway.skyscanner.net/hotels/v1/prices/map/location/{lon,lat}
   ?market={market}&locale={locale}&checkin_date={checkin_date}&checkout_date={checkout_date}
   &currency={currency}&adults={adults}&rooms={rooms}&images={images}&image_resolution={resolution}
   &image_type={type}&boost_official_partners={boost}&sort={sort_method}&limit={limit}&offset={offset}
-  &partners_per_hotel={num_partners}&enhanced={enhanced}&bbox={left,bottom,right,top}`
+  &partners_per_hotel={num_partners}&enhanced={enhanced}&bbox={left,bottom,right,top}"
+```
 
 *TRY IT OUT*
 
@@ -674,7 +686,7 @@ Provides the search by current location functionality.
 | Header | Value |
 | --- | --- |
 | `apikey` <br><span class="required">REQUIRED</span> | This header is required to be on every single request any client does (it could also be accepted via query parameter) |
-| `x-user-agent` <br><span class="required">REQUIRED</span> | Indicates which is the device and the platform related to the client. The format for that header is `device;B2B`, where:<br>Device<br>`T` for tablet<br>`D` for desktop<br>`M` for mobile<br>`N` if you are not able to detect the device type |
+| `x-user-agent` <br><span class="required">REQUIRED</span> | Indicates which is the device and the platform related to the client. The format for that header is `device;B2B`, where:<br>Device is:<br>`T` for tablet<br>`D` for desktop<br>`M` for mobile<br>`N` if you are not able to detect the device type |
 | `skyscanner-correlation-id` <br><span class="optional">OPTIONAL</span> | This one is intended for enabling tracing across the services |
 
 *URI PARAMETERS*
@@ -720,7 +732,9 @@ Provides the search by current location functionality.
 
 **Note**: The OR and AND filters allow multiple values coma separated. For example: *&amenities=Lift,Bar*
 
-##### Response
+### Response
+
+> The response is the same as the search map entity one
 
 *RESPONSE PARAMETERS*
 
@@ -731,11 +745,9 @@ Provides the search by current location functionality.
 | `count` | Number of hotels |
 | `results` | An object containing the hotels and the enhancers if requested |
 
-> The response is the same as the search map entity one
+## Hotel Prices
 
-### Hotel prices
-
-##### Request /v1/prices/hotel/{hotel_id}
+### Request
 
 Given a hotel, this endpoint will give back the hotel with all the information and live prices. To reuse the prices already fetched by previous calls to the search endpoint the parameter *entity_id* must be filled with the same entity id.
 Otherwise, the system will start fetching prices from the beginning for this specific hotel.
@@ -743,10 +755,14 @@ Is a regular practice following the user flow first of all search for prices usi
 
 *API endpoint*
 
-`GET https://gateway.skyscanner.net/hotels/v1/prices/hotel/{hotel_id}
+`GET /v1/prices/hotel/{hotel_id}`
+
+```shell
+GET "https://gateway.skyscanner.net/hotels/v1/prices/hotel/{hotel_id}
   ?entity_id=27539733&market={market}&locale={locale}&checkin_date={checkin_date}&checkout_date={checkout_date}
   &currency={currency}&adults={adults}&rooms={rooms}&images={images}&image_resolution={resolution}
-  &image_type={type}&boost_official_partners={boost}&partners_per_hotel={num_partners}`
+  &image_type={type}&boost_official_partners={boost}&partners_per_hotel={num_partners}"
+```
 
 *TRY IT OUT*
 
@@ -757,7 +773,7 @@ Is a regular practice following the user flow first of all search for prices usi
 | Header | Value |
 | --- | --- |
 | `apikey` <br><span class="required">REQUIRED</span> | This header is required to be on every single request any client does (it could also be accepted via query parameter) |
-| `x-user-agent` <br><span class="required">REQUIRED</span> | Indicates which is the device and the platform related to the client. The format for that header is `device;B2B`, where:<br>Device<br>`T` for tablet<br>`D` for desktop<br>`M` for mobile<br>`N` if you are not able to detect the device type |
+| `x-user-agent` <br><span class="required">REQUIRED</span> | Indicates which is the device and the platform related to the client. The format for that header is `device;B2B`, where:<br>Device is:<br>`T` for tablet<br>`D` for desktop<br>`M` for mobile<br>`N` if you are not able to detect the device type |
 | `skyscanner-correlation-id` <br><span class="optional">OPTIONAL</span> | This one is intended for enabling tracing across the services |
 
 *URI PARAMETERS*
@@ -786,18 +802,11 @@ Is a regular practice following the user flow first of all search for prices usi
 | `enhanced` <br><span class="optional">OPTIONAL</span> | Choose extra renderers for the response, available options are:<br>location: Returns the higher level entities according to the search entity. |
 | `entity_id` <br><span class="optional">OPTIONAL</span> | This field should be present when this endpoint has been called when the user has already looked for prices in an upper entity containing the hotel in order to reuse the cached prices.<br>For example: A user searches for prices in Paris (bellboy stores Paris prices). And then, the user opens a hotel details page. In this case, the request to Bellboy must have the entity_id param fulfilled with the Paris entity_id in order to reuse the prices.|
 
-##### Response
-
-*RESPONSE PARAMETERS*
-
-| Element | Detail |
-| ------- | ------ |
-| `meta` | Contains metadata regarding the search cycle such as it's status |
-| `results` | An object containing the hotel and the enhancers if requested |
+### Response
 
 > Example response:
 
-```josn
+```json
 {
   "meta": {
     "offers": 2,
@@ -922,3 +931,10 @@ Is a regular practice following the user flow first of all search for prices usi
   }
 }
 ```
+
+*RESPONSE PARAMETERS*
+
+| Element | Detail |
+| ------- | ------ |
+| `meta` | Contains metadata regarding the search cycle such as it's status |
+| `results` | An object containing the hotel and the enhancers if requested |
