@@ -137,7 +137,7 @@ The following URL shows how the search prices endpoint can be used to retrieve p
 | `count` | Number of hotels |
 | `results` | An object containing the hotels and the enhancers if requested |
 
-> Example response with polling url in the header:
+> Example response:
 
 ```json
 {
@@ -429,11 +429,227 @@ These differences can be summarized into the following points:
 - The default total amount of hotels returned per page will be 100.
 - Support for bounding box queries to filter hotels that are inside of an area, the coordinates passed are serialised as *left, bottom, right, top*
 
-The following URL shows how the map prices endpoint can be used to retrieve prices for those hotels that are placed in Barcelona - *entity id* 27548283, *ready to be rendered in a map*.
+*API endpoint*
 
-https://gateway.skyscanner.net/hbe-bellboy/v1/prices/map/entity/27548283?market=ES&locale=es-ES&checkin_date=2017-12-11&checkout_date=2017-12-13&currency=EUR&adults=2&rooms=1&apikey=f0b72de6242211e78e7dacbc32afe6a5&bbox=2.166,41.388,2.17,41.40
+`GET https://gateway.skyscanner.net/hotels/v1/prices/map/entity/{entity_id}
+  ?market={market}&locale={locale}&checkin_date={checkin_date}&checkout_date={checkout_date}
+  &currency={currency}&adults={adults}&rooms={rooms}&images={images}&image_resolution={resolution}
+  &image_type={type}&boost_official_partners={boost}&sort={sort_method}&limit={limit}&offset={offset}
+  &partners_per_hotel={num_partners}&enhanced={enhanced}&bbox={left,bottom,right,top}`
 
-**wip postman link and raml docs**
+*TRY IT OUT*
+
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/44864263fb0a0624becf)
+
+*HEADER VALUES*
+
+| Header | Value |
+| --- | --- |
+| `apikey` <br><span class="required">REQUIRED</span> | This header is required to be on every single request any client does (it could also be accepted via query parameter) |
+| `x-user-agent` <br><span class="required">REQUIRED</span> | Indicates which is the device and the platform related to the client. The format for that header is `device;B2B`, where:<br>Device<br>`T` for tablet<br>`D` for desktop<br>`M` for mobile<br>`N` if you are not able to detect the device type |
+| `skyscanner-correlation-id` <br><span class="optional">OPTIONAL</span> | This one is intended for enabling tracing across the services |
+
+*URI PARAMETERS*
+
+| Parameter | Description |
+| --------- | ------- |
+| `entity_id` <br><span class="required">REQUIRED</span> | Entity to search for hotels prices in it |
+| `version` <br><span class="required">REQUIRED</span> | API version |
+
+*QUERY PARAMETERS*
+
+| Parameter | Description |
+| --------- | ------- |
+| `market` <br><span class="required">REQUIRED</span> | Matching [A-Z]{2} |
+| `locale` <br><span class="required">REQUIRED</span> | Matching [a-z]{2}-[A-Z]{2} |
+| `images` <br><span class="optional">OPTIONAL</span> | Maximum number of images to retrieve per each hotel<br>between 1-30, default: 3 |
+| `image_resolution` <br><span class="optional">OPTIONAL</span> | Resolution options<br>high or low, default: high |
+| `image_type` <br><span class="optional">OPTIONAL</span> | The format of the images<br>thumbnail or gallery |
+| `currency` <br><span class="required">REQUIRED</span> | Currency code |
+| `checkin_date` <br><span class="required">REQUIRED</span> | YYYY-MM-DD |
+| `checkout_date` <br><span class="required">REQUIRED</span> | YYYY-MM-DD |
+| `rooms` <br><span class="required">REQUIRED</span> | Number of rooms<br>default: 1 |
+| `adults` <br><span class="required">REQUIRED</span> | Number of adults<br>default: 2 |
+| `boost_official_partners` <br><span class="optional">OPTIONAL</span> | Indicates whether prices from official partners must be shown in the first place [1] or not [0]<br>default: 0 |
+| `sort` <br><span class="optional">OPTIONAL</span> | Sort by a given attribute. By default the relevance sorting is applied<br>One of: relevance, -relevance, price, -price, distance, -distance, rating, -rating, stars, -stars |
+| `price_min` <br><span class="optional">OPTIONAL</span> | Filter. Return only hotels where the cheaper price is at least price_min (included). Cannot be used together with price_buckets |
+| `price_max` <br><span class="optional">OPTIONAL</span> | Filter. Return only hotels where the cheaper price is at most price_max (included). Cannot be used together with price_buckets |
+| `price_buckets` <br><span class="optional">OPTIONAL</span> | OR filter. Return only hotels with offers inside the specified buckets. Cannot be used together with price_min/price_max |
+| `district` <br><span class="optional">OPTIONAL</span> | OR filter. Return only results where a district matches |
+| `stars` <br><span class="optional">OPTIONAL</span> | OR filter. Return only results where a star category matches. The values must be TravelAPI ids |
+| `city` <br><span class="optional">OPTIONAL</span> | OR filter. When the search is done for an entity that contains different cities, this filter is available. Returns only results where the cities match. The values must be TravelAPI entity ids |
+| `chain` <br><span class="optional">OPTIONAL</span> | OR filter. Return only results where a hotel chains matches. The values must be TravelAPI ids |
+| `amenities` <br><span class="optional">OPTIONAL</span> | AND filter. Return only results where all amenities match. The values must be TravelAPI ids |
+| `cancellation` <br><span class="optional">OPTIONAL</span> | OR filter. Return only results where a cancellation policies matches. Options are:<br>free_cancellation, non_refundable, refundable, special_conditions |
+| `meal_plan` <br><span class="optional">OPTIONAL</span> | OR filter. Return only results where a meal plan matches. Options are:<br>room_only, breakfast_included, half_board, full_board, all_inclusive |
+| `property_type` <br><span class="optional">OPTIONAL</span> | OR filter. Return only results where an accommodation type matches. The values must be TravelAPI ids |
+| `hotel_name` <br><span class="optional">OPTIONAL</span> | Filter. Return only results where hotel name matches |
+| `limit` <br><span class="optional">OPTIONAL</span> | Number of results to retrieve<br>between 1-100, default: 100 |
+| `offset` <br><span class="optional">OPTIONAL</span> | How many results to skip from the first position. Useful for paginating<br>default: 0 |
+| `partners_per_hotel` <br><span class="optional">OPTIONAL</span> | Maximum numbers of partners to retrieve per each hotel. Note that 0 means all the available partners. Map only supports 1 partner per hotel<br>default: 1 |
+| `enhanced` <br><span class="optional">OPTIONAL</span> | Choose extra renderers for the response, available options are:<br>filters: Returns extra object in the response including the filters like stars, district, city, etc.<br>price_slider: Return the price_slider.<br>query_location: Returns the location (higher level entities according to the searched entity) and map boundary (the coordinates of the search area). |
+| `bbox` <br><span class="optional">OPTIONAL</span> | Bounding Box coordinates in which to look for hotels as bbox=left,bottom,right,top<br>Example: -4.051,50.478,1.853,52.909 |
+
+**Note**: The OR and AND filters allow multiple values coma separated. For example: *&amenities=Lift,Bar*
+
+##### Response
+
+*RESPONSE PARAMETERS*
+
+| Element | Detail |
+| ------- | ------ |
+| `correlation_id` | An identifier of the request |
+| `meta` | Contains metadata regarding the search cycle such as it's status |
+| `count` | Number of hotels |
+| `results` | An object containing the hotels and the enhancers if requested |
+
+> Example response:
+
+```json
+{
+  "correlation_id": "d93ddb4d-c97c-4979-9627-e188e02c8409",
+  "meta": {
+    "status": "COMPLETED",
+    "total": 5500,
+    "total_available": 4092,
+    "completion_percentage": 100,
+    "offers": 67275,
+    "hotels_filtered": 0
+  },
+  "count": 15,
+  "results": {
+    "filters": {
+      "district": [
+        {
+          "id": "27562177",
+          "min_price": 45,
+          "max_price": null,
+          "count": 94
+        },
+        ...
+      ],
+      "chain": [
+        {
+          "id": "Holiday Inn",
+          "min_price": 74,
+          "max_price": null,
+          "count": 74
+        },
+        ...
+      ],
+      "cancellation": [
+        {
+          "id": "free_cancellation",
+          "min_price": 36,
+          "max_price": null,
+          "count": 2207
+        },
+        ...
+      ],
+      "city": [
+        {
+          "id": "27544008",
+          "min_price": 32,
+          "max_price": null,
+          "count": 856
+        },
+        ...
+      ],
+      "amenities": [
+        {
+          "id": "WifiService",
+          "min_price": 32,
+          "max_price": null,
+          "count": 3327
+        },
+        ...
+      ],
+      "price_buckets": [
+        {
+          "id": "PR_BK_0",
+          "min_price": null,
+          "max_price": 80,
+          "count": 130
+        },
+        ...
+      ],
+      "stars": [
+        {
+          "id": "4",
+          "min_price": 58,
+          "max_price": null,
+          "count": 1220
+        },
+        ...
+      ],
+      "meal_plan": [
+        {
+          "id": "room_only",
+          "min_price": 32,
+          "max_price": null,
+          "count": 2060
+        },
+        ...
+      ],
+      "property_type": [
+        {
+          "id": "Hotel",
+          "min_price": 32,
+          "max_price": null,
+          "count": 3486
+        },
+        ...
+      ]
+    },
+    "map_boundary": {
+      "n_e_lng": 1.72864,
+      "s_w_lng": -2.04675,
+      "s_w_lat": 50.63341,
+      "n_e_lat": 52.7619
+    },
+    "hotel_pivot": null,
+    "hotels": [
+      {
+        "reviews_count": 284,
+        "coordinates": [
+          1.2961,
+          51.12328
+        ],
+        "hotel_id": "46997257",
+        "images": [
+          {
+            "provider": "h_dp",
+            "gallery": "http://d3ba47lalua02r.cloudfront.net/available/50049482/mca.jpg",
+            "thumbnail": "http://d3ba47lalua02r.cloudfront.net/available/50049482/mt.jpg"
+          }
+        ],
+        "name": "The West Bank Guest House",
+        "offers": [
+          {
+            "price_gbp": 58,
+            "price": 58,
+            "deeplink": "www.skyscanner.net/hotel_deeplink/4.0/UK/en-GB/GBP/h_xp/46997257/2017-04-30/2017-05-02/hotel/hotel/hotels?guests=1&ticket_price=58&rooms_left=1&appVersion=2.0&q_datetime_utc=2017-04-25T13%3A37%3A37&rooms=1&deeplink_ids=eu-west-1.prod_ae42baa45b08402e0a109287d1780528&request_id=b745fa26-f166-478f-b52c-2fcee3f413fe&appName=web&legacy_provider_id=1&max_price=132.0",
+            "closed_user_groups": null
+          }
+        ],
+        "stars": "4",
+        "rating": {
+          "value": 7.7,
+          "desc": "rating_good"
+        }
+      },
+      ...
+    ],
+    "location": [
+      {
+        "name": "United Kingdom",
+        "entity_id": "29475375",
+        "entity_type": "Nation"
+      }
+    ]
+  }
+}
+```
 
 ##### Request /v1/prices/map/location/{location}
 
