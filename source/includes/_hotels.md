@@ -657,7 +657,81 @@ This endpoint gives back hotels with prices too with map specific features but i
 
 Provides the search by current location functionality.
 
-**wip postman link and raml docs**
+*API endpoint*
+
+`GET https://gateway.skyscanner.net/hotels/v1/prices/map/location/{lon,lat}
+  ?market={market}&locale={locale}&checkin_date={checkin_date}&checkout_date={checkout_date}
+  &currency={currency}&adults={adults}&rooms={rooms}&images={images}&image_resolution={resolution}
+  &image_type={type}&boost_official_partners={boost}&sort={sort_method}&limit={limit}&offset={offset}
+  &partners_per_hotel={num_partners}&enhanced={enhanced}&bbox={left,bottom,right,top}`
+
+*TRY IT OUT*
+
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/8c06f7a93120a724de16)
+
+*HEADER VALUES*
+
+| Header | Value |
+| --- | --- |
+| `apikey` <br><span class="required">REQUIRED</span> | This header is required to be on every single request any client does (it could also be accepted via query parameter) |
+| `x-user-agent` <br><span class="required">REQUIRED</span> | Indicates which is the device and the platform related to the client. The format for that header is `device;B2B`, where:<br>Device<br>`T` for tablet<br>`D` for desktop<br>`M` for mobile<br>`N` if you are not able to detect the device type |
+| `skyscanner-correlation-id` <br><span class="optional">OPTIONAL</span> | This one is intended for enabling tracing across the services |
+
+*URI PARAMETERS*
+
+| Parameter | Description |
+| --------- | ------- |
+| `location` <br><span class="required">REQUIRED</span> | Location to search hotels near it. Following the format: lon,lat |
+| `version` <br><span class="required">REQUIRED</span> | API version |
+
+*QUERY PARAMETERS*
+
+| Parameter | Description |
+| --------- | ------- |
+| `market` <br><span class="required">REQUIRED</span> | Matching [A-Z]{2} |
+| `locale` <br><span class="required">REQUIRED</span> | Matching [a-z]{2}-[A-Z]{2} |
+| `images` <br><span class="optional">OPTIONAL</span> | Maximum number of images to retrieve per each hotel<br>between 1-30, default: 3 |
+| `image_resolution` <br><span class="optional">OPTIONAL</span> | Resolution options<br>high or low, default: high |
+| `image_type` <br><span class="optional">OPTIONAL</span> | The format of the images<br>thumbnail or gallery |
+| `currency` <br><span class="required">REQUIRED</span> | Currency code |
+| `checkin_date` <br><span class="required">REQUIRED</span> | YYYY-MM-DD |
+| `checkout_date` <br><span class="required">REQUIRED</span> | YYYY-MM-DD |
+| `rooms` <br><span class="required">REQUIRED</span> | Number of rooms<br>default: 1 |
+| `adults` <br><span class="required">REQUIRED</span> | Number of adults<br>default: 2 |
+| `boost_official_partners` <br><span class="optional">OPTIONAL</span> | Indicates whether prices from official partners must be shown in the first place [1] or not [0]<br>default: 0 |
+| `sort` <br><span class="optional">OPTIONAL</span> | Sort by a given attribute. By default the relevance sorting is applied<br>One of: relevance, -relevance, price, -price, distance, -distance, rating, -rating, stars, -stars |
+| `price_min` <br><span class="optional">OPTIONAL</span> | Filter. Return only hotels where the cheaper price is at least price_min (included). Cannot be used together with price_buckets |
+| `price_max` <br><span class="optional">OPTIONAL</span> | Filter. Return only hotels where the cheaper price is at most price_max (included). Cannot be used together with price_buckets |
+| `price_buckets` <br><span class="optional">OPTIONAL</span> | OR filter. Return only hotels with offers inside the specified buckets. Cannot be used together with price_min/price_max |
+| `district` <br><span class="optional">OPTIONAL</span> | OR filter. Return only results where a district matches |
+| `stars` <br><span class="optional">OPTIONAL</span> | OR filter. Return only results where a star category matches. The values must be TravelAPI ids |
+| `city` <br><span class="optional">OPTIONAL</span> | OR filter. When the search is done for an entity that contains different cities, this filter is available. Returns only results where the cities match. The values must be TravelAPI entity ids |
+| `chain` <br><span class="optional">OPTIONAL</span> | OR filter. Return only results where a hotel chains matches. The values must be TravelAPI ids |
+| `amenities` <br><span class="optional">OPTIONAL</span> | AND filter. Return only results where all amenities match. The values must be TravelAPI ids |
+| `cancellation` <br><span class="optional">OPTIONAL</span> | OR filter. Return only results where a cancellation policies matches. Options are:<br>free_cancellation, non_refundable, refundable, special_conditions |
+| `meal_plan` <br><span class="optional">OPTIONAL</span> | OR filter. Return only results where a meal plan matches. Options are:<br>room_only, breakfast_included, half_board, full_board, all_inclusive |
+| `property_type` <br><span class="optional">OPTIONAL</span> | OR filter. Return only results where an accommodation type matches. The values must be TravelAPI ids |
+| `hotel_name` <br><span class="optional">OPTIONAL</span> | Filter. Return only results where hotel name matches |
+| `limit` <br><span class="optional">OPTIONAL</span> | Number of results to retrieve<br>between 1-100, default: 100 |
+| `offset` <br><span class="optional">OPTIONAL</span> | How many results to skip from the first position. Useful for paginating<br>default: 0 |
+| `partners_per_hotel` <br><span class="optional">OPTIONAL</span> | Maximum numbers of partners to retrieve per each hotel. Note that 0 means all the available partners. Map only supports 1 partner per hotel<br>default: 1 |
+| `enhanced` <br><span class="optional">OPTIONAL</span> | Choose extra renderers for the response, available options are:<br>filters: Returns extra object in the response including the filters like stars, district, city, etc.<br>price_slider: Return the price_slider.<br>query_location: Returns the location (higher level entities according to the searched entity) and map boundary (the coordinates of the search area). |
+| `bbox` <br><span class="optional">OPTIONAL</span> | Bounding Box coordinates in which to look for hotels as bbox=left,bottom,right,top<br>Example: -4.051,50.478,1.853,52.909 |
+
+**Note**: The OR and AND filters allow multiple values coma separated. For example: *&amenities=Lift,Bar*
+
+##### Response
+
+*RESPONSE PARAMETERS*
+
+| Element | Detail |
+| ------- | ------ |
+| `correlation_id` | An identifier of the request |
+| `meta` | Contains metadata regarding the search cycle such as it's status |
+| `count` | Number of hotels |
+| `results` | An object containing the hotels and the enhancers if requested |
+
+> The response is the same as the search map entity one
 
 ### Hotel prices
 
