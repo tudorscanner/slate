@@ -17,6 +17,7 @@ The JSON API by itself is mapped at the following URL https://gateway.skyscanner
 ## Headers
 
 Bellboy expects some headers and requires some others in order to work properly. All of them are described here:
+
 - **apikey**: Required. This header is required to be on every single request any client does (it could also be accepted via query parameter).
 - **x-user-agent**: Required. Indicates which is the device and the platform related to the client. The format for that header is device;platform, where:
     - device can be: - T for tablet
