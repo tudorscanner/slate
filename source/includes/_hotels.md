@@ -97,14 +97,14 @@ The following URL shows how the search prices endpoint can be used to retrieve p
 | --------- | ------- |
 | `market` <br><span class="required">REQUIRED</span> | Matching [A-Z]{2} |
 | `locale` <br><span class="required">REQUIRED</span> | Matching [a-z]{2}-[A-Z]{2} |
-| `images` <br><span class="optional">OPTIONAL</span> | Maximum number of images to retrieve per each hotel<br>between 1-30, default: 3 |
-| `image_resolution` <br><span class="optional">OPTIONAL</span> | Resolution options<br>high or low, default: high |
-| `image_type` <br><span class="optional">OPTIONAL</span> | The format of the images<br>thumbnail or gallery |
 | `currency` <br><span class="required">REQUIRED</span> | Currency code |
 | `checkin_date` <br><span class="required">REQUIRED</span> | YYYY-MM-DD |
 | `checkout_date` <br><span class="required">REQUIRED</span> | YYYY-MM-DD |
 | `rooms` <br><span class="required">REQUIRED</span> | Number of rooms<br>default: 1 |
 | `adults` <br><span class="required">REQUIRED</span> | Number of adults<br>default: 2 |
+| `images` <br><span class="optional">OPTIONAL</span> | Maximum number of images to retrieve per each hotel<br>between 1-30, default: 3 |
+| `image_resolution` <br><span class="optional">OPTIONAL</span> | Resolution options<br>high or low, default: high |
+| `image_type` <br><span class="optional">OPTIONAL</span> | The format of the images<br>thumbnail or gallery |
 | `boost_official_partners` <br><span class="optional">OPTIONAL</span> | Indicates whether prices from official partners must be shown in the first place [1] or not [0]<br>default: 0 |
 | `sort` <br><span class="optional">OPTIONAL</span> | Sort by a given attribute. By default the relevance sorting is applied<br>One of: relevance, -relevance, price, -price, distance, -distance, rating, -rating, stars, -stars |
 | `price_min` <br><span class="optional">OPTIONAL</span> | Filter. Return only hotels where the cheaper price is at least price_min (included). Cannot be used together with price_buckets |
@@ -376,14 +376,14 @@ Provides the search by current location functionality.
 | --------- | ------- |
 | `market` <br><span class="required">REQUIRED</span> | Matching [A-Z]{2} |
 | `locale` <br><span class="required">REQUIRED</span> | Matching [a-z]{2}-[A-Z]{2} |
-| `images` <br><span class="optional">OPTIONAL</span> | Maximum number of images to retrieve per each hotel<br>between 1-30, default: 3 |
-| `image_resolution` <br><span class="optional">OPTIONAL</span> | Resolution options<br>high or low, default: high |
-| `image_type` <br><span class="optional">OPTIONAL</span> | The format of the images<br>thumbnail or gallery |
 | `currency` <br><span class="required">REQUIRED</span> | Currency code |
 | `checkin_date` <br><span class="required">REQUIRED</span> | YYYY-MM-DD |
 | `checkout_date` <br><span class="required">REQUIRED</span> | YYYY-MM-DD |
 | `rooms` <br><span class="required">REQUIRED</span> | Number of rooms<br>default: 1 |
 | `adults` <br><span class="required">REQUIRED</span> | Number of adults<br>default: 2 |
+| `images` <br><span class="optional">OPTIONAL</span> | Maximum number of images to retrieve per each hotel<br>between 1-30, default: 3 |
+| `image_resolution` <br><span class="optional">OPTIONAL</span> | Resolution options<br>high or low, default: high |
+| `image_type` <br><span class="optional">OPTIONAL</span> | The format of the images<br>thumbnail or gallery |
 | `boost_official_partners` <br><span class="optional">OPTIONAL</span> | Indicates whether prices from official partners must be shown in the first place [1] or not [0]<br>default: 0 |
 | `sort` <br><span class="optional">OPTIONAL</span> | Sort by a given attribute. By default the relevance sorting is applied<br>One of: relevance, -relevance, price, -price, distance, -distance, rating, -rating, stars, -stars |
 | `price_min` <br><span class="optional">OPTIONAL</span> | Filter. Return only hotels where the cheaper price is at least price_min (included). Cannot be used together with price_buckets |
@@ -462,14 +462,14 @@ These differences can be summarized into the following points:
 | --------- | ------- |
 | `market` <br><span class="required">REQUIRED</span> | Matching [A-Z]{2} |
 | `locale` <br><span class="required">REQUIRED</span> | Matching [a-z]{2}-[A-Z]{2} |
-| `images` <br><span class="optional">OPTIONAL</span> | Maximum number of images to retrieve per each hotel<br>between 1-30, default: 3 |
-| `image_resolution` <br><span class="optional">OPTIONAL</span> | Resolution options<br>high or low, default: high |
-| `image_type` <br><span class="optional">OPTIONAL</span> | The format of the images<br>thumbnail or gallery |
 | `currency` <br><span class="required">REQUIRED</span> | Currency code |
 | `checkin_date` <br><span class="required">REQUIRED</span> | YYYY-MM-DD |
 | `checkout_date` <br><span class="required">REQUIRED</span> | YYYY-MM-DD |
 | `rooms` <br><span class="required">REQUIRED</span> | Number of rooms<br>default: 1 |
 | `adults` <br><span class="required">REQUIRED</span> | Number of adults<br>default: 2 |
+| `images` <br><span class="optional">OPTIONAL</span> | Maximum number of images to retrieve per each hotel<br>between 1-30, default: 3 |
+| `image_resolution` <br><span class="optional">OPTIONAL</span> | Resolution options<br>high or low, default: high |
+| `image_type` <br><span class="optional">OPTIONAL</span> | The format of the images<br>thumbnail or gallery |
 | `boost_official_partners` <br><span class="optional">OPTIONAL</span> | Indicates whether prices from official partners must be shown in the first place [1] or not [0]<br>default: 0 |
 | `sort` <br><span class="optional">OPTIONAL</span> | Sort by a given attribute. By default the relevance sorting is applied<br>One of: relevance, -relevance, price, -price, distance, -distance, rating, -rating, stars, -stars |
 | `price_min` <br><span class="optional">OPTIONAL</span> | Filter. Return only hotels where the cheaper price is at least price_min (included). Cannot be used together with price_buckets |
@@ -690,14 +690,14 @@ Provides the search by current location functionality.
 | --------- | ------- |
 | `market` <br><span class="required">REQUIRED</span> | Matching [A-Z]{2} |
 | `locale` <br><span class="required">REQUIRED</span> | Matching [a-z]{2}-[A-Z]{2} |
-| `images` <br><span class="optional">OPTIONAL</span> | Maximum number of images to retrieve per each hotel<br>between 1-30, default: 3 |
-| `image_resolution` <br><span class="optional">OPTIONAL</span> | Resolution options<br>high or low, default: high |
-| `image_type` <br><span class="optional">OPTIONAL</span> | The format of the images<br>thumbnail or gallery |
 | `currency` <br><span class="required">REQUIRED</span> | Currency code |
 | `checkin_date` <br><span class="required">REQUIRED</span> | YYYY-MM-DD |
 | `checkout_date` <br><span class="required">REQUIRED</span> | YYYY-MM-DD |
 | `rooms` <br><span class="required">REQUIRED</span> | Number of rooms<br>default: 1 |
 | `adults` <br><span class="required">REQUIRED</span> | Number of adults<br>default: 2 |
+| `images` <br><span class="optional">OPTIONAL</span> | Maximum number of images to retrieve per each hotel<br>between 1-30, default: 3 |
+| `image_resolution` <br><span class="optional">OPTIONAL</span> | Resolution options<br>high or low, default: high |
+| `image_type` <br><span class="optional">OPTIONAL</span> | The format of the images<br>thumbnail or gallery |
 | `boost_official_partners` <br><span class="optional">OPTIONAL</span> | Indicates whether prices from official partners must be shown in the first place [1] or not [0]<br>default: 0 |
 | `sort` <br><span class="optional">OPTIONAL</span> | Sort by a given attribute. By default the relevance sorting is applied<br>One of: relevance, -relevance, price, -price, distance, -distance, rating, -rating, stars, -stars |
 | `price_min` <br><span class="optional">OPTIONAL</span> | Filter. Return only hotels where the cheaper price is at least price_min (included). Cannot be used together with price_buckets |
@@ -741,8 +741,184 @@ Given a hotel, this endpoint will give back the hotel with all the information a
 Otherwise, the system will start fetching prices from the beginning for this specific hotel.
 Is a regular practice following the user flow first of all search for prices using the search prices endpoint and then retrieve more specific information - perhaps the detailed reviews - about one of the hotels using the hotel prices endpoint.
 
-The following URL shows how the hotel prices endpoint can be used to retrieve prices and the detail information for the 47106754 hotel.
+*API endpoint*
 
-http://hbe-bellboy.slingshot.eu-west-1.prod.aws.skyscanner.local/v1/prices/hotel/46947978?entity_id=27539733&market=UK&locale=en-GB&currency=GBP&checkin_date=2017-11-28&checkout_date=2017-11-29&adults=1&rooms=1
+`GET https://gateway.skyscanner.net/hotels/v1/prices/hotel/{hotel_id}
+  ?entity_id=27539733&market={market}&locale={locale}&checkin_date={checkin_date}&checkout_date={checkout_date}
+  &currency={currency}&adults={adults}&rooms={rooms}&images={images}&image_resolution={resolution}
+  &image_type={type}&boost_official_partners={boost}&partners_per_hotel={num_partners}`
 
-**wip postman link and raml docs**
+*TRY IT OUT*
+
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/235d1617d92d7467ed1b)
+
+*HEADER VALUES*
+
+| Header | Value |
+| --- | --- |
+| `apikey` <br><span class="required">REQUIRED</span> | This header is required to be on every single request any client does (it could also be accepted via query parameter) |
+| `x-user-agent` <br><span class="required">REQUIRED</span> | Indicates which is the device and the platform related to the client. The format for that header is `device;B2B`, where:<br>Device<br>`T` for tablet<br>`D` for desktop<br>`M` for mobile<br>`N` if you are not able to detect the device type |
+| `skyscanner-correlation-id` <br><span class="optional">OPTIONAL</span> | This one is intended for enabling tracing across the services |
+
+*URI PARAMETERS*
+
+| Parameter | Description |
+| --------- | ------- |
+| `hotel_id` <br><span class="required">REQUIRED</span> | Hotel to search prices for |
+| `version` <br><span class="required">REQUIRED</span> | API version |
+
+*QUERY PARAMETERS*
+
+| Parameter | Description |
+| --------- | ------- |
+| `market` <br><span class="required">REQUIRED</span> | Matching [A-Z]{2} |
+| `locale` <br><span class="required">REQUIRED</span> | Matching [a-z]{2}-[A-Z]{2} |
+| `currency` <br><span class="required">REQUIRED</span> | Currency code |
+| `checkin_date` <br><span class="required">REQUIRED</span> | YYYY-MM-DD |
+| `checkout_date` <br><span class="required">REQUIRED</span> | YYYY-MM-DD |
+| `rooms` <br><span class="required">REQUIRED</span> | Number of rooms<br>default: 1 |
+| `adults` <br><span class="required">REQUIRED</span> | Number of adults<br>default: 2 |
+| `images` <br><span class="optional">OPTIONAL</span> | Maximum number of images to retrieve per each hotel<br>between 1-30, default: 3 |
+| `image_resolution` <br><span class="optional">OPTIONAL</span> | Resolution options<br>high or low, default: high |
+| `image_type` <br><span class="optional">OPTIONAL</span> | The format of the images<br>thumbnail or gallery |
+| `boost_official_partners` <br><span class="optional">OPTIONAL</span> | Indicates whether prices from official partners must be shown in the first place [1] or not [0]<br>default: 0 |
+| `partners_per_hotel` <br><span class="optional">OPTIONAL</span> | Maximum numbers of partners to retrieve per each hotel. Note that 0 means all the available partners<br>default: 3 |
+| `enhanced` <br><span class="optional">OPTIONAL</span> | Choose extra renderers for the response, available options are:<br>location: Returns the higher level entities according to the search entity. |
+| `entity_id` <br><span class="optional">OPTIONAL</span> | This field should be present when this endpoint has been called when the user has already looked for prices in an upper entity containing the hotel in order to reuse the cached prices.<br>For example: A user searches for prices in Paris (bellboy stores Paris prices). And then, the user opens a hotel details page. In this case, the request to Bellboy must have the entity_id param fulfilled with the Paris entity_id in order to reuse the prices.|
+
+##### Response
+
+*RESPONSE PARAMETERS*
+
+| Element | Detail |
+| ------- | ------ |
+| `meta` | Contains metadata regarding the search cycle such as it's status |
+| `results` | An object containing the hotel and the enhancers if requested |
+
+> Example response:
+
+```josn
+{
+  "meta": {
+    "offers": 2,
+    "status": "COMPLETED",
+    "completion_percentage": 100
+  },
+  "results": {
+    "location": [
+      {
+        "name": "Barcelona",
+        "entity_id": "27548283",
+        "entity_type": "City"
+      },
+      ...
+    ],
+    "hotel": {
+      "district": "27562628",
+      "name_en": "Hotel Via Augusta",
+      "name": "Hotel Via Augusta",
+      "hotel_id": "46958001",
+      "total_rooms": 207,
+      "stars": "2",
+      "reviews_count": 1496,
+      "amenities": [
+        "Lift",
+        "Laundry",
+        "AirConditioning",
+        "DailyNewspaperService",
+        "Balcony",
+        "FrontDesk24hService",
+        "SafeDepositBox",
+        "WifiService",
+        "Parking",
+        "DisabledFacility",
+        "LuggageStorage",
+        "MultilingualStaffService"
+      ],
+      "city": "27548283",
+      "offers": [
+        {
+          "price_gbp": 1669,
+          "closed_user_groups": null,
+          "room_type": [
+            "triple",
+            "triple",
+            "triple"
+          ],
+          "meal_plan": "breakfast_included",
+          "strike_through": 1967,
+          "deeplink": "www.skyscanner.net/hotel_deeplink/4.0/UK/en-GB/GBP/h_ka/46958001/2017-06-29/2017-07-05/hotel/hotel/hotels?request_id=15834838-f028-400a-bb4f-ed39025cf9e1&deeplink_ids=eu-west-1.prod_092a61636486890f4d9c56373a981f94&appName=web&ticket_price=1669&guests=7&q_datetime_utc=2017-04-24T15%3A15%3A07&legacy_provider_id=249&appVersion=2.0&rooms=3&max_price=1967.0",
+          "cancellation": null,
+          "partner_id": "h_ka",
+          "available": null,
+          "cancellation_text": null,
+          "is_official": false,
+          "price": 1669
+        },
+        ...
+      ],
+      "address": {
+        "district": "Sant Gervasi",
+        "city": "Barcelona",
+        "adm1": "Catalonia",
+        "nation": "Spain",
+        "postcode": "08006",
+        "street_address": "Via Augusta, 63"
+      },
+      "description": "https://d19i3hu78g2w6f.cloudfront.net/75be_HOTEL_18576_148_en-GB",
+      "rating": {
+        "value": 8.2,
+        "desc": "rating_very_good"
+      },
+      "chain": null,
+      "reviews": {
+        "guest_types": [
+          {
+            "value": "couple",
+            "score": 82,
+            "perc": 51
+          },
+          ...
+        ],
+        "count": 1496,
+        "summary": "Very good budget hotel. Close to restaurants, bars and public transportation. Popular among solo travelers. “Friendly staff”. “Good breakfast”. ",
+        "categories": [
+          {
+            "entries": [
+              "Fantastic service",
+              "Friendly staff",
+              "Very friendly multilingual staff",
+              "Good service"
+            ],
+            "score": 94,
+            "name": "Service"
+          },
+          ...
+        ]
+      },
+      "property_type": "Hotel",
+      "coordinates": [
+        2.15145,
+        41.40005
+      ],
+      "images": [
+        {
+          "provider": "h_dp",
+          "thumbnail": "http://d3ba47lalua02r.cloudfront.net/available/47224844/rmt.jpg",
+          "gallery": "http://d3ba47lalua02r.cloudfront.net/available/47224844/rmca.jpg"
+        },
+        ...
+      ]
+    },
+    "partners": [
+      {
+        "is_official": true,
+        "name": "Adagio Access",
+        "logo": "www.skyscanner.net/images/websites/220x80/h_as.png",
+        "website_id": "h_as"
+      },
+      ...
+    ]
+  }
+}
+```
