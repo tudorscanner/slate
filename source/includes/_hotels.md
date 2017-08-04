@@ -26,7 +26,7 @@ Bellboy expects some headers and requires some others in order to work properly.
         - N if you are not able to detect the device type
     - platform needs to be:
         - B2B
-- **skyscanner-correlation-id**: Optional. This one is intended for enabling tracing across the services.
+- **skyscanner-correlation-id**: Optional. This one is intended for enabling tracing across the services. It should be a unique request identifier (UID).
 
 ## Use flow
 
@@ -83,7 +83,8 @@ GET "https://gateway.skyscanner.net/hotels/v1/prices/search/entity/{entity_id}
 | --- | --- |
 | `apikey` <br><span class="required">REQUIRED</span> | This header is required to be on every single request any client does (it could also be accepted via query parameter) |
 | `x-user-agent` <br><span class="required">REQUIRED</span> | Indicates which is the device and the platform related to the client. The format for that header is `device;B2B`, where:<br>Device is:<br>`T` for tablet<br>`D` for desktop<br>`M` for mobile<br>`N` if you are not able to detect the device type |
-| `skyscanner-correlation-id` <br><span class="optional">OPTIONAL</span> | This one is intended for enabling tracing across the services |
+| `skyscanner-correlation-id` <br><span class="optional">OPTIONAL</span> | This one is intended for enabling tracing across the services. It should be a unique request identifier (UID). |
+
 
 *URI PARAMETERS*
 
@@ -123,7 +124,7 @@ GET "https://gateway.skyscanner.net/hotels/v1/prices/search/entity/{entity_id}
 | `limit` <br><span class="optional">OPTIONAL</span> | Number of results to retrieve<br>between 1-30, default: 30 |
 | `offset` <br><span class="optional">OPTIONAL</span> | How many results to skip from the first position. Useful for paginating<br>default: 0 |
 | `partners_per_hotel` <br><span class="optional">OPTIONAL</span> | Maximum numbers of partners to retrieve per each hotel. Note that 0 means all the available partners<br>default: 3 |
-| `enhanced` <br><span class="optional">OPTIONAL</span> | Choose extra renderers for the response, available options are:<br>filters: Returns extra object in the response including the filters like stars, district, city, etc.<br>price_slider: Return the price_slider.<br>partners: Returns information about the active partners in the system. is_official, the logo, the name and the website_id.<br>images: Returns images for the hotels. With the partner website_id and the urls.<br>amenities: Returns the hotels amenities.<br>query_location: Returns the location (higher level entities according to the searched entity) and map boundary (the coordinates of the search area).<br>extras: Returns the hotel chain of the hotels.<br>translations: Returns a dictionary with all literals and their corresponding translations using the request locale. |
+| `enhanced` <br><span class="optional">OPTIONAL</span> | Choose extra renderers for the response. If you need extra information that doesn't come with the default response, the enhancers are responsible of providing it. Available options are:<br>filters: Returns extra object in the response including the filters like stars, district, city, etc.<br>price_slider: Return the price_slider.<br>partners: Returns information about the active partners in the system. is_official, the logo, the name and the website_id.<br>images: Returns images for the hotels. With the partner website_id and the urls.<br>amenities: Returns the hotels amenities.<br>query_location: Returns the location (higher level entities according to the searched entity) and map boundary (the coordinates of the search area).<br>extras: Returns the hotel chain of the hotels.<br>translations: Returns a dictionary with all literals and their corresponding translations using the request locale. |
 
 **Note**: The OR and AND filters allow multiple values coma separated. For example: *&amenities=Lift,Bar*
 
@@ -373,7 +374,7 @@ GET "https://gateway.skyscanner.net/hotels/v1/prices/search/location/{lon,lat}
 | --- | --- |
 | `apikey` <br><span class="required">REQUIRED</span> | This header is required to be on every single request any client does (it could also be accepted via query parameter) |
 | `x-user-agent` <br><span class="required">REQUIRED</span> | Indicates which is the device and the platform related to the client. The format for that header is `device;B2B`, where:<br>Device is:<br>`T` for tablet<br>`D` for desktop<br>`M` for mobile<br>`N` if you are not able to detect the device type |
-| `skyscanner-correlation-id` <br><span class="optional">OPTIONAL</span> | This one is intended for enabling tracing across the services |
+| `skyscanner-correlation-id` <br><span class="optional">OPTIONAL</span> | This one is intended for enabling tracing across the services. It should be a unique request identifier (UID). |
 
 *URI PARAMETERS*
 
@@ -413,7 +414,7 @@ GET "https://gateway.skyscanner.net/hotels/v1/prices/search/location/{lon,lat}
 | `limit` <br><span class="optional">OPTIONAL</span> | Number of results to retrieve<br>between 1-30, default: 30 |
 | `offset` <br><span class="optional">OPTIONAL</span> | How many results to skip from the first position. Useful for paginating<br>default: 0 |
 | `partners_per_hotel` <br><span class="optional">OPTIONAL</span> | Maximum numbers of partners to retrieve per each hotel. Note that 0 means all the available partners<br>default: 3 |
-| `enhanced` <br><span class="optional">OPTIONAL</span> | Choose extra renderers for the response, available options are:<br>filters: Returns extra object in the response including the filters like stars, district, city, etc.<br>price_slider: Return the price_slider.<br>partners: Returns information about the active partners in the system. is_official, the logo, the name and the website_id.<br>images: Returns images for the hotels. With the partner website_id and the urls.<br>amenities: Returns the hotels amenities.<br>query_location: Returns the location (higher level entities according to the searched entity) and map boundary (the coordinates of the search area).<br>extras: Returns the hotel chain of the hotels.<br>translations: Returns a dictionary with all literals and their corresponding translations using the request locale. |
+| `enhanced` <br><span class="optional">OPTIONAL</span> | Choose extra renderers for the response. If you need extra information that doesn't come with the default response, the enhancers are responsible of providing it. Available options are:<br>filters: Returns extra object in the response including the filters like stars, district, city, etc.<br>price_slider: Return the price_slider.<br>partners: Returns information about the active partners in the system. is_official, the logo, the name and the website_id.<br>images: Returns images for the hotels. With the partner website_id and the urls.<br>amenities: Returns the hotels amenities.<br>query_location: Returns the location (higher level entities according to the searched entity) and map boundary (the coordinates of the search area).<br>extras: Returns the hotel chain of the hotels.<br>translations: Returns a dictionary with all literals and their corresponding translations using the request locale. |
 
 **Note**: The OR and AND filters allow multiple values coma separated. For example: *&amenities=Lift,Bar*
 
@@ -464,7 +465,7 @@ GET "https://gateway.skyscanner.net/hotels/v1/prices/map/entity/{entity_id}
 | --- | --- |
 | `apikey` <br><span class="required">REQUIRED</span> | This header is required to be on every single request any client does (it could also be accepted via query parameter) |
 | `x-user-agent` <br><span class="required">REQUIRED</span> | Indicates which is the device and the platform related to the client. The format for that header is `device;B2B`, where:<br>Device is:<br>`T` for tablet<br>`D` for desktop<br>`M` for mobile<br>`N` if you are not able to detect the device type |
-| `skyscanner-correlation-id` <br><span class="optional">OPTIONAL</span> | This one is intended for enabling tracing across the services |
+| `skyscanner-correlation-id` <br><span class="optional">OPTIONAL</span> | This one is intended for enabling tracing across the services. It should be a unique request identifier (UID). |
 
 *URI PARAMETERS*
 
@@ -504,7 +505,7 @@ GET "https://gateway.skyscanner.net/hotels/v1/prices/map/entity/{entity_id}
 | `limit` <br><span class="optional">OPTIONAL</span> | Number of results to retrieve<br>between 1-100, default: 100 |
 | `offset` <br><span class="optional">OPTIONAL</span> | How many results to skip from the first position. Useful for paginating<br>default: 0 |
 | `partners_per_hotel` <br><span class="optional">OPTIONAL</span> | Maximum numbers of partners to retrieve per each hotel. Note that 0 means all the available partners. Map only supports 1 partner per hotel<br>default: 1 |
-| `enhanced` <br><span class="optional">OPTIONAL</span> | Choose extra renderers for the response, available options are:<br>filters: Returns extra object in the response including the filters like stars, district, city, etc.<br>price_slider: Return the price_slider.<br>query_location: Returns the location (higher level entities according to the searched entity) and map boundary (the coordinates of the search area).<br>translations: Returns a dictionary with all literals and their corresponding translations using the request locale. |
+| `enhanced` <br><span class="optional">OPTIONAL</span> | Choose extra renderers for the response. If you need extra information that doesn't come with the default response, the enhancers are responsible of providing it. Available options are:<br>filters: Returns extra object in the response including the filters like stars, district, city, etc.<br>price_slider: Return the price_slider.<br>query_location: Returns the location (higher level entities according to the searched entity) and map boundary (the coordinates of the search area).<br>translations: Returns a dictionary with all literals and their corresponding translations using the request locale. |
 | `bbox` <br><span class="optional">OPTIONAL</span> | Bounding Box coordinates in which to look for hotels as bbox=left,bottom,right,top<br>Example: -4.051,50.478,1.853,52.909 |
 
 **Note**: The OR and AND filters allow multiple values coma separated. For example: *&amenities=Lift,Bar*
@@ -702,7 +703,7 @@ GET "https://gateway.skyscanner.net/hotels/v1/prices/map/location/{lon,lat}
 | --- | --- |
 | `apikey` <br><span class="required">REQUIRED</span> | This header is required to be on every single request any client does (it could also be accepted via query parameter) |
 | `x-user-agent` <br><span class="required">REQUIRED</span> | Indicates which is the device and the platform related to the client. The format for that header is `device;B2B`, where:<br>Device is:<br>`T` for tablet<br>`D` for desktop<br>`M` for mobile<br>`N` if you are not able to detect the device type |
-| `skyscanner-correlation-id` <br><span class="optional">OPTIONAL</span> | This one is intended for enabling tracing across the services |
+| `skyscanner-correlation-id` <br><span class="optional">OPTIONAL</span> | This one is intended for enabling tracing across the services. It should be a unique request identifier (UID). |
 
 *URI PARAMETERS*
 
@@ -742,7 +743,7 @@ GET "https://gateway.skyscanner.net/hotels/v1/prices/map/location/{lon,lat}
 | `limit` <br><span class="optional">OPTIONAL</span> | Number of results to retrieve<br>between 1-100, default: 100 |
 | `offset` <br><span class="optional">OPTIONAL</span> | How many results to skip from the first position. Useful for paginating<br>default: 0 |
 | `partners_per_hotel` <br><span class="optional">OPTIONAL</span> | Maximum numbers of partners to retrieve per each hotel. Note that 0 means all the available partners. Map only supports 1 partner per hotel<br>default: 1 |
-| `enhanced` <br><span class="optional">OPTIONAL</span> | Choose extra renderers for the response, available options are:<br>filters: Returns extra object in the response including the filters like stars, district, city, etc.<br>price_slider: Return the price_slider.<br>query_location: Returns the location (higher level entities according to the searched entity) and map boundary (the coordinates of the search area).<br>translations: Returns a dictionary with all literals and their corresponding translations using the request locale. |
+| `enhanced` <br><span class="optional">OPTIONAL</span> | Choose extra renderers for the response. If you need extra information that doesn't come with the default response, the enhancers are responsible of providing it. Available options are:<br>filters: Returns extra object in the response including the filters like stars, district, city, etc.<br>price_slider: Return the price_slider.<br>query_location: Returns the location (higher level entities according to the searched entity) and map boundary (the coordinates of the search area).<br>translations: Returns a dictionary with all literals and their corresponding translations using the request locale. |
 | `bbox` <br><span class="optional">OPTIONAL</span> | Bounding Box coordinates in which to look for hotels as bbox=left,bottom,right,top<br>Example: -4.051,50.478,1.853,52.909 |
 
 **Note**: The OR and AND filters allow multiple values coma separated. For example: *&amenities=Lift,Bar*
@@ -790,7 +791,7 @@ GET "https://gateway.skyscanner.net/hotels/v1/prices/hotel/{hotel_id}
 | --- | --- |
 | `apikey` <br><span class="required">REQUIRED</span> | This header is required to be on every single request any client does (it could also be accepted via query parameter) |
 | `x-user-agent` <br><span class="required">REQUIRED</span> | Indicates which is the device and the platform related to the client. The format for that header is `device;B2B`, where:<br>Device is:<br>`T` for tablet<br>`D` for desktop<br>`M` for mobile<br>`N` if you are not able to detect the device type |
-| `skyscanner-correlation-id` <br><span class="optional">OPTIONAL</span> | This one is intended for enabling tracing across the services |
+| `skyscanner-correlation-id` <br><span class="optional">OPTIONAL</span> | This one is intended for enabling tracing across the services. It should be a unique request identifier (UID). |
 
 *URI PARAMETERS*
 
@@ -815,7 +816,7 @@ GET "https://gateway.skyscanner.net/hotels/v1/prices/hotel/{hotel_id}
 | `image_type` <br><span class="optional">OPTIONAL</span> | The format of the images<br>thumbnail or gallery |
 | `boost_official_partners` <br><span class="optional">OPTIONAL</span> | Indicates whether prices from official partners must be shown in the first place [1] or not [0]<br>default: 0 |
 | `partners_per_hotel` <br><span class="optional">OPTIONAL</span> | Maximum numbers of partners to retrieve per each hotel. Note that 0 means all the available partners<br>default: 3 |
-| `enhanced` <br><span class="optional">OPTIONAL</span> | Choose extra renderers for the response, available options are:<br>location: Returns the higher level entities according to the search entity.<br>translations: Returns a dictionary with all literals and their corresponding translations using the request locale. |
+| `enhanced` <br><span class="optional">OPTIONAL</span> | Choose extra renderers for the response. If you need extra information that doesn't come with the default response, the enhancers are responsible of providing it. Available options are:<br>location: Returns the higher level entities according to the search entity.<br>translations: Returns a dictionary with all literals and their corresponding translations using the request locale. |
 | `entity_id` <br><span class="optional">OPTIONAL</span> | This field should be present when this endpoint has been called when the user has already looked for prices in an upper entity containing the hotel in order to reuse the cached prices.<br>For example: A user searches for prices in Paris (bellboy stores Paris prices). And then, the user opens a hotel details page. In this case, the request to Bellboy must have the entity_id param fulfilled with the Paris entity_id in order to reuse the prices.|
 
 ### Response
@@ -960,3 +961,30 @@ GET "https://gateway.skyscanner.net/hotels/v1/prices/hotel/{hotel_id}
 | `meta` | Contains metadata regarding the search cycle such as it's status |
 | `results` | An object containing the hotel and the enhancers if requested |
 | `translations` | Only with the `translations` enhanced. Dictionary with all literals that can be translated |
+
+## FAQ
+
+**Why amenities is an enhancer and a query parameter too?**
+
+The enhancers, are a way to add extra information to the response. By default, the hotels don't come with the list of their amenities if you don't pass the amenities enhancer.
+On the other hand, you can always filter hotels by amenities using the amenities parameter. For example: &amenities=Lift,WifiService where in this case, you would only get hotels that have those two amenities.
+
+**Why is the x-user-agent header mandatory and it's important to pass the correct device?**
+
+Bellboy provides deals depending on the device the user is using. For this reason, it is mandatory to send the correct x-user-agent in order to provide accurate offers.
+
+**Are the amenities filter returned in any particular order?**
+
+Yes, by default Bellboy returns certain amenities in the first place because are most commonly used for filtering (Wifi Service, Pool, Parking, Air Conditioning, Spa, Airport Shuttle Service).
+However, this order can change for different markets.
+
+**Are the meal plan and cancellation policy filters returned in any particular order?**
+
+Yes, by default Bellboy returns both filters in the following way:
+
+- Cancellation policy: The most convenient cancellation policy for the user is prioritised in the following order: Free cancellation, Refundable, Special conditions, Non-refundable
+- Meal plan: The more inclusive offers are prioritised in the following order: All inclusive, Full Board, Half Board, Breakfast included, Room only
+
+**How can I translate the id's in the response to localized strings to display to the user?**
+
+If you send the translations enhancer in the request, you will get a translations object in the root level of the response where you will find the translation for any key according to the locale you specified.
