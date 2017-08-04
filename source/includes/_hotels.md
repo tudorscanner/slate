@@ -325,6 +325,11 @@ GET "https://gateway.skyscanner.net/hotels/v1/prices/search/entity/{entity_id}
         "entity_type": "Nation"
       }
     ]
+  },
+  "translations": {
+    "CUG_create_account_to_unlock_deals_msg": "Create an account to unlock exclusive deals",
+    "CUG_deal": "DEAL",
+    ...
   }
 }
 ```
@@ -650,6 +655,11 @@ GET "https://gateway.skyscanner.net/hotels/v1/prices/map/entity/{entity_id}
         "entity_type": "Nation"
       }
     ]
+  },
+  "translations": {
+    "CUG_create_account_to_unlock_deals_msg": "Create an account to unlock exclusive deals",
+    "CUG_deal": "DEAL",
+    ...
   }
 }
 ```
@@ -934,6 +944,11 @@ GET "https://gateway.skyscanner.net/hotels/v1/prices/hotel/{hotel_id}
       },
       ...
     ]
+  },
+  "translations": {
+    "CUG_create_account_to_unlock_deals_msg": "Create an account to unlock exclusive deals",
+    "CUG_deal": "DEAL",
+    ...
   }
 }
 ```
