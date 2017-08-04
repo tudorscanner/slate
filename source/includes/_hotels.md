@@ -123,7 +123,7 @@ GET "https://gateway.skyscanner.net/hotels/v1/prices/search/entity/{entity_id}
 | `limit` <br><span class="optional">OPTIONAL</span> | Number of results to retrieve<br>between 1-30, default: 30 |
 | `offset` <br><span class="optional">OPTIONAL</span> | How many results to skip from the first position. Useful for paginating<br>default: 0 |
 | `partners_per_hotel` <br><span class="optional">OPTIONAL</span> | Maximum numbers of partners to retrieve per each hotel. Note that 0 means all the available partners<br>default: 3 |
-| `enhanced` <br><span class="optional">OPTIONAL</span> | Choose extra renderers for the response, available options are:<br>filters: Returns extra object in the response including the filters like stars, district, city, etc.<br>price_slider: Return the price_slider.<br>partners: Returns information about the active partners in the system. is_official, the logo, the name and the website_id.<br>images: Returns images for the hotels. With the partner website_id and the urls.<br>amenities: Returns the hotels amenities.<br>query_location: Returns the location (higher level entities according to the searched entity) and map boundary (the coordinates of the search area).<br>extras: Returns the hotel chain of the hotels. |
+| `enhanced` <br><span class="optional">OPTIONAL</span> | Choose extra renderers for the response, available options are:<br>filters: Returns extra object in the response including the filters like stars, district, city, etc.<br>price_slider: Return the price_slider.<br>partners: Returns information about the active partners in the system. is_official, the logo, the name and the website_id.<br>images: Returns images for the hotels. With the partner website_id and the urls.<br>amenities: Returns the hotels amenities.<br>query_location: Returns the location (higher level entities according to the searched entity) and map boundary (the coordinates of the search area).<br>extras: Returns the hotel chain of the hotels.<br>translations: Returns a dictionary with all literals and their corresponding translations using the request locale. |
 
 **Note**: The OR and AND filters allow multiple values coma separated. For example: *&amenities=Lift,Bar*
 
@@ -325,6 +325,11 @@ GET "https://gateway.skyscanner.net/hotels/v1/prices/search/entity/{entity_id}
         "entity_type": "Nation"
       }
     ]
+  },
+  "translations": {
+    "CUG_create_account_to_unlock_deals_msg": "Create an account to unlock exclusive deals",
+    "CUG_deal": "DEAL",
+    ...
   }
 }
 ```
@@ -337,6 +342,8 @@ GET "https://gateway.skyscanner.net/hotels/v1/prices/search/entity/{entity_id}
 | `meta` | Contains metadata regarding the search cycle such as it's status |
 | `count` | Number of hotels |
 | `results` | An object containing the hotels and the enhancers if requested |
+| `translations` | Only with the `translations` enhanced. Dictionary with all literals that can be translated |
+
 
 ### Location Request
 
@@ -406,7 +413,7 @@ GET "https://gateway.skyscanner.net/hotels/v1/prices/search/location/{lon,lat}
 | `limit` <br><span class="optional">OPTIONAL</span> | Number of results to retrieve<br>between 1-30, default: 30 |
 | `offset` <br><span class="optional">OPTIONAL</span> | How many results to skip from the first position. Useful for paginating<br>default: 0 |
 | `partners_per_hotel` <br><span class="optional">OPTIONAL</span> | Maximum numbers of partners to retrieve per each hotel. Note that 0 means all the available partners<br>default: 3 |
-| `enhanced` <br><span class="optional">OPTIONAL</span> | Choose extra renderers for the response, available options are:<br>filters: Returns extra object in the response including the filters like stars, district, city, etc.<br>price_slider: Return the price_slider.<br>partners: Returns information about the active partners in the system. is_official, the logo, the name and the website_id.<br>images: Returns images for the hotels. With the partner website_id and the urls.<br>amenities: Returns the hotels amenities.<br>query_location: Returns the location (higher level entities according to the searched entity) and map boundary (the coordinates of the search area).<br>extras: Returns the hotel chain of the hotels. |
+| `enhanced` <br><span class="optional">OPTIONAL</span> | Choose extra renderers for the response, available options are:<br>filters: Returns extra object in the response including the filters like stars, district, city, etc.<br>price_slider: Return the price_slider.<br>partners: Returns information about the active partners in the system. is_official, the logo, the name and the website_id.<br>images: Returns images for the hotels. With the partner website_id and the urls.<br>amenities: Returns the hotels amenities.<br>query_location: Returns the location (higher level entities according to the searched entity) and map boundary (the coordinates of the search area).<br>extras: Returns the hotel chain of the hotels.<br>translations: Returns a dictionary with all literals and their corresponding translations using the request locale. |
 
 **Note**: The OR and AND filters allow multiple values coma separated. For example: *&amenities=Lift,Bar*
 
@@ -422,6 +429,7 @@ GET "https://gateway.skyscanner.net/hotels/v1/prices/search/location/{lon,lat}
 | `meta` | Contains metadata regarding the search cycle such as it's status |
 | `count` | Number of hotels |
 | `results` | An object containing the hotels and the enhancers if requested |
+| `translations` | Only with the `translations` enhanced. Dictionary with all literals that can be translated |
 
 ## Search Prices, map version
 
@@ -496,7 +504,7 @@ GET "https://gateway.skyscanner.net/hotels/v1/prices/map/entity/{entity_id}
 | `limit` <br><span class="optional">OPTIONAL</span> | Number of results to retrieve<br>between 1-100, default: 100 |
 | `offset` <br><span class="optional">OPTIONAL</span> | How many results to skip from the first position. Useful for paginating<br>default: 0 |
 | `partners_per_hotel` <br><span class="optional">OPTIONAL</span> | Maximum numbers of partners to retrieve per each hotel. Note that 0 means all the available partners. Map only supports 1 partner per hotel<br>default: 1 |
-| `enhanced` <br><span class="optional">OPTIONAL</span> | Choose extra renderers for the response, available options are:<br>filters: Returns extra object in the response including the filters like stars, district, city, etc.<br>price_slider: Return the price_slider.<br>query_location: Returns the location (higher level entities according to the searched entity) and map boundary (the coordinates of the search area). |
+| `enhanced` <br><span class="optional">OPTIONAL</span> | Choose extra renderers for the response, available options are:<br>filters: Returns extra object in the response including the filters like stars, district, city, etc.<br>price_slider: Return the price_slider.<br>query_location: Returns the location (higher level entities according to the searched entity) and map boundary (the coordinates of the search area).<br>translations: Returns a dictionary with all literals and their corresponding translations using the request locale. |
 | `bbox` <br><span class="optional">OPTIONAL</span> | Bounding Box coordinates in which to look for hotels as bbox=left,bottom,right,top<br>Example: -4.051,50.478,1.853,52.909 |
 
 **Note**: The OR and AND filters allow multiple values coma separated. For example: *&amenities=Lift,Bar*
@@ -647,6 +655,11 @@ GET "https://gateway.skyscanner.net/hotels/v1/prices/map/entity/{entity_id}
         "entity_type": "Nation"
       }
     ]
+  },
+  "translations": {
+    "CUG_create_account_to_unlock_deals_msg": "Create an account to unlock exclusive deals",
+    "CUG_deal": "DEAL",
+    ...
   }
 }
 ```
@@ -659,6 +672,7 @@ GET "https://gateway.skyscanner.net/hotels/v1/prices/map/entity/{entity_id}
 | `meta` | Contains metadata regarding the search cycle such as it's status |
 | `count` | Number of hotels |
 | `results` | An object containing the hotels and the enhancers if requested |
+| `translations` | Only with the `translations` enhanced. Dictionary with all literals that can be translated |
 
 ### Location Request
 
@@ -728,7 +742,7 @@ GET "https://gateway.skyscanner.net/hotels/v1/prices/map/location/{lon,lat}
 | `limit` <br><span class="optional">OPTIONAL</span> | Number of results to retrieve<br>between 1-100, default: 100 |
 | `offset` <br><span class="optional">OPTIONAL</span> | How many results to skip from the first position. Useful for paginating<br>default: 0 |
 | `partners_per_hotel` <br><span class="optional">OPTIONAL</span> | Maximum numbers of partners to retrieve per each hotel. Note that 0 means all the available partners. Map only supports 1 partner per hotel<br>default: 1 |
-| `enhanced` <br><span class="optional">OPTIONAL</span> | Choose extra renderers for the response, available options are:<br>filters: Returns extra object in the response including the filters like stars, district, city, etc.<br>price_slider: Return the price_slider.<br>query_location: Returns the location (higher level entities according to the searched entity) and map boundary (the coordinates of the search area). |
+| `enhanced` <br><span class="optional">OPTIONAL</span> | Choose extra renderers for the response, available options are:<br>filters: Returns extra object in the response including the filters like stars, district, city, etc.<br>price_slider: Return the price_slider.<br>query_location: Returns the location (higher level entities according to the searched entity) and map boundary (the coordinates of the search area).<br>translations: Returns a dictionary with all literals and their corresponding translations using the request locale. |
 | `bbox` <br><span class="optional">OPTIONAL</span> | Bounding Box coordinates in which to look for hotels as bbox=left,bottom,right,top<br>Example: -4.051,50.478,1.853,52.909 |
 
 **Note**: The OR and AND filters allow multiple values coma separated. For example: *&amenities=Lift,Bar*
@@ -745,6 +759,7 @@ GET "https://gateway.skyscanner.net/hotels/v1/prices/map/location/{lon,lat}
 | `meta` | Contains metadata regarding the search cycle such as it's status |
 | `count` | Number of hotels |
 | `results` | An object containing the hotels and the enhancers if requested |
+| `translations` | Only with the `translations` enhanced. Dictionary with all literals that can be translated |
 
 ## Hotel Prices
 
@@ -800,7 +815,7 @@ GET "https://gateway.skyscanner.net/hotels/v1/prices/hotel/{hotel_id}
 | `image_type` <br><span class="optional">OPTIONAL</span> | The format of the images<br>thumbnail or gallery |
 | `boost_official_partners` <br><span class="optional">OPTIONAL</span> | Indicates whether prices from official partners must be shown in the first place [1] or not [0]<br>default: 0 |
 | `partners_per_hotel` <br><span class="optional">OPTIONAL</span> | Maximum numbers of partners to retrieve per each hotel. Note that 0 means all the available partners<br>default: 3 |
-| `enhanced` <br><span class="optional">OPTIONAL</span> | Choose extra renderers for the response, available options are:<br>location: Returns the higher level entities according to the search entity. |
+| `enhanced` <br><span class="optional">OPTIONAL</span> | Choose extra renderers for the response, available options are:<br>location: Returns the higher level entities according to the search entity.<br>translations: Returns a dictionary with all literals and their corresponding translations using the request locale. |
 | `entity_id` <br><span class="optional">OPTIONAL</span> | This field should be present when this endpoint has been called when the user has already looked for prices in an upper entity containing the hotel in order to reuse the cached prices.<br>For example: A user searches for prices in Paris (bellboy stores Paris prices). And then, the user opens a hotel details page. In this case, the request to Bellboy must have the entity_id param fulfilled with the Paris entity_id in order to reuse the prices.|
 
 ### Response
@@ -929,6 +944,11 @@ GET "https://gateway.skyscanner.net/hotels/v1/prices/hotel/{hotel_id}
       },
       ...
     ]
+  },
+  "translations": {
+    "CUG_create_account_to_unlock_deals_msg": "Create an account to unlock exclusive deals",
+    "CUG_deal": "DEAL",
+    ...
   }
 }
 ```
@@ -939,3 +959,4 @@ GET "https://gateway.skyscanner.net/hotels/v1/prices/hotel/{hotel_id}
 | ------- | ------ |
 | `meta` | Contains metadata regarding the search cycle such as it's status |
 | `results` | An object containing the hotel and the enhancers if requested |
+| `translations` | Only with the `translations` enhanced. Dictionary with all literals that can be translated |
