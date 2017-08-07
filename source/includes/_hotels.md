@@ -14,7 +14,7 @@ The Hotels API provides a global endpoint: https://gateway.skyscanner.net/hotels
 
 ## Headers
 
-The API expects some headers and requires some others in order to work properly. All of them are described here:
+The API expects the header:
 
 - **x-user-agent**: Required. Indicates which is the device related to the client. The format for that header is device;B2B, where:
     - device can be: - T for tablet
@@ -22,7 +22,6 @@ The API expects some headers and requires some others in order to work properly.
         - M for mobile
         - N if you are not able to detect the device type
     - For example: M;B2B
-- **skyscanner-correlation-id**: Optional. This one is intended for enabling tracing across the services. It should be a unique request identifier (UID).
 
 ## Use flow
 
@@ -69,7 +68,6 @@ GET "https://gateway.skyscanner.net/hotels/v1/prices/search/entity/{entity_id}
 | Header | Value |
 | --- | --- |
 | `x-user-agent` <br><span class="required">REQUIRED</span> | Indicates which is the device and the platform related to the client. The format for that header is `device;B2B`, where:<br>Device is:<br>`T` for tablet<br>`D` for desktop<br>`M` for mobile<br>`N` if you are not able to detect the device type |
-| `skyscanner-correlation-id` <br><span class="optional">OPTIONAL</span> | This one is intended for enabling tracing across the services. It should be a unique request identifier (UID). |
 
 
 *URI PARAMETERS*
@@ -361,7 +359,6 @@ GET "https://gateway.skyscanner.net/hotels/v1/prices/search/location/{lon,lat}
 | --- | --- |
 | `apikey` <br><span class="required">REQUIRED</span> | This header is required to be on every single request any client does (it could also be accepted via query parameter) |
 | `x-user-agent` <br><span class="required">REQUIRED</span> | Indicates which is the device and the platform related to the client. The format for that header is `device;B2B`, where:<br>Device is:<br>`T` for tablet<br>`D` for desktop<br>`M` for mobile<br>`N` if you are not able to detect the device type |
-| `skyscanner-correlation-id` <br><span class="optional">OPTIONAL</span> | This one is intended for enabling tracing across the services. It should be a unique request identifier (UID). |
 
 *URI PARAMETERS*
 
@@ -453,7 +450,6 @@ GET "https://gateway.skyscanner.net/hotels/v1/prices/map/entity/{entity_id}
 | --- | --- |
 | `apikey` <br><span class="required">REQUIRED</span> | This header is required to be on every single request any client does (it could also be accepted via query parameter) |
 | `x-user-agent` <br><span class="required">REQUIRED</span> | Indicates which is the device and the platform related to the client. The format for that header is `device;B2B`, where:<br>Device is:<br>`T` for tablet<br>`D` for desktop<br>`M` for mobile<br>`N` if you are not able to detect the device type |
-| `skyscanner-correlation-id` <br><span class="optional">OPTIONAL</span> | This one is intended for enabling tracing across the services. It should be a unique request identifier (UID). |
 
 *URI PARAMETERS*
 
@@ -692,7 +688,6 @@ GET "https://gateway.skyscanner.net/hotels/v1/prices/map/location/{lon,lat}
 | --- | --- |
 | `apikey` <br><span class="required">REQUIRED</span> | This header is required to be on every single request any client does (it could also be accepted via query parameter) |
 | `x-user-agent` <br><span class="required">REQUIRED</span> | Indicates which is the device and the platform related to the client. The format for that header is `device;B2B`, where:<br>Device is:<br>`T` for tablet<br>`D` for desktop<br>`M` for mobile<br>`N` if you are not able to detect the device type |
-| `skyscanner-correlation-id` <br><span class="optional">OPTIONAL</span> | This one is intended for enabling tracing across the services. It should be a unique request identifier (UID). |
 
 *URI PARAMETERS*
 
@@ -781,7 +776,6 @@ GET "https://gateway.skyscanner.net/hotels/v1/prices/hotel/{hotel_id}
 | --- | --- |
 | `apikey` <br><span class="required">REQUIRED</span> | This header is required to be on every single request any client does (it could also be accepted via query parameter) |
 | `x-user-agent` <br><span class="required">REQUIRED</span> | Indicates which is the device and the platform related to the client. The format for that header is `device;B2B`, where:<br>Device is:<br>`T` for tablet<br>`D` for desktop<br>`M` for mobile<br>`N` if you are not able to detect the device type |
-| `skyscanner-correlation-id` <br><span class="optional">OPTIONAL</span> | This one is intended for enabling tracing across the services. It should be a unique request identifier (UID). |
 
 *URI PARAMETERS*
 
