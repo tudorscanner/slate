@@ -334,7 +334,7 @@ GET "https://gateway.skyscanner.net/hotels/v1/prices/search/entity/{entity_id}
 ### Location Request
 
 This endpoint gives back hotels with prices too but instead from an entity, around specific coordinates.
-
+It takes the coordinades as an input to provide the hotels.
 Provides the search by current location functionality.
 
 *API endpoint*
