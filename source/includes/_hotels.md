@@ -6,47 +6,34 @@
     All the documentation below is for the new Hotels API.
 </aside>
 
-Bellboy is the service responsible for finding the best hotels with rates around a given entity. It provides endpoints to search prices, a map version of it and a hotel prices one.
+This service responsible for finding the best hotels with rates around a given entity. It provides endpoints to search prices, a map version of it and a hotel prices one.
 
 ## Endpoint
 
-Bellboy provides a global endpoint: https://gateway.skyscanner.net/hotels/
-
-The JSON API by itself is mapped at the following URL https://gateway.skyscanner.net/hotels/v{version}/ where version points to a specific release
+The Hotels API provides a global endpoint: https://gateway.skyscanner.net/hotels/v{version}/ where version points to a specific release.
 
 ## Headers
 
-Bellboy expects some headers and requires some others in order to work properly. All of them are described here:
+The API expects some headers and requires some others in order to work properly. All of them are described here:
 
-- **apikey**: Required. This header is required to be on every single request any client does (it could also be accepted via query parameter).
-- **x-user-agent**: Required. Indicates which is the device and the platform related to the client. The format for that header is device;platform, where:
+- **x-user-agent**: Required. Indicates which is the device related to the client. The format for that header is device;B2B, where:
     - device can be: - T for tablet
         - D for desktop
         - M for mobile
         - N if you are not able to detect the device type
-    - platform needs to be:
-        - B2B
+    - For example: M;B2B
 - **skyscanner-correlation-id**: Optional. This one is intended for enabling tracing across the services. It should be a unique request identifier (UID).
 
 ## Use flow
 
-Every time that a user searches for hotel offers in a city, Bellboy determines if the request belongs to an already created search cycle or it is a new one.
-A search cycle can be related to a request and identified univocally using some of the parameters sent along the request.
-The request parameters used are entity_id, market, locale, checkin_date, checkout_date, adults and rooms.
-The search cycle is not only identified and reused with those query parameters but also with the HTTP header x-user-agent, as it identifies different types of users with specific offers.
-Worth mentioning that a search cycle has a limited time of life, it lasts for 15 minutes. Hereby, once this timeout is reached a new search cycle is created.
-The search cycle moves from an initially PENDING state till a COMPLETED state meaning that all hotels and prices have been retrieved.
-Successive calls to the API using the same parameters that point to the same search cycle will receive the status of the search cycle, this flow can be resumed in the following steps:
+All the /prices endpoints are intended to be queried using a polling mechanism using the same parameters as the one that started the polling. The flow of the service is described below:
 
-All the /prices endpoints are intended to be queried using a polling mechanism. The flow of the service is described below:
-
-1. On the first request that a user does, Bellboy creates a search cycle according to the nature of the request and returns to the user empty results. `Metadata PENDING state`.
-2. In the background, bellboy will start retrieving hotels and prices that will be internally stored to be served to the user in the following requests.
-3. At this point, the client needs to keep polling the service with the same query while the status attribute inside the meta object in the response is *PENDING*. On each query, the number of results will grow. `Metadata PENDING state, partial results`.
+1. On the first request that a user does, the service will reply with empty results and the status attribute inside the meta object set to *PENDING*. `Metadata PENDING state`.
+3. The client needs to keep polling the service with the same query while the status attribute inside the meta object in the response is *PENDING*. On each query, the number of results will grow. `Metadata PENDING state, partial results`.
 4. The status attribute will eventually change to *COMPLETED*. Meaning that the search cycle has finished. `Metadata COMPLETED state`.
 5. Clients should implement a self-healing mechanism that should include:
     - Finish the polling after X seconds in the scenarios of having the status *PENDING* for so long.
-    - Retry mechanism in the scenario of a Bellboy failure (Ex: retry after 1 seconds)
+    - Retry mechanism in the scenario of a service failure (Ex: retry after 1 seconds)
 
 ## Search Prices
 
@@ -54,10 +41,10 @@ All the /prices endpoints are intended to be queried using a polling mechanism. 
 
 Given an entity_id, this endpoint will give back hotels with prices around the provided entity. The supported entities are any, from cities, islands, nations, places to Hotels.
 
-Bellboy, first of all, tries to search for the hotels related to an entity using an explicit relation - cities, administration zones and nations, and if the results are less than a minimum number of hotels the query turns out in a geographical query.
+The Hotels API, first of all, tries to search for the hotels related to an entity using an explicit relation - cities, administration zones and nations, and if the results are less than a minimum number of hotels the query turns out in a geographical query.
 This geographical query seeks for hotels using different distances, from 500 meters to 50km, till finding this minimum amount or get the maximum distance.
 
-When a Hotel is used as the entity queried for, Bellboy will treat this as an ad-hoc case. The hotel used as an entity will be serialized into the *hotel_pivot* object with its offers. Meanwhile, it will be removed from the results object.
+When a Hotel is used as the entity queried for, the service will treat this as an ad-hoc case. The hotel used as an entity will be serialized into the *hotel_pivot* object with its offers. Meanwhile, it will be removed from the results object.
 
 The following URL shows how the search prices endpoint can be used to retrieve prices for those hotels that are placed in Barcelona
 
@@ -81,7 +68,6 @@ GET "https://gateway.skyscanner.net/hotels/v1/prices/search/entity/{entity_id}
 
 | Header | Value |
 | --- | --- |
-| `apikey` <br><span class="required">REQUIRED</span> | This header is required to be on every single request any client does (it could also be accepted via query parameter) |
 | `x-user-agent` <br><span class="required">REQUIRED</span> | Indicates which is the device and the platform related to the client. The format for that header is `device;B2B`, where:<br>Device is:<br>`T` for tablet<br>`D` for desktop<br>`M` for mobile<br>`N` if you are not able to detect the device type |
 | `skyscanner-correlation-id` <br><span class="optional">OPTIONAL</span> | This one is intended for enabling tracing across the services. It should be a unique request identifier (UID). |
 
@@ -104,6 +90,7 @@ GET "https://gateway.skyscanner.net/hotels/v1/prices/search/entity/{entity_id}
 | `checkout_date` <br><span class="required">REQUIRED</span> | YYYY-MM-DD |
 | `rooms` <br><span class="required">REQUIRED</span> | Number of rooms<br>default: 1 |
 | `adults` <br><span class="required">REQUIRED</span> | Number of adults<br>default: 2 |
+| `apikey` <br><span class="required">REQUIRED</span> | This parameter is required to be on every single request any client does |
 | `images` <br><span class="optional">OPTIONAL</span> | Maximum number of images to retrieve per each hotel<br>between 1-30, default: 3 |
 | `image_resolution` <br><span class="optional">OPTIONAL</span> | Resolution options<br>high or low, default: high |
 | `image_type` <br><span class="optional">OPTIONAL</span> | The format of the images<br>thumbnail or gallery |
@@ -124,7 +111,7 @@ GET "https://gateway.skyscanner.net/hotels/v1/prices/search/entity/{entity_id}
 | `limit` <br><span class="optional">OPTIONAL</span> | Number of results to retrieve<br>between 1-30, default: 30 |
 | `offset` <br><span class="optional">OPTIONAL</span> | How many results to skip from the first position. Useful for paginating<br>default: 0 |
 | `partners_per_hotel` <br><span class="optional">OPTIONAL</span> | Maximum numbers of partners to retrieve per each hotel. Note that 0 means all the available partners<br>default: 3 |
-| `enhanced` <br><span class="optional">OPTIONAL</span> | Choose extra renderers for the response. If you need extra information that doesn't come with the default response, the enhancers are responsible of providing it. Available options are:<br>filters: Returns extra object in the response including the filters like stars, district, city, etc.<br>price_slider: Return the price_slider.<br>partners: Returns information about the active partners in the system. is_official, the logo, the name and the website_id.<br>images: Returns images for the hotels. With the partner website_id and the urls.<br>amenities: Returns the hotels amenities.<br>query_location: Returns the location (higher level entities according to the searched entity) and map boundary (the coordinates of the search area).<br>extras: Returns the hotel chain of the hotels.<br>translations: Returns a dictionary with all literals and their corresponding translations using the request locale. |
+| `enhanced` <br><span class="optional">OPTIONAL</span> | This parameter allows you to add additional content to the default response. Available options are:<br>filters: Returns extra object in the response including the filters like stars, district, city, etc.<br>price_slider: Return the price_slider.<br>partners: Returns information about the active partners in the system. is_official, the logo, the name and the website_id.<br>images: Returns images for the hotels. With the partner website_id and the urls.<br>amenities: Returns the hotels amenities.<br>query_location: Returns the location (higher level entities according to the searched entity) and map boundary (the coordinates of the search area).<br>extras: Returns the hotel chain of the hotels.<br>translations: Returns a dictionary with all literals and their corresponding translations using the request locale. |
 
 **Note**: The OR and AND filters allow multiple values coma separated. For example: *&amenities=Lift,Bar*
 
@@ -394,6 +381,7 @@ GET "https://gateway.skyscanner.net/hotels/v1/prices/search/location/{lon,lat}
 | `checkout_date` <br><span class="required">REQUIRED</span> | YYYY-MM-DD |
 | `rooms` <br><span class="required">REQUIRED</span> | Number of rooms<br>default: 1 |
 | `adults` <br><span class="required">REQUIRED</span> | Number of adults<br>default: 2 |
+| `apikey` <br><span class="required">REQUIRED</span> | This parameter is required to be on every single request any client does |
 | `images` <br><span class="optional">OPTIONAL</span> | Maximum number of images to retrieve per each hotel<br>between 1-30, default: 3 |
 | `image_resolution` <br><span class="optional">OPTIONAL</span> | Resolution options<br>high or low, default: high |
 | `image_type` <br><span class="optional">OPTIONAL</span> | The format of the images<br>thumbnail or gallery |
@@ -414,7 +402,7 @@ GET "https://gateway.skyscanner.net/hotels/v1/prices/search/location/{lon,lat}
 | `limit` <br><span class="optional">OPTIONAL</span> | Number of results to retrieve<br>between 1-30, default: 30 |
 | `offset` <br><span class="optional">OPTIONAL</span> | How many results to skip from the first position. Useful for paginating<br>default: 0 |
 | `partners_per_hotel` <br><span class="optional">OPTIONAL</span> | Maximum numbers of partners to retrieve per each hotel. Note that 0 means all the available partners<br>default: 3 |
-| `enhanced` <br><span class="optional">OPTIONAL</span> | Choose extra renderers for the response. If you need extra information that doesn't come with the default response, the enhancers are responsible of providing it. Available options are:<br>filters: Returns extra object in the response including the filters like stars, district, city, etc.<br>price_slider: Return the price_slider.<br>partners: Returns information about the active partners in the system. is_official, the logo, the name and the website_id.<br>images: Returns images for the hotels. With the partner website_id and the urls.<br>amenities: Returns the hotels amenities.<br>query_location: Returns the location (higher level entities according to the searched entity) and map boundary (the coordinates of the search area).<br>extras: Returns the hotel chain of the hotels.<br>translations: Returns a dictionary with all literals and their corresponding translations using the request locale. |
+| `enhanced` <br><span class="optional">OPTIONAL</span> | This parameter allows you to add additional content to the default response. The available options are:<br>filters: Returns extra object in the response including the filters like stars, district, city, etc.<br>price_slider: Return the price_slider.<br>partners: Returns information about the active partners in the system. is_official, the logo, the name and the website_id.<br>images: Returns images for the hotels. With the partner website_id and the urls.<br>amenities: Returns the hotels amenities.<br>query_location: Returns the location (higher level entities according to the searched entity) and map boundary (the coordinates of the search area).<br>extras: Returns the hotel chain of the hotels.<br>translations: Returns a dictionary with all literals and their corresponding translations using the request locale. |
 
 **Note**: The OR and AND filters allow multiple values coma separated. For example: *&amenities=Lift,Bar*
 
@@ -485,6 +473,7 @@ GET "https://gateway.skyscanner.net/hotels/v1/prices/map/entity/{entity_id}
 | `checkout_date` <br><span class="required">REQUIRED</span> | YYYY-MM-DD |
 | `rooms` <br><span class="required">REQUIRED</span> | Number of rooms<br>default: 1 |
 | `adults` <br><span class="required">REQUIRED</span> | Number of adults<br>default: 2 |
+| `apikey` <br><span class="required">REQUIRED</span> | This parameter is required to be on every single request any client does |
 | `images` <br><span class="optional">OPTIONAL</span> | Maximum number of images to retrieve per each hotel<br>between 1-30, default: 3 |
 | `image_resolution` <br><span class="optional">OPTIONAL</span> | Resolution options<br>high or low, default: high |
 | `image_type` <br><span class="optional">OPTIONAL</span> | The format of the images<br>thumbnail or gallery |
@@ -505,7 +494,7 @@ GET "https://gateway.skyscanner.net/hotels/v1/prices/map/entity/{entity_id}
 | `limit` <br><span class="optional">OPTIONAL</span> | Number of results to retrieve<br>between 1-100, default: 100 |
 | `offset` <br><span class="optional">OPTIONAL</span> | How many results to skip from the first position. Useful for paginating<br>default: 0 |
 | `partners_per_hotel` <br><span class="optional">OPTIONAL</span> | Maximum numbers of partners to retrieve per each hotel. Note that 0 means all the available partners. Map only supports 1 partner per hotel<br>default: 1 |
-| `enhanced` <br><span class="optional">OPTIONAL</span> | Choose extra renderers for the response. If you need extra information that doesn't come with the default response, the enhancers are responsible of providing it. Available options are:<br>filters: Returns extra object in the response including the filters like stars, district, city, etc.<br>price_slider: Return the price_slider.<br>query_location: Returns the location (higher level entities according to the searched entity) and map boundary (the coordinates of the search area).<br>translations: Returns a dictionary with all literals and their corresponding translations using the request locale. |
+| `enhanced` <br><span class="optional">OPTIONAL</span> | This parameter allows you to add additional content to the default response. The available options are:<br>filters: Returns extra object in the response including the filters like stars, district, city, etc.<br>price_slider: Return the price_slider.<br>query_location: Returns the location (higher level entities according to the searched entity) and map boundary (the coordinates of the search area).<br>translations: Returns a dictionary with all literals and their corresponding translations using the request locale. |
 | `bbox` <br><span class="optional">OPTIONAL</span> | Bounding Box coordinates in which to look for hotels as bbox=left,bottom,right,top<br>Example: -4.051,50.478,1.853,52.909 |
 
 **Note**: The OR and AND filters allow multiple values coma separated. For example: *&amenities=Lift,Bar*
@@ -723,6 +712,7 @@ GET "https://gateway.skyscanner.net/hotels/v1/prices/map/location/{lon,lat}
 | `checkout_date` <br><span class="required">REQUIRED</span> | YYYY-MM-DD |
 | `rooms` <br><span class="required">REQUIRED</span> | Number of rooms<br>default: 1 |
 | `adults` <br><span class="required">REQUIRED</span> | Number of adults<br>default: 2 |
+| `apikey` <br><span class="required">REQUIRED</span> | This parameter is required to be on every single request any client does |
 | `images` <br><span class="optional">OPTIONAL</span> | Maximum number of images to retrieve per each hotel<br>between 1-30, default: 3 |
 | `image_resolution` <br><span class="optional">OPTIONAL</span> | Resolution options<br>high or low, default: high |
 | `image_type` <br><span class="optional">OPTIONAL</span> | The format of the images<br>thumbnail or gallery |
@@ -743,7 +733,7 @@ GET "https://gateway.skyscanner.net/hotels/v1/prices/map/location/{lon,lat}
 | `limit` <br><span class="optional">OPTIONAL</span> | Number of results to retrieve<br>between 1-100, default: 100 |
 | `offset` <br><span class="optional">OPTIONAL</span> | How many results to skip from the first position. Useful for paginating<br>default: 0 |
 | `partners_per_hotel` <br><span class="optional">OPTIONAL</span> | Maximum numbers of partners to retrieve per each hotel. Note that 0 means all the available partners. Map only supports 1 partner per hotel<br>default: 1 |
-| `enhanced` <br><span class="optional">OPTIONAL</span> | Choose extra renderers for the response. If you need extra information that doesn't come with the default response, the enhancers are responsible of providing it. Available options are:<br>filters: Returns extra object in the response including the filters like stars, district, city, etc.<br>price_slider: Return the price_slider.<br>query_location: Returns the location (higher level entities according to the searched entity) and map boundary (the coordinates of the search area).<br>translations: Returns a dictionary with all literals and their corresponding translations using the request locale. |
+| `enhanced` <br><span class="optional">OPTIONAL</span> | This parameter allows you to add additional content to the default response. The available options are:<br>filters: Returns extra object in the response including the filters like stars, district, city, etc.<br>price_slider: Return the price_slider.<br>query_location: Returns the location (higher level entities according to the searched entity) and map boundary (the coordinates of the search area).<br>translations: Returns a dictionary with all literals and their corresponding translations using the request locale. |
 | `bbox` <br><span class="optional">OPTIONAL</span> | Bounding Box coordinates in which to look for hotels as bbox=left,bottom,right,top<br>Example: -4.051,50.478,1.853,52.909 |
 
 **Note**: The OR and AND filters allow multiple values coma separated. For example: *&amenities=Lift,Bar*
@@ -811,13 +801,14 @@ GET "https://gateway.skyscanner.net/hotels/v1/prices/hotel/{hotel_id}
 | `checkout_date` <br><span class="required">REQUIRED</span> | YYYY-MM-DD |
 | `rooms` <br><span class="required">REQUIRED</span> | Number of rooms<br>default: 1 |
 | `adults` <br><span class="required">REQUIRED</span> | Number of adults<br>default: 2 |
+| `apikey` <br><span class="required">REQUIRED</span> | This parameter is required to be on every single request any client does |
 | `images` <br><span class="optional">OPTIONAL</span> | Maximum number of images to retrieve per each hotel<br>between 1-30, default: 3 |
 | `image_resolution` <br><span class="optional">OPTIONAL</span> | Resolution options<br>high or low, default: high |
 | `image_type` <br><span class="optional">OPTIONAL</span> | The format of the images<br>thumbnail or gallery |
 | `boost_official_partners` <br><span class="optional">OPTIONAL</span> | Indicates whether prices from official partners must be shown in the first place [1] or not [0]<br>default: 0 |
 | `partners_per_hotel` <br><span class="optional">OPTIONAL</span> | Maximum numbers of partners to retrieve per each hotel. Note that 0 means all the available partners<br>default: 3 |
-| `enhanced` <br><span class="optional">OPTIONAL</span> | Choose extra renderers for the response. If you need extra information that doesn't come with the default response, the enhancers are responsible of providing it. Available options are:<br>location: Returns the higher level entities according to the search entity.<br>translations: Returns a dictionary with all literals and their corresponding translations using the request locale. |
-| `entity_id` <br><span class="optional">OPTIONAL</span> | This field should be present when this endpoint has been called when the user has already looked for prices in an upper entity containing the hotel in order to reuse the cached prices.<br>For example: A user searches for prices in Paris (bellboy stores Paris prices). And then, the user opens a hotel details page. In this case, the request to Bellboy must have the entity_id param fulfilled with the Paris entity_id in order to reuse the prices.|
+| `enhanced` <br><span class="optional">OPTIONAL</span> | This parameter allows you to add additional content to the default response. The available options are:<br>location: Returns the higher level entities according to the search entity.<br>translations: Returns a dictionary with all literals and their corresponding translations using the request locale. |
+| `entity_id` <br><span class="optional">OPTIONAL</span> | This field should be present when this endpoint has been called when the user has already looked for prices in an upper entity containing the hotel in order to reuse the cached prices.<br>For example: A user searches for prices in Paris (the service stores Paris prices). And then, the user opens a hotel details page. In this case, the request to the service must have the entity_id param fulfilled with the Paris entity_id in order to reuse the prices.|
 
 ### Response
 
@@ -971,16 +962,16 @@ On the other hand, you can always filter hotels by amenities using the amenities
 
 **Why is the x-user-agent header mandatory and it's important to pass the correct device?**
 
-Bellboy provides deals depending on the device the user is using. For this reason, it is mandatory to send the correct x-user-agent in order to provide accurate offers.
+The Hotels API provides deals depending on the device the user is using. For this reason, it is mandatory to send the correct x-user-agent in order to provide accurate offers.
 
 **Are the amenities filter returned in any particular order?**
 
-Yes, by default Bellboy returns certain amenities in the first place because are most commonly used for filtering (Wifi Service, Pool, Parking, Air Conditioning, Spa, Airport Shuttle Service).
+Yes, by default the service returns certain amenities in the first place because are most commonly used for filtering (Wifi Service, Pool, Parking, Air Conditioning, Spa, Airport Shuttle Service).
 However, this order can change for different markets.
 
 **Are the meal plan and cancellation policy filters returned in any particular order?**
 
-Yes, by default Bellboy returns both filters in the following way:
+Yes, by default the service returns both filters in the following way:
 
 - Cancellation policy: The most convenient cancellation policy for the user is prioritised in the following order: Free cancellation, Refundable, Special conditions, Non-refundable
 - Meal plan: The more inclusive offers are prioritised in the following order: All inclusive, Full Board, Half Board, Breakfast included, Room only
