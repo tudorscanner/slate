@@ -16,12 +16,15 @@ The Hotels API provides a global endpoint: https://gateway.skyscanner.net/hotels
 
 The API expects the header:
 
-- **x-user-agent**: Required. Indicates which is the device related to the client. The format for that header is device;B2B, where:
-    - device can be: - T for tablet
-        - D for desktop
-        - M for mobile
-        - N if you are not able to detect the device type
-    - For example: M;B2B
+- **x-user-agent**: Required. Indicates which is the device related to the client. The format for that header is device;B2B, where device can be: 
+	- T for tablet
+	- D for desktop
+	- M for mobile
+	- N if you are not able to detect the device type
+
+For example: 
+
+`x-user-agent: M;B2B`
 
 ## Use flow
 
