@@ -946,30 +946,3 @@ GET "https://gateway.skyscanner.net/hotels/v1/prices/hotel/{hotel_id}
 | `meta` | Contains metadata regarding the search cycle such as it's status |
 | `results` | An object containing the hotel and the enhancers if requested |
 | `translations` | Only with the `translations` enhanced. Dictionary with all literals that can be translated |
-
-## FAQ
-
-**Why amenities is an enhancer and a query parameter too?**
-
-The enhancers, are a way to add extra information to the response. By default, the hotels don't come with the list of their amenities if you don't pass the amenities enhancer.
-On the other hand, you can always filter hotels by amenities using the amenities parameter. For example: &amenities=Lift,WifiService where in this case, you would only get hotels that have those two amenities.
-
-**Why is the x-user-agent header mandatory and it's important to pass the correct device?**
-
-The Hotels API provides deals depending on the device the user is using. For this reason, it is mandatory to send the correct x-user-agent in order to provide accurate offers.
-
-**Are the amenities filter returned in any particular order?**
-
-Yes, by default the service returns certain amenities in the first place because are most commonly used for filtering (Wifi Service, Pool, Parking, Air Conditioning, Spa, Airport Shuttle Service).
-However, this order can change for different markets.
-
-**Are the meal plan and cancellation policy filters returned in any particular order?**
-
-Yes, by default the service returns both filters in the following way:
-
-- Cancellation policy: The most convenient cancellation policy for the user is prioritised in the following order: Free cancellation, Refundable, Special conditions, Non-refundable
-- Meal plan: The more inclusive offers are prioritised in the following order: All inclusive, Full Board, Half Board, Breakfast included, Room only
-
-**How can I translate the id's in the response to localized strings to display to the user?**
-
-If you send the translations enhancer in the request, you will get a translations object in the root level of the response where you will find the translation for any key according to the locale you specified.
