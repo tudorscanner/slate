@@ -225,13 +225,13 @@ Unless you require exact prices, we recommend you start with the cache prices AP
 </tr>
 </thead><tbody>
 <tr>
-<td><a href="#hotels-live-prices">Live prices</a><br><span class="required">PRIVATE BETA</span></td>
+<td><a href="#hotels-live-prices">Live prices</a><br><span class="required">NEW</span></td>
 <td>Returns live prices from all our suppliers for hotel deals (in the selected market).</td>
 </tr>
 </tbody></table>
 
 <aside class="warning">
-    Please note that the Skyscanner Hotels API is being reworked, and is currently unavailable. Legacy documentation is available <a href="https://support.business.skyscanner.net/hc/en-us/articles/212098705-Hotels-Price-List-and-Hotels-Details-service" target="_blank">here</a>
+    This is the new Skyscanner Hotels API. Legacy documentation is available <a href="https://support.business.skyscanner.net/hc/en-us/articles/212098705-Hotels-Price-List-and-Hotels-Details-service" target="_blank">here</a>
 </aside>
 
           <h1 id="flights-browse-prices">Flights Browse Prices</h1>
@@ -2238,8 +2238,1575 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
           <h1 id="hotels-live-prices">Hotels Live Prices</h1>
 
 <aside class="warning">
-  Please note that the Skyscanner Hotels API is being reworked, and is currently unavailable. Legacy documentation is available <a href="https://support.business.skyscanner.net/hc/en-us/articles/212098705-Hotels-Price-List-and-Hotels-Details-service" target="_blank">here</a>
+    Please note that the first Skyscanner Hotels API will be depricated in December 2017.
+    Legacy documentation is available <a href="https://support.business.skyscanner.net/hc/en-us/articles/212098705-Hotels-Price-List-and-Hotels-Details-service" target="_blank">here</a> but please insure you migrate your application to the new API before that date.
+    All the documentation below is for the new Hotels API.
 </aside>
+
+<p>This service responsible for finding the best hotels with rates around a given entity. It provides endpoints to search prices, a map version of it and a hotel prices one.</p>
+
+<h2 id="endpoint">Endpoint</h2>
+
+<p>The Hotels API provides a global endpoint: https://gateway.skyscanner.net/hotels/v{version}/ where version points to a specific release.</p>
+
+<h2 id="headers">Headers</h2>
+
+<p>The API expects the header:</p>
+
+<ul>
+<li><strong>x-user-agent</strong>: Required. Indicates which is the device related to the client. The format for that header is device;B2B, where device can be: 
+
+<ul>
+<li>T for tablet</li>
+<li>D for desktop</li>
+<li>M for mobile</li>
+<li>N if you are not able to detect the device type</li>
+</ul></li>
+</ul>
+
+<p>For example: </p>
+
+<p><code class="prettyprint">x-user-agent: M;B2B</code></p>
+
+<h2 id="use-flow">Use flow</h2>
+
+<p>All the /prices endpoints are intended to be queried using a polling mechanism using the same parameters as the one that started the polling. The flow of the service is described below:</p>
+
+<ol>
+<li>On the first request that a user does, the service will reply with empty results and the status attribute inside the meta object set to <em>PENDING</em>. <code class="prettyprint">Metadata PENDING state</code>.</li>
+<li>The client needs to keep polling the service with the same query while the status attribute inside the meta object in the response is <em>PENDING</em>. On each query, the number of results will grow. <code class="prettyprint">Metadata PENDING state, partial results</code>.</li>
+<li>The status attribute will eventually change to <em>COMPLETED</em>. Meaning that the search cycle has finished. <code class="prettyprint">Metadata COMPLETED state</code>.</li>
+<li>Clients should implement a self-healing mechanism that should include:
+
+<ul>
+<li>Finish the polling after X seconds in the scenarios of having the status <em>PENDING</em> for so long.</li>
+<li>Retry mechanism in the scenario of a service failure (Ex: retry after 1 seconds)</li>
+</ul></li>
+</ol>
+
+<h2 id="search-prices">Search Prices</h2>
+
+<h3 id="entity-request">Entity Request</h3>
+
+<p>Given an entity_id, this endpoint will give back hotels with prices around the provided entity. The supported entities are any, from cities, islands, nations, places to Hotels.</p>
+
+<p>The Hotels API, first of all, tries to search for the hotels related to an entity using an explicit relation - cities, administration zones and nations, and if the results are less than a minimum number of hotels the query turns out in a geographical query.
+This geographical query seeks for hotels using different distances, from 500 meters to 50km, till finding this minimum amount or get the maximum distance.</p>
+
+<p>When a Hotel is used as the entity queried for, the service will treat this as an ad-hoc case. The hotel used as an entity will be serialized into the <em>hotel_pivot</em> object with its offers. Meanwhile, it will be removed from the results object.</p>
+
+<p>The following URL shows how the search prices endpoint can be used to retrieve prices for those hotels that are placed in Barcelona</p>
+
+<p><em>API endpoint</em></p>
+
+<p><code class="prettyprint">GET /v1/prices/search/entity/{entity_id}</code></p>
+<pre class="highlight shell"><code>GET <span class="s2">"https://gateway.skyscanner.net/hotels/v1/prices/search/entity/{entity_id}
+  ?market={market}&amp;locale={locale}&amp;checkin_date={checkin_date}&amp;checkout_date={checkout_date}
+  &amp;currency={currency}&amp;adults={adults}&amp;rooms={rooms}&amp;images={images}&amp;image_resolution={resolution}
+  &amp;image_type={type}&amp;boost_official_partners={boost}&amp;sort={sort_method}&amp;limit={limit}&amp;offset={offset}
+  &amp;partners_per_hotel={num_partners}&amp;enhanced={enhanced}"</span>
+</code></pre>
+<p><em>TRY IT OUT</em></p>
+
+<p><a href="https://app.getpostman.com/run-collection/a3262c8af4a48eece516"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
+
+<p><em>HEADER VALUES</em></p>
+
+<table><thead>
+<tr>
+<th>Header</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">x-user-agent</code> <br><span class="required">REQUIRED</span></td>
+<td>Indicates which is the device and the platform related to the client. The format for that header is <code class="prettyprint">device;B2B</code>, where:<br>Device is:<br><code class="prettyprint">T</code> for tablet<br><code class="prettyprint">D</code> for desktop<br><code class="prettyprint">M</code> for mobile<br><code class="prettyprint">N</code> if you are not able to detect the device type</td>
+</tr>
+</tbody></table>
+
+<p><em>URI PARAMETERS</em></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">entity_id</code> <br><span class="required">REQUIRED</span></td>
+<td>Entity to search for hotels prices in it</td>
+</tr>
+<tr>
+<td><code class="prettyprint">version</code> <br><span class="required">REQUIRED</span></td>
+<td>API version</td>
+</tr>
+</tbody></table>
+
+<p><em>QUERY PARAMETERS</em></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">market</code> <br><span class="required">REQUIRED</span></td>
+<td>Matching [A-Z]{2}</td>
+</tr>
+<tr>
+<td><code class="prettyprint">locale</code> <br><span class="required">REQUIRED</span></td>
+<td>Matching [a-z]{2}-[A-Z]{2}</td>
+</tr>
+<tr>
+<td><code class="prettyprint">currency</code> <br><span class="required">REQUIRED</span></td>
+<td>Currency code</td>
+</tr>
+<tr>
+<td><code class="prettyprint">checkin_date</code> <br><span class="required">REQUIRED</span></td>
+<td>YYYY-MM-DD</td>
+</tr>
+<tr>
+<td><code class="prettyprint">checkout_date</code> <br><span class="required">REQUIRED</span></td>
+<td>YYYY-MM-DD</td>
+</tr>
+<tr>
+<td><code class="prettyprint">rooms</code> <br><span class="required">REQUIRED</span></td>
+<td>Number of rooms<br>default: 1</td>
+</tr>
+<tr>
+<td><code class="prettyprint">adults</code> <br><span class="required">REQUIRED</span></td>
+<td>Number of adults<br>default: 2</td>
+</tr>
+<tr>
+<td><code class="prettyprint">apikey</code> <br><span class="required">REQUIRED</span></td>
+<td>This parameter is required to be on every single request any client does</td>
+</tr>
+<tr>
+<td><code class="prettyprint">images</code> <br><span class="optional">OPTIONAL</span></td>
+<td>Maximum number of images to retrieve per each hotel<br>between 1-30, default: 3</td>
+</tr>
+<tr>
+<td><code class="prettyprint">image_resolution</code> <br><span class="optional">OPTIONAL</span></td>
+<td>Resolution options<br>high or low, default: high</td>
+</tr>
+<tr>
+<td><code class="prettyprint">image_type</code> <br><span class="optional">OPTIONAL</span></td>
+<td>The format of the images<br>thumbnail or gallery</td>
+</tr>
+<tr>
+<td><code class="prettyprint">boost_official_partners</code> <br><span class="optional">OPTIONAL</span></td>
+<td>Indicates whether prices from official partners must be shown in the first place [1] or not [0]<br>default: 0</td>
+</tr>
+<tr>
+<td><code class="prettyprint">sort</code> <br><span class="optional">OPTIONAL</span></td>
+<td>Sort by a given attribute. By default the relevance sorting is applied<br>One of: relevance, -relevance, price, -price, distance, -distance, rating, -rating, stars, -stars</td>
+</tr>
+<tr>
+<td><code class="prettyprint">price_min</code> <br><span class="optional">OPTIONAL</span></td>
+<td>Filter. Return only hotels where the cheaper price is at least price_min (included). Cannot be used together with price_buckets</td>
+</tr>
+<tr>
+<td><code class="prettyprint">price_max</code> <br><span class="optional">OPTIONAL</span></td>
+<td>Filter. Return only hotels where the cheaper price is at most price_max (included). Cannot be used together with price_buckets</td>
+</tr>
+<tr>
+<td><code class="prettyprint">price_buckets</code> <br><span class="optional">OPTIONAL</span></td>
+<td>OR filter. Return only hotels with offers inside the specified buckets. Cannot be used together with price_min/price_max</td>
+</tr>
+<tr>
+<td><code class="prettyprint">district</code> <br><span class="optional">OPTIONAL</span></td>
+<td>OR filter. Return only results where a district matches</td>
+</tr>
+<tr>
+<td><code class="prettyprint">stars</code> <br><span class="optional">OPTIONAL</span></td>
+<td>OR filter. Return only results where a star category matches. The values must be TravelAPI ids</td>
+</tr>
+<tr>
+<td><code class="prettyprint">city</code> <br><span class="optional">OPTIONAL</span></td>
+<td>OR filter. When the search is done for an entity that contains different cities, this filter is available. Returns only results where the cities match. The values must be TravelAPI entity ids</td>
+</tr>
+<tr>
+<td><code class="prettyprint">chain</code> <br><span class="optional">OPTIONAL</span></td>
+<td>OR filter. Return only results where a hotel chains matches. The values must be TravelAPI ids</td>
+</tr>
+<tr>
+<td><code class="prettyprint">amenities</code> <br><span class="optional">OPTIONAL</span></td>
+<td>AND filter. Return only results where all amenities match. The values must be TravelAPI ids</td>
+</tr>
+<tr>
+<td><code class="prettyprint">cancellation</code> <br><span class="optional">OPTIONAL</span></td>
+<td>OR filter. Return only results where a cancellation policies matches. Options are:<br>free_cancellation, non_refundable, refundable, special_conditions</td>
+</tr>
+<tr>
+<td><code class="prettyprint">meal_plan</code> <br><span class="optional">OPTIONAL</span></td>
+<td>OR filter. Return only results where a meal plan matches. Options are:<br>room_only, breakfast_included, half_board, full_board, all_inclusive</td>
+</tr>
+<tr>
+<td><code class="prettyprint">property_type</code> <br><span class="optional">OPTIONAL</span></td>
+<td>OR filter. Return only results where an accommodation type matches. The values must be TravelAPI ids</td>
+</tr>
+<tr>
+<td><code class="prettyprint">hotel_name</code> <br><span class="optional">OPTIONAL</span></td>
+<td>Filter. Return only results where hotel name matches</td>
+</tr>
+<tr>
+<td><code class="prettyprint">limit</code> <br><span class="optional">OPTIONAL</span></td>
+<td>Number of results to retrieve<br>between 1-30, default: 30</td>
+</tr>
+<tr>
+<td><code class="prettyprint">offset</code> <br><span class="optional">OPTIONAL</span></td>
+<td>How many results to skip from the first position. Useful for paginating<br>default: 0</td>
+</tr>
+<tr>
+<td><code class="prettyprint">partners_per_hotel</code> <br><span class="optional">OPTIONAL</span></td>
+<td>Maximum numbers of partners to retrieve per each hotel. Note that 0 means all the available partners<br>default: 3</td>
+</tr>
+<tr>
+<td><code class="prettyprint">enhanced</code> <br><span class="optional">OPTIONAL</span></td>
+<td>This parameter allows you to add additional content to the default response. Available options are:<br>filters: Returns extra object in the response including the filters like stars, district, city, etc.<br>price_slider: Return the price_slider.<br>partners: Returns information about the active partners in the system. is_official, the logo, the name and the website_id.<br>images: Returns images for the hotels. With the partner website_id and the urls.<br>amenities: Returns the hotels amenities.<br>query_location: Returns the location (higher level entities according to the searched entity) and map boundary (the coordinates of the search area).<br>extras: Returns the hotel chain of the hotels.<br>translations: Returns a dictionary with all literals and their corresponding translations using the request locale.</td>
+</tr>
+</tbody></table>
+
+<p><strong>Note</strong>: The OR and AND filters allow multiple values coma separated. For example: <em>&amp;amenities=Lift,Bar</em></p>
+
+<h3 id="response">Response</h3>
+
+<blockquote>
+<p>Example response:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"correlation_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"42be633f-edde-4631-ad8f-87e3fd2b4bf4"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"total_available"</span><span class="p">:</span><span class="w"> </span><span class="mi">1675</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"hotels_filtered"</span><span class="p">:</span><span class="w"> </span><span class="mi">4406</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"offers"</span><span class="p">:</span><span class="w"> </span><span class="mi">34757</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">4406</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"COMPLETED"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"completion_percentage"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"results"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"filters"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"district"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"max_price"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"27562177"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">350</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"min_price"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="err">...</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"meal_plan"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"max_price"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"room_only"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1391</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"min_price"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="err">...</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"max_price"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"27544008"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">4406</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"min_price"</span><span class="p">:</span><span class="w"> </span><span class="mi">18</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="err">...</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"property_type"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"max_price"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hotel"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1754</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"min_price"</span><span class="p">:</span><span class="w"> </span><span class="mi">32</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="err">...</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"price_buckets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"max_price"</span><span class="p">:</span><span class="w"> </span><span class="mi">80</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PR_BK_0"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">91</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"min_price"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="err">...</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"stars"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"max_price"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">735</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"min_price"</span><span class="p">:</span><span class="w"> </span><span class="mi">124</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="err">...</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"cancellation"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"max_price"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"non_refundable"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1437</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"min_price"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="err">...</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"chain"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"max_price"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hilton"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">14</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"min_price"</span><span class="p">:</span><span class="w"> </span><span class="mi">241</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="err">...</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"amenities"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"max_price"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"WifiService"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1993</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"min_price"</span><span class="p">:</span><span class="w"> </span><span class="mi">18</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="err">...</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"partners"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"website_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"h_mb"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"logo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"www.skyscanner.net/images/websites/220x80/h_mb.png"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"is_official"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Marina Bay Sands"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="err">...</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"hotel_pivot"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"entity"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"London"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"official_center"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"coordinates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="mf">-0.12801</span><span class="p">,</span><span class="w">
+          </span><span class="mf">51.50813</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Point"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"entity_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"27544008"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"entity_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"City"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"centroid"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"coordinates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="mf">-0.09435</span><span class="p">,</span><span class="w">
+          </span><span class="mf">51.50412</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Point"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"hotels"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"district"</span><span class="p">:</span><span class="w"> </span><span class="s2">"[]"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"27544008"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"offers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"cancellation"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"meal_plan"</span><span class="p">:</span><span class="w"> </span><span class="s2">"breakfast_included"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"closed_user_groups"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"is_official"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"room_type"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+              </span><span class="s2">"generic_room"</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="nt">"partner_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"h_dr"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"price_gbp"</span><span class="p">:</span><span class="w"> </span><span class="mi">239</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">239</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"strike_through"</span><span class="p">:</span><span class="w"> </span><span class="mi">286</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"deeplink"</span><span class="p">:</span><span class="w"> </span><span class="s2">"www.skyscanner.net/hotel_deeplink/4.0/UK/en-GB/GBP/h_dr/137554756/2017-05-07/2017-05-09/hotel/hotel/hotels?q_datetime_utc=2017-04-24T15%3A42%3A50&amp;appVersion=2.0&amp;rooms=1&amp;legacy_provider_id=926990&amp;deeplink_ids=eu-west-1.prod_b332e152f682d33ec1cc4b3ef6c5b4ac&amp;request_id=f6b76e8d-18ed-45d9-95f5-d87d93f44167&amp;guests=1&amp;ticket_price=239&amp;appName=web&amp;max_price=325.0"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"available"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"cancellation_text"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"images"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"thumbnail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://d3ba47lalua02r.cloudfront.net/available/66922450/rmt.jpg"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"h_dp"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"gallery"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://d3ba47lalua02r.cloudfront.net/available/66922450/rmca.jpg"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"amenities"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="s2">"InternetAccessService"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"CurrencyExchangeService"</span><span class="p">,</span><span class="w">
+          </span><span class="err">...</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"property_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hotel"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"distance"</span><span class="p">:</span><span class="w"> </span><span class="mf">1523.6670209587</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"reviews_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">129</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"stars"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Imperial"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"rating"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"desc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rating_good"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"hotel_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"137554756"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"coordinates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="mf">-0.12403</span><span class="p">,</span><span class="w">
+          </span><span class="mf">51.52162</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="err">...</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"map_boundary"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"s_w_lat"</span><span class="p">:</span><span class="w"> </span><span class="mf">51.49591</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"n_e_lat"</span><span class="p">:</span><span class="w"> </span><span class="mf">51.52918</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"n_e_lng"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.07762</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"s_w_lng"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.19137</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"location"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"England"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"entity_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"44293288"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"entity_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FirstLevelNationAdministrativeDivision"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"United Kingdom"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"entity_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"29475375"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"entity_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Nation"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"translations"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"CUG_create_account_to_unlock_deals_msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Create an account to unlock exclusive deals"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"CUG_deal"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DEAL"</span><span class="p">,</span><span class="w">
+    </span><span class="err">...</span><span class="w">
+  </span><span class="err">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p><em>RESPONSE PARAMETERS</em></p>
+
+<table><thead>
+<tr>
+<th>Element</th>
+<th>Detail</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">correlation_id</code></td>
+<td>An identifier of the request</td>
+</tr>
+<tr>
+<td><code class="prettyprint">meta</code></td>
+<td>Contains metadata regarding the search cycle such as it&rsquo;s status</td>
+</tr>
+<tr>
+<td><code class="prettyprint">count</code></td>
+<td>Number of hotels</td>
+</tr>
+<tr>
+<td><code class="prettyprint">results</code></td>
+<td>An object containing the hotels and the enhancers if requested</td>
+</tr>
+<tr>
+<td><code class="prettyprint">translations</code></td>
+<td>Only with the <code class="prettyprint">translations</code> enhanced. Dictionary with all literals that can be translated</td>
+</tr>
+</tbody></table>
+
+<h3 id="location-request">Location Request</h3>
+
+<p>This endpoint gives back hotels with prices too but instead from an entity, around specific coordinates.
+It takes the coordinades as an input to provide the hotels.
+Provides the search by current location functionality.</p>
+
+<p><em>API endpoint</em></p>
+
+<p><code class="prettyprint">GET /v1/prices/search/location/{lon,lat}</code></p>
+<pre class="highlight shell"><code>GET <span class="s2">"https://gateway.skyscanner.net/hotels/v1/prices/search/location/{lon,lat}
+  ?market={market}&amp;locale={locale}&amp;checkin_date={checkin_date}&amp;checkout_date={checkout_date}
+  &amp;currency={currency}&amp;adults={adults}&amp;rooms={rooms}&amp;images={images}&amp;image_resolution={resolution}
+  &amp;image_type={type}&amp;boost_official_partners={boost}&amp;sort={sort_method}&amp;limit={limit}&amp;offset={offset}
+  &amp;partners_per_hotel={num_partners}&amp;enhanced={enhanced}"</span>
+</code></pre>
+<p><em>TRY IT OUT</em></p>
+
+<p><a href="https://app.getpostman.com/run-collection/378efb1ead00baf8e120"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
+
+<p><em>HEADER VALUES</em></p>
+
+<table><thead>
+<tr>
+<th>Header</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">apikey</code> <br><span class="required">REQUIRED</span></td>
+<td>This header is required to be on every single request any client does (it could also be accepted via query parameter)</td>
+</tr>
+<tr>
+<td><code class="prettyprint">x-user-agent</code> <br><span class="required">REQUIRED</span></td>
+<td>Indicates which is the device and the platform related to the client. The format for that header is <code class="prettyprint">device;B2B</code>, where:<br>Device is:<br><code class="prettyprint">T</code> for tablet<br><code class="prettyprint">D</code> for desktop<br><code class="prettyprint">M</code> for mobile<br><code class="prettyprint">N</code> if you are not able to detect the device type</td>
+</tr>
+</tbody></table>
+
+<p><em>URI PARAMETERS</em></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">location</code> <br><span class="required">REQUIRED</span></td>
+<td>Location to search hotels near it. Following the format: lon,lat</td>
+</tr>
+<tr>
+<td><code class="prettyprint">version</code> <br><span class="required">REQUIRED</span></td>
+<td>API version</td>
+</tr>
+</tbody></table>
+
+<p><em>QUERY PARAMETERS</em></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">market</code> <br><span class="required">REQUIRED</span></td>
+<td>Matching [A-Z]{2}</td>
+</tr>
+<tr>
+<td><code class="prettyprint">locale</code> <br><span class="required">REQUIRED</span></td>
+<td>Matching [a-z]{2}-[A-Z]{2}</td>
+</tr>
+<tr>
+<td><code class="prettyprint">currency</code> <br><span class="required">REQUIRED</span></td>
+<td>Currency code</td>
+</tr>
+<tr>
+<td><code class="prettyprint">checkin_date</code> <br><span class="required">REQUIRED</span></td>
+<td>YYYY-MM-DD</td>
+</tr>
+<tr>
+<td><code class="prettyprint">checkout_date</code> <br><span class="required">REQUIRED</span></td>
+<td>YYYY-MM-DD</td>
+</tr>
+<tr>
+<td><code class="prettyprint">rooms</code> <br><span class="required">REQUIRED</span></td>
+<td>Number of rooms<br>default: 1</td>
+</tr>
+<tr>
+<td><code class="prettyprint">adults</code> <br><span class="required">REQUIRED</span></td>
+<td>Number of adults<br>default: 2</td>
+</tr>
+<tr>
+<td><code class="prettyprint">apikey</code> <br><span class="required">REQUIRED</span></td>
+<td>This parameter is required to be on every single request any client does</td>
+</tr>
+<tr>
+<td><code class="prettyprint">images</code> <br><span class="optional">OPTIONAL</span></td>
+<td>Maximum number of images to retrieve per each hotel<br>between 1-30, default: 3</td>
+</tr>
+<tr>
+<td><code class="prettyprint">image_resolution</code> <br><span class="optional">OPTIONAL</span></td>
+<td>Resolution options<br>high or low, default: high</td>
+</tr>
+<tr>
+<td><code class="prettyprint">image_type</code> <br><span class="optional">OPTIONAL</span></td>
+<td>The format of the images<br>thumbnail or gallery</td>
+</tr>
+<tr>
+<td><code class="prettyprint">boost_official_partners</code> <br><span class="optional">OPTIONAL</span></td>
+<td>Indicates whether prices from official partners must be shown in the first place [1] or not [0]<br>default: 0</td>
+</tr>
+<tr>
+<td><code class="prettyprint">sort</code> <br><span class="optional">OPTIONAL</span></td>
+<td>Sort by a given attribute. By default the relevance sorting is applied<br>One of: relevance, -relevance, price, -price, distance, -distance, rating, -rating, stars, -stars</td>
+</tr>
+<tr>
+<td><code class="prettyprint">price_min</code> <br><span class="optional">OPTIONAL</span></td>
+<td>Filter. Return only hotels where the cheaper price is at least price_min (included). Cannot be used together with price_buckets</td>
+</tr>
+<tr>
+<td><code class="prettyprint">price_max</code> <br><span class="optional">OPTIONAL</span></td>
+<td>Filter. Return only hotels where the cheaper price is at most price_max (included). Cannot be used together with price_buckets</td>
+</tr>
+<tr>
+<td><code class="prettyprint">price_buckets</code> <br><span class="optional">OPTIONAL</span></td>
+<td>OR filter. Return only hotels with offers inside the specified buckets. Cannot be used together with price_min/price_max</td>
+</tr>
+<tr>
+<td><code class="prettyprint">district</code> <br><span class="optional">OPTIONAL</span></td>
+<td>OR filter. Return only results where a district matches</td>
+</tr>
+<tr>
+<td><code class="prettyprint">stars</code> <br><span class="optional">OPTIONAL</span></td>
+<td>OR filter. Return only results where a star category matches. The values must be TravelAPI ids</td>
+</tr>
+<tr>
+<td><code class="prettyprint">city</code> <br><span class="optional">OPTIONAL</span></td>
+<td>OR filter. When the search is done for an entity that contains different cities, this filter is available. Returns only results where the cities match. The values must be TravelAPI entity ids</td>
+</tr>
+<tr>
+<td><code class="prettyprint">chain</code> <br><span class="optional">OPTIONAL</span></td>
+<td>OR filter. Return only results where a hotel chains matches. The values must be TravelAPI ids</td>
+</tr>
+<tr>
+<td><code class="prettyprint">amenities</code> <br><span class="optional">OPTIONAL</span></td>
+<td>AND filter. Return only results where all amenities match. The values must be TravelAPI ids</td>
+</tr>
+<tr>
+<td><code class="prettyprint">cancellation</code> <br><span class="optional">OPTIONAL</span></td>
+<td>OR filter. Return only results where a cancellation policies matches. Options are:<br>free_cancellation, non_refundable, refundable, special_conditions</td>
+</tr>
+<tr>
+<td><code class="prettyprint">meal_plan</code> <br><span class="optional">OPTIONAL</span></td>
+<td>OR filter. Return only results where a meal plan matches. Options are:<br>room_only, breakfast_included, half_board, full_board, all_inclusive</td>
+</tr>
+<tr>
+<td><code class="prettyprint">property_type</code> <br><span class="optional">OPTIONAL</span></td>
+<td>OR filter. Return only results where an accommodation type matches. The values must be TravelAPI ids</td>
+</tr>
+<tr>
+<td><code class="prettyprint">hotel_name</code> <br><span class="optional">OPTIONAL</span></td>
+<td>Filter. Return only results where hotel name matches</td>
+</tr>
+<tr>
+<td><code class="prettyprint">limit</code> <br><span class="optional">OPTIONAL</span></td>
+<td>Number of results to retrieve<br>between 1-30, default: 30</td>
+</tr>
+<tr>
+<td><code class="prettyprint">offset</code> <br><span class="optional">OPTIONAL</span></td>
+<td>How many results to skip from the first position. Useful for paginating<br>default: 0</td>
+</tr>
+<tr>
+<td><code class="prettyprint">partners_per_hotel</code> <br><span class="optional">OPTIONAL</span></td>
+<td>Maximum numbers of partners to retrieve per each hotel. Note that 0 means all the available partners<br>default: 3</td>
+</tr>
+<tr>
+<td><code class="prettyprint">enhanced</code> <br><span class="optional">OPTIONAL</span></td>
+<td>This parameter allows you to add additional content to the default response. The available options are:<br>filters: Returns extra object in the response including the filters like stars, district, city, etc.<br>price_slider: Return the price_slider.<br>partners: Returns information about the active partners in the system. is_official, the logo, the name and the website_id.<br>images: Returns images for the hotels. With the partner website_id and the urls.<br>amenities: Returns the hotels amenities.<br>query_location: Returns the location (higher level entities according to the searched entity) and map boundary (the coordinates of the search area).<br>extras: Returns the hotel chain of the hotels.<br>translations: Returns a dictionary with all literals and their corresponding translations using the request locale.</td>
+</tr>
+</tbody></table>
+
+<p><strong>Note</strong>: The OR and AND filters allow multiple values coma separated. For example: <em>&amp;amenities=Lift,Bar</em></p>
+
+<h3 id="response">Response</h3>
+
+<blockquote>
+<p>The response is the same as the search entity one but without the <em>hotel_pivot</em></p>
+</blockquote>
+
+<p><em>RESPONSE PARAMETERS</em></p>
+
+<table><thead>
+<tr>
+<th>Element</th>
+<th>Detail</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">correlation_id</code></td>
+<td>An identifier of the request</td>
+</tr>
+<tr>
+<td><code class="prettyprint">meta</code></td>
+<td>Contains metadata regarding the search cycle such as it&rsquo;s status</td>
+</tr>
+<tr>
+<td><code class="prettyprint">count</code></td>
+<td>Number of hotels</td>
+</tr>
+<tr>
+<td><code class="prettyprint">results</code></td>
+<td>An object containing the hotels and the enhancers if requested</td>
+</tr>
+<tr>
+<td><code class="prettyprint">translations</code></td>
+<td>Only with the <code class="prettyprint">translations</code> enhanced. Dictionary with all literals that can be translated</td>
+</tr>
+</tbody></table>
+
+<h2 id="search-prices-map-version">Search Prices, map version</h2>
+
+<h3 id="entity-request">Entity Request</h3>
+
+<p>Given an entity, this endpoint will give you back the hotels with prices around the provided entity, having the same intentions than the regular search prices but modifying the response to suit it in environments where the information has to be rendered in a map.
+These differences can be summarized into the following points:</p>
+
+<ul>
+<li>Every hotel will have one price (the cheapest).</li>
+<li>The default total amount of hotels returned per page will be 100.</li>
+<li>Support for bounding box queries to filter hotels that are inside of an area, the coordinates passed are serialised as <em>left, bottom, right, top</em></li>
+</ul>
+
+<p><em>API endpoint</em></p>
+
+<p><code class="prettyprint">GET /v1/prices/map/entity/{entity_id}</code></p>
+<pre class="highlight shell"><code>GET <span class="s2">"https://gateway.skyscanner.net/hotels/v1/prices/map/entity/{entity_id}
+  ?market={market}&amp;locale={locale}&amp;checkin_date={checkin_date}&amp;checkout_date={checkout_date}
+  &amp;currency={currency}&amp;adults={adults}&amp;rooms={rooms}&amp;images={images}&amp;image_resolution={resolution}
+  &amp;image_type={type}&amp;boost_official_partners={boost}&amp;sort={sort_method}&amp;limit={limit}&amp;offset={offset}
+  &amp;partners_per_hotel={num_partners}&amp;enhanced={enhanced}&amp;bbox={left,bottom,right,top}"</span>
+</code></pre>
+<p><em>TRY IT OUT</em></p>
+
+<p><a href="https://app.getpostman.com/run-collection/44864263fb0a0624becf"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
+
+<p><em>HEADER VALUES</em></p>
+
+<table><thead>
+<tr>
+<th>Header</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">apikey</code> <br><span class="required">REQUIRED</span></td>
+<td>This header is required to be on every single request any client does (it could also be accepted via query parameter)</td>
+</tr>
+<tr>
+<td><code class="prettyprint">x-user-agent</code> <br><span class="required">REQUIRED</span></td>
+<td>Indicates which is the device and the platform related to the client. The format for that header is <code class="prettyprint">device;B2B</code>, where:<br>Device is:<br><code class="prettyprint">T</code> for tablet<br><code class="prettyprint">D</code> for desktop<br><code class="prettyprint">M</code> for mobile<br><code class="prettyprint">N</code> if you are not able to detect the device type</td>
+</tr>
+</tbody></table>
+
+<p><em>URI PARAMETERS</em></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">entity_id</code> <br><span class="required">REQUIRED</span></td>
+<td>Entity to search for hotels prices in it</td>
+</tr>
+<tr>
+<td><code class="prettyprint">version</code> <br><span class="required">REQUIRED</span></td>
+<td>API version</td>
+</tr>
+</tbody></table>
+
+<p><em>QUERY PARAMETERS</em></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">market</code> <br><span class="required">REQUIRED</span></td>
+<td>Matching [A-Z]{2}</td>
+</tr>
+<tr>
+<td><code class="prettyprint">locale</code> <br><span class="required">REQUIRED</span></td>
+<td>Matching [a-z]{2}-[A-Z]{2}</td>
+</tr>
+<tr>
+<td><code class="prettyprint">currency</code> <br><span class="required">REQUIRED</span></td>
+<td>Currency code</td>
+</tr>
+<tr>
+<td><code class="prettyprint">checkin_date</code> <br><span class="required">REQUIRED</span></td>
+<td>YYYY-MM-DD</td>
+</tr>
+<tr>
+<td><code class="prettyprint">checkout_date</code> <br><span class="required">REQUIRED</span></td>
+<td>YYYY-MM-DD</td>
+</tr>
+<tr>
+<td><code class="prettyprint">rooms</code> <br><span class="required">REQUIRED</span></td>
+<td>Number of rooms<br>default: 1</td>
+</tr>
+<tr>
+<td><code class="prettyprint">adults</code> <br><span class="required">REQUIRED</span></td>
+<td>Number of adults<br>default: 2</td>
+</tr>
+<tr>
+<td><code class="prettyprint">apikey</code> <br><span class="required">REQUIRED</span></td>
+<td>This parameter is required to be on every single request any client does</td>
+</tr>
+<tr>
+<td><code class="prettyprint">images</code> <br><span class="optional">OPTIONAL</span></td>
+<td>Maximum number of images to retrieve per each hotel<br>between 1-30, default: 3</td>
+</tr>
+<tr>
+<td><code class="prettyprint">image_resolution</code> <br><span class="optional">OPTIONAL</span></td>
+<td>Resolution options<br>high or low, default: high</td>
+</tr>
+<tr>
+<td><code class="prettyprint">image_type</code> <br><span class="optional">OPTIONAL</span></td>
+<td>The format of the images<br>thumbnail or gallery</td>
+</tr>
+<tr>
+<td><code class="prettyprint">boost_official_partners</code> <br><span class="optional">OPTIONAL</span></td>
+<td>Indicates whether prices from official partners must be shown in the first place [1] or not [0]<br>default: 0</td>
+</tr>
+<tr>
+<td><code class="prettyprint">sort</code> <br><span class="optional">OPTIONAL</span></td>
+<td>Sort by a given attribute. By default the relevance sorting is applied<br>One of: relevance, -relevance, price, -price, distance, -distance, rating, -rating, stars, -stars</td>
+</tr>
+<tr>
+<td><code class="prettyprint">price_min</code> <br><span class="optional">OPTIONAL</span></td>
+<td>Filter. Return only hotels where the cheaper price is at least price_min (included). Cannot be used together with price_buckets</td>
+</tr>
+<tr>
+<td><code class="prettyprint">price_max</code> <br><span class="optional">OPTIONAL</span></td>
+<td>Filter. Return only hotels where the cheaper price is at most price_max (included). Cannot be used together with price_buckets</td>
+</tr>
+<tr>
+<td><code class="prettyprint">price_buckets</code> <br><span class="optional">OPTIONAL</span></td>
+<td>OR filter. Return only hotels with offers inside the specified buckets. Cannot be used together with price_min/price_max</td>
+</tr>
+<tr>
+<td><code class="prettyprint">district</code> <br><span class="optional">OPTIONAL</span></td>
+<td>OR filter. Return only results where a district matches</td>
+</tr>
+<tr>
+<td><code class="prettyprint">stars</code> <br><span class="optional">OPTIONAL</span></td>
+<td>OR filter. Return only results where a star category matches. The values must be TravelAPI ids</td>
+</tr>
+<tr>
+<td><code class="prettyprint">city</code> <br><span class="optional">OPTIONAL</span></td>
+<td>OR filter. When the search is done for an entity that contains different cities, this filter is available. Returns only results where the cities match. The values must be TravelAPI entity ids</td>
+</tr>
+<tr>
+<td><code class="prettyprint">chain</code> <br><span class="optional">OPTIONAL</span></td>
+<td>OR filter. Return only results where a hotel chains matches. The values must be TravelAPI ids</td>
+</tr>
+<tr>
+<td><code class="prettyprint">amenities</code> <br><span class="optional">OPTIONAL</span></td>
+<td>AND filter. Return only results where all amenities match. The values must be TravelAPI ids</td>
+</tr>
+<tr>
+<td><code class="prettyprint">cancellation</code> <br><span class="optional">OPTIONAL</span></td>
+<td>OR filter. Return only results where a cancellation policies matches. Options are:<br>free_cancellation, non_refundable, refundable, special_conditions</td>
+</tr>
+<tr>
+<td><code class="prettyprint">meal_plan</code> <br><span class="optional">OPTIONAL</span></td>
+<td>OR filter. Return only results where a meal plan matches. Options are:<br>room_only, breakfast_included, half_board, full_board, all_inclusive</td>
+</tr>
+<tr>
+<td><code class="prettyprint">property_type</code> <br><span class="optional">OPTIONAL</span></td>
+<td>OR filter. Return only results where an accommodation type matches. The values must be TravelAPI ids</td>
+</tr>
+<tr>
+<td><code class="prettyprint">hotel_name</code> <br><span class="optional">OPTIONAL</span></td>
+<td>Filter. Return only results where hotel name matches</td>
+</tr>
+<tr>
+<td><code class="prettyprint">limit</code> <br><span class="optional">OPTIONAL</span></td>
+<td>Number of results to retrieve<br>between 1-100, default: 100</td>
+</tr>
+<tr>
+<td><code class="prettyprint">offset</code> <br><span class="optional">OPTIONAL</span></td>
+<td>How many results to skip from the first position. Useful for paginating<br>default: 0</td>
+</tr>
+<tr>
+<td><code class="prettyprint">partners_per_hotel</code> <br><span class="optional">OPTIONAL</span></td>
+<td>Maximum numbers of partners to retrieve per each hotel. Note that 0 means all the available partners. Map only supports 1 partner per hotel<br>default: 1</td>
+</tr>
+<tr>
+<td><code class="prettyprint">enhanced</code> <br><span class="optional">OPTIONAL</span></td>
+<td>This parameter allows you to add additional content to the default response. The available options are:<br>filters: Returns extra object in the response including the filters like stars, district, city, etc.<br>price_slider: Return the price_slider.<br>query_location: Returns the location (higher level entities according to the searched entity) and map boundary (the coordinates of the search area).<br>translations: Returns a dictionary with all literals and their corresponding translations using the request locale.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">bbox</code> <br><span class="optional">OPTIONAL</span></td>
+<td>Bounding Box coordinates in which to look for hotels as bbox=left,bottom,right,top<br>Example: -4.051,50.478,1.853,52.909</td>
+</tr>
+</tbody></table>
+
+<p><strong>Note</strong>: The OR and AND filters allow multiple values coma separated. For example: <em>&amp;amenities=Lift,Bar</em></p>
+
+<h3 id="response">Response</h3>
+
+<blockquote>
+<p>Example response:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"correlation_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"d93ddb4d-c97c-4979-9627-e188e02c8409"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"COMPLETED"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">5500</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"total_available"</span><span class="p">:</span><span class="w"> </span><span class="mi">4092</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"completion_percentage"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"offers"</span><span class="p">:</span><span class="w"> </span><span class="mi">67275</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"hotels_filtered"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"results"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"filters"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"district"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"27562177"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"min_price"</span><span class="p">:</span><span class="w"> </span><span class="mi">45</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"max_price"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">94</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="err">...</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"chain"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Holiday Inn"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"min_price"</span><span class="p">:</span><span class="w"> </span><span class="mi">74</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"max_price"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">74</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="err">...</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"cancellation"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"free_cancellation"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"min_price"</span><span class="p">:</span><span class="w"> </span><span class="mi">36</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"max_price"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">2207</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="err">...</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"27544008"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"min_price"</span><span class="p">:</span><span class="w"> </span><span class="mi">32</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"max_price"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">856</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="err">...</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"amenities"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"WifiService"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"min_price"</span><span class="p">:</span><span class="w"> </span><span class="mi">32</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"max_price"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">3327</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="err">...</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"price_buckets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PR_BK_0"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"min_price"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"max_price"</span><span class="p">:</span><span class="w"> </span><span class="mi">80</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">130</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="err">...</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"stars"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"min_price"</span><span class="p">:</span><span class="w"> </span><span class="mi">58</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"max_price"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1220</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="err">...</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"meal_plan"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"room_only"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"min_price"</span><span class="p">:</span><span class="w"> </span><span class="mi">32</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"max_price"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">2060</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="err">...</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"property_type"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hotel"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"min_price"</span><span class="p">:</span><span class="w"> </span><span class="mi">32</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"max_price"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">3486</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="err">...</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"map_boundary"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"n_e_lng"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.72864</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"s_w_lng"</span><span class="p">:</span><span class="w"> </span><span class="mf">-2.04675</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"s_w_lat"</span><span class="p">:</span><span class="w"> </span><span class="mf">50.63341</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"n_e_lat"</span><span class="p">:</span><span class="w"> </span><span class="mf">52.7619</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"hotel_pivot"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"hotels"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"reviews_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">284</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"coordinates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="mf">1.2961</span><span class="p">,</span><span class="w">
+          </span><span class="mf">51.12328</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"hotel_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"46997257"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"images"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"h_dp"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"gallery"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://d3ba47lalua02r.cloudfront.net/available/50049482/mca.jpg"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"thumbnail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://d3ba47lalua02r.cloudfront.net/available/50049482/mt.jpg"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The West Bank Guest House"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"offers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"price_gbp"</span><span class="p">:</span><span class="w"> </span><span class="mi">58</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">58</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"deeplink"</span><span class="p">:</span><span class="w"> </span><span class="s2">"www.skyscanner.net/hotel_deeplink/4.0/UK/en-GB/GBP/h_xp/46997257/2017-04-30/2017-05-02/hotel/hotel/hotels?guests=1&amp;ticket_price=58&amp;rooms_left=1&amp;appVersion=2.0&amp;q_datetime_utc=2017-04-25T13%3A37%3A37&amp;rooms=1&amp;deeplink_ids=eu-west-1.prod_ae42baa45b08402e0a109287d1780528&amp;request_id=b745fa26-f166-478f-b52c-2fcee3f413fe&amp;appName=web&amp;legacy_provider_id=1&amp;max_price=132.0"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"closed_user_groups"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"stars"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"rating"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">7.7</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"desc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rating_good"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="err">...</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"location"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"United Kingdom"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"entity_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"29475375"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"entity_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Nation"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"translations"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"CUG_create_account_to_unlock_deals_msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Create an account to unlock exclusive deals"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"CUG_deal"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DEAL"</span><span class="p">,</span><span class="w">
+    </span><span class="err">...</span><span class="w">
+  </span><span class="err">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p><em>RESPONSE PARAMETERS</em></p>
+
+<table><thead>
+<tr>
+<th>Element</th>
+<th>Detail</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">correlation_id</code></td>
+<td>An identifier of the request</td>
+</tr>
+<tr>
+<td><code class="prettyprint">meta</code></td>
+<td>Contains metadata regarding the search cycle such as it&rsquo;s status</td>
+</tr>
+<tr>
+<td><code class="prettyprint">count</code></td>
+<td>Number of hotels</td>
+</tr>
+<tr>
+<td><code class="prettyprint">results</code></td>
+<td>An object containing the hotels and the enhancers if requested</td>
+</tr>
+<tr>
+<td><code class="prettyprint">translations</code></td>
+<td>Only with the <code class="prettyprint">translations</code> enhanced. Dictionary with all literals that can be translated</td>
+</tr>
+</tbody></table>
+
+<h3 id="location-request">Location Request</h3>
+
+<p>This endpoint gives back hotels with prices too with map specific features but instead from an entity, around specific coordinates.</p>
+
+<p>Provides the search by current location functionality.</p>
+
+<p><em>API endpoint</em></p>
+
+<p><code class="prettyprint">GET /v1/prices/map/location/{lon,lat}</code></p>
+<pre class="highlight shell"><code>GET <span class="s2">"https://gateway.skyscanner.net/hotels/v1/prices/map/location/{lon,lat}
+  ?market={market}&amp;locale={locale}&amp;checkin_date={checkin_date}&amp;checkout_date={checkout_date}
+  &amp;currency={currency}&amp;adults={adults}&amp;rooms={rooms}&amp;images={images}&amp;image_resolution={resolution}
+  &amp;image_type={type}&amp;boost_official_partners={boost}&amp;sort={sort_method}&amp;limit={limit}&amp;offset={offset}
+  &amp;partners_per_hotel={num_partners}&amp;enhanced={enhanced}&amp;bbox={left,bottom,right,top}"</span>
+</code></pre>
+<p><em>TRY IT OUT</em></p>
+
+<p><a href="https://app.getpostman.com/run-collection/8c06f7a93120a724de16"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
+
+<p><em>HEADER VALUES</em></p>
+
+<table><thead>
+<tr>
+<th>Header</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">apikey</code> <br><span class="required">REQUIRED</span></td>
+<td>This header is required to be on every single request any client does (it could also be accepted via query parameter)</td>
+</tr>
+<tr>
+<td><code class="prettyprint">x-user-agent</code> <br><span class="required">REQUIRED</span></td>
+<td>Indicates which is the device and the platform related to the client. The format for that header is <code class="prettyprint">device;B2B</code>, where:<br>Device is:<br><code class="prettyprint">T</code> for tablet<br><code class="prettyprint">D</code> for desktop<br><code class="prettyprint">M</code> for mobile<br><code class="prettyprint">N</code> if you are not able to detect the device type</td>
+</tr>
+</tbody></table>
+
+<p><em>URI PARAMETERS</em></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">location</code> <br><span class="required">REQUIRED</span></td>
+<td>Location to search hotels near it. Following the format: lon,lat</td>
+</tr>
+<tr>
+<td><code class="prettyprint">version</code> <br><span class="required">REQUIRED</span></td>
+<td>API version</td>
+</tr>
+</tbody></table>
+
+<p><em>QUERY PARAMETERS</em></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">market</code> <br><span class="required">REQUIRED</span></td>
+<td>Matching [A-Z]{2}</td>
+</tr>
+<tr>
+<td><code class="prettyprint">locale</code> <br><span class="required">REQUIRED</span></td>
+<td>Matching [a-z]{2}-[A-Z]{2}</td>
+</tr>
+<tr>
+<td><code class="prettyprint">currency</code> <br><span class="required">REQUIRED</span></td>
+<td>Currency code</td>
+</tr>
+<tr>
+<td><code class="prettyprint">checkin_date</code> <br><span class="required">REQUIRED</span></td>
+<td>YYYY-MM-DD</td>
+</tr>
+<tr>
+<td><code class="prettyprint">checkout_date</code> <br><span class="required">REQUIRED</span></td>
+<td>YYYY-MM-DD</td>
+</tr>
+<tr>
+<td><code class="prettyprint">rooms</code> <br><span class="required">REQUIRED</span></td>
+<td>Number of rooms<br>default: 1</td>
+</tr>
+<tr>
+<td><code class="prettyprint">adults</code> <br><span class="required">REQUIRED</span></td>
+<td>Number of adults<br>default: 2</td>
+</tr>
+<tr>
+<td><code class="prettyprint">apikey</code> <br><span class="required">REQUIRED</span></td>
+<td>This parameter is required to be on every single request any client does</td>
+</tr>
+<tr>
+<td><code class="prettyprint">images</code> <br><span class="optional">OPTIONAL</span></td>
+<td>Maximum number of images to retrieve per each hotel<br>between 1-30, default: 3</td>
+</tr>
+<tr>
+<td><code class="prettyprint">image_resolution</code> <br><span class="optional">OPTIONAL</span></td>
+<td>Resolution options<br>high or low, default: high</td>
+</tr>
+<tr>
+<td><code class="prettyprint">image_type</code> <br><span class="optional">OPTIONAL</span></td>
+<td>The format of the images<br>thumbnail or gallery</td>
+</tr>
+<tr>
+<td><code class="prettyprint">boost_official_partners</code> <br><span class="optional">OPTIONAL</span></td>
+<td>Indicates whether prices from official partners must be shown in the first place [1] or not [0]<br>default: 0</td>
+</tr>
+<tr>
+<td><code class="prettyprint">sort</code> <br><span class="optional">OPTIONAL</span></td>
+<td>Sort by a given attribute. By default the relevance sorting is applied<br>One of: relevance, -relevance, price, -price, distance, -distance, rating, -rating, stars, -stars</td>
+</tr>
+<tr>
+<td><code class="prettyprint">price_min</code> <br><span class="optional">OPTIONAL</span></td>
+<td>Filter. Return only hotels where the cheaper price is at least price_min (included). Cannot be used together with price_buckets</td>
+</tr>
+<tr>
+<td><code class="prettyprint">price_max</code> <br><span class="optional">OPTIONAL</span></td>
+<td>Filter. Return only hotels where the cheaper price is at most price_max (included). Cannot be used together with price_buckets</td>
+</tr>
+<tr>
+<td><code class="prettyprint">price_buckets</code> <br><span class="optional">OPTIONAL</span></td>
+<td>OR filter. Return only hotels with offers inside the specified buckets. Cannot be used together with price_min/price_max</td>
+</tr>
+<tr>
+<td><code class="prettyprint">district</code> <br><span class="optional">OPTIONAL</span></td>
+<td>OR filter. Return only results where a district matches</td>
+</tr>
+<tr>
+<td><code class="prettyprint">stars</code> <br><span class="optional">OPTIONAL</span></td>
+<td>OR filter. Return only results where a star category matches. The values must be TravelAPI ids</td>
+</tr>
+<tr>
+<td><code class="prettyprint">city</code> <br><span class="optional">OPTIONAL</span></td>
+<td>OR filter. When the search is done for an entity that contains different cities, this filter is available. Returns only results where the cities match. The values must be TravelAPI entity ids</td>
+</tr>
+<tr>
+<td><code class="prettyprint">chain</code> <br><span class="optional">OPTIONAL</span></td>
+<td>OR filter. Return only results where a hotel chains matches. The values must be TravelAPI ids</td>
+</tr>
+<tr>
+<td><code class="prettyprint">amenities</code> <br><span class="optional">OPTIONAL</span></td>
+<td>AND filter. Return only results where all amenities match. The values must be TravelAPI ids</td>
+</tr>
+<tr>
+<td><code class="prettyprint">cancellation</code> <br><span class="optional">OPTIONAL</span></td>
+<td>OR filter. Return only results where a cancellation policies matches. Options are:<br>free_cancellation, non_refundable, refundable, special_conditions</td>
+</tr>
+<tr>
+<td><code class="prettyprint">meal_plan</code> <br><span class="optional">OPTIONAL</span></td>
+<td>OR filter. Return only results where a meal plan matches. Options are:<br>room_only, breakfast_included, half_board, full_board, all_inclusive</td>
+</tr>
+<tr>
+<td><code class="prettyprint">property_type</code> <br><span class="optional">OPTIONAL</span></td>
+<td>OR filter. Return only results where an accommodation type matches. The values must be TravelAPI ids</td>
+</tr>
+<tr>
+<td><code class="prettyprint">hotel_name</code> <br><span class="optional">OPTIONAL</span></td>
+<td>Filter. Return only results where hotel name matches</td>
+</tr>
+<tr>
+<td><code class="prettyprint">limit</code> <br><span class="optional">OPTIONAL</span></td>
+<td>Number of results to retrieve<br>between 1-100, default: 100</td>
+</tr>
+<tr>
+<td><code class="prettyprint">offset</code> <br><span class="optional">OPTIONAL</span></td>
+<td>How many results to skip from the first position. Useful for paginating<br>default: 0</td>
+</tr>
+<tr>
+<td><code class="prettyprint">partners_per_hotel</code> <br><span class="optional">OPTIONAL</span></td>
+<td>Maximum numbers of partners to retrieve per each hotel. Note that 0 means all the available partners. Map only supports 1 partner per hotel<br>default: 1</td>
+</tr>
+<tr>
+<td><code class="prettyprint">enhanced</code> <br><span class="optional">OPTIONAL</span></td>
+<td>This parameter allows you to add additional content to the default response. The available options are:<br>filters: Returns extra object in the response including the filters like stars, district, city, etc.<br>price_slider: Return the price_slider.<br>query_location: Returns the location (higher level entities according to the searched entity) and map boundary (the coordinates of the search area).<br>translations: Returns a dictionary with all literals and their corresponding translations using the request locale.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">bbox</code> <br><span class="optional">OPTIONAL</span></td>
+<td>Bounding Box coordinates in which to look for hotels as bbox=left,bottom,right,top<br>Example: -4.051,50.478,1.853,52.909</td>
+</tr>
+</tbody></table>
+
+<p><strong>Note</strong>: The OR and AND filters allow multiple values coma separated. For example: <em>&amp;amenities=Lift,Bar</em></p>
+
+<h3 id="response">Response</h3>
+
+<blockquote>
+<p>The response is the same as the search map entity one</p>
+</blockquote>
+
+<p><em>RESPONSE PARAMETERS</em></p>
+
+<table><thead>
+<tr>
+<th>Element</th>
+<th>Detail</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">correlation_id</code></td>
+<td>An identifier of the request</td>
+</tr>
+<tr>
+<td><code class="prettyprint">meta</code></td>
+<td>Contains metadata regarding the search cycle such as it&rsquo;s status</td>
+</tr>
+<tr>
+<td><code class="prettyprint">count</code></td>
+<td>Number of hotels</td>
+</tr>
+<tr>
+<td><code class="prettyprint">results</code></td>
+<td>An object containing the hotels and the enhancers if requested</td>
+</tr>
+<tr>
+<td><code class="prettyprint">translations</code></td>
+<td>Only with the <code class="prettyprint">translations</code> enhanced. Dictionary with all literals that can be translated</td>
+</tr>
+</tbody></table>
+
+<h2 id="hotel-prices">Hotel Prices</h2>
+
+<h3 id="request">Request</h3>
+
+<p>Given a hotel, this endpoint will give back the hotel with all the information and live prices. To reuse the prices already fetched by previous calls to the search endpoint the parameter <em>entity_id</em> must be filled with the same entity id.
+Otherwise, the system will start fetching prices from the beginning for this specific hotel.
+Is a regular practice following the user flow first of all search for prices using the search prices endpoint and then retrieve more specific information - perhaps the detailed reviews - about one of the hotels using the hotel prices endpoint.</p>
+
+<p><em>API endpoint</em></p>
+
+<p><code class="prettyprint">GET /v1/prices/hotel/{hotel_id}</code></p>
+<pre class="highlight shell"><code>GET <span class="s2">"https://gateway.skyscanner.net/hotels/v1/prices/hotel/{hotel_id}
+  ?entity_id=27539733&amp;market={market}&amp;locale={locale}&amp;checkin_date={checkin_date}&amp;checkout_date={checkout_date}
+  &amp;currency={currency}&amp;adults={adults}&amp;rooms={rooms}&amp;images={images}&amp;image_resolution={resolution}
+  &amp;image_type={type}&amp;boost_official_partners={boost}&amp;partners_per_hotel={num_partners}"</span>
+</code></pre>
+<p><em>TRY IT OUT</em></p>
+
+<p><a href="https://app.getpostman.com/run-collection/235d1617d92d7467ed1b"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
+
+<p><em>HEADER VALUES</em></p>
+
+<table><thead>
+<tr>
+<th>Header</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">apikey</code> <br><span class="required">REQUIRED</span></td>
+<td>This header is required to be on every single request any client does (it could also be accepted via query parameter)</td>
+</tr>
+<tr>
+<td><code class="prettyprint">x-user-agent</code> <br><span class="required">REQUIRED</span></td>
+<td>Indicates which is the device and the platform related to the client. The format for that header is <code class="prettyprint">device;B2B</code>, where:<br>Device is:<br><code class="prettyprint">T</code> for tablet<br><code class="prettyprint">D</code> for desktop<br><code class="prettyprint">M</code> for mobile<br><code class="prettyprint">N</code> if you are not able to detect the device type</td>
+</tr>
+</tbody></table>
+
+<p><em>URI PARAMETERS</em></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">hotel_id</code> <br><span class="required">REQUIRED</span></td>
+<td>Hotel to search prices for</td>
+</tr>
+<tr>
+<td><code class="prettyprint">version</code> <br><span class="required">REQUIRED</span></td>
+<td>API version</td>
+</tr>
+</tbody></table>
+
+<p><em>QUERY PARAMETERS</em></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">market</code> <br><span class="required">REQUIRED</span></td>
+<td>Matching [A-Z]{2}</td>
+</tr>
+<tr>
+<td><code class="prettyprint">locale</code> <br><span class="required">REQUIRED</span></td>
+<td>Matching [a-z]{2}-[A-Z]{2}</td>
+</tr>
+<tr>
+<td><code class="prettyprint">currency</code> <br><span class="required">REQUIRED</span></td>
+<td>Currency code</td>
+</tr>
+<tr>
+<td><code class="prettyprint">checkin_date</code> <br><span class="required">REQUIRED</span></td>
+<td>YYYY-MM-DD</td>
+</tr>
+<tr>
+<td><code class="prettyprint">checkout_date</code> <br><span class="required">REQUIRED</span></td>
+<td>YYYY-MM-DD</td>
+</tr>
+<tr>
+<td><code class="prettyprint">rooms</code> <br><span class="required">REQUIRED</span></td>
+<td>Number of rooms<br>default: 1</td>
+</tr>
+<tr>
+<td><code class="prettyprint">adults</code> <br><span class="required">REQUIRED</span></td>
+<td>Number of adults<br>default: 2</td>
+</tr>
+<tr>
+<td><code class="prettyprint">apikey</code> <br><span class="required">REQUIRED</span></td>
+<td>This parameter is required to be on every single request any client does</td>
+</tr>
+<tr>
+<td><code class="prettyprint">images</code> <br><span class="optional">OPTIONAL</span></td>
+<td>Maximum number of images to retrieve per each hotel<br>between 1-30, default: 3</td>
+</tr>
+<tr>
+<td><code class="prettyprint">image_resolution</code> <br><span class="optional">OPTIONAL</span></td>
+<td>Resolution options<br>high or low, default: high</td>
+</tr>
+<tr>
+<td><code class="prettyprint">image_type</code> <br><span class="optional">OPTIONAL</span></td>
+<td>The format of the images<br>thumbnail or gallery</td>
+</tr>
+<tr>
+<td><code class="prettyprint">boost_official_partners</code> <br><span class="optional">OPTIONAL</span></td>
+<td>Indicates whether prices from official partners must be shown in the first place [1] or not [0]<br>default: 0</td>
+</tr>
+<tr>
+<td><code class="prettyprint">partners_per_hotel</code> <br><span class="optional">OPTIONAL</span></td>
+<td>Maximum numbers of partners to retrieve per each hotel. Note that 0 means all the available partners<br>default: 3</td>
+</tr>
+<tr>
+<td><code class="prettyprint">enhanced</code> <br><span class="optional">OPTIONAL</span></td>
+<td>This parameter allows you to add additional content to the default response. The available options are:<br>location: Returns the higher level entities according to the search entity.<br>translations: Returns a dictionary with all literals and their corresponding translations using the request locale.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">entity_id</code> <br><span class="optional">OPTIONAL</span></td>
+<td>This field should be present when this endpoint has been called when the user has already looked for prices in an upper entity containing the hotel in order to reuse the cached prices.<br>For example: A user searches for prices in Paris (the service stores Paris prices). And then, the user opens a hotel details page. In this case, the request to the service must have the entity_id param fulfilled with the Paris entity_id in order to reuse the prices.</td>
+</tr>
+</tbody></table>
+
+<h3 id="response">Response</h3>
+
+<blockquote>
+<p>Example response:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"offers"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"COMPLETED"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"completion_percentage"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"results"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"location"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Barcelona"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"entity_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"27548283"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"entity_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"City"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="err">...</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"hotel"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"district"</span><span class="p">:</span><span class="w"> </span><span class="s2">"27562628"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name_en"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hotel Via Augusta"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hotel Via Augusta"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"hotel_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"46958001"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"total_rooms"</span><span class="p">:</span><span class="w"> </span><span class="mi">207</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"stars"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"reviews_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1496</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"amenities"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"Lift"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Laundry"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"AirConditioning"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"DailyNewspaperService"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Balcony"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"FrontDesk24hService"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"SafeDepositBox"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"WifiService"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Parking"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"DisabledFacility"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"LuggageStorage"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"MultilingualStaffService"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"27548283"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"offers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"price_gbp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1669</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"closed_user_groups"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"room_type"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"triple"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"triple"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"triple"</span><span class="w">
+          </span><span class="p">],</span><span class="w">
+          </span><span class="nt">"meal_plan"</span><span class="p">:</span><span class="w"> </span><span class="s2">"breakfast_included"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"strike_through"</span><span class="p">:</span><span class="w"> </span><span class="mi">1967</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"deeplink"</span><span class="p">:</span><span class="w"> </span><span class="s2">"www.skyscanner.net/hotel_deeplink/4.0/UK/en-GB/GBP/h_ka/46958001/2017-06-29/2017-07-05/hotel/hotel/hotels?request_id=15834838-f028-400a-bb4f-ed39025cf9e1&amp;deeplink_ids=eu-west-1.prod_092a61636486890f4d9c56373a981f94&amp;appName=web&amp;ticket_price=1669&amp;guests=7&amp;q_datetime_utc=2017-04-24T15%3A15%3A07&amp;legacy_provider_id=249&amp;appVersion=2.0&amp;rooms=3&amp;max_price=1967.0"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"cancellation"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"partner_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"h_ka"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"available"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"cancellation_text"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"is_official"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">1669</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="err">...</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"district"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sant Gervasi"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Barcelona"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"adm1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Catalonia"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"nation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Spain"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"postcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"08006"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"street_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Via Augusta, 63"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://d19i3hu78g2w6f.cloudfront.net/75be_HOTEL_18576_148_en-GB"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"rating"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">8.2</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"desc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rating_very_good"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"chain"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"reviews"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"guest_types"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"couple"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"score"</span><span class="p">:</span><span class="w"> </span><span class="mi">82</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"perc"</span><span class="p">:</span><span class="w"> </span><span class="mi">51</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="err">...</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1496</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"summary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Very good budget hotel. Close to restaurants, bars and public transportation. Popular among solo travelers. “Friendly staff”. “Good breakfast”. "</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"categories"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"entries"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+              </span><span class="s2">"Fantastic service"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"Friendly staff"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"Very friendly multilingual staff"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"Good service"</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="nt">"score"</span><span class="p">:</span><span class="w"> </span><span class="mi">94</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Service"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="err">...</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"property_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hotel"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"coordinates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="mf">2.15145</span><span class="p">,</span><span class="w">
+        </span><span class="mf">41.40005</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"images"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"h_dp"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"thumbnail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://d3ba47lalua02r.cloudfront.net/available/47224844/rmt.jpg"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"gallery"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://d3ba47lalua02r.cloudfront.net/available/47224844/rmca.jpg"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="err">...</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"partners"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"is_official"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Adagio Access"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"logo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"www.skyscanner.net/images/websites/220x80/h_as.png"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"website_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"h_as"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="err">...</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"translations"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"CUG_create_account_to_unlock_deals_msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Create an account to unlock exclusive deals"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"CUG_deal"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DEAL"</span><span class="p">,</span><span class="w">
+    </span><span class="err">...</span><span class="w">
+  </span><span class="err">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p><em>RESPONSE PARAMETERS</em></p>
+
+<table><thead>
+<tr>
+<th>Element</th>
+<th>Detail</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">meta</code></td>
+<td>Contains metadata regarding the search cycle such as it&rsquo;s status</td>
+</tr>
+<tr>
+<td><code class="prettyprint">results</code></td>
+<td>An object containing the hotel and the enhancers if requested</td>
+</tr>
+<tr>
+<td><code class="prettyprint">translations</code></td>
+<td>Only with the <code class="prettyprint">translations</code> enhanced. Dictionary with all literals that can be translated</td>
+</tr>
+</tbody></table>
 
           <h1 id="localisation">Localisation</h1>
 
