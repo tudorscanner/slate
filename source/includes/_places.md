@@ -313,25 +313,30 @@ GET "http://gateway.skyscanner.net/autosuggest/v3/hotels?
 | ```market``` | The [market](#markets) your user is in |
 | ```limit_geopolitical``` | Only show results that are contained within any of the provided geopolitical entities (specified by its IDs, comma separated). |
 | ```exclude_geopolitical``` | Only show results that are NOT contained in any of the provided geopolitical entities (specified by its IDs, comma separated). |
-| ```limit_taxonomy``` | Only show results that belong to specified ontology class hierarchies (comma-separated). |
-| ```exclude_taxonomy``` | Only show results that do NOT belong to specified ontology class hierarchies (comma-separated). |
 
-> Example response for 'lond'
+> Example response for '?q=lond&locale=en-GB'
 
 ```json
 {
   "results": [
     {
-      "individual_id": 27544008,
-      "type": "City",
+      "id": "27544008",
+      "localised_name": "London",
       "localised_type": "City",
-      "containment_chain": [
+      "type": "City",
+      "geo_containers": [
         {
-          "id": 27544008,
-          "localised_name": "London",
-          "type": "City"
+          "id": "44293288",
+          "localised_name": "England",
+          "localised_type": "Region",
+          "type": "FirstLevelNationAdministrativeDivision"
         },
-        ...
+        {
+          "id": "29475375",
+          "localised_name": "United Kingdom",
+          "localised_type": "Country",
+          "type": "Nation"
+        }
       ]
     },
     ...
@@ -344,10 +349,9 @@ GET "http://gateway.skyscanner.net/autosuggest/v3/hotels?
 | Parameter | Description |
 | --- | --- |
 | ```results``` | Contains a list of results for the query in order of relevance | 
-| ```individual_id``` | Can be used as an input to the Hotels Pricing Service or to query geo |
-| ```type``` | Identify the type of the entity (City, District, Hotel, ...) |
-| ```localised_type``` | Contains the `type` in the locale used in the query |
-| ```containment_chain``` | The list of locations that contain one another in order (e.g. London, England, United Kingdom) |
 | ```id``` | Can be used as an input to the Hotels Pricing Service or to query geo |
 | ```localised_name``` | Entity name in the provided locale |
+| ```localised_type``` | Contains the `type` in the locale used in the query |
+| ```type``` | Identify the type of the entity (City, District, Hotel, ...) |
+| ```geo_containers``` | The list of parent locations that contain one another in order (e.g. England, United Kingdom for London) |
 
