@@ -4389,20 +4389,15 @@ Please <a href="https://partners.skyscanner.net/contact/" target="_blank"> conta
 <p>If the default Skyscanner schema is not used, the schema name must be appended to the place id as follows:
 <code class="prettyprint">placeCode-locationSchema</code></p>
 
-<h2 id="car-hire-and-hotels">Car Hire and Hotels</h2>
+<h2 id="hotels-autosuggest">Hotels Autosuggest</h2>
 
 <p>Retrieve a list of hotels and/or geographical locations which can then be used witht the hotels and car hire APIs. In the case of car hire, use this if you want downtown (non-airport) searches.</p>
-<pre class="highlight shell"><code>GET <span class="s2">"http://partners.api.skyscanner.net/apiservices/hotels/autosuggest/v2/{country}/{currency}/{locale}/{query}?
-    apiKey={apiKey}"</span>
-</code></pre>
-<p><em>API endpoint</em></p>
+<pre class="highlight shell"><code>GET <span class="s2">"http://gateway.skyscanner.net/autosuggest/v3/hotels?
+    q=lond&amp;
+    market=US&amp;
+    locale=en-US
 
-<p><code class="prettyprint">GET /hotels/autosuggest/v2/</code></p>
-
-<p><em>Try it out</em></p>
-
-<p><a href="https://app.getpostman.com/run-collection/bdc1b26caf8b51e5c21a"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
-
+</span></code></pre>
 <p><em>REQUEST PARAMETERS</em></p>
 
 <table><thead>
@@ -4412,61 +4407,51 @@ Please <a href="https://partners.skyscanner.net/contact/" target="_blank"> conta
 </tr>
 </thead><tbody>
 <tr>
-<td><code class="prettyprint">country</code> <br><span class="required">REQUIRED</span></td>
-<td>The <a href="#markets">market country</a> your user is in</td>
+<td><code class="prettyprint">q</code></td>
+<td>User query. If empty, will return most popular places for the market based on market distance and number of hotels</td>
 </tr>
 <tr>
-<td><code class="prettyprint">currency</code> <br><span class="required">REQUIRED</span></td>
-<td>The <a href="#currencies">currency</a> you want the prices in</td>
-</tr>
-<tr>
-<td><code class="prettyprint">locale</code> <br><span class="required">REQUIRED</span></td>
+<td><code class="prettyprint">locale</code></td>
 <td>The <a href="#locales">locale</a> you want the results in (ISO locale)</td>
 </tr>
 <tr>
-<td><code class="prettyprint">query</code> <br><span class="required">REQUIRED</span></td>
-<td>The query string, must be at least 2 characters long.</td>
+<td><code class="prettyprint">market</code></td>
+<td>The <a href="#markets">market</a> your user is in</td>
 </tr>
 <tr>
-<td><code class="prettyprint">apiKey</code> <br><span class="required">REQUIRED</span></td>
-<td>The API Key to identify the customer</td>
+<td><code class="prettyprint">limit_geopolitical</code></td>
+<td>Only show results that are contained within any of the provided geopolitical entities (specified by its IDs, comma separated).</td>
+</tr>
+<tr>
+<td><code class="prettyprint">exclude_geopolitical</code></td>
+<td>Only show results that are NOT contained in any of the provided geopolitical entities (specified by its IDs, comma separated).</td>
 </tr>
 </tbody></table>
 
 <blockquote>
-<p>Example response for &lsquo;pari&rsquo;</p>
+<p>Example response for &rsquo;?q=lond&amp;locale=en-GB&rsquo;</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"places"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"place_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"city_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Paris"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"admin_level1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Île-de-France"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"country_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"France"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"place_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"admin_level1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Île-de-France"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"country_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"France"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-  </span><span class="err">...</span><span class="w">
-  </span><span class="p">],</span><span class="w">
   </span><span class="nt">"results"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Paris"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"parent_place_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"individual_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"27539733"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"geo_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"City"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"localised_geo_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"City"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"is_bookable"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Paris 08 Élysée"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"parent_place_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"individual_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"27562771"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"geo_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"District"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"localised_geo_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"District"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"is_bookable"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"27544008"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"localised_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"London"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"localised_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"City"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"City"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"geo_containers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"44293288"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"localised_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"England"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"localised_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Region"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FirstLevelNationAdministrativeDivision"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"29475375"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"localised_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"United Kingdom"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"localised_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Country"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Nation"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="err">...</span><span class="w">
   </span><span class="p">]</span><span class="w">
@@ -4481,12 +4466,28 @@ Please <a href="https://partners.skyscanner.net/contact/" target="_blank"> conta
 </tr>
 </thead><tbody>
 <tr>
-<td><code class="prettyprint">places</code></td>
-<td>Contains a list of places that represent lookup geographic places (e.g. cities, countries) for the query.</td>
+<td><code class="prettyprint">results</code></td>
+<td>Contains a list of results for the query in order of relevance</td>
 </tr>
 <tr>
-<td><code class="prettyprint">results</code></td>
-<td>Contains a list of results for the query with:<br>- geo_type to identify the type (City, District, Hotel, &hellip;)<br>- localised_geo_type which contains the geo_type in the locale used in the query<br>- display_name<br>- individual_id which can be used as an input to the Hotels Pricing Service<br>- parent_place_id which can be used to lookup the place information</td>
+<td><code class="prettyprint">id</code></td>
+<td>Can be used as an input to the Hotels Pricing Service or to query geo</td>
+</tr>
+<tr>
+<td><code class="prettyprint">localised_name</code></td>
+<td>Entity name in the provided locale</td>
+</tr>
+<tr>
+<td><code class="prettyprint">localised_type</code></td>
+<td>Contains the <code class="prettyprint">type</code> in the locale used in the query</td>
+</tr>
+<tr>
+<td><code class="prettyprint">type</code></td>
+<td>Identify the type of the entity (City, District, Hotel, &hellip;)</td>
+</tr>
+<tr>
+<td><code class="prettyprint">geo_containers</code></td>
+<td>The list of parent locations that contain one another in order (e.g. England, United Kingdom for London)</td>
 </tr>
 </tbody></table>
 
