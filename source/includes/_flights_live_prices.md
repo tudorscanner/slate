@@ -68,6 +68,8 @@ or go to our [test harness](http://business.skyscanner.net/portal/en-GB/Document
 | ```adults``` <br><span class="required">REQUIRED</span> | Number of adults (16+ years). Must be between 1 and 8.  |
 | ```children``` <br><span class="optional">OPTIONAL</span> | Number of children (1-16 years). Can be between 0 and 8.  |
 | ```infants``` <br><span class="optional">OPTIONAL</span> | Number of infants (under 12 months). Can be between 0 and 8.  |
+| ```includeCarriers``` <br><span class="optional">OPTIONAL</span> | Only return results from those carriers. Comma-separated list of carrier ids.  |
+| ```excludeCarriers``` <br><span class="optional">OPTIONAL</span> | Filter out results from those carriers. Comma-separated list of carrier ids.  |
 | ```apiKey``` <br><span class="required">REQUIRED</span> | Your API Key. |
 
 
@@ -155,7 +157,7 @@ or go to our [test harness](http://business.skyscanner.net/portal/en-GB/Document
 | ```apiKey``` <br><span class="required">REQUIRED</span> | Your API Key. |
 
 
-### Pagination and payload 
+### Pagination and payload
 
 > Example polling request with pagination:
 
@@ -176,7 +178,7 @@ If you want to supply results in pages, rather than show all the results availab
 | ```pageSize``` | The number of itineraries per page. Defaults to 10 if not specified.|
 
 
-Keep requesting page 0 until you get `UpdatesComplete` with `pageIndex=0` at half a second to one second interval. Once you get `UpdatesComplete` you may request any page and page size. 
+Keep requesting page 0 until you get `UpdatesComplete` with `pageIndex=0` at half a second to one second interval. Once you get `UpdatesComplete` you may request any page and page size.
 
 
 <aside class="notice">
@@ -421,7 +423,7 @@ The full url and body content are provided in the response from the live pricing
 *TRY IT OUT*
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/31ff523d2ff9186107e1)
- 
+
  or go to our [test harness](http://business.skyscanner.net/portal/en-GB/Documentation/FlightsLivePricingQuickStart)
 
 *REQUEST PARAMETERS*
