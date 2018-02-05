@@ -1090,6 +1090,14 @@ risk of exposing account API keys.
 <td>Number of infants (under 12 months). Can be between 0 and 8.</td>
 </tr>
 <tr>
+<td><code class="prettyprint">includeCarriers</code> <br><span class="optional">OPTIONAL</span></td>
+<td>Only return results from those carriers. Comma-separated list of carrier ids.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">excludeCarriers</code> <br><span class="optional">OPTIONAL</span></td>
+<td>Filter out results from those carriers. Comma-separated list of carrier ids.</td>
+</tr>
+<tr>
 <td><code class="prettyprint">apiKey</code> <br><span class="required">REQUIRED</span></td>
 <td>Your API Key.</td>
 </tr>
@@ -1276,7 +1284,7 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 </tr>
 </tbody></table>
 
-<p>Keep requesting page 0 until you get <code class="prettyprint">UpdatesComplete</code> with <code class="prettyprint">pageIndex=0</code> at half a second to one second interval. Once you get <code class="prettyprint">UpdatesComplete</code> you may request any page and page size. </p>
+<p>Keep requesting page 0 until you get <code class="prettyprint">UpdatesComplete</code> with <code class="prettyprint">pageIndex=0</code> at half a second to one second interval. Once you get <code class="prettyprint">UpdatesComplete</code> you may request any page and page size.</p>
 
 <aside class="notice">
   While the status is <em>UpdatesPending</em>, you should <b>request only page 0</b> because the contents of each page are liable to change until updates are complete.
