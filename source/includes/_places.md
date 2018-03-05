@@ -180,7 +180,7 @@ You can use this endpoint to retrieve the user's location from their IP address:
 <code>http://partners.api.skyscanner.net/apiservices/autosuggest/v1.0/UK/GBP/en?id=188.39.95.140-ip&apikey=&lt;apiKey&gt;</code>
 </aside>
 
-## Geo Catalog 
+## Geo Catalog
 
 <aside class="warning">
 Please <a href="https://partners.skyscanner.net/contact/" target="_blank"> contact us</a> to request access.
@@ -207,6 +207,7 @@ GET "http://partners.api.skyscanner.net/apiservices/
 | Parameter | Description |
 | --------- | ------- |
 | ```apiKey``` <br><span class="required">REQUIRED</span> | Your API Key. |
+| ```languageid``` | A locale in ISO format, for example ```fr-FR``` |
 
 > Response extract:
 
@@ -301,7 +302,7 @@ GET "http://gateway.skyscanner.net/autosuggest/v3/hotels?
     q=lond&
     market=US&
     locale=en-US
-    
+
 ```
 
 *REQUEST PARAMETERS*
@@ -348,10 +349,9 @@ GET "http://gateway.skyscanner.net/autosuggest/v3/hotels?
 
 | Parameter | Description |
 | --- | --- |
-| ```results``` | Contains a list of results for the query in order of relevance | 
+| ```results``` | Contains a list of results for the query in order of relevance |
 | ```id``` | Can be used as an input to the Hotels Pricing Service or to query geo |
 | ```localised_name``` | Entity name in the provided locale |
 | ```localised_type``` | Contains the `type` in the locale used in the query |
 | ```type``` | Identify the type of the entity (City, District, Hotel, ...) |
 | ```geo_containers``` | The list of parent locations that contain one another in order (e.g. England, United Kingdom for London) |
-
