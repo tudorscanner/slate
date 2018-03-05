@@ -58,7 +58,7 @@ search: false
 
 2. Merge into master
 
-3. Run `./deploy.sh` locally to publish the changes (anyone can do this but do insure you merge to master first!)
+3. There's no 3 anymore. Travis will automatically deploy to Github Pages from master
 
 
 
