@@ -760,10 +760,11 @@ Is a regular practice following the user flow first of all search for prices usi
 
 *API endpoint*
 
-`GET /v1/prices/hotel/{hotel_id}`
+`GET /hbe-bellboy/v1/prices/hotel/{hotel_id}`
+`GET /hbe-bellboy/v2/prices/hotel/{hotel_ids}`
 
 ```shell
-GET "https://gateway.skyscanner.net/hotels/v1/prices/hotel/{hotel_id}
+GET "https://gateway.skyscanner.net/hbe-bellboy/v2/prices/hotel/{hotel_id}
   ?entity_id=27539733&market={market}&locale={locale}&checkin_date={checkin_date}&checkout_date={checkout_date}
   &currency={currency}&adults={adults}&rooms={rooms}&images={images}&image_resolution={resolution}
   &image_type={type}&boost_official_partners={boost}&partners_per_hotel={num_partners}"
