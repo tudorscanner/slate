@@ -760,7 +760,7 @@ Is a regular practice following the user flow first of all search for prices usi
 
 *API endpoint*
 
-`GET /hbe-bellboy/v1/prices/hotel/{hotel_id}`
+`GET /hbe-bellboy/v/prices/hotel/{hotel_id}`
 `GET /hbe-bellboy/v2/prices/hotel/{hotel_ids}`
 
 ```shell
