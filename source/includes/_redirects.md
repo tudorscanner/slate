@@ -53,7 +53,7 @@ Parameter | Description |
 
 *EXAMPLE REDIRECT*
 
-<a href="http://partners.api.skyscanner.net/apiservices/referral/v1.0/GB/GBP/en-GB/EDI/CDG/2014-12-12/2014-12-20?apiKey=prtl674938798674" target="_blank">http://partners.api.skyscanner.net/apiservices/referral/v1.0/GB/GBP/en-GB/EDI/CDG/2017-12-12/2017-12-20?apiKey=prtl674938798674</a>
+<a href="http://partners.api.skyscanner.net/apiservices/referral/v1.0/GB/GBP/en-GB/EDI/CDG/2018-12-12/2018-12-20?apiKey=prtl674938798674" target="_blank">http://partners.api.skyscanner.net/apiservices/referral/v1.0/GB/GBP/en-GB/EDI/CDG/2018-12-12/2018-12-20?apiKey=prtl674938798674</a>
 
 <br>
 
@@ -102,7 +102,7 @@ Parameter | Description |
 
 *EXAMPLE REDIRECT*
 
-<a href="http://www.api.prod.skyscanner.local/apiservices/referral/v1.0/UK/GBP/en-GB/LHR/EDI/2017-04-02/2017-04-16?product=carhire&pickUpTime=10:00&dropOffTime=12:00&driverAge=27&apiKey=prtl674938798674" target="_blank">http://www.api.prod.skyscanner.local/apiservices/referral/v1.0/UK/GBP/en-GB/LHR/EDI/2017-04-02/2017-04-16?product=carhire&pickUpTime=10:00&dropOffTime=12:00&driverAge=27?apiKey=prtl674938798674</a>
+<a href="http://partners.api.skyscanner.net/apiservices/referral/v1.0/UK/GBP/en-GB/LHR/EDI/2019-04-02/2019-04-16?product=carhire&pickUpTime=10:00&dropOffTime=12:00&driverAge=27&apiKey=prtl674938798674" target="_blank">http://partners.api.skyscanner.net/apiservices/referral/v1.0/UK/GBP/en-GB/LHR/EDI/2019-04-02/2019-04-16?product=carhire&pickUpTime=10:00&dropOffTime=12:00&driverAge=27&apiKey=prtl674938798674</a>
 
 
 ## To the supplier
