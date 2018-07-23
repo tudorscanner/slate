@@ -26,7 +26,9 @@ GET "http://partners.api.skyscanner.net/apiservices/
     referral/v1.0/{country}/{currency}/{locale}/
     {originPlace}/{destinationPlace}/
     {outboundPartialDate}/{inboundPartialDate}
-    ?apiKey={shortApiKey}"
+    ?apiKey={shortApiKey}&nonStopOnly={nonStopOnly}
+	&cabinClass={cabinClass}
+	&adults={adults}&children={children}"
 ```
 *API endpoint*
 
@@ -43,8 +45,11 @@ Parameter | Description |
 | ```destinationPlace``` <br><span class="required">REQUIRED</span> | The destination place (see [places](#places)) |
 | ```outboundPartialDate``` <br><span class="required">REQUIRED</span> | The outbound date. Format "yyyy-mm-dd", "yyyy-mm" or "anytime". |
 | ```inboundPartialDate``` <br><span class="optional">OPTIONAL</span> | The return date. Format "yyyy-mm-dd", "yyyy-mm" or "anytime". Use empty string for oneway trip. |
-```shortApiKey``` <br><span class="required">REQUIRED</span> | The first 16 characters of your API Key |
-
+| ```shortApiKey``` <br><span class="required">REQUIRED</span> | The first 16 characters of your API Key |
+| ```nonStopOnly``` <br><span class="optional">OPTIONAL</span> | Must be set to `true` if you are looking for direct flights only |
+| ```cabinClass``` <br><span class="optional">OPTIONAL</span> | The cabin class. Can be `economy`, `premiumeconomy`, `business` or `first` |
+| ```adults``` <br><span class="optional">OPTIONAL</span> | Number of adults (16+ years). Must be between 1 and 8 (inclusive) |
+| ```children``` <br><span class="optional">OPTIONAL</span> | List of child ages delimited by <code>&#124;</code>. Trere may be up to 8 children, each between 0 and 15 (inclusive) years old. Note that only 1 child aged 0-2 per adult is allowed. |
 
 <aside class="warning">
   Please insure that you use the short API key (the first 16 characters of your full API key) to avoid exposing your key. Please see <a href="#authentication">authentication</a> for more information.
@@ -53,7 +58,7 @@ Parameter | Description |
 
 *EXAMPLE REDIRECT*
 
-<a href="http://partners.api.skyscanner.net/apiservices/referral/v1.0/GB/GBP/en-GB/EDI/CDG/2018-12-12/2018-12-20?apiKey=prtl674938798674" target="_blank">http://partners.api.skyscanner.net/apiservices/referral/v1.0/GB/GBP/en-GB/EDI/CDG/2018-12-12/2018-12-20?apiKey=prtl674938798674</a>
+<a href="http://partners.api.skyscanner.net/apiservices/referral/v1.0/GB/GBP/en-GB/EDI/CDG/2018-12-12/2018-12-20?apiKey=prtl674938798674&nonStopOnly=true&cabinClass=premiumEconomy&adults=1&children=3|12" target="_blank">http://partners.api.skyscanner.net/apiservices/referral/v1.0/GB/GBP/en-GB/EDI/CDG/2018-12-12/2018-12-20?apiKey=prtl674938798674&nonStopOnly=true&cabinClass=premiumEconomy&adults=1&children=3|12</a>
 
 <br>
 
