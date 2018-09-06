@@ -70,6 +70,7 @@ or go to our [test harness](http://business.skyscanner.net/portal/en-GB/Document
 | ```infants``` <br><span class="optional">OPTIONAL</span> | Number of infants (under 12 months). Can be between 0 and 8.  |
 | ```includeCarriers``` <br><span class="optional">OPTIONAL</span> | Only return results from those carriers. Comma-separated list of carrier ids.  |
 | ```excludeCarriers``` <br><span class="optional">OPTIONAL</span> | Filter out results from those carriers. Comma-separated list of carrier ids.  |
+| ```groupPricing``` <br><span class="optional">OPTIONAL</span> | If set to `true`, prices will be obtained for the whole passenger group and if set to `false` it will be obtained for one adult. By default it is set to `false`. |
 | ```apiKey``` <br><span class="required">REQUIRED</span> | Your API Key. |
 
 
@@ -397,7 +398,7 @@ curl "http://partners.api.skyscanner.net/apiservices/pricing/v1.0/
     -H "Content-Type: application/x-www-form-urlencoded"
 ```
 
-For group pricing a Booking Details request must be made to get the deeplink with additional information such as number of passengers.
+If you set `groupPricing` to `false` when creating the session, a Booking Details request must be made to get the deeplink with additional information such as number of passengers.
 
 > The url is provided in the response of the live prices:
 
@@ -472,12 +473,20 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 ### Request
 
 ```shell
-curl "http://partners.api.skyscanner.net/apiservices/pricing/uk1/v1.0/
-    {SessionKey}/booking/
-    {OutboundLegId};{InboundLegId}
+curl "http://partners.api.skyscanner.net/{URL returned in Location header}
     ?apiKey={apiKey}"
     -X GET
 ```
+
+<aside class="warning" name="booking-url-warning">
+Previous versions of the Flights Pricing API returned the same polling URL as the URL used to request booking details.
+
+This will change over the second half of 2018. We recommend you use the URL returned in the `Location` header and do not make assumptions on what the URL will be.
+
+If you have a working integration with the Flights Pricing API and your integration is not reading the polling URL from the `Location` header, you will need to update your integration.
+
+If you do not update your integration, polling the booking details for a session will fail at some point during the second half of 2018.
+</aside>
 
 *API endpoint*
 
