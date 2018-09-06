@@ -1098,6 +1098,10 @@ risk of exposing account API keys.
 <td>Filter out results from those carriers. Comma-separated list of carrier ids.</td>
 </tr>
 <tr>
+<td><code class="prettyprint">groupPricing</code> <br><span class="optional">OPTIONAL</span></td>
+<td>If set to <code class="prettyprint">true</code>, prices will be obtained for the whole passenger group and if set to <code class="prettyprint">false</code> it will be obtained for one adult. By default it is set to <code class="prettyprint">false</code>.</td>
+</tr>
+<tr>
 <td><code class="prettyprint">apiKey</code> <br><span class="required">REQUIRED</span></td>
 <td>Your API Key.</td>
 </tr>
@@ -1547,7 +1551,7 @@ Please add the no-follow attribute when you link to the deeplink. See <a href="h
     -X PUT
     -H <span class="s2">"Content-Type: application/x-www-form-urlencoded"</span>
 </code></pre>
-<p>For group pricing a Booking Details request must be made to get the deeplink with additional information such as number of passengers.</p>
+<p>If you set <code class="prettyprint">groupPricing</code> to <code class="prettyprint">false</code> when creating the session, a Booking Details request must be made to get the deeplink with additional information such as number of passengers.</p>
 
 <blockquote>
 <p>The url is provided in the response of the live prices:</p>
@@ -1648,12 +1652,20 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 <h2 id="polling-the-booking-details">Polling the booking details</h2>
 
 <h3 id="request">Request</h3>
-<pre class="highlight shell"><code>curl <span class="s2">"http://partners.api.skyscanner.net/apiservices/pricing/uk1/v1.0/
-    {SessionKey}/booking/
-    {OutboundLegId};{InboundLegId}
+<pre class="highlight shell"><code>curl <span class="s2">"http://partners.api.skyscanner.net/{URL returned in Location header}
     ?apiKey={apiKey}"</span>
     -X GET
 </code></pre>
+<aside class="warning" name="booking-url-warning">
+Previous versions of the Flights Pricing API returned the same polling URL as the URL used to request booking details.
+
+This will change over the second half of 2018. We recommend you use the URL returned in the `Location` header and do not make assumptions on what the URL will be.
+
+If you have a working integration with the Flights Pricing API and your integration is not reading the polling URL from the `Location` header, you will need to update your integration.
+
+If you do not update your integration, polling the booking details for a session will fail at some point during the second half of 2018.
+</aside>
+
 <p><em>API endpoint</em></p>
 
 <p><code class="prettyprint">GET /pricing/v1.0/{SessionKey}/booking/{OutboundLegId};{InboundLegId}</code></p>
