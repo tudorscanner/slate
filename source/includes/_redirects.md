@@ -23,7 +23,7 @@ When using [flights live prices](#flights-live-prices) or [car hire live prices]
 
 ![deeplink page](/images/deeplink.png)
 
-You can customise the redirect page by replacing the default logo with your own logo. Please see [How can I put my logo on the redirect page?](https://support.business.skyscanner.net/hc/en-us/articles/208180985-How-can-I-put-my-logo-on-the-redirect-page-) for more information.
+You can customise the redirect page by replacing the default logo with your own logo. Please see [How can I put my logo on the redirect page?](https://support.business.skyscanner.net/hc/en-us/articles/115005566769-How-can-I-put-my-logo-on-the-redirect-page-) for more information.
 
 See how it looks with your logo
 
