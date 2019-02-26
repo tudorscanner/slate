@@ -298,7 +298,7 @@ If the default Skyscanner schema is not used, the schema name must be appended t
 Retrieve a list of hotels and/or geographical locations which can then be used witht the hotels and car hire APIs. In the case of car hire, use this if you want downtown (non-airport) searches.
 
 ```shell
-GET "http://gateway.skyscanner.net/autosuggest/v3/hotels?
+GET "https://www.skyscanner.net/g/autosuggest/v3/hotels?
     q=lond&
     market=US&
     locale=en-US
