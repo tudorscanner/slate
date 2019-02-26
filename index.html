@@ -2252,14 +2252,14 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 
 <h2 id="endpoint">Endpoint</h2>
 
-<p>The Hotels API provides a global endpoint: https://gateway.skyscanner.net/hotels/v{version}/ where version points to a specific release.</p>
+<p>The Hotels API provides a global endpoint: https://www.skyscanner.net/g/hotels/v{version}/ where version points to a specific release.</p>
 
 <h2 id="headers">Headers</h2>
 
 <p>The API expects the header:</p>
 
 <ul>
-<li><strong>x-user-agent</strong>: Required. Indicates which is the device related to the client. The format for that header is device;B2B, where device can be: 
+<li><strong>x-user-agent</strong>: Required. Indicates which is the device related to the client. The format for that header is device;B2B, where device can be:
 
 <ul>
 <li>T for tablet</li>
@@ -2269,7 +2269,7 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 </ul></li>
 </ul>
 
-<p>For example: </p>
+<p>For example:</p>
 
 <p><code class="prettyprint">x-user-agent: M;B2B</code></p>
 
@@ -2305,7 +2305,7 @@ This geographical query seeks for hotels using different distances, from 500 met
 <p><em>API endpoint</em></p>
 
 <p><code class="prettyprint">GET /v1/prices/search/entity/{entity_id}</code></p>
-<pre class="highlight shell"><code>GET <span class="s2">"https://gateway.skyscanner.net/hotels/v1/prices/search/entity/{entity_id}
+<pre class="highlight shell"><code>GET <span class="s2">"https://www.skyscanner.net/g/hotels/v1/prices/search/entity/{entity_id}
   ?market={market}&amp;locale={locale}&amp;checkin_date={checkin_date}&amp;checkout_date={checkout_date}
   &amp;currency={currency}&amp;adults={adults}&amp;rooms={rooms}&amp;images={images}&amp;image_resolution={resolution}
   &amp;image_type={type}&amp;boost_official_partners={boost}&amp;sort={sort_method}&amp;limit={limit}&amp;offset={offset}
@@ -2720,7 +2720,7 @@ Provides the search by current location functionality.</p>
 <p><em>API endpoint</em></p>
 
 <p><code class="prettyprint">GET /v1/prices/search/location/{lon,lat}</code></p>
-<pre class="highlight shell"><code>GET <span class="s2">"https://gateway.skyscanner.net/hotels/v1/prices/search/location/{lon,lat}
+<pre class="highlight shell"><code>GET <span class="s2">"https://www.skyscanner.net/g/hotels/v1/prices/search/location/{lon,lat}
   ?market={market}&amp;locale={locale}&amp;checkin_date={checkin_date}&amp;checkout_date={checkout_date}
   &amp;currency={currency}&amp;adults={adults}&amp;rooms={rooms}&amp;images={images}&amp;image_resolution={resolution}
   &amp;image_type={type}&amp;boost_official_partners={boost}&amp;sort={sort_method}&amp;limit={limit}&amp;offset={offset}
@@ -2946,7 +2946,7 @@ These differences can be summarized into the following points:</p>
 <p><em>API endpoint</em></p>
 
 <p><code class="prettyprint">GET /v1/prices/map/entity/{entity_id}</code></p>
-<pre class="highlight shell"><code>GET <span class="s2">"https://gateway.skyscanner.net/hotels/v1/prices/map/entity/{entity_id}
+<pre class="highlight shell"><code>GET <span class="s2">"https://www.skyscanner.net/g/hotels/v1/prices/map/entity/{entity_id}
   ?market={market}&amp;locale={locale}&amp;checkin_date={checkin_date}&amp;checkout_date={checkout_date}
   &amp;currency={currency}&amp;adults={adults}&amp;rooms={rooms}&amp;images={images}&amp;image_resolution={resolution}
   &amp;image_type={type}&amp;boost_official_partners={boost}&amp;sort={sort_method}&amp;limit={limit}&amp;offset={offset}
@@ -3317,7 +3317,7 @@ These differences can be summarized into the following points:</p>
 <p><em>API endpoint</em></p>
 
 <p><code class="prettyprint">GET /v1/prices/map/location/{lon,lat}</code></p>
-<pre class="highlight shell"><code>GET <span class="s2">"https://gateway.skyscanner.net/hotels/v1/prices/map/location/{lon,lat}
+<pre class="highlight shell"><code>GET <span class="s2">"https://www.skyscanner.net/g/hotels/v1/prices/map/location/{lon,lat}
   ?market={market}&amp;locale={locale}&amp;checkin_date={checkin_date}&amp;checkout_date={checkout_date}
   &amp;currency={currency}&amp;adults={adults}&amp;rooms={rooms}&amp;images={images}&amp;image_resolution={resolution}
   &amp;image_type={type}&amp;boost_official_partners={boost}&amp;sort={sort_method}&amp;limit={limit}&amp;offset={offset}
@@ -3542,7 +3542,7 @@ Is a regular practice following the user flow first of all search for prices usi
 <p><em>API endpoint</em></p>
 
 <p><code class="prettyprint">GET /v1/prices/hotel/{hotel_id}</code></p>
-<pre class="highlight shell"><code>GET <span class="s2">"https://gateway.skyscanner.net/hotels/v1/prices/hotel/{hotel_id}
+<pre class="highlight shell"><code>GET <span class="s2">"https://www.skyscanner.net/g/hotels/v1/prices/hotel/{hotel_id}
   ?entity_id=27539733&amp;market={market}&amp;locale={locale}&amp;checkin_date={checkin_date}&amp;checkout_date={checkout_date}
   &amp;currency={currency}&amp;adults={adults}&amp;rooms={rooms}&amp;images={images}&amp;image_resolution={resolution}
   &amp;image_type={type}&amp;boost_official_partners={boost}&amp;partners_per_hotel={num_partners}"</span>
@@ -4401,7 +4401,7 @@ Please <a href="https://partners.skyscanner.net/contact/" target="_blank"> conta
 <h2 id="hotels-autosuggest">Hotels Autosuggest</h2>
 
 <p>Retrieve a list of hotels and/or geographical locations which can then be used witht the hotels and car hire APIs. In the case of car hire, use this if you want downtown (non-airport) searches.</p>
-<pre class="highlight shell"><code>GET <span class="s2">"http://gateway.skyscanner.net/autosuggest/v3/hotels?
+<pre class="highlight shell"><code>GET <span class="s2">"https://www.skyscanner.net/g/autosuggest/v3/hotels?
     q=lond&amp;
     market=US&amp;
     locale=en-US
