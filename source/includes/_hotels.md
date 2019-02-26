@@ -10,19 +10,19 @@ This service responsible for finding the best hotels with rates around a given e
 
 ## Endpoint
 
-The Hotels API provides a global endpoint: https://gateway.skyscanner.net/hotels/v{version}/ where version points to a specific release.
+The Hotels API provides a global endpoint: https://www.skyscanner.net/g/hotels/v{version}/ where version points to a specific release.
 
 ## Headers
 
 The API expects the header:
 
-- **x-user-agent**: Required. Indicates which is the device related to the client. The format for that header is device;B2B, where device can be: 
+- **x-user-agent**: Required. Indicates which is the device related to the client. The format for that header is device;B2B, where device can be:
 	- T for tablet
 	- D for desktop
 	- M for mobile
 	- N if you are not able to detect the device type
 
-For example: 
+For example:
 
 `x-user-agent: M;B2B`
 
@@ -55,7 +55,7 @@ The following URL shows how the search prices endpoint can be used to retrieve p
 `GET /v1/prices/search/entity/{entity_id}`
 
 ```shell
-GET "https://gateway.skyscanner.net/hotels/v1/prices/search/entity/{entity_id}
+GET "https://www.skyscanner.net/g/hotels/v1/prices/search/entity/{entity_id}
   ?market={market}&locale={locale}&checkin_date={checkin_date}&checkout_date={checkout_date}
   &currency={currency}&adults={adults}&rooms={rooms}&images={images}&image_resolution={resolution}
   &image_type={type}&boost_official_partners={boost}&sort={sort_method}&limit={limit}&offset={offset}
@@ -345,7 +345,7 @@ Provides the search by current location functionality.
 `GET /v1/prices/search/location/{lon,lat}`
 
 ```shell
-GET "https://gateway.skyscanner.net/hotels/v1/prices/search/location/{lon,lat}
+GET "https://www.skyscanner.net/g/hotels/v1/prices/search/location/{lon,lat}
   ?market={market}&locale={locale}&checkin_date={checkin_date}&checkout_date={checkout_date}
   &currency={currency}&adults={adults}&rooms={rooms}&images={images}&image_resolution={resolution}
   &image_type={type}&boost_official_partners={boost}&sort={sort_method}&limit={limit}&offset={offset}
@@ -436,7 +436,7 @@ These differences can be summarized into the following points:
 `GET /v1/prices/map/entity/{entity_id}`
 
 ```shell
-GET "https://gateway.skyscanner.net/hotels/v1/prices/map/entity/{entity_id}
+GET "https://www.skyscanner.net/g/hotels/v1/prices/map/entity/{entity_id}
   ?market={market}&locale={locale}&checkin_date={checkin_date}&checkout_date={checkout_date}
   &currency={currency}&adults={adults}&rooms={rooms}&images={images}&image_resolution={resolution}
   &image_type={type}&boost_official_partners={boost}&sort={sort_method}&limit={limit}&offset={offset}
@@ -674,7 +674,7 @@ Provides the search by current location functionality.
 `GET /v1/prices/map/location/{lon,lat}`
 
 ```shell
-GET "https://gateway.skyscanner.net/hotels/v1/prices/map/location/{lon,lat}
+GET "https://www.skyscanner.net/g/hotels/v1/prices/map/location/{lon,lat}
   ?market={market}&locale={locale}&checkin_date={checkin_date}&checkout_date={checkout_date}
   &currency={currency}&adults={adults}&rooms={rooms}&images={images}&image_resolution={resolution}
   &image_type={type}&boost_official_partners={boost}&sort={sort_method}&limit={limit}&offset={offset}
@@ -763,7 +763,7 @@ Is a regular practice following the user flow first of all search for prices usi
 `GET /v1/prices/hotel/{hotel_id}`
 
 ```shell
-GET "https://gateway.skyscanner.net/hotels/v1/prices/hotel/{hotel_id}
+GET "https://www.skyscanner.net/g/hotels/v1/prices/hotel/{hotel_id}
   ?entity_id=27539733&market={market}&locale={locale}&checkin_date={checkin_date}&checkout_date={checkout_date}
   &currency={currency}&adults={adults}&rooms={rooms}&images={images}&image_resolution={resolution}
   &image_type={type}&boost_official_partners={boost}&partners_per_hotel={num_partners}"
