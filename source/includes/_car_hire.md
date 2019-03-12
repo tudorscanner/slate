@@ -245,7 +245,7 @@ or go to the [test harness](http://business.skyscanner.net/portal/en-GB/Document
 | `car_class_id`| reference to the car_classes set|
 | `location`| location containing address, lat/lon and distance to search location for pick up and drop off places (drop off can be not available even though the query contains a drop off place) |
 | `value_add`| See below |
-| `vendor`| Car vendor information (id, name and logo URL) |
+| `vendor`| Car vendor information (id, name and logo URL). Unlike `website`, represents not the booking agent, but direct supplier of the car (could be the same). |
 
 *CAR VALUE_ADD* 
 
