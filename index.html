@@ -2063,8 +2063,13 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
         </span><span class="nt">"included_mileage"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nt">"unlimited"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
         </span><span class="p">}</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">},</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"vendor"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"logo_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://logos.skyscnr.com/images/carhire/vendors/675.png"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Green Motion"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">675</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+    </span><span class="err">}</span><span class="p">,</span><span class="w">
   </span><span class="err">...</span><span class="w">
   </span><span class="p">],</span><span class="w">
   </span><span class="nt">"websites"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -2191,6 +2196,10 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 <tr>
 <td><code class="prettyprint">value_add</code></td>
 <td>See below</td>
+</tr>
+<tr>
+<td><code class="prettyprint">vendor</code></td>
+<td>Car vendor information (id, name and logo URL). Unlike <code class="prettyprint">website</code>, represents not the booking agent, but direct supplier of the car (could be the same).</td>
 </tr>
 </tbody></table>
 
