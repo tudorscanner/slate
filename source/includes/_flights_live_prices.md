@@ -182,7 +182,7 @@ Keep requesting page 0 until you get `UpdatesComplete` with `pageIndex=0` at hal
   While the status is <em>UpdatesPending</em>, you should <b>request only page 0</b> because the contents of each page are liable to change until updates are complete.
 </aside>
 
-For more information about polling the results please see our [FAQ](https://support.business.skyscanner.net/hc/en-us/articles/206800439-What-polling-intervals-should-I-use-)
+For more information about polling the results please see our [FAQ](https://support.business.skyscanner.net/hc/en-us/articles/115005572965-What-polling-intervals-should-I-use-)
 
 We have no facility to tell you how many pages exist. Beyond the end of results, you will receive successful, empty, responses.
 
