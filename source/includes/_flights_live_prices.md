@@ -148,13 +148,9 @@ or go to our [test harness](http://business.skyscanner.net/portal/en-GB/Document
 | ```outboundDepartTime``` <br><span class="optional">OPTIONAL</span> | Filter for outbound departure time by time period of the day (i.e. morning, afternoon, evening). List of day time period delimited by ‘;’ (acceptable values are M, A, E) |
 | ```outboundDepartStartTime``` <br><span class="optional">OPTIONAL</span> | Filter for start of range for outbound departure time. Format ‘hh:mm’. |
 | ```outboundDepartEndTime``` <br><span class="optional">OPTIONAL</span> | Filter for end of range for outbound departure time. Format ‘hh:mm’. |
-| ```outboundArriveStartTime``` <br><span class="optional">OPTIONAL</span> | Filter for start of range for outbound arrival time. Format ‘hh:mm’. |
-| ```outboundArriveEndTime``` <br><span class="optional">OPTIONAL</span> | Filter for end of range for outbound arrival time. Format ‘hh:mm’. |
 | ```inboundDepartTime``` <br><span class="optional">OPTIONAL</span> | Filter for inbound departure time by time period of the day (i.e. morning, afternoon, evening). List of day time period delimited by ‘;’ (acceptable values are M, A, E)  |
 | ```inboundDepartStartTime``` <br><span class="optional">OPTIONAL</span> | Filter for start of range for inbound departure time. Format ‘hh:mm’. |
 | ```inboundDepartEndTime``` <br><span class="optional">OPTIONAL</span> | Filter for start of range for inbound departure time. Format ‘hh:mm’. |
-| ```inboundArriveStartTime``` <br><span class="optional">OPTIONAL</span> | Filter for start of range for inbound departure time. Format ‘hh:mm’. |
-| ```inboundArriveEndTime``` <br><span class="optional">OPTIONAL</span> | Filter for end of range for inbound arrival time. Format ‘hh:mm’. |
 | ```apiKey``` <br><span class="required">REQUIRED</span> | Your API Key. |
 
 
@@ -186,7 +182,7 @@ Keep requesting page 0 until you get `UpdatesComplete` with `pageIndex=0` at hal
   While the status is <em>UpdatesPending</em>, you should <b>request only page 0</b> because the contents of each page are liable to change until updates are complete.
 </aside>
 
-For more information about polling the results please see our [FAQ](https://support.business.skyscanner.net/hc/en-us/articles/206800439-What-polling-intervals-should-I-use-)
+For more information about polling the results please see our [FAQ](https://support.business.skyscanner.net/hc/en-us/articles/115005572965-What-polling-intervals-should-I-use-)
 
 We have no facility to tell you how many pages exist. Beyond the end of results, you will receive successful, empty, responses.
 
