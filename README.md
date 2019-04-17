@@ -47,6 +47,15 @@ includes:
   - localisation
   - places
   - redirects
+  - referrals
+  - flights_generic
+  - flights_dayView
+  - flights_browseView
+  - flights_calendarMonthView
+  - hotels_generic
+  - hotels_dayView
+  - cars_generic
+  - cars_dayView
   - response_codes
 search: false
 ---

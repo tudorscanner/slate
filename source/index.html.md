@@ -22,6 +22,12 @@ includes:
   - localisation
   - places
   - redirects
+  - referrals
+  - flights_dayView
+  - flights_browseView
+  - flights_calendarMonthView
+  - hotels_dayView
+  - cars_dayView
   - response_codes
 search: false
 ---
