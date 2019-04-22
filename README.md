@@ -52,6 +52,7 @@ includes:
   - flights_dayView
   - flights_browseView
   - flights_calendarMonthView
+  - flights_multiCity
   - hotels_generic
   - hotels_dayView
   - cars_generic

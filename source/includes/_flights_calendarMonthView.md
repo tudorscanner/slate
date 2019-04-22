@@ -15,18 +15,18 @@ A schema definition for the flights calendar month view microsite supported path
 
 | Property | Type | Required | Nullable | Defined by |
 |----------|------|----------|----------|------------|
-| [adultsv2](#adultsv2) | `string` | Optional  | No | Flights Calendar Month View supported parameters (this schema) |
-| [childrenv2](#childrenv2) | `string` | Optional  | No | Flights Calendar Month View supported parameters (this schema) |
+| [adultsv2](#adultsv2) | `integer` | Optional  | No | Flights Calendar Month View supported parameters (this schema) |
+| [childrenv2](#childrenv2) | `integer` | Optional  | No | Flights Calendar Month View supported parameters (this schema) |
 | [currency](#currency) | `string` | Optional  | No | Flights Calendar Month View supported parameters (this schema) |
 | [destination](#destination) | `string` | **Required**  | No | Flights Calendar Month View supported parameters (this schema) |
-| [infants](#infants) | `string` | Optional  | No | Flights Calendar Month View supported parameters (this schema) |
+| [infants](#infants) | `integer` | Optional  | No | Flights Calendar Month View supported parameters (this schema) |
 | [iym](#iym) | `string` | **Required**  | No | Flights Calendar Month View supported parameters (this schema) |
 | [locale](#locale) | `string` | Optional  | No | Flights Calendar Month View supported parameters (this schema) |
 | [market](#market) | `string` | Optional  | No | Flights Calendar Month View supported parameters (this schema) |
 | [origin](#origin) | `string` | **Required**  | No | Flights Calendar Month View supported parameters (this schema) |
 | [oym](#oym) | `string` | **Required**  | No | Flights Calendar Month View supported parameters (this schema) |
 | [preferDirects](#preferdirects) | `boolean` | Optional  | No | Flights Calendar Month View supported parameters (this schema) |
-| [rtn](#rtn) | `string` | Optional  | No | Flights Calendar Month View supported parameters (this schema) |
+| [rtn](#rtn) | `enum` | Optional  | No | Flights Calendar Month View supported parameters (this schema) |
 | `*` | any | Additional | Yes | this schema *allows* additional properties |
 
 ### adultsv2
@@ -36,14 +36,15 @@ Number of adult passengers. Adults have to be 16 years old or older.
 `adultsv2`
 
 * is optional
-* type: `string`
+* type: `integer`
 * defined in this schema
 
 #### adultsv2 Type
 
 
-`string`
+`integer`
 
+* minimum value: `1`
 
 
 
@@ -57,13 +58,13 @@ Number of child passengers. The value must be in the format integer|integer.. wh
 `childrenv2`
 
 * is optional
-* type: `string`
+* type: `integer`
 * defined in this schema
 
 #### childrenv2 Type
 
 
-`string`
+`integer`
 
 
 
@@ -120,13 +121,13 @@ Number of infant passengers. An infant is 1 year old or younger.
 `infants`
 
 * is optional
-* type: `string`
+* type: `integer`
 * defined in this schema
 
 #### infants Type
 
 
-`string`
+`integer`
 
 
 
@@ -265,16 +266,16 @@ Trip type: 0 if oneway or 1 if return or multicity trip
 `rtn`
 
 * is optional
-* type: `string`
+* type: `enum`
 * defined in this schema
 
-#### rtn Type
+The value of this property **must** be equal to one of the [known values below](#rtn-known-values).
 
-
-`string`
-
-
-
+#### rtn Known Values
+| Value | Description |
+|-------|-------------|
+| `0` |  |
+| `1` |  |
 
 
 

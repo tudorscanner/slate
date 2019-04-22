@@ -8,6 +8,7 @@ Error Code | Meaning
 ---------- | -------
 200 | <b>Success</b>
 204 | <b>No content</b> - the session is still being created (wait and try again).
+301 | <b>Moved Permanently</b> – the result shows redirect location.
 304 | <b>Not Modified</b> – the results have not been modified since the last poll.
 400 | <b>Bad Request</b> -- Input validation failed.
 403 | <b>Forbidden</b> -- The API Key was not supplied, or it was invalid, or it is not authorized to access the service.

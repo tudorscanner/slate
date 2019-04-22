@@ -9,29 +9,30 @@ A schema definition for the flights day-view microsite supported query parameter
 
 | Abstract | Extensible | Status | Identifiable | Custom Properties | Additional Properties | Defined In |
 |----------|------------|--------|--------------|-------------------|-----------------------|------------|
-| Can be instantiated | No | Experimental | No | Forbidden | Permitted | [dayView.json](dayView.json) |
+| Can be instantiated | No | Experimental | No | Forbidden | Permitted | --- |
+| Can be instantiated | No | Experimental | No | Forbidden | Permitted | --- |
 
 ## Flights Day View supported query parameters Properties
 
 | Property | Type | Required | Nullable | Default | Defined by |
 |----------|------|----------|----------|---------|------------|
-| [adultsv2](#adultsv2) | `string` | **Required**  | No | `1` | Flights Day View supported query parameters (this schema) |
+| [adultsv2](#adultsv2) | `integer` | **Required**  | No | `1` | Flights Day View supported query parameters (this schema) |
 | [alternativedestinations](#alternativedestinations) | `string[]` | Optional  | No |  | Flights Day View supported query parameters (this schema) |
 | [alternativeorigins](#alternativeorigins) | `string[]` | Optional  | No |  | Flights Day View supported query parameters (this schema) |
 | [cabinclass](#cabinclass) | `enum` | **Required**  | No | `"economy"` | Flights Day View supported query parameters (this schema) |
-| [childrenv2](#childrenv2) | `string` | Optional  | No |  | Flights Day View supported query parameters (this schema) |
+| [childrenv2](#childrenv2) | `integer` | Optional  | No |  | Flights Day View supported query parameters (this schema) |
 | [currency](#currency) | `string` | Optional  | No |  | Flights Day View supported query parameters (this schema) |
 | [destination](#destination) | `string` | **Required**  | No |  | Flights Day View supported query parameters (this schema) |
 | [inboundDate](#inbounddate) | `string` | Optional  | No |  | Flights Day View supported query parameters (this schema) |
 | [inboundaltsenabled](#inboundaltsenabled) | `boolean` | Optional  | No |  | Flights Day View supported query parameters (this schema) |
-| [infants](#infants) | `string` | Optional  | No |  | Flights Day View supported query parameters (this schema) |
+| [infants](#infants) | `integer` | Optional  | No |  | Flights Day View supported query parameters (this schema) |
 | [locale](#locale) | `string` | Optional  | No |  | Flights Day View supported query parameters (this schema) |
 | [market](#market) | `string` | Optional  | No |  | Flights Day View supported query parameters (this schema) |
 | [origin](#origin) | `string` | **Required**  | No |  | Flights Day View supported query parameters (this schema) |
 | [outboundDate](#outbounddate) | `string` | **Required**  | No |  | Flights Day View supported query parameters (this schema) |
 | [outboundaltsenabled](#outboundaltsenabled) | `boolean` | Optional  | No |  | Flights Day View supported query parameters (this schema) |
 | [preferdirects](#preferdirects) | `boolean` | Optional  | No |  | Flights Day View supported query parameters (this schema) |
-| [rtn](#rtn) | `string` | Optional  | No |  | Flights Day View supported query parameters (this schema) |
+| [rtn](#rtn) | `enum` | Optional  | No |  | Flights Day View supported query parameters (this schema) |
 | `*` | any | Additional | Yes | this schema *allows* additional properties |
 
 ### adultsv2
@@ -41,15 +42,16 @@ Number of adult passengers. Adults have to be 16 years old or older.
 `adultsv2`
 
 * is **required**
-* type: `string`
+* type: `integer`
 * default: `1`
 * defined in this schema
 
 #### adultsv2 Type
 
 
-`string`
+`integer`
 
+* minimum value: `1`
 
 
 
@@ -141,13 +143,13 @@ Number of child passengers. The value must be in the format integer|integer.. wh
 `childrenv2`
 
 * is optional
-* type: `string`
+* type: `integer`
 * defined in this schema
 
 #### childrenv2 Type
 
 
-`string`
+`integer`
 
 
 
@@ -244,13 +246,13 @@ Number of infant passengers. An infant is 1 year old or younger.
 `infants`
 
 * is optional
-* type: `string`
+* type: `integer`
 * defined in this schema
 
 #### infants Type
 
 
-`string`
+`integer`
 
 
 
@@ -387,16 +389,16 @@ Trip type: 0 if oneway or 1 if return or multicity trip
 `rtn`
 
 * is optional
-* type: `string`
+* type: `enum`
 * defined in this schema
 
-#### rtn Type
+The value of this property **must** be equal to one of the [known values below](#rtn-known-values).
 
-
-`string`
-
-
-
+#### rtn Known Values
+| Value | Description |
+|-------|-------------|
+| `0` |  |
+| `1` |  |
 
 
 
