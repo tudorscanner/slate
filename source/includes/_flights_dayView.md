@@ -9,8 +9,7 @@ A schema definition for the flights day-view microsite supported query parameter
 
 | Abstract | Extensible | Status | Identifiable | Custom Properties | Additional Properties | Defined In |
 |----------|------------|--------|--------------|-------------------|-----------------------|------------|
-| Can be instantiated | No | Experimental | No | Forbidden | Permitted | --- |
-| Can be instantiated | No | Experimental | No | Forbidden | Permitted | --- |
+| Can be instantiated | No | Experimental | No | Forbidden | Permitted | [dayView.json](dayView.json) |
 
 ## Flights Day View supported query parameters Properties
 

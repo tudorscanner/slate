@@ -16,7 +16,7 @@ A schema definition for the carhire day-view microsite supported query parameter
 | Property | Type | Required | Nullable | Defined by |
 |----------|------|----------|----------|------------|
 | [currency](#currency) | `string` | Optional  | No | Carhire Day View supported query parameters (this schema) |
-| [driverAge](#driverage) | `string` | Optional  | No | Carhire Day View supported query parameters (this schema) |
+| [driverAge](#driverage) | `integer` | Optional  | No | Carhire Day View supported query parameters (this schema) |
 | [dropoffPlace](#dropoffplace) | `string` | Optional  | No | Carhire Day View supported query parameters (this schema) |
 | [dropoffTime](#dropofftime) | `string` | Optional  | No | Carhire Day View supported query parameters (this schema) |
 | [locale](#locale) | `string` | Optional  | No | Carhire Day View supported query parameters (this schema) |
@@ -53,13 +53,13 @@ Driver age
 `driverAge`
 
 * is optional
-* type: `string`
+* type: `integer`
 * defined in this schema
 
 #### driverAge Type
 
 
-`string`
+`integer`
 
 
 
