@@ -9,7 +9,7 @@ A schema definition for the flights browse view microsite supported path and que
 
 | Abstract | Extensible | Status | Identifiable | Custom Properties | Additional Properties | Defined In |
 |----------|------------|--------|--------------|-------------------|-----------------------|------------|
-| Can be instantiated | No | Experimental | No | Forbidden | Permitted | [browseView.json](browseView.json) |
+| Can be instantiated | No | Experimental | No | Forbidden | Permitted |  |
 
 ## Flights Browse View supported parameters Properties
 

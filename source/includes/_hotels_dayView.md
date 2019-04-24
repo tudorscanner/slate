@@ -9,7 +9,7 @@ A schema definition for the hotels day-view microsite supported query parameters
 
 | Abstract | Extensible | Status | Identifiable | Custom Properties | Additional Properties | Defined In |
 |----------|------------|--------|--------------|-------------------|-----------------------|------------|
-| Can be instantiated | No | Experimental | No | Forbidden | Permitted | [dayView.json](dayView.json) |
+| Can be instantiated | No | Experimental | No | Forbidden | Permitted |  |
 
 ## Hotels Day View supported query parameters Properties
 

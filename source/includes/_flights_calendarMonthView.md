@@ -9,7 +9,7 @@ A schema definition for the flights calendar month view microsite supported path
 
 | Abstract | Extensible | Status | Identifiable | Custom Properties | Additional Properties | Defined In |
 |----------|------------|--------|--------------|-------------------|-----------------------|------------|
-| Can be instantiated | No | Experimental | No | Forbidden | Permitted | [calendarMonthView.json](calendarMonthView.json) |
+| Can be instantiated | No | Experimental | No | Forbidden | Permitted |  |
 
 ## Flights Calendar Month View supported parameters Properties
 

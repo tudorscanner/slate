@@ -62,6 +62,17 @@ search: false
 ---
 ```
 
+### Regenerating the documentation
+
+Every time when [referrals-api](https://github.skyscannertools.net/partnerinsights/referrals-api) project change involves schema change, API documentation has to be regenerated.
+In order to do this
+
+1. Get latest master of [referrals-api](https://github.skyscannertools.net/partnerinsights/referrals-api) project next to this project
+
+2. Run ```./generate_doc.sh``` script in this project directory
+
+3. Commit changes as described below
+
 ### Publishing
 
 1. Create a merge request  
