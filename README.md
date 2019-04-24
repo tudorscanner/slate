@@ -69,7 +69,7 @@ In order to do this
 
 1. Get latest master of [referrals-api](https://github.skyscannertools.net/partnerinsights/referrals-api) project next to this project
 
-2. Run ```./generate_doc.sh``` script in this project directory
+2. Run ```./generate_referral_service_docs.sh``` script in this project directory
 
 3. Commit changes as described below
 
