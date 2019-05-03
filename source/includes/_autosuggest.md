@@ -29,7 +29,7 @@ GET "http://partners.api.skyscanner.net/apiservices/
 | Parameter | Description |
 | --------- | ------- |
 | ```query``` <br><span class="required">REQUIRED</span> | The query string, must be at least 2 characters long. |
-| ```apiKey``` <br><span class="required">REQUIRED</span> | The API Key to identify the customer |
+| ```apiKey``` <br><span class="required">REQUIRED</span> | The API Key to identify the customer (could be full or short). |
 
 ```json
 {
@@ -88,7 +88,7 @@ GET "http://partners.api.skyscanner.net/apiservices/
 | Parameter | Description |
 | --------- | ------- |
 | ```id``` <br><span class="required">REQUIRED</span> | The place id. |
-| ```apiKey``` <br><span class="required">REQUIRED</span> | The API Key to identify the customer |
+| ```apiKey``` <br><span class="required">REQUIRED</span> | The API Key to identify the customer (could be full or short). |
 
 > Example response for id=cdg
 

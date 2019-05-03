@@ -137,14 +137,14 @@ or go to our [test harness](http://business.skyscanner.net/portal/en-GB/Document
 
 | Parameter | Description |
 | --------- | ------- |
-| ```sortType``` <br><span class="optional">OPTIONAL</span> | The parameter to sort results on. Can be carrier, duration, outboundarrivetime, outbounddeparttime, inboundarrivetime, inbounddeparttime, price* |
+| ```sortType``` <br><span class="optional">OPTIONAL</span> | The parameter to sort results on. Can be carrier, duration, outboundarrivetime, outbounddeparttime, inboundarrivetime, inbounddeparttime, price |
 | ```sortOrder``` <br><span class="optional">OPTIONAL</span> | The sort order. 'asc' or 'desc' |
 | ```duration``` <br><span class="optional">OPTIONAL</span> | Filter for maximum duration in minutes. Integer between 0 and 1800  |
 | ```includeCarriers``` <br><span class="optional">OPTIONAL</span> | Filter flights by the specified carriers. Must be semicolon-separated [IATA codes](http://www.iata.org/publications/Pages/code-search.aspx). |
 | ```excludeCarriers``` <br><span class="optional">OPTIONAL</span> | Filter flights by any but the specified carriers. Must be semicolon-separated [IATA codes](http://www.iata.org/publications/Pages/code-search.aspx). |
 | ```originAirports``` <br><span class="optional">OPTIONAL</span> | Origin airports to filter on. List of airport codes delimited by ‘;’  |
 | ```destinationAirports``` <br><span class="optional">OPTIONAL</span> | Destination airports to filter on. List of airport codes delimited by ‘;’  |
-| ```stops``` <br><span class="optional">OPTIONAL</span> | Filter by number of stops.<br>`0`: direct flights only<br>`1`: flights with one stop only <br>to show all flights do not use (only supports values 0 and 1) |
+| ```stops``` <br><span class="optional">OPTIONAL</span> | Filter for maximum number of stops.<br>0 for direct flights only<br>1 for flights with maximum one stop<br>omit for all flights (direct and indirect)  |
 | ```outboundDepartTime``` <br><span class="optional">OPTIONAL</span> | Filter for outbound departure time by time period of the day (i.e. morning, afternoon, evening). List of day time period delimited by ‘;’ (acceptable values are M, A, E) |
 | ```outboundDepartStartTime``` <br><span class="optional">OPTIONAL</span> | Filter for start of range for outbound departure time. Format ‘hh:mm’. |
 | ```outboundDepartEndTime``` <br><span class="optional">OPTIONAL</span> | Filter for end of range for outbound departure time. Format ‘hh:mm’. |
