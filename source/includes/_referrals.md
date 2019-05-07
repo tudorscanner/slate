@@ -5,7 +5,7 @@ partner redirects to Skyscanner site based to provided request parameters.
 
 *API endpoint*
 
-`GET /{vertical}/{pagetype}?`
+`GET /{vertical}/{pagetype}?associateid={{ associateId }}`
 
 
 *TRY IT OUT*
@@ -20,6 +20,7 @@ partner redirects to Skyscanner site based to provided request parameters.
 | --------- | ------- |
 | ```vertical``` <br><span class="required">REQUIRED</span> | Your Vertical. Allowed values: flights, hotels, cars|
 | ```pagetype``` <br><span class="required">OPTIONAL</span> | Your page type|
+| ```associateid``` <br><span class="required">OPTIONAL</span> | Associate partner id to attribute traffic to|
 
 Specific request query parameters are provided in tables below.
 
