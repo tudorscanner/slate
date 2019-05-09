@@ -1,6 +1,6 @@
 # Referrals
 
-The [Referrals-api Service](https://github.skyscannertools.net/partnerinsights/referrals-api) is used to provide 
+The Referrals-api service is used to provide 
 partner redirects to Skyscanner site based to provided request parameters.
 
 *API endpoint*
