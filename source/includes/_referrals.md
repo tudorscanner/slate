@@ -12,7 +12,6 @@ partner redirects to Skyscanner site based to provided request parameters.
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/31ff523d2ff9186107e1)
 
- or go to our [test harness](http://business.skyscanner.net/portal/en-GB/Documentation/FlightsLivePricingQuickStart)
 
 *REQUEST PARAMETERS*
 
