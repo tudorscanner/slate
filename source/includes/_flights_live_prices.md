@@ -64,7 +64,7 @@ or go to our [test harness](http://business.skyscanner.net/portal/en-GB/Document
 | ```destinationPlace``` <br><span class="required">REQUIRED</span> | The destination place (see [places](#places)) |
 | ```outboundDate``` <br><span class="required">REQUIRED</span> | The outbound date. Format "yyyy-mm-dd". |
 | ```inboundDate``` <br><span class="optional">OPTIONAL</span> | The return date. Format "yyyy-mm-dd". Use empty string for oneway trip. |
-| ```cabinClass``` <br><span class="optional">OPTIONAL</span> | The cabin class. Can be "economy", "premiumeconomy", "business", "first"  |
+| ```cabinClass``` <br><span class="optional">OPTIONAL</span> | The cabin class. Can be "Economy", "PremiumEconomy", "Business", "First"  |
 | ```adults``` <br><span class="required">REQUIRED</span> | Number of adults (16+ years). Must be between 1 and 8.  |
 | ```children``` <br><span class="optional">OPTIONAL</span> | Number of children (1-16 years). Can be between 0 and 8.  |
 | ```infants``` <br><span class="optional">OPTIONAL</span> | Number of infants (under 12 months). Can be between 0 and 8.  |
