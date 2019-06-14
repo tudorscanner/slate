@@ -1,17 +1,19 @@
 # Referrals
 
-The Referrals-api service is used to provide 
-partner redirects to Skyscanner site based to provided request parameters.
+The referrals service is used to provide partner redirects
+to Skyscanner pages based to provided request parameters.
 
 *API endpoint*
 
-`GET /{vertical}/{pagetype}?associateid={{ associateId }}`
+The API is accessible at https://skyscanner.net/g/referrals/v1
 
+There is one main endpoint with the following URL structure:
+
+`GET /{vertical}/{pagetype}?associateid={{ associateId }}`
 
 *TRY IT OUT*
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/31ff523d2ff9186107e1)
-
 
 *REQUEST PARAMETERS*
 
@@ -63,5 +65,3 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 | API endpoint | Description  |
 | --- | ---|
 | [Carhire Day View supported query parameters Schema](#carhire-day-view-supported-query-parameters-schema) | Schema and Query Parameters Properties for CarHire DayView</b>. |
-
-
