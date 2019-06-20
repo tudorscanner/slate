@@ -148,6 +148,44 @@ If you need more help you can find more information and answers to questions in 
 Be careful when sharing API keys. Do not publish them in public code repositories or add them to client-side API calls. When you need to make a client-side call (e.g. redirect) please insure that you use your short API key (the first 16 characters of you key). Please note that *not* all API endpoints supports short API keys.
 </aside>
 
+<h2 id="token-generation">Token generation</h2>
+
+<p>Get authentication token. Expiration time is 30 minutes.</p>
+<pre class="highlight shell"><code>GET <span class="s2">"http://partners.api.skyscanner.net/apiservices/
+    token/v2/gettoken?
+    apiKey={apiKey}"</span>
+</code></pre>
+<p><em>API endpoint</em></p>
+
+<p><code class="prettyprint">GET /token/v2/gettoken</code></p>
+
+<p><em>REQUEST PARAMETERS</em></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">apiKey</code> <br><span class="required">REQUIRED</span></td>
+<td>Your API Key.</td>
+</tr>
+</tbody></table>
+
+<h3 id="response">Response</h3>
+
+<blockquote>
+<p>Example of token result</p>
+</blockquote>
+<pre class="highlight shell"><code>    _dR-ShOTX6w2SeENoXhHTsT9Z5N4UNqwReQqU_F8WkbgMDIuZx7ud7boHnngf4fT9bpPDFJh7nxB3hWsAT8x76w<span class="o">==</span>
+</code></pre>
+<p>A successful response contains string with token value.</p>
+
+<aside class="warning">
+Please don&rsquo;t forget to encode token with URL encoder to escape special characters before sending it as value for apiKey URL paramater.
+</aside>
+
           <h1 id="getting-started">Getting Started</h1>
 
 <h2 id="flights">Flights</h2>
@@ -4142,6 +4180,11 @@ The country and language must be included in the Autosuggest query so that the m
 <td>Contains the list of places that match the query string. The places can be countries, cities or airports.</td>
 </tr>
 </tbody></table>
+
+<aside class="notice">
+If you are using this endpoint from client-side code, we recommend to use a token as value for apiKey request parameter. This way you will overcome the potential security risk of exposing account API keys.
+See <a href="#token-generation">token generation</a> section for more details.
+</aside>
 
 <h2 id="place-information">Place Information</h2>
 
