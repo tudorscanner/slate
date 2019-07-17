@@ -184,7 +184,7 @@ GET "http://partners.api.skyscanner.net/apiservices/
 
 <aside class="notice">
 You can use this endpoint to retrieve the user's location from their IP address:
-<code>http://partners.api.skyscanner.net/apiservices/autosuggest/v1.0/UK/GBP/en?id=188.39.95.140-ip&apikey=&lt;apiKey&gt;</code>
+<code>http://partners.api.skyscanner.net/apiservices/autosuggest/v1.0/UK/GBP/en-GB?id=188.39.95.140-ip&apikey=&lt;apiKey&gt;</code>
 </aside>
 
 ## Geo Catalog
