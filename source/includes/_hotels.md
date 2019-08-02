@@ -56,7 +56,7 @@ B2B partner please use v1 endpoint
 
 `GET /v1/prices/search/entity/{entity_id}`
 
-v3 is new endpoint, support dbook booking and cug override
+V3 is a new endpoint which supports direct booking and cug overriding.
 
 `GET /v3/prices/search/entity/{entity_id}`
 
@@ -98,7 +98,7 @@ GET "https://www.skyscanner.net/g/hbe-bellboy/v1/prices/search/entity/{entity_id
 | `rooms` <br><span class="required">REQUIRED</span> | Number of rooms<br>default: 1 |
 | `adults` <br><span class="required">REQUIRED</span> | Number of adults<br>default: 2 |
 | `apikey` <br><span class="required">REQUIRED</span> | This parameter is required to be on every single request any client does |
-| `images` <br><span class="optional">OPTIONAL</span> | Maximum number of images to retrieve per each hotel<br>between 1-30, default: 1 |
+| `images` <br><span class="optional">OPTIONAL</span> | Maximum number of images to retrieve for each hotel<br>between 1-30, default: 1 |
 | `image_resolution` <br><span class="optional">OPTIONAL</span> | Resolution options<br>high or low, default: high |
 | `image_type` <br><span class="optional">OPTIONAL</span> | The format of the images<br>thumbnail or gallery or dynamic |
 | `boost_official_partners` <br><span class="optional">OPTIONAL</span> | Indicates whether prices from official partners must be shown in the first place [1] or not [0]<br>default: 0 |
@@ -108,7 +108,7 @@ GET "https://www.skyscanner.net/g/hbe-bellboy/v1/prices/search/entity/{entity_id
 | `price_buckets` <br><span class="optional">OPTIONAL</span> | OR filter. Return only hotels with offers inside the specified buckets. Cannot be used together with price_min/price_max |
 | `price_bucket_step` <br><span class="optional">OPTIONAL</span> | Fix step for the buckets. Need to be used together with price_buckets, default step will be dynamic |
 | `price_bucket_number` <br><span class="optional">OPTIONAL</span> | This parameter allows you to set the price buckets number, default: 5 |
-| `price_buckets_strategy` <br><span class="optional">OPTIONAL</span> | price_buckets_strategy is 2 means use the new price buckets thread (split most 30 buckets), others use old price bucket thread (split most price_bucket_number buckets) |
+| `price_buckets_strategy` <br><span class="optional">OPTIONAL</span> | price_buckets_strategy is 2 means use the new price buckets thread (split most 30 buckets), others use old price bucket thread (split into price_bucket_number buckets at most) |
 | `price_buckets_min` <br><span class="optional">OPTIONAL</span> | Filter. Return only hotels where the cheaper price is at least price_buckets_min (included). Would not be applied if price_buckets_strategy is not 2 |
 | `price_buckets_max` <br><span class="optional">OPTIONAL</span> | Filter. Return only hotels where the cheaper price is at most price_buckets_max (included). Would not be applied if price_buckets_strategy is not 2 |
 | `district` <br><span class="optional">OPTIONAL</span> | OR filter. Return only results where a district matches |
@@ -127,13 +127,13 @@ GET "https://www.skyscanner.net/g/hbe-bellboy/v1/prices/search/entity/{entity_id
 | `partners_per_hotel` <br><span class="optional">OPTIONAL</span> | Maximum numbers of partners to retrieve per each hotel. Note that 0 means all the available partners<br>default: 3 |
 | `enhanced` <br><span class="optional">OPTIONAL</span> | This parameter allows you to add additional content to the default response. Available options are:<br>filters: Returns extra object in the response including the filters like stars, district, city, etc.<br>price_slider: Return the price_slider.<br>partners: Returns information about the active partners in the system. is_official, the logo, the name and the website_id.<br>images: Returns images for the hotels. With the partner website_id and the urls.<br>amenities: Returns the hotels amenities.<br>query_location: Returns the location (higher level entities according to the searched entity) and map boundary (the coordinates of the search area).<br>extras: Returns the hotel chain of the hotels.<br>translations: Returns a dictionary with all literals and their corresponding translations using the request locale. <br>detailed_reviews: Returns information from the hotel reviews provided by Trustyou (http://www.trustyou.com/)|
 | `index` <br><span class="optional">OPTIONAL</span> | Mark the times of the same requests sent to bellboy, start from 1, default: 0 |
-| `sorting_version` <br><span class="optional">OPTIONAL</span> | (B2B partner need't set the value) Hotel sorting score calculation options<br>mr4: RelevanceContainerScoring,<br>mr5: IronRankScoring,<br>mr6: IronCatRankScoring,<br>mr4a: RelevanceContainerHotelModelScoring,<br>mr7: HotelBookingModelScoring,<br>mr8: IronTrainModelScoring,<br>default: mr4 |
-| `t_version` <br><span class="optional">OPTIONAL</span> | (B2B partner need't set the value) Used for ABTesting, default is '' |
-| `app_name` <br><span class="optional">OPTIONAL</span> | (B2B partner need't set the value) This parameter allows you to the app name, default is '' |
-| `appVersion` <br><span class="optional">OPTIONAL</span> | (B2B partner need't set the value) This parameter allows you to the app version, default is '' |
-| `search_id` <br><span class="optional">OPTIONAL</span> | (B2B partner need't set the value) Elasticsearch ID, for the same request, first time need't set the value, second time can get the value from prior response, default is '' |
-| `cug_segments` <br><span class="optional">OPTIONAL</span> | (B2B partner need't set the value) Only v3 supports, it allows you to add special cug segments for user. Options are:<br>mobile, logged_in, business, apps, flight_booked |
-| `cug` <br><span class="optional">OPTIONAL</span> | (B2B partner need't set the value) This parameter allows you to reorder hotels by cug price. Options are:<br>1: cug hotels would be ranked ahead, 2: high cug hotels would be ranked ahead. <br>default is 0, order by parameter sort |
+| `sorting_version` <br><span class="optional">OPTIONAL</span> | (B2B partner needn't set the value) Hotel sorting score calculation options<br>mr4: RelevanceContainerScoring,<br>mr5: IronRankScoring,<br>mr6: IronCatRankScoring,<br>mr4a: RelevanceContainerHotelModelScoring,<br>mr7: HotelBookingModelScoring,<br>mr8: IronTrainModelScoring,<br>default: mr4 |
+| `t_version` <br><span class="optional">OPTIONAL</span> | (B2B partner needn't set the value) Used for ABTesting, default is '' |
+| `app_name` <br><span class="optional">OPTIONAL</span> | (B2B partner needn't set the value) This parameter allows you to set the app name, default is '' |
+| `appVersion` <br><span class="optional">OPTIONAL</span> | (B2B partner needn't set the value) This parameter allows you to set the app version, default is '' |
+| `search_id` <br><span class="optional">OPTIONAL</span> | (B2B partner needn't set the value) Elasticsearch ID, for the same request, first time needn't set the value, second time can get the value from prior response, default is '' |
+| `cug_segments` <br><span class="optional">OPTIONAL</span> | (B2B partner needn't set the value) Only v3 supports, it allows you to add special cug segments for user. Options are:<br>mobile, logged_in, business, apps, flight_booked |
+| `cug` <br><span class="optional">OPTIONAL</span> | (B2B partner needn't set the value) This parameter allows you to reorder hotels by cug price. Options are:<br>1: cug hotels would be ranked ahead, 2: high cug hotels would be ranked ahead. <br>default is 0, order by parameter sort |
 
 **Note**: The OR and AND filters allow multiple values coma separated. For example: *&amenities=Lift,Bar*
 
@@ -817,7 +817,7 @@ B2B partner please use v1 endpoint
 
 `GET /v1/prices/hotel/{hotel_id}`
 
-v3 is new endpoint, support dbook booking and cug override
+V3 is a new endpoint which supports dbook booking and cug overriding.
 
 `GET /v3/prices/hotel/{hotel_id}`
 
@@ -858,7 +858,7 @@ GET "https://www.skyscanner.net/g/hotels/v1/prices/hotel/{hotel_id}
 | `rooms` <br><span class="required">REQUIRED</span> | Number of rooms<br>default: 1 |
 | `adults` <br><span class="required">REQUIRED</span> | Number of adults<br>default: 2 |
 | `apikey` <br><span class="required">REQUIRED</span> | This parameter is required to be on every single request any client does |
-| `images` <br><span class="optional">OPTIONAL</span> | Maximum number of images to retrieve per each hotel<br>between 1-30, default: 1 |
+| `images` <br><span class="optional">OPTIONAL</span> | Maximum number of images to retrieve for each hotel<br>between 1-30, default: 1 |
 | `image_resolution` <br><span class="optional">OPTIONAL</span> | Resolution options<br>high or low, default: high |
 | `image_type` <br><span class="optional">OPTIONAL</span> | The format of the images<br>thumbnail or gallery or dynamic |
 | `boost_official_partners` <br><span class="optional">OPTIONAL</span> | Indicates whether prices from official partners must be shown in the first place [1] or not [0]<br>default: 0 |
@@ -866,12 +866,12 @@ GET "https://www.skyscanner.net/g/hotels/v1/prices/hotel/{hotel_id}
 | `enhanced` <br><span class="optional">OPTIONAL</span> | This parameter allows you to add additional content to the default response. The available options are:<br>location: Returns the higher level entities according to the search entity.<br>translations: Returns a dictionary with all literals and their corresponding translations using the request locale. |
 | `entity_id` <br><span class="optional">OPTIONAL</span> | This field should be present when this endpoint has been called when the user has already looked for prices in an upper entity containing the hotel in order to reuse the cached prices.<br>For example: A user searches for prices in Paris (the service stores Paris prices). And then, the user opens a hotel details page. In this case, the request to the service must have the entity_id param fulfilled with the Paris entity_id in order to reuse the prices.|
 | `index` <br><span class="optional">OPTIONAL</span> | Mark the times of the same requests sent to bellboy, start from 1, default: 0 |
-| `t_version` <br><span class="optional">OPTIONAL</span> | (B2B partner need't set the value) Used for ABTesting, default is '' |
-| `app_name` <br><span class="optional">OPTIONAL</span> | (B2B partner need't set the value) This parameter allows you to the app name, default is '' |
-| `appVersion` <br><span class="optional">OPTIONAL</span> | (B2B partner need't set the value) This parameter allows you to the app version, default is '' |
-| `search_id` <br><span class="optional">OPTIONAL</span> | (B2B partner need't set the value) Elasticsearch ID, the value can be got from search response or first request response, default is '' |
-| `cug_segments` <br><span class="optional">OPTIONAL</span> | (B2B partner need't set the value) Only v3 supports, it allows you to add special cug segments for user. Options are:<br>mobile, logged_in, business, apps, flight_booked |
-| `ignore_cache` <br><span class="optional">OPTIONAL</span> | (B2B partner need't set the value) This parameter allows you to bypass Elasticsearch and Redis cache. Options are:<br>0: use cache, 1: bypass cache, default: 0 |
+| `t_version` <br><span class="optional">OPTIONAL</span> | (B2B partner needn't set the value) Used for ABTesting, default is '' |
+| `app_name` <br><span class="optional">OPTIONAL</span> | (B2B partner needn't set the value) This parameter allows you to set the app name, default is '' |
+| `appVersion` <br><span class="optional">OPTIONAL</span> | (B2B partner needn't set the value) This parameter allows you to set the app version, default is '' |
+| `search_id` <br><span class="optional">OPTIONAL</span> | (B2B partner needn't set the value) Elasticsearch ID, the value can be got from search response or first request response, default is '' |
+| `cug_segments` <br><span class="optional">OPTIONAL</span> | (B2B partner needn't set the value) Only v3 supports, it allows you to add special cug segments for user. Options are:<br>mobile, logged_in, business, apps, flight_booked |
+| `ignore_cache` <br><span class="optional">OPTIONAL</span> | (B2B partner needn't set the value) This parameter allows you to bypass Elasticsearch and Redis cache. Options are:<br>0: use cache, 1: bypass cache, default: 0 |
 
 ### Response
 
@@ -1094,8 +1094,8 @@ GET "https://www.skyscanner.net/g/hbe-bellboy/v2/prices/hotel/{hotel_ids}
 | `boost_official_partners` <br><span class="optional">OPTIONAL</span> | Indicates whether prices from official partners must be shown in the first place [1] or not [0]<br>default: 0 |
 | `partners_per_hotel` <br><span class="optional">OPTIONAL</span> | Maximum numbers of partners to retrieve per each hotel. Note that 0 means all the available partners<br>default: 3 |
 | `enhanced` <br><span class="optional">OPTIONAL</span> | This parameter allows you to add additional content to the default response. The available options are:<br>location: Returns the higher level entities according to the search entity.<br>translations: Returns a dictionary with all literals and their corresponding translations using the request locale. |
-| `app_name` <br><span class="optional">OPTIONAL</span> | (B2B partner need't set the value) This parameter allows you to the app name, default is '' |
-| `appVersion` <br><span class="optional">OPTIONAL</span> | (B2B partner need't set the value) This parameter allows you to the app version, default is '' |
+| `app_name` <br><span class="optional">OPTIONAL</span> | (B2B partner needn't set the value) This parameter allows you to set the app name, default is '' |
+| `appVersion` <br><span class="optional">OPTIONAL</span> | (B2B partner needn't set the value) This parameter allows you to set the app version, default is '' |
 
 ### Response
 
