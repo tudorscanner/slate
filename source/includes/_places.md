@@ -92,6 +92,13 @@ GET "http://partners.api.skyscanner.net/apiservices/
 | ```Places``` | Contains the list of places that match the query string. The places can be countries, cities or airports. |
 
 
+<aside class="notice">
+If you are using this endpoint from client-side code, we recommend to use a token as value for apiKey request parameter. This way you will overcome the potential security risk of exposing account API keys.
+See <a href="#token-generation">token generation</a> section for more details.
+</aside>
+
+
+
 ## Place Information
 
 Get information about a country, city or airport using its ID.
@@ -177,7 +184,7 @@ GET "http://partners.api.skyscanner.net/apiservices/
 
 <aside class="notice">
 You can use this endpoint to retrieve the user's location from their IP address:
-<code>http://partners.api.skyscanner.net/apiservices/autosuggest/v1.0/UK/GBP/en?id=188.39.95.140-ip&apikey=&lt;apiKey&gt;</code>
+<code>http://partners.api.skyscanner.net/apiservices/autosuggest/v1.0/UK/GBP/en-GB?id=188.39.95.140-ip&apikey=&lt;apiKey&gt;</code>
 </aside>
 
 ## Geo Catalog
