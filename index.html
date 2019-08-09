@@ -2351,8 +2351,14 @@ This geographical query seeks for hotels using different distances, from 500 met
 
 <p><em>API endpoint</em></p>
 
+<p>B2B partner please use v1 endpoint</p>
+
 <p><code class="prettyprint">GET /v1/prices/search/entity/{entity_id}</code></p>
-<pre class="highlight shell"><code>GET <span class="s2">"https://www.skyscanner.net/g/hotels/v1/prices/search/entity/{entity_id}
+
+<p>V3 is a new endpoint which supports direct booking and cug overriding.</p>
+
+<p><code class="prettyprint">GET /v3/prices/search/entity/{entity_id}</code></p>
+<pre class="highlight shell"><code>GET <span class="s2">"https://www.skyscanner.net/g/hbe-bellboy/v1/prices/search/entity/{entity_id}
   ?market={market}&amp;locale={locale}&amp;checkin_date={checkin_date}&amp;checkout_date={checkout_date}
   &amp;currency={currency}&amp;adults={adults}&amp;rooms={rooms}&amp;images={images}&amp;image_resolution={resolution}
   &amp;image_type={type}&amp;boost_official_partners={boost}&amp;sort={sort_method}&amp;limit={limit}&amp;offset={offset}
@@ -2436,7 +2442,7 @@ This geographical query seeks for hotels using different distances, from 500 met
 </tr>
 <tr>
 <td><code class="prettyprint">images</code> <br><span class="optional">OPTIONAL</span></td>
-<td>Maximum number of images to retrieve per each hotel<br>between 1-30, default: 3</td>
+<td>Maximum number of images to retrieve for each hotel<br>between 1-30, default: 1</td>
 </tr>
 <tr>
 <td><code class="prettyprint">image_resolution</code> <br><span class="optional">OPTIONAL</span></td>
@@ -2444,7 +2450,7 @@ This geographical query seeks for hotels using different distances, from 500 met
 </tr>
 <tr>
 <td><code class="prettyprint">image_type</code> <br><span class="optional">OPTIONAL</span></td>
-<td>The format of the images<br>thumbnail or gallery</td>
+<td>The format of the images<br>thumbnail or gallery or dynamic</td>
 </tr>
 <tr>
 <td><code class="prettyprint">boost_official_partners</code> <br><span class="optional">OPTIONAL</span></td>
@@ -2465,6 +2471,26 @@ This geographical query seeks for hotels using different distances, from 500 met
 <tr>
 <td><code class="prettyprint">price_buckets</code> <br><span class="optional">OPTIONAL</span></td>
 <td>OR filter. Return only hotels with offers inside the specified buckets. Cannot be used together with price_min/price_max</td>
+</tr>
+<tr>
+<td><code class="prettyprint">price_bucket_step</code> <br><span class="optional">OPTIONAL</span></td>
+<td>Fix step for the buckets. Need to be used together with price_buckets, default step will be dynamic</td>
+</tr>
+<tr>
+<td><code class="prettyprint">price_bucket_number</code> <br><span class="optional">OPTIONAL</span></td>
+<td>This parameter allows you to set the price buckets number, default: 5</td>
+</tr>
+<tr>
+<td><code class="prettyprint">price_buckets_strategy</code> <br><span class="optional">OPTIONAL</span></td>
+<td>price_buckets_strategy is 2 means use the new price buckets thread (split most 30 buckets), others use old price bucket thread (split into price_bucket_number buckets at most)</td>
+</tr>
+<tr>
+<td><code class="prettyprint">price_buckets_min</code> <br><span class="optional">OPTIONAL</span></td>
+<td>Filter. Return only hotels where the cheaper price is at least price_buckets_min (included). Would not be applied if price_buckets_strategy is not 2</td>
+</tr>
+<tr>
+<td><code class="prettyprint">price_buckets_max</code> <br><span class="optional">OPTIONAL</span></td>
+<td>Filter. Return only hotels where the cheaper price is at most price_buckets_max (included). Would not be applied if price_buckets_strategy is not 2</td>
 </tr>
 <tr>
 <td><code class="prettyprint">district</code> <br><span class="optional">OPTIONAL</span></td>
@@ -2499,12 +2525,20 @@ This geographical query seeks for hotels using different distances, from 500 met
 <td>OR filter. Return only results where an accommodation type matches. The values must be TravelAPI ids</td>
 </tr>
 <tr>
+<td><code class="prettyprint">guest_rating</code> <br><span class="optional">OPTIONAL</span></td>
+<td>OR filter. Return only results where a guest rating matches. The values must be TravelAPI ids</td>
+</tr>
+<tr>
+<td><code class="prettyprint">guest_type</code> <br><span class="optional">OPTIONAL</span></td>
+<td>OR filter. Return only results where a guest type matches. The values must be TravelAPI ids</td>
+</tr>
+<tr>
 <td><code class="prettyprint">hotel_name</code> <br><span class="optional">OPTIONAL</span></td>
 <td>Filter. Return only results where hotel name matches</td>
 </tr>
 <tr>
 <td><code class="prettyprint">limit</code> <br><span class="optional">OPTIONAL</span></td>
-<td>Number of results to retrieve<br>between 1-30, default: 30</td>
+<td>Number of results to retrieve<br>between 1-30, default: 15</td>
 </tr>
 <tr>
 <td><code class="prettyprint">offset</code> <br><span class="optional">OPTIONAL</span></td>
@@ -2518,6 +2552,38 @@ This geographical query seeks for hotels using different distances, from 500 met
 <td><code class="prettyprint">enhanced</code> <br><span class="optional">OPTIONAL</span></td>
 <td>This parameter allows you to add additional content to the default response. Available options are:<br>filters: Returns extra object in the response including the filters like stars, district, city, etc.<br>price_slider: Return the price_slider.<br>partners: Returns information about the active partners in the system. is_official, the logo, the name and the website_id.<br>images: Returns images for the hotels. With the partner website_id and the urls.<br>amenities: Returns the hotels amenities.<br>query_location: Returns the location (higher level entities according to the searched entity) and map boundary (the coordinates of the search area).<br>extras: Returns the hotel chain of the hotels.<br>translations: Returns a dictionary with all literals and their corresponding translations using the request locale. <br>detailed_reviews: Returns information from the hotel reviews provided by Trustyou (http://www.trustyou.com/)</td>
 </tr>
+<tr>
+<td><code class="prettyprint">index</code> <br><span class="optional">OPTIONAL</span></td>
+<td>Mark the times of the same requests sent to bellboy, start from 1, default: 0</td>
+</tr>
+<tr>
+<td><code class="prettyprint">sorting_version</code> <br><span class="optional">OPTIONAL</span></td>
+<td>(B2B partner needn&rsquo;t set the value) Hotel sorting score calculation options<br>mr4: RelevanceContainerScoring,<br>mr5: IronRankScoring,<br>mr6: IronCatRankScoring,<br>mr4a: RelevanceContainerHotelModelScoring,<br>mr7: HotelBookingModelScoring,<br>mr8: IronTrainModelScoring,<br>default: mr4</td>
+</tr>
+<tr>
+<td><code class="prettyprint">t_version</code> <br><span class="optional">OPTIONAL</span></td>
+<td>(B2B partner needn&rsquo;t set the value) Used for ABTesting, default is &ldquo;</td>
+</tr>
+<tr>
+<td><code class="prettyprint">app_name</code> <br><span class="optional">OPTIONAL</span></td>
+<td>(B2B partner needn&rsquo;t set the value) This parameter allows you to set the app name, default is &rdquo;</td>
+</tr>
+<tr>
+<td><code class="prettyprint">appVersion</code> <br><span class="optional">OPTIONAL</span></td>
+<td>(B2B partner needn&rsquo;t set the value) This parameter allows you to set the app version, default is &ldquo;</td>
+</tr>
+<tr>
+<td><code class="prettyprint">search_id</code> <br><span class="optional">OPTIONAL</span></td>
+<td>(B2B partner needn&rsquo;t set the value) Elasticsearch ID, for the same request, first time needn&rsquo;t set the value, second time can get the value from prior response, default is &rdquo;</td>
+</tr>
+<tr>
+<td><code class="prettyprint">cug_segments</code> <br><span class="optional">OPTIONAL</span></td>
+<td>(B2B partner needn&rsquo;t set the value) Only v3 supports, it allows you to add special cug segments for user. Options are:<br>mobile, logged_in, business, apps, flight_booked</td>
+</tr>
+<tr>
+<td><code class="prettyprint">cug</code> <br><span class="optional">OPTIONAL</span></td>
+<td>(B2B partner needn&rsquo;t set the value) This parameter allows you to reorder hotels by cug price. Options are:<br>1: cug hotels would be ranked ahead, 2: high cug hotels would be ranked ahead. <br>default is 0, order by parameter sort</td>
+</tr>
 </tbody></table>
 
 <p><strong>Note</strong>: The OR and AND filters allow multiple values coma separated. For example: <em>&amp;amenities=Lift,Bar</em></p>
@@ -2528,204 +2594,236 @@ This geographical query seeks for hotels using different distances, from 500 met
 <p>Example response:</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"correlation_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"42be633f-edde-4631-ad8f-87e3fd2b4bf4"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"total_available"</span><span class="p">:</span><span class="w"> </span><span class="mi">1675</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"hotels_filtered"</span><span class="p">:</span><span class="w"> </span><span class="mi">4406</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"offers"</span><span class="p">:</span><span class="w"> </span><span class="mi">34757</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">4406</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"COMPLETED"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"completion_percentage"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"results"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"filters"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"district"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"max_price"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"27562177"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">350</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"min_price"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="err">...</span><span class="w">
-      </span><span class="p">],</span><span class="w">
-      </span><span class="nt">"meal_plan"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"max_price"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"room_only"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1391</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"min_price"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="err">...</span><span class="w">
-      </span><span class="p">],</span><span class="w">
-      </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"max_price"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"27544008"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">4406</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"min_price"</span><span class="p">:</span><span class="w"> </span><span class="mi">18</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="err">...</span><span class="w">
-      </span><span class="p">],</span><span class="w">
-      </span><span class="nt">"property_type"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"max_price"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hotel"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1754</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"min_price"</span><span class="p">:</span><span class="w"> </span><span class="mi">32</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="err">...</span><span class="w">
-      </span><span class="p">],</span><span class="w">
-      </span><span class="nt">"price_buckets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"max_price"</span><span class="p">:</span><span class="w"> </span><span class="mi">80</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PR_BK_0"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">91</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"min_price"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="err">...</span><span class="w">
-      </span><span class="p">],</span><span class="w">
-      </span><span class="nt">"stars"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"max_price"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">735</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"min_price"</span><span class="p">:</span><span class="w"> </span><span class="mi">124</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="err">...</span><span class="w">
-      </span><span class="p">],</span><span class="w">
-      </span><span class="nt">"cancellation"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"max_price"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"non_refundable"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1437</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"min_price"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="err">...</span><span class="w">
-      </span><span class="p">],</span><span class="w">
-      </span><span class="nt">"chain"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"max_price"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hilton"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">14</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"min_price"</span><span class="p">:</span><span class="w"> </span><span class="mi">241</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="err">...</span><span class="w">
-      </span><span class="p">],</span><span class="w">
-      </span><span class="nt">"amenities"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"max_price"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"WifiService"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1993</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"min_price"</span><span class="p">:</span><span class="w"> </span><span class="mi">18</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="err">...</span><span class="w">
-      </span><span class="p">]</span><span class="w">
+    </span><span class="nt">"correlation_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3889f7d3-65d2-40e8-8034-4accb18bade9"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"COMPLETED"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"search_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"915c591f9fd48c64c9c0ad748d6e6851f09f5dbc4d608495479f1a07e1e7a968"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">311</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"completion_percentage"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"total_available"</span><span class="p">:</span><span class="w"> </span><span class="mi">73</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"hotels_filtered"</span><span class="p">:</span><span class="w"> </span><span class="mi">73</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"offers"</span><span class="p">:</span><span class="w"> </span><span class="mi">459</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"total_available_filtered"</span><span class="p">:</span><span class="w"> </span><span class="mi">73</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"request_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"e3f5c49b-3139-4311-99e1-5ca746541f58"</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"partners"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"website_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"h_mb"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"logo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"www.skyscanner.net/images/websites/220x80/h_mb.png"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"is_official"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Marina Bay Sands"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="err">...</span><span class="w">
-    </span><span class="p">],</span><span class="w">
-    </span><span class="nt">"hotel_pivot"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"entity"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"London"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"official_center"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"coordinates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-          </span><span class="mf">-0.12801</span><span class="p">,</span><span class="w">
-          </span><span class="mf">51.50813</span><span class="w">
+    </span><span class="nt">"results"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"location"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"entity_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Island"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"entity_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"81972530"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Malta Island"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"entity_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Nation"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"entity_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"29475371"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Malte"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
         </span><span class="p">],</span><span class="w">
-        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Point"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="nt">"entity_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"27544008"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"entity_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"City"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"centroid"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"coordinates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-          </span><span class="mf">-0.09435</span><span class="p">,</span><span class="w">
-          </span><span class="mf">51.50412</span><span class="w">
+        </span><span class="nt">"hotels"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"coordinates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="mf">14.50658</span><span class="p">,</span><span class="w">
+                    </span><span class="mf">35.91218</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="nt">"stars"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"offer_types"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="s2">"META"</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="nt">"district"</span><span class="p">:</span><span class="w"> </span><span class="s2">"[]"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"reviews_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">868</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"33349710"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"cheapest_offer_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"META"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"amenities"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="s2">"Lift"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"ConciergeService"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Laundry"</span><span class="p">,</span><span class="w">
+                    </span><span class="err">...</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="nt">"property_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hotel"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"distance"</span><span class="p">:</span><span class="w"> </span><span class="mf">6142.49539734</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"rating"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="nt">"desc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rating_satisfactory"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">6.9</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Roma Hotel"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"hotel_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"47053033"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"images"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="p">{</span><span class="w">
+                        </span><span class="nt">"gallery"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://d2xf5gjipzd8cd.cloudfront.net/available/353235256/mca.jpg"</span><span class="p">,</span><span class="w">
+                        </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"h_ct"</span><span class="p">,</span><span class="w">
+                        </span><span class="nt">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Beach"</span><span class="p">,</span><span class="w">
+                        </span><span class="nt">"dynamic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://d2xf5gjipzd8cd.cloudfront.net/available/353235256/353235256_WxH.jpg"</span><span class="p">,</span><span class="w">
+                        </span><span class="nt">"thumbnail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://d2xf5gjipzd8cd.cloudfront.net/available/353235256/mt.jpg"</span><span class="w">
+                    </span><span class="p">},</span><span class="w">
+                    </span><span class="err">...</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="nt">"offers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="p">{</span><span class="w">
+                        </span><span class="nt">"partner_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"h_hc"</span><span class="p">,</span><span class="w">
+                        </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">78</span><span class="p">,</span><span class="w">
+                        </span><span class="nt">"price_gbp"</span><span class="p">:</span><span class="w"> </span><span class="mi">69</span><span class="p">,</span><span class="w">
+                        </span><span class="nt">"available"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                        </span><span class="nt">"strike_through"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                        </span><span class="nt">"meal_plan"</span><span class="p">:</span><span class="w"> </span><span class="s2">"breakfast_included"</span><span class="p">,</span><span class="w">
+                        </span><span class="nt">"is_official"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                        </span><span class="nt">"closed_user_groups"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                        </span><span class="nt">"dbook_link"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                        </span><span class="nt">"room_type"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                            </span><span class="s2">"triple_room"</span><span class="w">
+                        </span><span class="p">],</span><span class="w">
+                        </span><span class="nt">"deeplink"</span><span class="p">:</span><span class="w"> </span><span class="s2">"www.skyscanner.fr/hotel_deeplink/4.0/FR/fr-FR/EUR/h_hc/47053033/2019-06-18/2019-06-19/hotel/hotel/hotels?guests=1&amp;rooms=1&amp;legacy_provider_id=17&amp;request_id=e3f5c49b-3139-4311-99e1-5ca746541f58&amp;q_datetime_utc=2019-06-13T02%3A44%3A29&amp;appName=mobileweb&amp;appVersion=2.0&amp;ticket_price=78&amp;deeplink_data=eyJ1cmwiOiAiaHR0cHM6Ly9mci5ob3RlbHMuY29tL1BQQ0hvdGVsRGV0YWlscz9hZHVsdHNQZXJSb29tPTEmdmlldz1wcmljZXMmbXBoPTAmcG9zPUhDT01fRlImbnVtYmVyT2ZSb29tcz0xJnJhdGVwbGFuaWQ9MjA2Nzc3OTk1JmhvdGVsaWQ9Mjk5NTg4JmRlcGFydHVyZURhdGU9MTkvMDYvMjAxOSZsb2NhbGU9ZnJfRlImYXJyaXZhbERhdGU9MTgvMDYvMjAxOSIsICJmaWVsZHMiOiB7InNpZ25hdHVyZSI6ICJmNTkyYjZiNjU0OWUxMDBiYTNkNzM1NDNhOGZmNGNmOSJ9fQ%3D%3D&amp;max_price=78.0&amp;channel=website&amp;max_price=78.0&amp;channel=website"</span><span class="p">,</span><span class="w">
+                        </span><span class="nt">"cancellation_text"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                        </span><span class="nt">"cancellation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"non_refundable"</span><span class="w">
+                    </span><span class="p">},</span><span class="w">
+                    </span><span class="err">...</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="nt">"relevance"</span><span class="p">:</span><span class="w"> </span><span class="mf">2000000.3686611408</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="err">...</span><span class="w">
         </span><span class="p">],</span><span class="w">
-        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Point"</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"hotels"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"district"</span><span class="p">:</span><span class="w"> </span><span class="s2">"[]"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"27544008"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"offers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-          </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"cancellation"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"meal_plan"</span><span class="p">:</span><span class="w"> </span><span class="s2">"breakfast_included"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"closed_user_groups"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"is_official"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"room_type"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-              </span><span class="s2">"generic_room"</span><span class="w">
+        </span><span class="nt">"price_includes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"vat"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"other_taxes"</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"average_min_price"</span><span class="p">:</span><span class="w"> </span><span class="mf">139.73</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"filters"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"stars"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"max_price"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"min_price"</span><span class="p">:</span><span class="w"> </span><span class="mi">182</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="err">...</span><span class="w">
             </span><span class="p">],</span><span class="w">
-            </span><span class="nt">"partner_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"h_dr"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"price_gbp"</span><span class="p">:</span><span class="w"> </span><span class="mi">239</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">239</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"strike_through"</span><span class="p">:</span><span class="w"> </span><span class="mi">286</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"deeplink"</span><span class="p">:</span><span class="w"> </span><span class="s2">"www.skyscanner.net/hotel_deeplink/4.0/UK/en-GB/GBP/h_dr/137554756/2017-05-07/2017-05-09/hotel/hotel/hotels?q_datetime_utc=2017-04-24T15%3A42%3A50&amp;appVersion=2.0&amp;rooms=1&amp;legacy_provider_id=926990&amp;deeplink_ids=eu-west-1.prod_b332e152f682d33ec1cc4b3ef6c5b4ac&amp;request_id=f6b76e8d-18ed-45d9-95f5-d87d93f44167&amp;guests=1&amp;ticket_price=239&amp;appName=web&amp;max_price=325.0"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"available"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"cancellation_text"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
-          </span><span class="p">}</span><span class="w">
-        </span><span class="p">],</span><span class="w">
-        </span><span class="nt">"images"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-          </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"thumbnail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://d3ba47lalua02r.cloudfront.net/available/66922450/rmt.jpg"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"h_dp"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"gallery"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://d3ba47lalua02r.cloudfront.net/available/66922450/rmca.jpg"</span><span class="w">
-          </span><span class="p">}</span><span class="w">
-        </span><span class="p">],</span><span class="w">
-        </span><span class="nt">"amenities"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-          </span><span class="s2">"InternetAccessService"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"CurrencyExchangeService"</span><span class="p">,</span><span class="w">
-          </span><span class="err">...</span><span class="w">
-        </span><span class="p">],</span><span class="w">
-        </span><span class="nt">"property_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hotel"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"distance"</span><span class="p">:</span><span class="w"> </span><span class="mf">1523.6670209587</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"reviews_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">129</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"stars"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Imperial"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"rating"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"desc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rating_good"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
+            </span><span class="nt">"chain"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Corinthia"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"max_price"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"min_price"</span><span class="p">:</span><span class="w"> </span><span class="mi">182</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="nt">"price_buckets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PR_BK_0"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"max_price"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"min_price"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="err">...</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="nt">"district"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+            </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"33350111"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"max_price"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">27</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"min_price"</span><span class="p">:</span><span class="w"> </span><span class="mi">36</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="err">...</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="nt">"meal_plan"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"breakfast_included"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"max_price"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">43</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"min_price"</span><span class="p">:</span><span class="w"> </span><span class="mi">28</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="err">...</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="nt">"guest_rating"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rating_satisfactory"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"min_price"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"max_price"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="err">...</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="nt">"amenities"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"WifiService"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"max_price"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"min_price"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="err">...</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="nt">"property_type"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hotel"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"max_price"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"min_price"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="err">...</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="nt">"guest_type"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"solo"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"max_price"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"min_price"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="err">...</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="nt">"cancellation"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"free_cancellation"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"max_price"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">26</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"min_price"</span><span class="p">:</span><span class="w"> </span><span class="mi">28</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="err">...</span><span class="w">
+            </span><span class="p">]</span><span class="w">
         </span><span class="p">},</span><span class="w">
-        </span><span class="nt">"hotel_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"137554756"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"coordinates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-          </span><span class="mf">-0.12403</span><span class="p">,</span><span class="w">
-          </span><span class="mf">51.52162</span><span class="w">
-        </span><span class="p">]</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="err">...</span><span class="w">
-    </span><span class="p">],</span><span class="w">
-    </span><span class="nt">"map_boundary"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"s_w_lat"</span><span class="p">:</span><span class="w"> </span><span class="mf">51.49591</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"n_e_lat"</span><span class="p">:</span><span class="w"> </span><span class="mf">51.52918</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"n_e_lng"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.07762</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"s_w_lng"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.19137</span><span class="w">
+        </span><span class="nt">"partners"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"website_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"h_ay"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"is_dbook"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"logo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"www.skyscanner.fr/images/websites/220x80/h_ay.png"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ibis Styles"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"is_official"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"partner_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Group"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="err">...</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"hotel_pivot"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"map_boundary"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"s_w_lng"</span><span class="p">:</span><span class="w"> </span><span class="mf">14.448729</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"s_w_lat"</span><span class="p">:</span><span class="w"> </span><span class="mf">35.893651</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"n_e_lat"</span><span class="p">:</span><span class="w"> </span><span class="mf">35.913651</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"n_e_lng"</span><span class="p">:</span><span class="w"> </span><span class="mf">14.51241</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"closed_user_group_deals"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+        </span><span class="nt">"entity"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Luqa"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"entity_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"City"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"centroid"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Point"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"coordinates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="mf">14.4886111132</span><span class="p">,</span><span class="w">
+                    </span><span class="mf">35.858888893</span><span class="w">
+                </span><span class="p">]</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nt">"entity_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"46395655"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"official_center"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Point"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"coordinates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="mf">14.4892913</span><span class="p">,</span><span class="w">
+                    </span><span class="mf">35.859653</span><span class="w">
+                </span><span class="p">]</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"location"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"England"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"entity_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"44293288"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"entity_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FirstLevelNationAdministrativeDivision"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"United Kingdom"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"entity_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"29475375"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"entity_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Nation"</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">]</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"translations"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"CUG_create_account_to_unlock_deals_msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Create an account to unlock exclusive deals"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"CUG_deal"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DEAL"</span><span class="p">,</span><span class="w">
-    </span><span class="err">...</span><span class="w">
-  </span><span class="err">}</span><span class="w">
+    </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"translations"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"CUG_create_account_to_unlock_deals_msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Créez un compte pour avoir accès à des offres exclusives"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"CUG_deal"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OFFRE"</span><span class="p">,</span><span class="w">
+        </span><span class="err">...</span><span class="w">
+    </span><span class="err">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p><em>RESPONSE PARAMETERS</em></p>
@@ -3588,7 +3686,13 @@ Is a regular practice following the user flow first of all search for prices usi
 
 <p><em>API endpoint</em></p>
 
+<p>B2B partner please use v1 endpoint</p>
+
 <p><code class="prettyprint">GET /v1/prices/hotel/{hotel_id}</code></p>
+
+<p>V3 is a new endpoint which supports dbook booking and cug overriding.</p>
+
+<p><code class="prettyprint">GET /v3/prices/hotel/{hotel_id}</code></p>
 <pre class="highlight shell"><code>GET <span class="s2">"https://www.skyscanner.net/g/hotels/v1/prices/hotel/{hotel_id}
   ?entity_id=27539733&amp;market={market}&amp;locale={locale}&amp;checkin_date={checkin_date}&amp;checkout_date={checkout_date}
   &amp;currency={currency}&amp;adults={adults}&amp;rooms={rooms}&amp;images={images}&amp;image_resolution={resolution}
@@ -3676,7 +3780,7 @@ Is a regular practice following the user flow first of all search for prices usi
 </tr>
 <tr>
 <td><code class="prettyprint">images</code> <br><span class="optional">OPTIONAL</span></td>
-<td>Maximum number of images to retrieve per each hotel<br>between 1-30, default: 3</td>
+<td>Maximum number of images to retrieve for each hotel<br>between 1-30, default: 1</td>
 </tr>
 <tr>
 <td><code class="prettyprint">image_resolution</code> <br><span class="optional">OPTIONAL</span></td>
@@ -3684,7 +3788,7 @@ Is a regular practice following the user flow first of all search for prices usi
 </tr>
 <tr>
 <td><code class="prettyprint">image_type</code> <br><span class="optional">OPTIONAL</span></td>
-<td>The format of the images<br>thumbnail or gallery</td>
+<td>The format of the images<br>thumbnail or gallery or dynamic</td>
 </tr>
 <tr>
 <td><code class="prettyprint">boost_official_partners</code> <br><span class="optional">OPTIONAL</span></td>
@@ -3702,6 +3806,34 @@ Is a regular practice following the user flow first of all search for prices usi
 <td><code class="prettyprint">entity_id</code> <br><span class="optional">OPTIONAL</span></td>
 <td>This field should be present when this endpoint has been called when the user has already looked for prices in an upper entity containing the hotel in order to reuse the cached prices.<br>For example: A user searches for prices in Paris (the service stores Paris prices). And then, the user opens a hotel details page. In this case, the request to the service must have the entity_id param fulfilled with the Paris entity_id in order to reuse the prices.</td>
 </tr>
+<tr>
+<td><code class="prettyprint">index</code> <br><span class="optional">OPTIONAL</span></td>
+<td>Mark the times of the same requests sent to bellboy, start from 1, default: 0</td>
+</tr>
+<tr>
+<td><code class="prettyprint">t_version</code> <br><span class="optional">OPTIONAL</span></td>
+<td>(B2B partner needn&rsquo;t set the value) Used for ABTesting, default is &ldquo;</td>
+</tr>
+<tr>
+<td><code class="prettyprint">app_name</code> <br><span class="optional">OPTIONAL</span></td>
+<td>(B2B partner needn&rsquo;t set the value) This parameter allows you to set the app name, default is &rdquo;</td>
+</tr>
+<tr>
+<td><code class="prettyprint">appVersion</code> <br><span class="optional">OPTIONAL</span></td>
+<td>(B2B partner needn&rsquo;t set the value) This parameter allows you to set the app version, default is &ldquo;</td>
+</tr>
+<tr>
+<td><code class="prettyprint">search_id</code> <br><span class="optional">OPTIONAL</span></td>
+<td>(B2B partner needn&rsquo;t set the value) Elasticsearch ID, the value can be got from search response or first request response, default is &rdquo;</td>
+</tr>
+<tr>
+<td><code class="prettyprint">cug_segments</code> <br><span class="optional">OPTIONAL</span></td>
+<td>(B2B partner needn&rsquo;t set the value) Only v3 supports, it allows you to add special cug segments for user. Options are:<br>mobile, logged_in, business, apps, flight_booked</td>
+</tr>
+<tr>
+<td><code class="prettyprint">ignore_cache</code> <br><span class="optional">OPTIONAL</span></td>
+<td>(B2B partner needn&rsquo;t set the value) This parameter allows you to bypass Elasticsearch and Redis cache. Options are:<br>0: use cache, 1: bypass cache, default: 0</td>
+</tr>
 </tbody></table>
 
 <h3 id="response">Response</h3>
@@ -3710,132 +3842,462 @@ Is a regular practice following the user flow first of all search for prices usi
 <p>Example response:</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"offers"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"COMPLETED"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"completion_percentage"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"results"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"location"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Barcelona"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"entity_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"27548283"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"entity_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"City"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="err">...</span><span class="w">
-    </span><span class="p">],</span><span class="w">
-    </span><span class="nt">"hotel"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"district"</span><span class="p">:</span><span class="w"> </span><span class="s2">"27562628"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"name_en"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hotel Via Augusta"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hotel Via Augusta"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"hotel_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"46958001"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"total_rooms"</span><span class="p">:</span><span class="w"> </span><span class="mi">207</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"stars"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"reviews_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1496</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"amenities"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="s2">"Lift"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"Laundry"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"AirConditioning"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"DailyNewspaperService"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"Balcony"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"FrontDesk24hService"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"SafeDepositBox"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"WifiService"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"Parking"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"DisabledFacility"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"LuggageStorage"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"MultilingualStaffService"</span><span class="w">
-      </span><span class="p">],</span><span class="w">
-      </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"27548283"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"offers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"price_gbp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1669</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"closed_user_groups"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"room_type"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-            </span><span class="s2">"triple"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"triple"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"triple"</span><span class="w">
-          </span><span class="p">],</span><span class="w">
-          </span><span class="nt">"meal_plan"</span><span class="p">:</span><span class="w"> </span><span class="s2">"breakfast_included"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"strike_through"</span><span class="p">:</span><span class="w"> </span><span class="mi">1967</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"deeplink"</span><span class="p">:</span><span class="w"> </span><span class="s2">"www.skyscanner.net/hotel_deeplink/4.0/UK/en-GB/GBP/h_ka/46958001/2017-06-29/2017-07-05/hotel/hotel/hotels?request_id=15834838-f028-400a-bb4f-ed39025cf9e1&amp;deeplink_ids=eu-west-1.prod_092a61636486890f4d9c56373a981f94&amp;appName=web&amp;ticket_price=1669&amp;guests=7&amp;q_datetime_utc=2017-04-24T15%3A15%3A07&amp;legacy_provider_id=249&amp;appVersion=2.0&amp;rooms=3&amp;max_price=1967.0"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"cancellation"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"partner_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"h_ka"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"available"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"cancellation_text"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"is_official"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">1669</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="err">...</span><span class="w">
-      </span><span class="p">],</span><span class="w">
-      </span><span class="nt">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"district"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sant Gervasi"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Barcelona"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"adm1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Catalonia"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"nation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Spain"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"postcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"08006"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"street_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Via Augusta, 63"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://d19i3hu78g2w6f.cloudfront.net/75be_HOTEL_18576_148_en-GB"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"rating"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">8.2</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"desc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rating_very_good"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="nt">"chain"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"reviews"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"guest_types"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-          </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"couple"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"score"</span><span class="p">:</span><span class="w"> </span><span class="mi">82</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"perc"</span><span class="p">:</span><span class="w"> </span><span class="mi">51</span><span class="w">
-          </span><span class="p">},</span><span class="w">
-          </span><span class="err">...</span><span class="w">
-        </span><span class="p">],</span><span class="w">
-        </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1496</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"summary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Very good budget hotel. Close to restaurants, bars and public transportation. Popular among solo travelers. “Friendly staff”. “Good breakfast”. "</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"categories"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-          </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"entries"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-              </span><span class="s2">"Fantastic service"</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"Friendly staff"</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"Very friendly multilingual staff"</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"Good service"</span><span class="w">
-            </span><span class="p">],</span><span class="w">
-            </span><span class="nt">"score"</span><span class="p">:</span><span class="w"> </span><span class="mi">94</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Service"</span><span class="w">
-          </span><span class="p">},</span><span class="w">
-          </span><span class="err">...</span><span class="w">
-        </span><span class="p">]</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="nt">"property_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hotel"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"coordinates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="mf">2.15145</span><span class="p">,</span><span class="w">
-        </span><span class="mf">41.40005</span><span class="w">
-      </span><span class="p">],</span><span class="w">
-      </span><span class="nt">"images"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"h_dp"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"thumbnail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://d3ba47lalua02r.cloudfront.net/available/47224844/rmt.jpg"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"gallery"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://d3ba47lalua02r.cloudfront.net/available/47224844/rmca.jpg"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="err">...</span><span class="w">
-      </span><span class="p">]</span><span class="w">
+    </span><span class="nt">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"completion_percentage"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"search_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ca7a935824954024c5228394530677d66ecb7d5b24973a4d8afda9b911c4fb0f"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"COMPLETED"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"offers"</span><span class="p">:</span><span class="w"> </span><span class="mi">14</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"request_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"39bb7709-2707-4ad5-8b74-7193810224fe"</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"partners"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"is_official"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Adagio Access"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"logo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"www.skyscanner.net/images/websites/220x80/h_as.png"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"website_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"h_as"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="err">...</span><span class="w">
-    </span><span class="p">]</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"translations"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"CUG_create_account_to_unlock_deals_msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Create an account to unlock exclusive deals"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"CUG_deal"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DEAL"</span><span class="p">,</span><span class="w">
-    </span><span class="err">...</span><span class="w">
-  </span><span class="err">}</span><span class="w">
+    </span><span class="nt">"translations"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"CUG_create_account_to_unlock_deals_msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Créez un compte pour avoir accès à des offres exclusives"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"CUG_deal"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OFFRE"</span><span class="p">,</span><span class="w">
+        </span><span class="err">...</span><span class="w">
+    </span><span class="err">}</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"results"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"partners"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"is_dbook"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"website_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"h_98"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"is_official"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Travelanium"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"logo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"www.skyscanner.fr/images/websites/220x80/h_98.png"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"partner_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CRS"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="err">...</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"location"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"entity_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"District"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Estación de Gran Vía"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"entity_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"27562647"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="err">...</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"hotel"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"chain_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"90718893"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"checkin_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"14:00"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"district"</span><span class="p">:</span><span class="w"> </span><span class="s2">"27562647"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"name_en"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hotel Madrid Gran Via 25 Managed By Melia"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://dmf5e20brgddt.cloudfront.net/547b_2533_fr-FR_b2b"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"reviews_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">3011</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"group_name"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="s2">"Meliá"</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="nt">"dbook_partners"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+            </span><span class="nt">"images"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nt">"thumbnail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://d2xf5gjipzd8cd.cloudfront.net/available/353312696/mt.jpg"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"h_ct"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bedroom"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"dynamic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://d2xf5gjipzd8cd.cloudfront.net/available/353312696/353312696_WxH.jpg"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"gallery"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://d2xf5gjipzd8cd.cloudfront.net/available/353312696/mca.jpg"</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="err">...</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="nt">"property_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hotel"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"offers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nt">"closed_user_groups"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"available"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"room_type"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                        </span><span class="s2">"double_room"</span><span class="w">
+                    </span><span class="p">],</span><span class="w">
+                    </span><span class="nt">"deeplink"</span><span class="p">:</span><span class="w"> </span><span class="s2">"www.skyscanner.fr/hotel_deeplink/4.0/FR/fr-FR/EUR/h_me/46942019/2019-06-18/2019-06-19/hotel/hotel/hotels?guests=1&amp;rooms=1&amp;legacy_provider_id=1751086970&amp;request_id=39bb7709-2707-4ad5-8b74-7193810224fe&amp;q_datetime_utc=2019-06-12T12%3A02%3A15&amp;appName=mobileweb&amp;appVersion=2.0&amp;ticket_price=166&amp;deeplink_data=eyJ1cmwiOiAiaHR0cHM6Ly9tbS5tZWxpYS5jb20vZHluY2xpY2svbWVsaWEtY29tLz9ldGYtcHVibGlzaGVyPXNreXNjYW5uZXImZXRmLW5hbWU9bWV0YXNlYXJjaF9za3lzY2FubmVyX0ZSLXNreXNjYW5uZXImZXRmLXByZHJlZj0yODE5JmVzZWctbmFtZT1OTyZlc2VnLWl0ZW09Tk8mZXRmLW1lZGlhcGxhbj1GUi1JbmZsdWVuY2VyJmV1cmw9aHR0cDovL3d3dy5tZWxpYS5jb20vblJlc2VydmF0aW9ucy9qc3AvQ19SYXRlcy5qc3A%2FaWRQYXJ0bmVyPVNLWVNDQU5ORVJfRlImY29kaWdvSG90ZWw9MjgxOSZub2NoZXM9MSZpZExhbmc9ZnImZGlhPTE4Jm1lcz0wNiZhbmlvPTIwMTkmaGFiaXRhY2lvbmVzPTEmYWR1bHRzUm9vbTE9MSZjaGlsZHJlblJvb20xPTAmSWRQcm09U0tZU0NBTk5FUiZkaXZpc2FQcmVzZW50YWNpb249JnV0bV9zb3VyY2U9c2t5c2Nhbm5lciZ1dG1fbWVkaXVtPW1ldGFzZWFyY2gmdXRtX2NhbXBhaWduPXNreXNjYW5uZXJfRlImdXRtX2NvbnRlbnQ9MjgxOSZtYXJrZXQ9RlIiLCAiZmllbGRzIjogeyJzaWduYXR1cmUiOiAiYjBkZTZkNTFjMzk3YWRiZGEwMjlhOThhMGMxYWU4ZTcifX0%3D&amp;max_price=205.0&amp;channel=website"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"dbook_link"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"partner_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"h_me"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">166</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"is_official"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"price_gbp"</span><span class="p">:</span><span class="w"> </span><span class="mi">148</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"meal_plan"</span><span class="p">:</span><span class="w"> </span><span class="s2">"breakfast_not_included"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"strike_through"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"cancellation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"non_refundable"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"cancellation_text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Si vous annulez ou modifiez Annuler ou Modifier ou vous ne vous présentez pas 100 PCT vous sera débité en frais d'annulation"</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="err">...</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="nt">"total_rooms"</span><span class="p">:</span><span class="w"> </span><span class="mi">175</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hotel Madrid Gran Vía 25, Managed by Meliá"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"stars"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"amenities"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="s2">"Bar"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"FrontDesk24hService"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Restaurant"</span><span class="p">,</span><span class="w">
+                </span><span class="err">...</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="nt">"chain"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Meliã"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"street_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Gran Via 25"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"adm1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Communauté de Madrid"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"postcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"28013"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"district"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Estación de Gran Vía"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Madrid"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"nation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Espagne"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"27544850"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"group_id"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="s2">"90719217"</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="nt">"checkout_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12:00"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"hotel_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"46942019"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"official_website"</span><span class="p">:</span><span class="w"> </span><span class="s2">"h_me"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"rich_media"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"rating"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">8.1</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"desc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rating_very_good"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nt">"reviews"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"badges"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="p">{</span><span class="w">
+                        </span><span class="nt">"badge_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"hotel_type"</span><span class="p">,</span><span class="w">
+                        </span><span class="nt">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Très bon hôtel en ville"</span><span class="p">,</span><span class="w">
+                        </span><span class="nt">"subtext"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Top 11% en ville"</span><span class="w">
+                    </span><span class="p">},</span><span class="w">
+                    </span><span class="err">...</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="nt">"categories"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="p">{</span><span class="w">
+                        </span><span class="nt">"score"</span><span class="p">:</span><span class="w"> </span><span class="mi">95</span><span class="p">,</span><span class="w">
+                        </span><span class="nt">"entries"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                            </span><span class="s2">"Très bien situé"</span><span class="p">,</span><span class="w">
+                            </span><span class="s2">"Emplacement parfait"</span><span class="p">,</span><span class="w">
+                            </span><span class="s2">"Situation géographique excellente"</span><span class="p">,</span><span class="w">
+                            </span><span class="s2">"Bonne situation"</span><span class="w">
+                        </span><span class="p">],</span><span class="w">
+                        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"14"</span><span class="p">,</span><span class="w">
+                        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Site"</span><span class="w">
+                    </span><span class="p">},</span><span class="w">
+                    </span><span class="err">...</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="nt">"guest_types"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="p">{</span><span class="w">
+                        </span><span class="nt">"perc"</span><span class="p">:</span><span class="w"> </span><span class="mi">62</span><span class="p">,</span><span class="w">
+                        </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"couple"</span><span class="p">,</span><span class="w">
+                        </span><span class="nt">"score"</span><span class="p">:</span><span class="w"> </span><span class="mi">86</span><span class="w">
+                    </span><span class="p">},</span><span class="w">
+                    </span><span class="err">...</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">3011</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"summary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Très bon hôtel pour une escapade citadine. Parfait pour le tourisme et proche des boutiques."</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nt">"coordinates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="mf">-3.70228</span><span class="p">,</span><span class="w">
+                </span><span class="mf">40.42003</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="nt">"policies"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://dmf5e20brgddt.cloudfront.net/a27b_2533_fr-FR_policies_b2b"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"price_includes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"vat"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"other_taxes"</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p><em>RESPONSE PARAMETERS</em></p>
+
+<table><thead>
+<tr>
+<th>Element</th>
+<th>Detail</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">meta</code></td>
+<td>Contains metadata regarding the search cycle such as it&rsquo;s status</td>
+</tr>
+<tr>
+<td><code class="prettyprint">results</code></td>
+<td>An object containing the hotel and the enhancers if requested</td>
+</tr>
+<tr>
+<td><code class="prettyprint">translations</code></td>
+<td>Only with the <code class="prettyprint">translations</code> enhanced. Dictionary with all literals that can be translated</td>
+</tr>
+</tbody></table>
+
+<h2 id="hotels-prices">Hotels Prices</h2>
+
+<h3 id="request">Request</h3>
+
+<p>Given multiple hotels (maximum 50), this endpoint will give back the hotels with all the information and live prices.</p>
+
+<p><em>API endpoint</em></p>
+
+<p><code class="prettyprint">GET /v2/prices/hotel/{hotel_ids}</code></p>
+<pre class="highlight shell"><code>GET <span class="s2">"https://www.skyscanner.net/g/hbe-bellboy/v2/prices/hotel/{hotel_ids}
+  ?market={market}&amp;locale={locale}&amp;checkin_date={checkin_date}&amp;checkout_date={checkout_date}
+  &amp;currency={currency}&amp;adults={adults}&amp;rooms={rooms}&amp;images={images}&amp;image_resolution={resolution}
+  &amp;image_type={type}&amp;boost_official_partners={boost}&amp;partners_per_hotel={num_partners}"</span>
+</code></pre>
+<p><em>TRY IT OUT</em></p>
+
+<p><a href="https://app.getpostman.com/run-collection/235d1617d92d7467ed1b"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
+
+<p><em>HEADER VALUES</em></p>
+
+<table><thead>
+<tr>
+<th>Header</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">apikey</code> <br><span class="required">REQUIRED</span></td>
+<td>This header is required to be on every single request any client does (it could also be accepted via query parameter)</td>
+</tr>
+<tr>
+<td><code class="prettyprint">x-user-agent</code> <br><span class="required">REQUIRED</span></td>
+<td>Indicates which is the device and the platform related to the client. The format for that header is <code class="prettyprint">device;B2B</code>, where:<br>Device is:<br><code class="prettyprint">T</code> for tablet<br><code class="prettyprint">D</code> for desktop<br><code class="prettyprint">M</code> for mobile<br><code class="prettyprint">N</code> if you are not able to detect the device type</td>
+</tr>
+</tbody></table>
+
+<p><em>URI PARAMETERS</em></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">hotel_ids</code> <br><span class="required">REQUIRED</span></td>
+<td>Hotels to search prices for, using &rsquo;,&rsquo; to join the hotels</td>
+</tr>
+<tr>
+<td><code class="prettyprint">version</code> <br><span class="required">REQUIRED</span></td>
+<td>API version</td>
+</tr>
+</tbody></table>
+
+<p><em>QUERY PARAMETERS</em></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">market</code> <br><span class="required">REQUIRED</span></td>
+<td>Matching [A-Z]{2}</td>
+</tr>
+<tr>
+<td><code class="prettyprint">locale</code> <br><span class="required">REQUIRED</span></td>
+<td>Matching [a-z]{2}-[A-Z]{2}</td>
+</tr>
+<tr>
+<td><code class="prettyprint">currency</code> <br><span class="required">REQUIRED</span></td>
+<td>Currency code</td>
+</tr>
+<tr>
+<td><code class="prettyprint">checkin_date</code> <br><span class="required">REQUIRED</span></td>
+<td>YYYY-MM-DD</td>
+</tr>
+<tr>
+<td><code class="prettyprint">checkout_date</code> <br><span class="required">REQUIRED</span></td>
+<td>YYYY-MM-DD</td>
+</tr>
+<tr>
+<td><code class="prettyprint">rooms</code> <br><span class="required">REQUIRED</span></td>
+<td>Number of rooms<br>default: 1</td>
+</tr>
+<tr>
+<td><code class="prettyprint">adults</code> <br><span class="required">REQUIRED</span></td>
+<td>Number of adults<br>default: 2</td>
+</tr>
+<tr>
+<td><code class="prettyprint">apikey</code> <br><span class="required">REQUIRED</span></td>
+<td>This parameter is required to be on every single request any client does</td>
+</tr>
+<tr>
+<td><code class="prettyprint">images</code> <br><span class="optional">OPTIONAL</span></td>
+<td>Maximum number of images to retrieve per each hotel<br>between 1-30, default: 1</td>
+</tr>
+<tr>
+<td><code class="prettyprint">image_resolution</code> <br><span class="optional">OPTIONAL</span></td>
+<td>Resolution options<br>high or low, default: high</td>
+</tr>
+<tr>
+<td><code class="prettyprint">image_type</code> <br><span class="optional">OPTIONAL</span></td>
+<td>The format of the images<br>thumbnail or gallery or dynamic</td>
+</tr>
+<tr>
+<td><code class="prettyprint">boost_official_partners</code> <br><span class="optional">OPTIONAL</span></td>
+<td>Indicates whether prices from official partners must be shown in the first place [1] or not [0]<br>default: 0</td>
+</tr>
+<tr>
+<td><code class="prettyprint">partners_per_hotel</code> <br><span class="optional">OPTIONAL</span></td>
+<td>Maximum numbers of partners to retrieve per each hotel. Note that 0 means all the available partners<br>default: 3</td>
+</tr>
+<tr>
+<td><code class="prettyprint">enhanced</code> <br><span class="optional">OPTIONAL</span></td>
+<td>This parameter allows you to add additional content to the default response. The available options are:<br>location: Returns the higher level entities according to the search entity.<br>translations: Returns a dictionary with all literals and their corresponding translations using the request locale.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">app_name</code> <br><span class="optional">OPTIONAL</span></td>
+<td>(B2B partner needn&rsquo;t set the value) This parameter allows you to set the app name, default is &ldquo;</td>
+</tr>
+<tr>
+<td><code class="prettyprint">appVersion</code> <br><span class="optional">OPTIONAL</span></td>
+<td>(B2B partner needn&rsquo;t set the value) This parameter allows you to set the app version, default is &rdquo;</td>
+</tr>
+</tbody></table>
+
+<h3 id="response">Response</h3>
+
+<blockquote>
+<p>Example response:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"results"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"partners"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"logo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"www.skyscanner.net/images/websites/220x80/d_ct.png"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Trip.com"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"is_official"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"partner_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OTA"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"website_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"d_ct"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"is_dbook"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="err">...</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"hotels"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"group_name"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="s2">"Meliá"</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="nt">"amenities"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="s2">"Laundry"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Parking"</span><span class="p">,</span><span class="w">
+                    </span><span class="err">...</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hotel Madrid Gran Via 25 Managed By Melia"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"images"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="p">{</span><span class="w">
+                        </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"h_ct"</span><span class="p">,</span><span class="w">
+                        </span><span class="nt">"dynamic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://d2xf5gjipzd8cd.cloudfront.net/available/353312696/353312696_WxH.jpg"</span><span class="p">,</span><span class="w">
+                        </span><span class="nt">"thumbnail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://d2xf5gjipzd8cd.cloudfront.net/available/353312696/mt.jpg"</span><span class="p">,</span><span class="w">
+                        </span><span class="nt">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bedroom"</span><span class="p">,</span><span class="w">
+                        </span><span class="nt">"gallery"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://d2xf5gjipzd8cd.cloudfront.net/available/353312696/mca.jpg"</span><span class="w">
+                    </span><span class="p">},</span><span class="w">
+                    </span><span class="err">...</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="nt">"rich_media"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"location"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="p">{</span><span class="w">
+                        </span><span class="nt">"entity_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"27562647"</span><span class="p">,</span><span class="w">
+                        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Gran Vía"</span><span class="p">,</span><span class="w">
+                        </span><span class="nt">"entity_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"District"</span><span class="w">
+                    </span><span class="p">},</span><span class="w">
+                    </span><span class="err">...</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="nt">"rating"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="nt">"desc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rating_very_good"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">8.1</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="nt">"offers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="p">{</span><span class="w">
+                        </span><span class="nt">"cancellation_text"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                        </span><span class="nt">"meal_plan"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                        </span><span class="nt">"partner_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"d_ct"</span><span class="p">,</span><span class="w">
+                        </span><span class="nt">"deeplink"</span><span class="p">:</span><span class="w"> </span><span class="s2">"www.skyscanner.net/None&amp;max_price=199.0&amp;channel=website"</span><span class="p">,</span><span class="w">
+                        </span><span class="nt">"available"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                        </span><span class="nt">"is_official"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+                        </span><span class="nt">"room_type"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                            </span><span class="s2">"generic_room"</span><span class="w">
+                        </span><span class="p">],</span><span class="w">
+                        </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">128</span><span class="p">,</span><span class="w">
+                        </span><span class="nt">"price_gbp"</span><span class="p">:</span><span class="w"> </span><span class="mi">128</span><span class="p">,</span><span class="w">
+                        </span><span class="nt">"strike_through"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                        </span><span class="nt">"closed_user_groups"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                        </span><span class="nt">"cancellation"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                        </span><span class="nt">"dbook_link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"www.skyscanner.net/hotels/book/46942019/d_ct?adults=1&amp;rooms=1&amp;checkin=2019-06-18&amp;checkout=2019-06-19&amp;requestId=6431b3f0-09b8-4d8b-9808-0bc551f9725c&amp;priceCurrency=GBP&amp;appId=hate-squad&amp;priceAmount=128"</span><span class="w">
+                    </span><span class="p">},</span><span class="w">
+                    </span><span class="err">...</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"27544850"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"reviews_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">3022</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"reviews"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="nt">"categories"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                        </span><span class="p">{</span><span class="w">
+                            </span><span class="nt">"entries"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                                </span><span class="s2">"Great location"</span><span class="p">,</span><span class="w">
+                                </span><span class="s2">"Fantastic position"</span><span class="p">,</span><span class="w">
+                                </span><span class="s2">"Wonderfully located"</span><span class="p">,</span><span class="w">
+                                </span><span class="s2">"Perfect for shopping"</span><span class="w">
+                            </span><span class="p">],</span><span class="w">
+                            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Location"</span><span class="p">,</span><span class="w">
+                            </span><span class="nt">"score"</span><span class="p">:</span><span class="w"> </span><span class="mi">95</span><span class="p">,</span><span class="w">
+                            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"14"</span><span class="w">
+                        </span><span class="p">},</span><span class="w">
+                        </span><span class="err">...</span><span class="w">
+                    </span><span class="p">],</span><span class="w">
+                    </span><span class="nt">"guest_types"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                        </span><span class="p">{</span><span class="w">
+                            </span><span class="nt">"perc"</span><span class="p">:</span><span class="w"> </span><span class="mi">65</span><span class="p">,</span><span class="w">
+                            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"couple"</span><span class="p">,</span><span class="w">
+                            </span><span class="nt">"score"</span><span class="p">:</span><span class="w"> </span><span class="mi">79</span><span class="w">
+                        </span><span class="p">},</span><span class="w">
+                        </span><span class="err">...</span><span class="w">
+                    </span><span class="p">],</span><span class="w">
+                    </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">3022</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"badges"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                        </span><span class="p">{</span><span class="w">
+                            </span><span class="nt">"badge_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"hotel_type"</span><span class="p">,</span><span class="w">
+                            </span><span class="nt">"subtext"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Top 11% in city"</span><span class="p">,</span><span class="w">
+                            </span><span class="nt">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Great city hotel"</span><span class="w">
+                        </span><span class="p">},</span><span class="w">
+                        </span><span class="err">...</span><span class="w">
+                    </span><span class="p">],</span><span class="w">
+                    </span><span class="nt">"summary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Very good city hotel. Good for sightseeing and located near shopping areas."</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="nt">"policies"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://dmf5e20brgddt.cloudfront.net/7657_2533_en-GB_policies_b2b"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"hotel_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"46942019"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"chain_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"90718893"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"chain"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Meliã"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"total_rooms"</span><span class="p">:</span><span class="w"> </span><span class="mi">175</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"name_en"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hotel Madrid Gran Via 25 Managed By Melia"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"checkin_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"14:00"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"group_id"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="s2">"90719217"</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="nt">"property_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hotel"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"checkout_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12:00"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://dmf5e20brgddt.cloudfront.net/e289_2533_en-GB_b2b"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"district"</span><span class="p">:</span><span class="w"> </span><span class="s2">"27562647"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"stars"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"coordinates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="mf">-3.70228</span><span class="p">,</span><span class="w">
+                    </span><span class="mf">40.42003</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="nt">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="nt">"nation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Spain"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"adm1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Community of Madrid"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Madrid"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"district"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Gran Vía"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"street_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Gran Via 25"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"postcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"28013"</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="err">...</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"price_includes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"vat"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"other_taxes"</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"translations"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"CUG_create_account_to_unlock_deals_msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Create an account to unlock exclusive deals"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"CUG_deal"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DEAL"</span><span class="p">,</span><span class="w">
+        </span><span class="err">...</span><span class="w">
+    </span><span class="err">}</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"COMPLETED"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"completion_percentage"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"search_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dd30d77810d91ae4ca062378c31d09c9658e7fec85330fcd6b515b55b6c73d4b"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"offers"</span><span class="p">:</span><span class="w"> </span><span class="mi">62</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"request_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6431b3f0-09b8-4d8b-9808-0bc551f9725c"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p><em>RESPONSE PARAMETERS</em></p>
