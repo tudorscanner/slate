@@ -9,6 +9,7 @@ Getting Started with the Slate Skyscanner API documentation
 4. Initialize and start Slate. You can either do this locally, or with Vagrant:
 
 ```shell
+# on Mac make sure you have Ruby 2.2 + Middleman installed
 # either run this to run locally
 bundle install
 bundle exec middleman server
@@ -67,11 +68,13 @@ search: false
 Every time when [referrals-api](https://github.skyscannertools.net/partnerinsights/referrals-api) project change involves schema change, API documentation has to be regenerated.
 In order to do this
 
-1. Get latest master of [referrals-api](https://github.skyscannertools.net/partnerinsights/referrals-api) project next to this project
+1. Make sure you have installed jsonschema2md: ```npm install -g @adobe/jsonschema2md```
 
-2. Run ```./generate_referral_service_docs.sh``` script in this project directory
+2. Get latest master of [referrals-api](https://github.skyscannertools.net/partnerinsights/referrals-api) project next to this project
 
-3. Commit changes as described below
+3. Run ```./generate_referral_service_docs.sh``` script in this project directory
+
+4. Commit changes as described below
 
 ### Publishing
 
