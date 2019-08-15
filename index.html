@@ -5082,17 +5082,53 @@ to Skyscanner pages based to provided request parameters.</p>
 </thead><tbody>
 <tr>
 <td><code class="prettyprint">vertical</code> <br><span class="required">REQUIRED</span></td>
-<td>Your Vertical. Allowed values: flights, hotels, cars</td>
+<td>The vertical you want to redirect to. Allowed values: flights, hotels, cars</td>
 </tr>
 <tr>
 <td><code class="prettyprint">pagetype</code> <br><span class="required">OPTIONAL</span></td>
-<td>Your page type</td>
+<td>Page type supported by each vertical. E.g. for flights -&gt; day-view, browse-view&hellip; take a look at the next table</td>
 </tr>
 <tr>
 <td><code class="prettyprint">associateid</code> <br><span class="required">OPTIONAL</span></td>
 <td>Associate partner id to attribute traffic to</td>
 </tr>
+<tr>
+<td><code class="prettyprint">utm_term</code> <br><span class="required">OPTIONAL</span></td>
+<td>Used to send through a unique variable that you can track back to your campaigns.</td>
+</tr>
 </tbody></table>
+
+<p><em>PAGE TYPES</em></p>
+
+<table><thead>
+<tr>
+<th>Vertical</th>
+<th>Pagetypes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>flights</td>
+<td>day-view, calendar-month-view, browse-view, multicity</td>
+</tr>
+<tr>
+<td>hotels</td>
+<td>day-view</td>
+</tr>
+<tr>
+<td>cars</td>
+<td>day-view</td>
+</tr>
+</tbody></table>
+
+<p>An example including some of the parameters looks like:</p>
+
+<p><code class="prettyprint">GET /flights/day-view/?market=UK&amp;currency=GBP&amp;locale=en-GB&amp;origin=cdg&amp;destination=edi&amp;outboundDate=2019-10-14&amp;utm_term=summer&amp;associateid=MY_ID_123</code></p>
+
+<p><code class="prettyprint">GET /flights/calendar-month-view/?market=UK&amp;currency=GBP&amp;locale=en-GB&amp;origin=cdg&amp;destination=edi&amp;iym=1910&amp;utm_term=summer&amp;associateid=MY_ID_123</code></p>
+
+<p><code class="prettyprint">GET /cars/day-view/?pickupPlace=BCN&amp;dropoffPlace=BCN&amp;pickupTime=2019-09-10T10:00&amp;dropoffTime=2019-09-15T10:00&amp;driverAge=42&amp;associateid=MY_ID_123</code></p>
+
+<p><code class="prettyprint">GET /hotels/day-view?entity_id=27536561&amp;checkin=2019-09-10&amp;checkout=2019-09-15&amp;adults=2&amp;rooms=1&amp;associateid=MY_ID_123</code></p>
 
 <p>Specific request query parameters are provided in tables below.</p>
 
