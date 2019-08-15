@@ -19,9 +19,28 @@ There is one main endpoint with the following URL structure:
 
 | Parameter | Description |
 | --------- | ------- |
-| ```vertical``` <br><span class="required">REQUIRED</span> | Your Vertical. Allowed values: flights, hotels, cars|
-| ```pagetype``` <br><span class="required">OPTIONAL</span> | Your page type|
+| ```vertical``` <br><span class="required">REQUIRED</span> | The vertical you want to redirect to. Allowed values: flights, hotels, cars|
+| ```pagetype``` <br><span class="required">OPTIONAL</span> | Page type supported by each vertical. E.g. for flights -> day-view, browse-view... take a look at the next table|
 | ```associateid``` <br><span class="required">OPTIONAL</span> | Associate partner id to attribute traffic to|
+| ```utm_term``` <br><span class="required">OPTIONAL</span> | Used to send through a unique variable that you can track back to your campaigns.|
+
+*PAGE TYPES*
+
+| Vertical | Pagetypes |
+| --------- | ------- |
+| flights | day-view, calendar-month-view, browse-view, multicity |
+| hotels | day-view |
+| cars | day-view |
+
+An example including some of the parameters looks like:
+
+`GET /flights/day-view/?market=UK&currency=GBP&locale=en-GB&origin=cdg&destination=edi&outboundDate=2019-10-14&utm_term=summer&associateid=MY_ID_123`
+
+`GET /flights/calendar-month-view/?market=UK&currency=GBP&locale=en-GB&origin=cdg&destination=edi&iym=1910&utm_term=summer&associateid=MY_ID_123`
+
+`GET /cars/day-view/?pickupPlace=BCN&dropoffPlace=BCN&pickupTime=2019-09-10T10:00&dropoffTime=2019-09-15T10:00&driverAge=42&associateid=MY_ID_123`
+
+`GET /hotels/day-view?entity_id=27536561&checkin=2019-09-10&checkout=2019-09-15&adults=2&rooms=1&associateid=MY_ID_123`
 
 Specific request query parameters are provided in tables below.
 
