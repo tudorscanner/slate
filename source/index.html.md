@@ -28,6 +28,7 @@ includes:
   - flights_calendarMonthView
   - flights_multiCity
   - hotels_dayView
+  - hotels_homeView
   - cars_dayView
   - response_codes
 search: false
