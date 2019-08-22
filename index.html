@@ -7156,6 +7156,7 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 <th>Type</th>
 <th>Required</th>
 <th>Nullable</th>
+<th>Default</th>
 <th>Defined by</th>
 </tr>
 </thead><tbody>
@@ -7164,6 +7165,7 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 <td><code class="prettyprint">integer</code></td>
 <td><strong>Required</strong></td>
 <td>No</td>
+<td><code class="prettyprint">2</code></td>
 <td>Hotels Day View supported query parameters (this schema)</td>
 </tr>
 <tr>
@@ -7171,6 +7173,7 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 <td><code class="prettyprint">string</code></td>
 <td><strong>Required</strong></td>
 <td>No</td>
+<td></td>
 <td>Hotels Day View supported query parameters (this schema)</td>
 </tr>
 <tr>
@@ -7178,6 +7181,7 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 <td><code class="prettyprint">string</code></td>
 <td><strong>Required</strong></td>
 <td>No</td>
+<td></td>
 <td>Hotels Day View supported query parameters (this schema)</td>
 </tr>
 <tr>
@@ -7185,6 +7189,7 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 <td><code class="prettyprint">string</code></td>
 <td>Optional</td>
 <td>No</td>
+<td></td>
 <td>Hotels Day View supported query parameters (this schema)</td>
 </tr>
 <tr>
@@ -7192,6 +7197,7 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 <td><code class="prettyprint">string</code></td>
 <td><strong>Required</strong></td>
 <td>No</td>
+<td></td>
 <td>Hotels Day View supported query parameters (this schema)</td>
 </tr>
 <tr>
@@ -7199,6 +7205,7 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 <td><code class="prettyprint">string</code></td>
 <td>Optional</td>
 <td>No</td>
+<td></td>
 <td>Hotels Day View supported query parameters (this schema)</td>
 </tr>
 <tr>
@@ -7206,6 +7213,7 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 <td><code class="prettyprint">string</code></td>
 <td>Optional</td>
 <td>No</td>
+<td></td>
 <td>Hotels Day View supported query parameters (this schema)</td>
 </tr>
 <tr>
@@ -7213,6 +7221,7 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 <td><code class="prettyprint">integer</code></td>
 <td><strong>Required</strong></td>
 <td>No</td>
+<td><code class="prettyprint">1</code></td>
 <td>Hotels Day View supported query parameters (this schema)</td>
 </tr>
 <tr>
@@ -7221,18 +7230,20 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 <td>Additional</td>
 <td>Yes</td>
 <td>this schema <em>allows</em> additional properties</td>
+<td></td>
 </tr>
 </tbody></table>
 
 <h3 id="adults">adults</h3>
 
-<p>Number of adults</p>
+<p>Number of adults. Adults number should be greater than or equal to the rooms number.</p>
 
 <p><code class="prettyprint">adults</code></p>
 
 <ul>
 <li>is <strong>required</strong></li>
 <li>type: <code class="prettyprint">integer</code></li>
+<li>default: <code class="prettyprint">2</code></li>
 <li>defined in this schema</li>
 </ul>
 
@@ -7240,9 +7251,13 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 
 <p><code class="prettyprint">integer</code></p>
 
+<ul>
+<li>minimum value: <code class="prettyprint">1</code></li>
+</ul>
+
 <h3 id="checkin">checkin</h3>
 
-<p>Date in the format YYYY-MM-DD</p>
+<p>Checkin date in the formats: <code class="prettyprint">YYYY-MM-DD</code>, <code class="prettyprint">YYMMDD</code> or <code class="prettyprint">YYYYMMDD</code></p>
 
 <p><code class="prettyprint">checkin</code></p>
 
@@ -7258,7 +7273,7 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 
 <h3 id="checkout">checkout</h3>
 
-<p>Date in the format YYYY-MM-DD</p>
+<p>Checkout date in the formats: <code class="prettyprint">YYYY-MM-DD</code>, <code class="prettyprint">YYMMDD</code> or <code class="prettyprint">YYYYMMDD</code></p>
 
 <p><code class="prettyprint">checkout</code></p>
 
@@ -7274,7 +7289,7 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 
 <h3 id="currency">currency</h3>
 
-<p>The desired currency for the hotels search results</p>
+<p>The desired currency for the hotels search results.</p>
 
 <p><code class="prettyprint">currency</code></p>
 
@@ -7306,7 +7321,7 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 
 <h3 id="locale">locale</h3>
 
-<p>The desired locale for the hotels search results</p>
+<p>The desired locale for the hotels search results.</p>
 
 <p><code class="prettyprint">locale</code></p>
 
@@ -7338,19 +7353,203 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 
 <h3 id="rooms">rooms</h3>
 
-<p>Number of rooms</p>
+<p>Number of rooms. Rooms number should be less than or equal to the adults number.</p>
 
 <p><code class="prettyprint">rooms</code></p>
 
 <ul>
 <li>is <strong>required</strong></li>
 <li>type: <code class="prettyprint">integer</code></li>
+<li>default: <code class="prettyprint">1</code></li>
 <li>defined in this schema</li>
 </ul>
 
 <h4 id="rooms-type">rooms Type</h4>
 
 <p><code class="prettyprint">integer</code></p>
+
+<ul>
+<li>minimum value: <code class="prettyprint">1</code></li>
+</ul>
+
+          <h2 id="hotels-home-view-supported-query-parameters-schema">Hotels Home View supported query parameters Schema</h2>
+<pre class="highlight plaintext"><code>/hotels/home-view
+</code></pre>
+<p>A schema definition for the hotels home-view microsite supported query parameters.</p>
+
+<table><thead>
+<tr>
+<th>Abstract</th>
+<th>Extensible</th>
+<th>Status</th>
+<th>Identifiable</th>
+<th>Custom Properties</th>
+<th>Additional Properties</th>
+<th>Defined In</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Can be instantiated</td>
+<td>No</td>
+<td>Experimental</td>
+<td>No</td>
+<td>Forbidden</td>
+<td>Permitted</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h2 id="hotels-home-view-supported-query-parameters-properties">Hotels Home View supported query parameters Properties</h2>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Nullable</th>
+<th>Default</th>
+<th>Defined by</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><a href="#adults">adults</a></td>
+<td><code class="prettyprint">integer</code></td>
+<td>Optional</td>
+<td>No</td>
+<td><code class="prettyprint">2</code></td>
+<td>Hotels Home View supported query parameters (this schema)</td>
+</tr>
+<tr>
+<td><a href="#checkin">checkin</a></td>
+<td><code class="prettyprint">string</code></td>
+<td>Optional</td>
+<td>No</td>
+<td></td>
+<td>Hotels Home View supported query parameters (this schema)</td>
+</tr>
+<tr>
+<td><a href="#checkout">checkout</a></td>
+<td><code class="prettyprint">string</code></td>
+<td>Optional</td>
+<td>No</td>
+<td></td>
+<td>Hotels Home View supported query parameters (this schema)</td>
+</tr>
+<tr>
+<td><a href="#rooms">rooms</a></td>
+<td><code class="prettyprint">integer</code></td>
+<td>Optional</td>
+<td>No</td>
+<td><code class="prettyprint">1</code></td>
+<td>Hotels Home View supported query parameters (this schema)</td>
+</tr>
+<tr>
+<td><a href="#skyscanner_node_code">skyscanner_node_code</a></td>
+<td><code class="prettyprint">string</code></td>
+<td>Optional</td>
+<td>No</td>
+<td></td>
+<td>Hotels Home View supported query parameters (this schema)</td>
+</tr>
+<tr>
+<td><code class="prettyprint">*</code></td>
+<td>any</td>
+<td>Additional</td>
+<td>Yes</td>
+<td>this schema <em>allows</em> additional properties</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="adults">adults</h3>
+
+<p>Number of adults. Adults number should be greater than or equal to the rooms number.</p>
+
+<p><code class="prettyprint">adults</code></p>
+
+<ul>
+<li>is optional</li>
+<li>type: <code class="prettyprint">integer</code></li>
+<li>default: <code class="prettyprint">2</code></li>
+<li>defined in this schema</li>
+</ul>
+
+<h4 id="adults-type">adults Type</h4>
+
+<p><code class="prettyprint">integer</code></p>
+
+<ul>
+<li>minimum value: <code class="prettyprint">1</code></li>
+</ul>
+
+<h3 id="checkin">checkin</h3>
+
+<p>Checkin date in the formats: <code class="prettyprint">YYYY-MM-DD</code>, <code class="prettyprint">YYMMDD</code> or <code class="prettyprint">YYYYMMDD</code>.</p>
+
+<p><code class="prettyprint">checkin</code></p>
+
+<ul>
+<li>is optional</li>
+<li>type: <code class="prettyprint">string</code></li>
+<li>defined in this schema</li>
+</ul>
+
+<h4 id="checkin-type">checkin Type</h4>
+
+<p><code class="prettyprint">string</code></p>
+
+<h3 id="checkout">checkout</h3>
+
+<p>Checkout date in the formats: <code class="prettyprint">YYYY-MM-DD</code>, <code class="prettyprint">YYMMDD</code> or <code class="prettyprint">YYYYMMDD</code>.</p>
+
+<p><code class="prettyprint">checkout</code></p>
+
+<ul>
+<li>is optional</li>
+<li>type: <code class="prettyprint">string</code></li>
+<li>defined in this schema</li>
+</ul>
+
+<h4 id="checkout-type">checkout Type</h4>
+
+<p><code class="prettyprint">string</code></p>
+
+<h3 id="rooms">rooms</h3>
+
+<p>Number of rooms. Rooms number should be less than or equal to the adults number.</p>
+
+<p><code class="prettyprint">rooms</code></p>
+
+<ul>
+<li>is optional</li>
+<li>type: <code class="prettyprint">integer</code></li>
+<li>default: <code class="prettyprint">1</code></li>
+<li>defined in this schema</li>
+</ul>
+
+<h4 id="rooms-type">rooms Type</h4>
+
+<p><code class="prettyprint">integer</code></p>
+
+<ul>
+<li>minimum value: <code class="prettyprint">1</code></li>
+</ul>
+
+<h3 id="skyscanner_node_code">skyscanner_node_code</h3>
+
+<p>The IATA code of the destination.</p>
+
+<p><code class="prettyprint">skyscanner_node_code</code></p>
+
+<ul>
+<li>is optional</li>
+<li>type: <code class="prettyprint">string</code></li>
+<li>defined in this schema</li>
+</ul>
+
+<h4 id="skyscanner_node_code-type">skyscanner_node_code Type</h4>
+
+<p><code class="prettyprint">string</code></p>
 
           <h2 id="carhire-day-view-supported-query-parameters-schema">Carhire Day View supported query parameters Schema</h2>
 <pre class="highlight plaintext"><code>/cars/day-view
