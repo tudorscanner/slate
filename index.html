@@ -7418,7 +7418,7 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 <tr>
 <td><a href="#adults">adults</a></td>
 <td><code class="prettyprint">integer</code></td>
-<td><strong>Required</strong></td>
+<td>Optional</td>
 <td>No</td>
 <td><code class="prettyprint">2</code></td>
 <td>Hotels Day View supported query parameters (this schema)</td>
@@ -7426,7 +7426,7 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 <tr>
 <td><a href="#checkin">checkin</a></td>
 <td><code class="prettyprint">string</code></td>
-<td><strong>Required</strong></td>
+<td>Optional</td>
 <td>No</td>
 <td></td>
 <td>Hotels Day View supported query parameters (this schema)</td>
@@ -7434,7 +7434,7 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 <tr>
 <td><a href="#checkout">checkout</a></td>
 <td><code class="prettyprint">string</code></td>
-<td><strong>Required</strong></td>
+<td>Optional</td>
 <td>No</td>
 <td></td>
 <td>Hotels Day View supported query parameters (this schema)</td>
@@ -7474,9 +7474,17 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 <tr>
 <td><a href="#rooms">rooms</a></td>
 <td><code class="prettyprint">integer</code></td>
-<td><strong>Required</strong></td>
+<td>Optional</td>
 <td>No</td>
 <td><code class="prettyprint">1</code></td>
+<td>Hotels Day View supported query parameters (this schema)</td>
+</tr>
+<tr>
+<td><a href="#sort">sort</a></td>
+<td><code class="prettyprint">string</code></td>
+<td>Optional</td>
+<td>No</td>
+<td></td>
 <td>Hotels Day View supported query parameters (this schema)</td>
 </tr>
 <tr>
@@ -7496,7 +7504,7 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 <p><code class="prettyprint">adults</code></p>
 
 <ul>
-<li>is <strong>required</strong></li>
+<li>is optional</li>
 <li>type: <code class="prettyprint">integer</code></li>
 <li>default: <code class="prettyprint">2</code></li>
 <li>defined in this schema</li>
@@ -7517,7 +7525,7 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 <p><code class="prettyprint">checkin</code></p>
 
 <ul>
-<li>is <strong>required</strong></li>
+<li>is optional</li>
 <li>type: <code class="prettyprint">string</code></li>
 <li>defined in this schema</li>
 </ul>
@@ -7533,7 +7541,7 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 <p><code class="prettyprint">checkout</code></p>
 
 <ul>
-<li>is <strong>required</strong></li>
+<li>is optional</li>
 <li>type: <code class="prettyprint">string</code></li>
 <li>defined in this schema</li>
 </ul>
@@ -7613,7 +7621,7 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 <p><code class="prettyprint">rooms</code></p>
 
 <ul>
-<li>is <strong>required</strong></li>
+<li>is optional</li>
 <li>type: <code class="prettyprint">integer</code></li>
 <li>default: <code class="prettyprint">1</code></li>
 <li>defined in this schema</li>
@@ -7626,6 +7634,22 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 <ul>
 <li>minimum value: <code class="prettyprint">1</code></li>
 </ul>
+
+<h3 id="sort">sort</h3>
+
+<p>Defines the order in which search results will appear. Options are: price, -price, distance, -rating, stars, -stars.</p>
+
+<p><code class="prettyprint">sort</code></p>
+
+<ul>
+<li>is optional</li>
+<li>type: <code class="prettyprint">string</code></li>
+<li>defined in this schema</li>
+</ul>
+
+<h4 id="sort-type">sort Type</h4>
+
+<p><code class="prettyprint">string</code></p>
 
           <h2 id="hotels-home-view-supported-query-parameters-schema">Hotels Home View supported query parameters Schema</h2>
 <pre class="highlight plaintext"><code>/hotels/home-view
