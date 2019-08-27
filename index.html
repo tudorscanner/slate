@@ -7121,6 +7121,145 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 
 <p><code class="prettyprint">string</code></p>
 
+          <h2 id="cheap-flights-to-supported-query-parameters-schema">Cheap Flights To supported query parameters Schema</h2>
+<pre class="highlight plaintext"><code>/flights/cheap-flights-to
+</code></pre>
+<p>A schema definition for the cheap flights to microsite supported query parameters</p>
+
+<table><thead>
+<tr>
+<th>Abstract</th>
+<th>Extensible</th>
+<th>Status</th>
+<th>Identifiable</th>
+<th>Custom Properties</th>
+<th>Additional Properties</th>
+<th>Defined In</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Can be instantiated</td>
+<td>No</td>
+<td>Experimental</td>
+<td>No</td>
+<td>Forbidden</td>
+<td>Permitted</td>
+<td><a href="cheapFlightsTo.json">cheapFlightsTo.json</a></td>
+</tr>
+</tbody></table>
+
+<h2 id="cheap-flights-to-supported-query-parameters-properties">Cheap Flights To supported query parameters Properties</h2>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Nullable</th>
+<th>Defined by</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><a href="#currency">currency</a></td>
+<td><code class="prettyprint">string</code></td>
+<td>Optional</td>
+<td>No</td>
+<td>Cheap Flights To supported query parameters (this schema)</td>
+</tr>
+<tr>
+<td><a href="#destination">destination</a></td>
+<td><code class="prettyprint">string</code></td>
+<td><strong>Required</strong></td>
+<td>No</td>
+<td>Cheap Flights To supported query parameters (this schema)</td>
+</tr>
+<tr>
+<td><a href="#locale">locale</a></td>
+<td><code class="prettyprint">string</code></td>
+<td>Optional</td>
+<td>No</td>
+<td>Cheap Flights To supported query parameters (this schema)</td>
+</tr>
+<tr>
+<td><a href="#market">market</a></td>
+<td><code class="prettyprint">string</code></td>
+<td>Optional</td>
+<td>No</td>
+<td>Cheap Flights To supported query parameters (this schema)</td>
+</tr>
+<tr>
+<td><code class="prettyprint">*</code></td>
+<td>any</td>
+<td>Additional</td>
+<td>Yes</td>
+<td>this schema <em>allows</em> additional properties</td>
+</tr>
+</tbody></table>
+
+<h3 id="currency">currency</h3>
+
+<p>The desired currency for the flights search results</p>
+
+<p><code class="prettyprint">currency</code></p>
+
+<ul>
+<li>is optional</li>
+<li>type: <code class="prettyprint">string</code></li>
+<li>defined in this schema</li>
+</ul>
+
+<h4 id="currency-type">currency Type</h4>
+
+<p><code class="prettyprint">string</code></p>
+
+<h3 id="destination">destination</h3>
+
+<p>Location code for the destination</p>
+
+<p><code class="prettyprint">destination</code></p>
+
+<ul>
+<li>is <strong>required</strong></li>
+<li>type: <code class="prettyprint">string</code></li>
+<li>defined in this schema</li>
+</ul>
+
+<h4 id="destination-type">destination Type</h4>
+
+<p><code class="prettyprint">string</code></p>
+
+<h3 id="locale">locale</h3>
+
+<p>The desired locale for the flights search results</p>
+
+<p><code class="prettyprint">locale</code></p>
+
+<ul>
+<li>is optional</li>
+<li>type: <code class="prettyprint">string</code></li>
+<li>defined in this schema</li>
+</ul>
+
+<h4 id="locale-type">locale Type</h4>
+
+<p><code class="prettyprint">string</code></p>
+
+<h3 id="market">market</h3>
+
+<p>The market for which the flights search will be performed.</p>
+
+<p><code class="prettyprint">market</code></p>
+
+<ul>
+<li>is optional</li>
+<li>type: <code class="prettyprint">string</code></li>
+<li>defined in this schema</li>
+</ul>
+
+<h4 id="market-type">market Type</h4>
+
+<p><code class="prettyprint">string</code></p>
+
           <h2 id="hotels-day-view-supported-query-parameters-schema">Hotels Day View supported query parameters Schema</h2>
 <pre class="highlight plaintext"><code>/hotels/day-view
 </code></pre>
