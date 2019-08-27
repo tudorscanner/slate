@@ -14,14 +14,15 @@ A schema definition for the hotels day-view microsite supported query parameters
 
 | Property                | Type      | Required     | Nullable | Default                                    | Defined by                                               |
 | ----------------------- | --------- | ------------ | -------- | ------------------------------------------ | -------------------------------------------------------- |
-| [adults](#adults)       | `integer` | **Required** | No       | `2`                                        | Hotels Day View supported query parameters (this schema) |
-| [checkin](#checkin)     | `string`  | **Required** | No       |                                            | Hotels Day View supported query parameters (this schema) |
-| [checkout](#checkout)   | `string`  | **Required** | No       |                                            | Hotels Day View supported query parameters (this schema) |
+| [adults](#adults)       | `integer` | Optional     | No       | `2`                                        | Hotels Day View supported query parameters (this schema) |
+| [checkin](#checkin)     | `string`  | Optional     | No       |                                            | Hotels Day View supported query parameters (this schema) |
+| [checkout](#checkout)   | `string`  | Optional     | No       |                                            | Hotels Day View supported query parameters (this schema) |
 | [currency](#currency)   | `string`  | Optional     | No       |                                            | Hotels Day View supported query parameters (this schema) |
 | [entity_id](#entity_id) | `string`  | **Required** | No       |                                            | Hotels Day View supported query parameters (this schema) |
 | [locale](#locale)       | `string`  | Optional     | No       |                                            | Hotels Day View supported query parameters (this schema) |
 | [market](#market)       | `string`  | Optional     | No       |                                            | Hotels Day View supported query parameters (this schema) |
-| [rooms](#rooms)         | `integer` | **Required** | No       | `1`                                        | Hotels Day View supported query parameters (this schema) |
+| [rooms](#rooms)         | `integer` | Optional     | No       | `1`                                        | Hotels Day View supported query parameters (this schema) |
+| [sort](#sort)           | `string`  | Optional     | No       |                                            | Hotels Day View supported query parameters (this schema) |
 | `*`                     | any       | Additional   | Yes      | this schema _allows_ additional properties |
 
 ### adults
@@ -30,7 +31,7 @@ Number of adults. Adults number should be greater than or equal to the rooms num
 
 `adults`
 
-- is **required**
+- is optional
 - type: `integer`
 - default: `2`
 - defined in this schema
@@ -47,7 +48,7 @@ Checkin date in the formats: `YYYY-MM-DD`, `YYMMDD` or `YYYYMMDD`
 
 `checkin`
 
-- is **required**
+- is optional
 - type: `string`
 - defined in this schema
 
@@ -61,7 +62,7 @@ Checkout date in the formats: `YYYY-MM-DD`, `YYMMDD` or `YYYYMMDD`
 
 `checkout`
 
-- is **required**
+- is optional
 - type: `string`
 - defined in this schema
 
@@ -131,7 +132,7 @@ Number of rooms. Rooms number should be less than or equal to the adults number.
 
 `rooms`
 
-- is **required**
+- is optional
 - type: `integer`
 - default: `1`
 - defined in this schema
@@ -141,3 +142,17 @@ Number of rooms. Rooms number should be less than or equal to the adults number.
 `integer`
 
 - minimum value: `1`
+
+### sort
+
+Defines the order in which search results will appear. Options are: price, -price, distance, -rating, stars, -stars.
+
+`sort`
+
+- is optional
+- type: `string`
+- defined in this schema
+
+#### sort Type
+
+`string`
