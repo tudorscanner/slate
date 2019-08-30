@@ -7878,7 +7878,7 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 <tr>
 <td><a href="#driverage">driverAge</a></td>
 <td><code class="prettyprint">integer</code></td>
-<td>Optional</td>
+<td><strong>Required</strong></td>
 <td>No</td>
 <td>Carhire Day View supported query parameters (this schema)</td>
 </tr>
@@ -7892,7 +7892,7 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 <tr>
 <td><a href="#dropofftime">dropoffTime</a></td>
 <td><code class="prettyprint">string</code></td>
-<td>Optional</td>
+<td><strong>Required</strong></td>
 <td>No</td>
 <td>Carhire Day View supported query parameters (this schema)</td>
 </tr>
@@ -7913,14 +7913,14 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 <tr>
 <td><a href="#pickupplace">pickupPlace</a></td>
 <td><code class="prettyprint">string</code></td>
-<td>Optional</td>
+<td><strong>Required</strong></td>
 <td>No</td>
 <td>Carhire Day View supported query parameters (this schema)</td>
 </tr>
 <tr>
 <td><a href="#pickuptime">pickupTime</a></td>
 <td><code class="prettyprint">string</code></td>
-<td>Optional</td>
+<td><strong>Required</strong></td>
 <td>No</td>
 <td>Carhire Day View supported query parameters (this schema)</td>
 </tr>
@@ -7935,7 +7935,7 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 
 <h3 id="currency">currency</h3>
 
-<p>The desired currency for the carhire search results</p>
+<p>The desired currency for the page</p>
 
 <p><code class="prettyprint">currency</code></p>
 
@@ -7951,12 +7951,12 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 
 <h3 id="driverage">driverAge</h3>
 
-<p>Driver age</p>
+<p>Driver age between 18 and 99</p>
 
 <p><code class="prettyprint">driverAge</code></p>
 
 <ul>
-<li>is optional</li>
+<li>is <strong>required</strong></li>
 <li>type: <code class="prettyprint">integer</code></li>
 <li>defined in this schema</li>
 </ul>
@@ -7967,7 +7967,7 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 
 <h3 id="dropoffplace">dropoffPlace</h3>
 
-<p>Dropoff place id</p>
+<p>Pick up IATA code / hotel or city entity id</p>
 
 <p><code class="prettyprint">dropoffPlace</code></p>
 
@@ -7983,12 +7983,12 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 
 <h3 id="dropofftime">dropoffTime</h3>
 
-<p>Dropoff time in the format: YYYY-MM-DDTHH:MM</p>
+<p>Drop Off Datetime in ISO 8601 standard. I.e YYYY-MM-DDTHH:MM</p>
 
 <p><code class="prettyprint">dropoffTime</code></p>
 
 <ul>
-<li>is optional</li>
+<li>is <strong>required</strong></li>
 <li>type: <code class="prettyprint">string</code></li>
 <li>defined in this schema</li>
 </ul>
@@ -7999,7 +7999,7 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 
 <h3 id="locale">locale</h3>
 
-<p>The desired locale for the carhire search results</p>
+<p>The desired locale for the page</p>
 
 <p><code class="prettyprint">locale</code></p>
 
@@ -8015,7 +8015,7 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 
 <h3 id="market">market</h3>
 
-<p>The market for which the carhire search will be performed.</p>
+<p>The market of the user</p>
 
 <p><code class="prettyprint">market</code></p>
 
@@ -8031,12 +8031,12 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 
 <h3 id="pickupplace">pickupPlace</h3>
 
-<p>Pickup place id</p>
+<p>Pick up IATA code / hotel or city entity id</p>
 
 <p><code class="prettyprint">pickupPlace</code></p>
 
 <ul>
-<li>is optional</li>
+<li>is <strong>required</strong></li>
 <li>type: <code class="prettyprint">string</code></li>
 <li>defined in this schema</li>
 </ul>
@@ -8047,12 +8047,12 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 
 <h3 id="pickuptime">pickupTime</h3>
 
-<p>Pickup time in the format: YYYY-MM-DDTHH:MM</p>
+<p>Pick Up Datetime in ISO 8601 standard. I.e YYYY-MM-DDTHH:MM</p>
 
 <p><code class="prettyprint">pickupTime</code></p>
 
 <ul>
-<li>is optional</li>
+<li>is <strong>required</strong></li>
 <li>type: <code class="prettyprint">string</code></li>
 <li>defined in this schema</li>
 </ul>
