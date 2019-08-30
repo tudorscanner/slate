@@ -7144,7 +7144,7 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 <td>No</td>
 <td>Forbidden</td>
 <td>Permitted</td>
-<td><a href="flightsHomePage.json">flightsHomePage.json</a></td>
+<td></td>
 </tr>
 </tbody></table>
 
@@ -8058,6 +8058,122 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 </ul>
 
 <h4 id="pickuptime-type">pickupTime Type</h4>
+
+<p><code class="prettyprint">string</code></p>
+
+          <h2 id="carhire-home-page-supported-query-parameters-schema">Carhire Home page supported query parameters Schema</h2>
+<pre class="highlight plaintext"><code>/cars/home
+</code></pre>
+<p>A schema definition for the carhire home page microsite supported query parameters</p>
+
+<table><thead>
+<tr>
+<th>Abstract</th>
+<th>Extensible</th>
+<th>Status</th>
+<th>Identifiable</th>
+<th>Custom Properties</th>
+<th>Additional Properties</th>
+<th>Defined In</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Can be instantiated</td>
+<td>No</td>
+<td>Experimental</td>
+<td>No</td>
+<td>Forbidden</td>
+<td>Permitted</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h2 id="carhire-home-page-supported-query-parameters-properties">Carhire Home page supported query parameters Properties</h2>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Nullable</th>
+<th>Defined by</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><a href="#currency">currency</a></td>
+<td><code class="prettyprint">string</code></td>
+<td>Optional</td>
+<td>No</td>
+<td>Carhire Home page supported query parameters (this schema)</td>
+</tr>
+<tr>
+<td><a href="#locale">locale</a></td>
+<td><code class="prettyprint">string</code></td>
+<td>Optional</td>
+<td>No</td>
+<td>Carhire Home page supported query parameters (this schema)</td>
+</tr>
+<tr>
+<td><a href="#market">market</a></td>
+<td><code class="prettyprint">string</code></td>
+<td>Optional</td>
+<td>No</td>
+<td>Carhire Home page supported query parameters (this schema)</td>
+</tr>
+<tr>
+<td><code class="prettyprint">*</code></td>
+<td>any</td>
+<td>Additional</td>
+<td>Yes</td>
+<td>this schema <em>allows</em> additional properties</td>
+</tr>
+</tbody></table>
+
+<h3 id="currency">currency</h3>
+
+<p>The desired currency for the carhire search results</p>
+
+<p><code class="prettyprint">currency</code></p>
+
+<ul>
+<li>is optional</li>
+<li>type: <code class="prettyprint">string</code></li>
+<li>defined in this schema</li>
+</ul>
+
+<h4 id="currency-type">currency Type</h4>
+
+<p><code class="prettyprint">string</code></p>
+
+<h3 id="locale">locale</h3>
+
+<p>The desired locale for the carhire search results</p>
+
+<p><code class="prettyprint">locale</code></p>
+
+<ul>
+<li>is optional</li>
+<li>type: <code class="prettyprint">string</code></li>
+<li>defined in this schema</li>
+</ul>
+
+<h4 id="locale-type">locale Type</h4>
+
+<p><code class="prettyprint">string</code></p>
+
+<h3 id="market">market</h3>
+
+<p>The market for which the carhire search will be performed.</p>
+
+<p><code class="prettyprint">market</code></p>
+
+<ul>
+<li>is optional</li>
+<li>type: <code class="prettyprint">string</code></li>
+<li>defined in this schema</li>
+</ul>
+
+<h4 id="market-type">market Type</h4>
 
 <p><code class="prettyprint">string</code></p>
 
