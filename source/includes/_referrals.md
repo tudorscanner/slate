@@ -1,19 +1,26 @@
 # Referrals
 
-The referrals service is used to provide partner redirects
-to Skyscanner pages based to provided request parameters.
+The referral service is used to provide partner redirects
+to Skyscanner pages based to provided request parameters. 
+It can redirect to different pages within Skyscanner based on the provided {pagetype} parameter 
+(for the full list of page types and examples see below).
 
 *API endpoint*
 
-The API is accessible at https://skyscanner.net/g/referrals/v1
+The API is accessible at **https://skyscanner.net/g/referrals/v1**
 
 There is one main endpoint with the following URL structure:
 
-`GET /{vertical}/{pagetype}?associateid={{ associateId }}`
+`https://skyscanner.net/g/referrals/v1/{vertical}/{pagetype}?associateid={associateId}`
+
+The endpoint serves only GET requests and responds with HTTP status 301 redirecting to the desired Skyscanner page.
+
+For the different possible values of the parameters and for additional query parameters
+check the tables below.
 
 *TRY IT OUT*
 
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/31ff523d2ff9186107e1)
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/84b89b3a51c23e6230d7)
 
 *REQUEST PARAMETERS*
 
@@ -28,7 +35,7 @@ There is one main endpoint with the following URL structure:
 
 | Vertical | Pagetypes |
 | --------- | ------- |
-| flights | home, day-view, calendar-month-view, browse-view, multicity, booking-panel, cheap-flights-to, flights-airline |
+| flights | home, day-view, calendar-month-view, browse-view, multicity, cheap-flights-to, flights-airline |
 | hotels | day-view, home-view, hotel-details |
 | cars | home, day-view |
 
@@ -59,12 +66,13 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 
 | API endpoint | Description  |
 | --- | ---|
-| [Flights Day View supported query parameters Schema](#flights-day-view-supported-query-parameters-schema) | Schema and Query Parameters Properties for Flights DayView|
-| [Flights Calendar Month View supported parameters Schema](#flights-calendar-month-view-supported-query-parameters-schema) | Schema and Query Parameters Properties for Flights MonthView|
+| [Flights Day View supported query parameters Schema](#flights-day-view-supported-query-parameters-schema) | Schema and Query Parameters Properties for Flights DayView |
+| [Flights Calendar Month View supported parameters Schema](#flights-calendar-month-view-supported-query-parameters-schema) | Schema and Query Parameters Properties for Flights MonthView |
 | [Flights Browse View supported parameters Schema](#flights-browse-view-supported-parameters-schema) | Schema and Query Parameters Properties for Flights BrowseView |
-| [Flights Day View for multicity search Schema](#flights-day-view-for-multicity-search-schema) | Schema and Query Parameters Properties for Flights Multicity</b>. |
-
-
+| [Flights Day View for multicity search Schema](#flights-day-view-for-multicity-search-schema) | Schema and Query Parameters Properties for Flights Multicity</b> |
+| [Flights Home Page supported parameters Schema](#flights-home-page-supported-parameters-schema) | Schema and Query Parameters Properties for Skyscanner's home page |
+| [Flights Cheap Flights to supported parameters Schema](#cheap-flights-to-supported-query-parameters-schema) | Schema and Query Parameters Properties for Cheap Flights To |
+| [Flights Airline to supported parameters Schema](#flights-airline-contents-schema) | Schema and Query Parameters Properties for Flights Airline |
 
 
 ## Hotels Query Parameters
@@ -73,7 +81,9 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 
 | API endpoint | Description  |
 | --- | ---|
-| [Hotels Day View supported query parameters Schema](#hotels-day-view-supported-query-parameters-schema) | Schema and Query Parameters Properties for Hotels DayView</b>. |
+| [Hotels Day View supported query parameters Schema](#hotels-day-view-supported-query-parameters-schema) | Schema and Query Parameters Properties for Hotels DayView</b> |
+| [Hotels Home View supported query parameters Schema](#hotels-home-view-supported-query-parameters-schema) | Schema and Query Parameters Properties for Hotels Home View</b> |
+| [Hotel Details supported query parameters Schema](#hotel-details-supported-query-parameters-schema) | Schema and Query Parameters Properties for Hotel Details</b> |
 
 
 
@@ -83,4 +93,5 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 
 | API endpoint | Description  |
 | --- | ---|
-| [Carhire Day View supported query parameters Schema](#carhire-day-view-supported-query-parameters-schema) | Schema and Query Parameters Properties for CarHire DayView</b>. |
+| [Carhire Day View supported query parameters Schema](#carhire-day-view-supported-query-parameters-schema) | Schema and Query Parameters Properties for CarHire DayView</b> |
+| [Carhire Home Page supported query parameters Schema](#carhire-home-page-supported-query-parameters-schema) | Schema and Query Parameters Properties for CarHire Home</b> |
