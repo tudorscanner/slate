@@ -5057,20 +5057,27 @@ Please <b>do not cache the deeplinks</b> as they are only valid while your sessi
 
           <h1 id="referrals">Referrals</h1>
 
-<p>The referrals service is used to provide partner redirects
-to Skyscanner pages based to provided request parameters.</p>
+<p>The referral service is used to provide partner redirects
+to Skyscanner pages based to provided request parameters. 
+It can redirect to different pages within Skyscanner based on the provided {pagetype} parameter 
+(for the full list of page types and examples see below).</p>
 
 <p><em>API endpoint</em></p>
 
-<p>The API is accessible at https://skyscanner.net/g/referrals/v1</p>
+<p>The API is accessible at <strong>https://skyscanner.net/g/referrals/v1</strong></p>
 
 <p>There is one main endpoint with the following URL structure:</p>
 
-<p><code class="prettyprint">GET /{vertical}/{pagetype}?associateid={{ associateId }}</code></p>
+<p><code class="prettyprint">https://skyscanner.net/g/referrals/v1/{vertical}/{pagetype}?associateid={associateId}</code></p>
+
+<p>The endpoint serves only GET requests and responds with HTTP status 301 redirecting to the desired Skyscanner page.</p>
+
+<p>For the different possible values of the parameters and for additional query parameters
+check the tables below.</p>
 
 <p><em>TRY IT OUT</em></p>
 
-<p><a href="https://app.getpostman.com/run-collection/31ff523d2ff9186107e1"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
+<p><a href="https://app.getpostman.com/run-collection/84b89b3a51c23e6230d7"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
 
 <p><em>REQUEST PARAMETERS</em></p>
 
@@ -5108,7 +5115,7 @@ to Skyscanner pages based to provided request parameters.</p>
 </thead><tbody>
 <tr>
 <td>flights</td>
-<td>home, day-view, calendar-month-view, browse-view, multicity, booking-panel, cheap-flights-to, flights-airline</td>
+<td>home, day-view, calendar-month-view, browse-view, multicity, cheap-flights-to, flights-airline</td>
 </tr>
 <tr>
 <td>hotels</td>
@@ -5165,7 +5172,19 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 </tr>
 <tr>
 <td><a href="#flights-day-view-for-multicity-search-schema">Flights Day View for multicity search Schema</a></td>
-<td>Schema and Query Parameters Properties for Flights Multicity</b>.</td>
+<td>Schema and Query Parameters Properties for Flights Multicity</b></td>
+</tr>
+<tr>
+<td><a href="#flights-home-page-supported-parameters-schema">Flights Home Page supported parameters Schema</a></td>
+<td>Schema and Query Parameters Properties for Skyscanner&rsquo;s home page</td>
+</tr>
+<tr>
+<td><a href="#cheap-flights-to-supported-query-parameters-schema">Flights Cheap Flights to supported parameters Schema</a></td>
+<td>Schema and Query Parameters Properties for Cheap Flights To</td>
+</tr>
+<tr>
+<td><a href="#flights-airline-contents-schema">Flights Airline to supported parameters Schema</a></td>
+<td>Schema and Query Parameters Properties for Flights Airline</td>
 </tr>
 </tbody></table>
 
@@ -5181,7 +5200,15 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 </thead><tbody>
 <tr>
 <td><a href="#hotels-day-view-supported-query-parameters-schema">Hotels Day View supported query parameters Schema</a></td>
-<td>Schema and Query Parameters Properties for Hotels DayView</b>.</td>
+<td>Schema and Query Parameters Properties for Hotels DayView</b></td>
+</tr>
+<tr>
+<td><a href="#hotels-home-view-supported-query-parameters-schema">Hotels Home View supported query parameters Schema</a></td>
+<td>Schema and Query Parameters Properties for Hotels Home View</b></td>
+</tr>
+<tr>
+<td><a href="#hotel-details-supported-query-parameters-schema">Hotel Details supported query parameters Schema</a></td>
+<td>Schema and Query Parameters Properties for Hotel Details</b></td>
 </tr>
 </tbody></table>
 
@@ -5197,7 +5224,11 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 </thead><tbody>
 <tr>
 <td><a href="#carhire-day-view-supported-query-parameters-schema">Carhire Day View supported query parameters Schema</a></td>
-<td>Schema and Query Parameters Properties for CarHire DayView</b>.</td>
+<td>Schema and Query Parameters Properties for CarHire DayView</b></td>
+</tr>
+<tr>
+<td><a href="#carhire-home-page-supported-query-parameters-schema">Carhire Home Page supported query parameters Schema</a></td>
+<td>Schema and Query Parameters Properties for CarHire Home</b></td>
 </tr>
 </tbody></table>
 
