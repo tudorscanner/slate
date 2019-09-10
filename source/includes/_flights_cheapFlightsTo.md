@@ -1,24 +1,16 @@
-## Cheap Flights To supported query parameters Schema
+## Cheap Flights To supported parameters Schema
 
 ```
 /flights/cheap-flights-to
 ```
 
-A schema definition for the cheap flights to microsite supported query parameters
-
-| Abstract            | Extensible | Status       | Identifiable | Custom Properties | Additional Properties | Defined In                                 |
-| ------------------- | ---------- | ------------ | ------------ | ----------------- | --------------------- | ------------------------------------------ |
-| Can be instantiated | No         | Experimental | No           | Forbidden         | Permitted             | [cheapFlightsTo.json](cheapFlightsTo.json) |
-
-## Cheap Flights To supported query parameters Properties
-
-| Property                    | Type     | Required     | Nullable | Defined by                                                |
-| --------------------------- | -------- | ------------ | -------- | --------------------------------------------------------- |
-| [currency](#currency)       | `string` | Optional     | No       | Cheap Flights To supported query parameters (this schema) |
-| [destination](#destination) | `string` | **Required** | No       | Cheap Flights To supported query parameters (this schema) |
-| [locale](#locale)           | `string` | Optional     | No       | Cheap Flights To supported query parameters (this schema) |
-| [market](#market)           | `string` | Optional     | No       | Cheap Flights To supported query parameters (this schema) |
-| `*`                         | any      | Additional   | Yes      | this schema _allows_ additional properties                |
+| Property                    | Type     | Required     | Nullable | Defined by                                          |
+| --------------------------- | -------- | ------------ | -------- | --------------------------------------------------- |
+| [currency](#currency)       | `string` | Optional     | No       | Cheap Flights To supported parameters (this schema) |
+| [destination](#destination) | `string` | **Required** | No       | Cheap Flights To supported parameters (this schema) |
+| [locale](#locale)           | `string` | Optional     | No       | Cheap Flights To supported parameters (this schema) |
+| [market](#market)           | `string` | Optional     | No       | Cheap Flights To supported parameters (this schema) |
+| `*`                         | any      | Additional   | Yes      | this schema _allows_ additional properties          |
 
 ### currency
 

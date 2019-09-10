@@ -4,14 +4,6 @@
 /flights/home
 ```
 
-A schema definition for the flights home page microsite supported path and query parameters
-
-| Abstract            | Extensible | Status       | Identifiable | Custom Properties | Additional Properties | Defined In                                   |
-| ------------------- | ---------- | ------------ | ------------ | ----------------- | --------------------- | -------------------------------------------- |
-| Can be instantiated | No         | Experimental | No           | Forbidden         | Permitted             |                                              |
-
-## Flights Home Page supported parameters Properties
-
 | Property              | Type     | Required   | Nullable | Defined by                                           |
 | --------------------- | -------- | ---------- | -------- | ---------------------------------------------------- |
 | [currency](#currency) | `string` | Optional   | No       | Flights Home Page supported parameters (this schema) |

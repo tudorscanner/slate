@@ -1,25 +1,17 @@
-## Flights Airline contents Schema
+## Flights Airline supported parameters Schema
 
 ```
 /flights/flights-airline
 ```
 
-A schema definition for the flights airline microsite supported query parameters
-
-| Abstract            | Extensible | Status       | Identifiable | Custom Properties | Additional Properties | Defined In                                 |
-| ------------------- | ---------- | ------------ | ------------ | ----------------- | --------------------- | ------------------------------------------ |
-| Can be instantiated | No         | Experimental | No           | Forbidden         | Permitted             |  |
-
-## Flights Airline contents Properties
-
-| Property                    | Type     | Required     | Nullable | Defined by                                 |
-| --------------------------- | -------- | ------------ | -------- | ------------------------------------------ |
-| [airlineCode](#airlinecode) | `string` | **Required** | No       | Flights Airline contents (this schema)     |
-| [airlineName](#airlinename) | `string` | Optional     | No       | Flights Airline contents (this schema)     |
-| [currency](#currency)       | `string` | Optional     | No       | Flights Airline contents (this schema)     |
-| [locale](#locale)           | `string` | Optional     | No       | Flights Airline contents (this schema)     |
-| [market](#market)           | `string` | Optional     | No       | Flights Airline contents (this schema)     |
-| `*`                         | any      | Additional   | Yes      | this schema _allows_ additional properties |
+| Property                    | Type     | Required     | Nullable | Defined by                                         |
+| --------------------------- | -------- | ------------ | -------- | -------------------------------------------------- |
+| [airlineCode](#airlinecode) | `string` | **Required** | No       | Flights Airline supported parameters (this schema) |
+| [airlineName](#airlinename) | `string` | Optional     | No       | Flights Airline supported parameters (this schema) |
+| [currency](#currency)       | `string` | Optional     | No       | Flights Airline supported parameters (this schema) |
+| [locale](#locale)           | `string` | Optional     | No       | Flights Airline supported parameters (this schema) |
+| [market](#market)           | `string` | Optional     | No       | Flights Airline supported parameters (this schema) |
+| `*`                         | any      | Additional   | Yes      | this schema _allows_ additional properties         |
 
 ### airlineCode
 
