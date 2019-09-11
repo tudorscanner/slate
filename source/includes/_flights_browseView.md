@@ -4,14 +4,6 @@
 /flights/browse-view
 ```
 
-A schema definition for the flights browse view microsite supported path and query parameters
-
-| Abstract            | Extensible | Status       | Identifiable | Custom Properties | Additional Properties | Defined In                         |
-| ------------------- | ---------- | ------------ | ------------ | ----------------- | --------------------- | ---------------------------------- |
-| Can be instantiated | No         | Experimental | No           | Forbidden         | Permitted             |  |
-
-## Flights Browse View supported parameters Properties
-
 | Property                        | Type      | Required     | Nullable | Defined by                                             |
 | ------------------------------- | --------- | ------------ | -------- | ------------------------------------------------------ |
 | [adultsv2](#adultsv2)           | `integer` | Optional     | No       | Flights Browse View supported parameters (this schema) |
@@ -26,7 +18,7 @@ A schema definition for the flights browse view microsite supported path and que
 | [origin](#origin)               | `string`  | **Required** | No       | Flights Browse View supported parameters (this schema) |
 | [outboundDate](#outbounddate)   | `string`  | Optional     | No       | Flights Browse View supported parameters (this schema) |
 | [oym](#oym)                     | `string`  | Optional     | No       | Flights Browse View supported parameters (this schema) |
-| [preferdirects](#preferdirects) | `boolean` | Optional     | No       | Flights Browse View supported parameters (this schema) |
+| [preferDirects](#preferdirects) | `boolean` | Optional     | No       | Flights Browse View supported parameters (this schema) |
 | [rtn](#rtn)                     | `enum`    | Optional     | No       | Flights Browse View supported parameters (this schema) |
 | `*`                             | any       | Additional   | Yes      | this schema _allows_ additional properties             |
 
@@ -91,7 +83,7 @@ Location code for the destination
 
 ### inboundDate
 
-Inbound date in the format yymmdd
+Inbound date in the format YYYY-MM-DD
 
 `inboundDate`
 
@@ -119,7 +111,7 @@ Number of infant passengers. An infant is 1 year old or younger.
 
 ### iym
 
-Arrival date in the format: yymm
+Arrival date in the format: YYYY-MM
 
 `iym`
 
@@ -175,7 +167,7 @@ Location code for the origin
 
 ### outboundDate
 
-Outbound date in the format yymmdd
+Outbound date in the format YYYY-MM-DD
 
 `outboundDate`
 
@@ -189,7 +181,7 @@ Outbound date in the format yymmdd
 
 ### oym
 
-Departure date in the format: yymm
+Departure date in the format: YYYY-MM
 
 `oym`
 
@@ -201,17 +193,17 @@ Departure date in the format: yymm
 
 `string`
 
-### preferdirects
+### preferDirects
 
 Will search only for direct flights if the value is true
 
-`preferdirects`
+`preferDirects`
 
 - is optional
 - type: `boolean`
 - defined in this schema
 
-#### preferdirects Type
+#### preferDirects Type
 
 `boolean`
 

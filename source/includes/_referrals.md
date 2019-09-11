@@ -26,7 +26,7 @@ check the tables below.
 
 | Parameter | Description |
 | --------- | ------- |
-| ```vertical``` <br><span class="required">REQUIRED</span> | The vertical you want to redirect to. Allowed values: flights, hotels, cars|
+| ```vertical``` <br><span class="required">REQUIRED</span> | The vertical you want to redirect to. Allowed values: flights, cars|
 | ```pagetype``` <br><span class="required">OPTIONAL</span> | Page type supported by each vertical. E.g. for flights -> day-view, browse-view... take a look at the next table|
 | ```associateid``` <br><span class="required">OPTIONAL</span> | Associate partner id to attribute traffic to|
 | ```utm_term``` <br><span class="required">OPTIONAL</span> | Used to send through a unique variable that you can track back to your campaigns.|
@@ -36,18 +36,16 @@ check the tables below.
 | Vertical | Pagetypes |
 | --------- | ------- |
 | flights | home, day-view, calendar-month-view, browse-view, multicity, cheap-flights-to, flights-airline |
-| hotels | day-view, home-view, hotel-details |
 | cars | home, day-view |
 
 An example including some of the parameters looks like:
 
-`GET /flights/day-view/?market=UK&currency=GBP&locale=en-GB&origin=cdg&destination=edi&outboundDate=2019-10-14&utm_term=summer&associateid=MY_ID_123`
+`GET https://skyscanner.net/g/referrals/v1/flights/day-view/?market=UK&currency=GBP&locale=en-GB&origin=cdg&destination=edi&outboundDate=2019-10-14&utm_term=summer&associateid=MY_ID_123`
 
-`GET /flights/calendar-month-view/?market=UK&currency=GBP&locale=en-GB&origin=cdg&destination=edi&iym=1910&utm_term=summer&associateid=MY_ID_123`
+`GET https://skyscanner.net/g/referrals/v1/flights/calendar-month-view/?market=UK&currency=GBP&locale=en-GB&origin=cdg&destination=edi&iym=1910&utm_term=summer&associateid=MY_ID_123`
 
-`GET /cars/day-view/?pickupPlace=BCN&dropoffPlace=BCN&pickupTime=2019-09-10T10:00&dropoffTime=2019-09-15T10:00&driverAge=42&associateid=MY_ID_123`
+`GET https://skyscanner.net/g/referrals/v1/cars/day-view/?pickupPlace=BCN&dropoffPlace=BCN&pickupTime=2019-09-10T10:00&dropoffTime=2019-09-15T10:00&driverAge=42&associateid=MY_ID_123`
 
-`GET /hotels/day-view?entity_id=27536561&checkin=2019-09-10&checkout=2019-09-15&adults=2&rooms=1&associateid=MY_ID_123`
 
 Specific request query parameters are provided in tables below.
 
@@ -60,38 +58,25 @@ The URL to redirect to is provided in the Location header of the response.
 Please refer to our <a href="#response-codes">response codes</a> in case of unsuccessful response.
 </aside>
 
-## Flights Query Parameters
+## Flights Parameters
 
-*Flights - API*
+*Flights - Referral*
+
+| Page type | Description  |
+| --- | ---|
+| [day-view](#flights-day-view-supported-query-parameters-schema) | Flights Day View [Example Link](https://www.skyscanner.net/transport/flights/sof/ams/200813/200819/?adults=1&children=2&adultsv2=1&childrenv2=3%7c2&infants=0&cabinclass=economy&rtn=1&preferdirects=false&outboundaltsenabled=false&inboundaltsenabled=false&ref=home#/)|
+| [calendar-month-view](#flights-calendar-month-view-supported-query-parameters-schema) | Flights MonthView [Example Link](https://www.skyscanner.net/transport/flights/sof/ams/?adults=1&children=2&adultsv2=1&childrenv2=3%7C2&infants=0&cabinclass=economy&rtn=1&preferdirects=false&outboundaltsenabled=false&inboundaltsenabled=false&oym=2008&iym=2008&ref=home&selectedoday=01&selectediday=01)|
+| [browse-view](#flights-browse-view-supported-parameters-schema) | Flights BrowseView [Example Link](https://www.skyscanner.net/transport/flights-from/edi/?adults=1&children=2&adultsv2=1&childrenv2=3%7c2&infants=0&cabinclass=economy&rtn=1&preferdirects=false&outboundaltsenabled=false&inboundaltsenabled=false&oym=2008&iym=2008&ref=home)|
+| [multicity](#flights-day-view-for-multicity-search-schema) | Flights Multicity [Example Link](https://www.skyscanner.net/transport/d/sof/2020-08-13/ams/ams/2020-08-19/lond/lond/2020-08-20/sof?adults=1&children=2&adultsv2=1&childrenv2=3%7c2&infants=0&cabinclass=economy&ref=home#/)|
+| [home](#flights-home-page-supported-parameters-schema) | Skyscanner's Home [Example Link](https://www.skyscanner.net/)|
+| [cheap-flights-to](#cheap-flights-to-supported-query-parameters-schema) | Cheap Flights To [Example Link](https://www.skyscanner.net/za/en-gb/zar/flights-to/bom/cheap-flights-to-mumbai-airport.html)|
+| [flights-airline](#flights-airline-contents-schema) | Flights Airline [Example Link](https://www.skyscanner.net/airline/airline-emirates-ek.html)|
+
+## Cars Parameters
+
+*Cars - Referral*
 
 | API endpoint | Description  |
 | --- | ---|
-| [Flights Day View supported query parameters Schema](#flights-day-view-supported-query-parameters-schema) | Schema and Query Parameters Properties for Flights DayView |
-| [Flights Calendar Month View supported parameters Schema](#flights-calendar-month-view-supported-query-parameters-schema) | Schema and Query Parameters Properties for Flights MonthView |
-| [Flights Browse View supported parameters Schema](#flights-browse-view-supported-parameters-schema) | Schema and Query Parameters Properties for Flights BrowseView |
-| [Flights Day View for multicity search Schema](#flights-day-view-for-multicity-search-schema) | Schema and Query Parameters Properties for Flights Multicity</b> |
-| [Flights Home Page supported parameters Schema](#flights-home-page-supported-parameters-schema) | Schema and Query Parameters Properties for Skyscanner's home page |
-| [Flights Cheap Flights to supported parameters Schema](#cheap-flights-to-supported-query-parameters-schema) | Schema and Query Parameters Properties for Cheap Flights To |
-| [Flights Airline to supported parameters Schema](#flights-airline-contents-schema) | Schema and Query Parameters Properties for Flights Airline |
-
-
-## Hotels Query Parameters
-
-*Hotels - API*
-
-| API endpoint | Description  |
-| --- | ---|
-| [Hotels Day View supported query parameters Schema](#hotels-day-view-supported-query-parameters-schema) | Schema and Query Parameters Properties for Hotels DayView</b> |
-| [Hotels Home View supported query parameters Schema](#hotels-home-view-supported-query-parameters-schema) | Schema and Query Parameters Properties for Hotels Home View</b> |
-| [Hotel Details supported query parameters Schema](#hotel-details-supported-query-parameters-schema) | Schema and Query Parameters Properties for Hotel Details</b> |
-
-
-
-## Cars Query Parameters
-
-*Cars - API*
-
-| API endpoint | Description  |
-| --- | ---|
-| [Carhire Day View supported query parameters Schema](#carhire-day-view-supported-query-parameters-schema) | Schema and Query Parameters Properties for CarHire DayView</b> |
-| [Carhire Home Page supported query parameters Schema](#carhire-home-page-supported-query-parameters-schema) | Schema and Query Parameters Properties for CarHire Home</b> |
+| [day-view](#carhire-day-view-supported-query-parameters-schema) | CarHire DayView [Example Link](https://www.skyscanner.net/carhire/results/95565041/95565041/2020-08-20T10:00/2020-08-21T10:00/30)|
+| [home](#carhire-home-page-supported-query-parameters-schema) | CarHire Home [Example Link](https://www.skyscanner.net/carhire) |

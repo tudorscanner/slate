@@ -4,14 +4,6 @@
 /flights/calendar-month-view
 ```
 
-A schema definition for the flights calendar month view microsite supported path and query parameters
-
-| Abstract            | Extensible | Status       | Identifiable | Custom Properties | Additional Properties | Defined In                                       |
-| ------------------- | ---------- | ------------ | ------------ | ----------------- | --------------------- | ------------------------------------------------ |
-| Can be instantiated | No         | Experimental | No           | Forbidden         | Permitted             |  |
-
-## Flights Calendar Month View supported parameters Properties
-
 | Property                        | Type      | Required     | Nullable | Defined by                                                     |
 | ------------------------------- | --------- | ------------ | -------- | -------------------------------------------------------------- |
 | [adultsv2](#adultsv2)           | `integer` | Optional     | No       | Flights Calendar Month View supported parameters (this schema) |
@@ -103,7 +95,7 @@ Number of infant passengers. An infant is 1 year old or younger.
 
 ### iym
 
-Arrival date in the format: yymm
+Arrival date in the format: YYYY-MM
 
 `iym`
 
@@ -159,7 +151,7 @@ Location code for the origin
 
 ### oym
 
-Departure date in the format: yymm
+Departure date in the format: YYYY-MM
 
 `oym`
 

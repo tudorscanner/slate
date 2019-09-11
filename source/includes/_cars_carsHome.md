@@ -1,23 +1,15 @@
-## Carhire Home page supported query parameters Schema
+## Carhire Home page supported parameters Schema
 
 ```
 /cars/home
 ```
 
-A schema definition for the carhire home page microsite supported query parameters
-
-| Abstract            | Extensible | Status       | Identifiable | Custom Properties | Additional Properties | Defined In                     |
-| ------------------- | ---------- | ------------ | ------------ | ----------------- | --------------------- | ------------------------------ |
-| Can be instantiated | No         | Experimental | No           | Forbidden         | Permitted             |                                |
-
-## Carhire Home page supported query parameters Properties
-
-| Property              | Type     | Required   | Nullable | Defined by                                                 |
-| --------------------- | -------- | ---------- | -------- | ---------------------------------------------------------- |
-| [currency](#currency) | `string` | Optional   | No       | Carhire Home page supported query parameters (this schema) |
-| [locale](#locale)     | `string` | Optional   | No       | Carhire Home page supported query parameters (this schema) |
-| [market](#market)     | `string` | Optional   | No       | Carhire Home page supported query parameters (this schema) |
-| `*`                   | any      | Additional | Yes      | this schema _allows_ additional properties                 |
+| Property              | Type     | Required   | Nullable | Defined by                                           |
+| --------------------- | -------- | ---------- | -------- | ---------------------------------------------------- |
+| [currency](#currency) | `string` | Optional   | No       | Carhire Home page supported parameters (this schema) |
+| [locale](#locale)     | `string` | Optional   | No       | Carhire Home page supported parameters (this schema) |
+| [market](#market)     | `string` | Optional   | No       | Carhire Home page supported parameters (this schema) |
+| `*`                   | any      | Additional | Yes      | this schema _allows_ additional properties           |
 
 ### currency
 

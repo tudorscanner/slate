@@ -1,36 +1,28 @@
-## Flights Day View supported query parameters Schema
+## Flights Day View supported parameters Schema
 
 ```
 /flights/day-view
 ```
 
-A schema definition for the flights day-view microsite supported query parameters
-
-| Abstract            | Extensible | Status       | Identifiable | Custom Properties | Additional Properties | Defined In                   |
-| ------------------- | ---------- | ------------ | ------------ | ----------------- | --------------------- | ---------------------------- |
-| Can be instantiated | No         | Experimental | No           | Forbidden         | Permitted             |  |
-
-## Flights Day View supported query parameters Properties
-
-| Property                                            | Type       | Required     | Nullable | Default                                    | Defined by                                                |
-| --------------------------------------------------- | ---------- | ------------ | -------- | ------------------------------------------ | --------------------------------------------------------- |
-| [adultsv2](#adultsv2)                               | `integer`  | **Required** | No       | `1`                                        | Flights Day View supported query parameters (this schema) |
-| [alternativedestinations](#alternativedestinations) | `string[]` | Optional     | No       |                                            | Flights Day View supported query parameters (this schema) |
-| [alternativeorigins](#alternativeorigins)           | `string[]` | Optional     | No       |                                            | Flights Day View supported query parameters (this schema) |
-| [cabinclass](#cabinclass)                           | `enum`     | **Required** | No       | `"economy"`                                | Flights Day View supported query parameters (this schema) |
-| [childrenv2](#childrenv2)                           | `string`   | Optional     | No       |                                            | Flights Day View supported query parameters (this schema) |
-| [currency](#currency)                               | `string`   | Optional     | No       |                                            | Flights Day View supported query parameters (this schema) |
-| [destination](#destination)                         | `string`   | **Required** | No       |                                            | Flights Day View supported query parameters (this schema) |
-| [inboundDate](#inbounddate)                         | `string`   | Optional     | No       |                                            | Flights Day View supported query parameters (this schema) |
-| [inboundaltsenabled](#inboundaltsenabled)           | `boolean`  | Optional     | No       |                                            | Flights Day View supported query parameters (this schema) |
-| [infants](#infants)                                 | `integer`  | Optional     | No       |                                            | Flights Day View supported query parameters (this schema) |
-| [locale](#locale)                                   | `string`   | Optional     | No       |                                            | Flights Day View supported query parameters (this schema) |
-| [market](#market)                                   | `string`   | Optional     | No       |                                            | Flights Day View supported query parameters (this schema) |
-| [origin](#origin)                                   | `string`   | **Required** | No       |                                            | Flights Day View supported query parameters (this schema) |
-| [outboundDate](#outbounddate)                       | `string`   | **Required** | No       |                                            | Flights Day View supported query parameters (this schema) |
-| [outboundaltsenabled](#outboundaltsenabled)         | `boolean`  | Optional     | No       |                                            | Flights Day View supported query parameters (this schema) |
-| [preferdirects](#preferdirects)                     | `boolean`  | Optional     | No       |                                            | Flights Day View supported query parameters (this schema) |
-| [rtn](#rtn)                                         | `enum`     | Optional     | No       |                                            | Flights Day View supported query parameters (this schema) |
+| Property                                            | Type       | Required     | Nullable | Default                                    | Defined by                                          |
+| --------------------------------------------------- | ---------- | ------------ | -------- | ------------------------------------------ | --------------------------------------------------- |
+| [adultsv2](#adultsv2)                               | `integer`  | **Required** | No       | `1`                                        | Flights Day View supported parameters (this schema) |
+| [alternativedestinations](#alternativedestinations) | `string[]` | Optional     | No       |                                            | Flights Day View supported parameters (this schema) |
+| [alternativeorigins](#alternativeorigins)           | `string[]` | Optional     | No       |                                            | Flights Day View supported parameters (this schema) |
+| [cabinclass](#cabinclass)                           | `enum`     | **Required** | No       | `"economy"`                                | Flights Day View supported parameters (this schema) |
+| [childrenv2](#childrenv2)                           | `string`   | Optional     | No       |                                            | Flights Day View supported parameters (this schema) |
+| [currency](#currency)                               | `string`   | Optional     | No       |                                            | Flights Day View supported parameters (this schema) |
+| [destination](#destination)                         | `string`   | **Required** | No       |                                            | Flights Day View supported parameters (this schema) |
+| [inboundDate](#inbounddate)                         | `string`   | Optional     | No       |                                            | Flights Day View supported parameters (this schema) |
+| [inboundaltsenabled](#inboundaltsenabled)           | `boolean`  | Optional     | No       |                                            | Flights Day View supported parameters (this schema) |
+| [infants](#infants)                                 | `integer`  | Optional     | No       |                                            | Flights Day View supported parameters (this schema) |
+| [locale](#locale)                                   | `string`   | Optional     | No       |                                            | Flights Day View supported parameters (this schema) |
+| [market](#market)                                   | `string`   | Optional     | No       |                                            | Flights Day View supported parameters (this schema) |
+| [origin](#origin)                                   | `string`   | **Required** | No       |                                            | Flights Day View supported parameters (this schema) |
+| [outboundDate](#outbounddate)                       | `string`   | **Required** | No       |                                            | Flights Day View supported parameters (this schema) |
+| [outboundaltsenabled](#outboundaltsenabled)         | `boolean`  | Optional     | No       |                                            | Flights Day View supported parameters (this schema) |
+| [preferDirects](#preferdirects)                     | `boolean`  | Optional     | No       |                                            | Flights Day View supported parameters (this schema) |
+| [rtn](#rtn)                                         | `enum`     | Optional     | No       |                                            | Flights Day View supported parameters (this schema) |
 | `*`                                                 | any        | Additional   | Yes      | this schema _allows_ additional properties |
 
 ### adultsv2
@@ -149,7 +141,7 @@ Location code for the destination
 
 ### inboundDate
 
-Inbound date in the format yymmdd
+Inbound date in the format YYYY-MM-DD
 
 `inboundDate`
 
@@ -233,7 +225,7 @@ Location code for the origin
 
 ### outboundDate
 
-Outbound date in the format yymmdd
+Outbound date in the format YYYY-MM-DD
 
 `outboundDate`
 
@@ -259,17 +251,17 @@ Inlcuding nearby airports as an outbound place
 
 `boolean`
 
-### preferdirects
+### preferDirects
 
 Will search only for direct flights if the value is true
 
-`preferdirects`
+`preferDirects`
 
 - is optional
 - type: `boolean`
 - defined in this schema
 
-#### preferdirects Type
+#### preferDirects Type
 
 `boolean`
 

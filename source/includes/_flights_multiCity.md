@@ -4,14 +4,6 @@
 /flights/multicity
 ```
 
-A schema definition for the flights day-view microsite supported query parameters
-
-| Abstract            | Extensible | Status       | Identifiable | Custom Properties | Additional Properties | Defined In                       |
-| ------------------- | ---------- | ------------ | ------------ | ----------------- | --------------------- | -------------------------------- |
-| Can be instantiated | No         | Experimental | No           | Forbidden         | Permitted             |  |
-
-## Flights Day View for multicity search Properties
-
 | Property                      | Type      | Required     | Nullable | Default                                    | Defined by                                          |
 | ----------------------------- | --------- | ------------ | -------- | ------------------------------------------ | --------------------------------------------------- |
 | [adultsv2](#adultsv2)         | `integer` | **Required** | No       | `1`                                        | Flights Day View for multicity search (this schema) |
@@ -111,7 +103,7 @@ The desired currency for the flights search results
 
 ### date0
 
-Outbound date in the format yymmdd
+Outbound date in the format YYYY-MM-DD
 
 `date0`
 
@@ -125,7 +117,7 @@ Outbound date in the format yymmdd
 
 ### date1
 
-Outbound date in the format yymmdd
+Outbound date in the format YYYY-MM-DD
 
 `date1`
 
@@ -139,7 +131,7 @@ Outbound date in the format yymmdd
 
 ### date2
 
-Outbound date in the format yymmdd
+Outbound date in the format YYYY-MM-DD
 
 `date2`
 
@@ -153,7 +145,7 @@ Outbound date in the format yymmdd
 
 ### date3
 
-Outbound date in the format yymmdd
+Outbound date in the format YYYY-MM-DD
 
 `date3`
 
@@ -167,7 +159,7 @@ Outbound date in the format yymmdd
 
 ### date4
 
-Outbound date in the format yymmdd
+Outbound date in the format YYYY-MM-DD
 
 `date4`
 
@@ -181,7 +173,7 @@ Outbound date in the format yymmdd
 
 ### date5
 
-Outbound date in the format yymmdd
+Outbound date in the format YYYY-MM-DD
 
 `date5`
 
