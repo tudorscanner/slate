@@ -64,13 +64,13 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 
 | Page type | Description  |
 | --- | ---|
-| [day-view](#flights-day-view-supported-query-parameters-schema) | Flights Day View [Example Link](https://www.skyscanner.net/transport/flights/sof/ams/200813/200819/?adults=1&children=2&adultsv2=1&childrenv2=3%7c2&infants=0&cabinclass=economy&rtn=1&preferdirects=false&outboundaltsenabled=false&inboundaltsenabled=false&ref=home#/)|
-| [calendar-month-view](#flights-calendar-month-view-supported-query-parameters-schema) | Flights MonthView [Example Link](https://www.skyscanner.net/transport/flights/sof/ams/?adults=1&children=2&adultsv2=1&childrenv2=3%7C2&infants=0&cabinclass=economy&rtn=1&preferdirects=false&outboundaltsenabled=false&inboundaltsenabled=false&oym=2008&iym=2008&ref=home&selectedoday=01&selectediday=01)|
+| [day-view](#flights-day-view-supported-parameters-schema) | Flights Day View [Example Link](https://www.skyscanner.net/transport/flights/sof/ams/200813/200819/?adults=1&children=2&adultsv2=1&childrenv2=3%7c2&infants=0&cabinclass=economy&rtn=1&preferdirects=false&outboundaltsenabled=false&inboundaltsenabled=false&ref=home#/)|
+| [calendar-month-view](#flights-calendar-month-view-supported-parameters-schema) | Flights MonthView [Example Link](https://www.skyscanner.net/transport/flights/sof/ams/?adults=1&children=2&adultsv2=1&childrenv2=3%7C2&infants=0&cabinclass=economy&rtn=1&preferdirects=false&outboundaltsenabled=false&inboundaltsenabled=false&oym=2008&iym=2008&ref=home&selectedoday=01&selectediday=01)|
 | [browse-view](#flights-browse-view-supported-parameters-schema) | Flights BrowseView [Example Link](https://www.skyscanner.net/transport/flights-from/edi/?adults=1&children=2&adultsv2=1&childrenv2=3%7c2&infants=0&cabinclass=economy&rtn=1&preferdirects=false&outboundaltsenabled=false&inboundaltsenabled=false&oym=2008&iym=2008&ref=home)|
 | [multicity](#flights-day-view-for-multicity-search-schema) | Flights Multicity [Example Link](https://www.skyscanner.net/transport/d/sof/2020-08-13/ams/ams/2020-08-19/lond/lond/2020-08-20/sof?adults=1&children=2&adultsv2=1&childrenv2=3%7c2&infants=0&cabinclass=economy&ref=home#/)|
 | [home](#flights-home-page-supported-parameters-schema) | Skyscanner's Home [Example Link](https://www.skyscanner.net/)|
-| [cheap-flights-to](#cheap-flights-to-supported-query-parameters-schema) | Cheap Flights To [Example Link](https://www.skyscanner.net/za/en-gb/zar/flights-to/bom/cheap-flights-to-mumbai-airport.html)|
-| [flights-airline](#flights-airline-contents-schema) | Flights Airline [Example Link](https://www.skyscanner.net/airline/airline-emirates-ek.html)|
+| [cheap-flights-to](#cheap-flights-to-supported-parameters-schema) | Cheap Flights To [Example Link](https://www.skyscanner.net/za/en-gb/zar/flights-to/bom/cheap-flights-to-mumbai-airport.html)|
+| [flights-airline](#flights-airline-supported-parameters-schema) | Flights Airline [Example Link](https://www.skyscanner.net/airline/airline-emirates-ek.html)|
 
 ## Cars Parameters
 
@@ -78,5 +78,5 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 
 | API endpoint | Description  |
 | --- | ---|
-| [day-view](#carhire-day-view-supported-query-parameters-schema) | CarHire DayView [Example Link](https://www.skyscanner.net/carhire/results/95565041/95565041/2020-08-20T10:00/2020-08-21T10:00/30)|
-| [home](#carhire-home-page-supported-query-parameters-schema) | CarHire Home [Example Link](https://www.skyscanner.net/carhire) |
+| [day-view](#carhire-day-view-supported-parameters-schema) | CarHire DayView [Example Link](https://www.skyscanner.net/carhire/results/95565041/95565041/2020-08-20T10:00/2020-08-21T10:00/30)|
+| [home](#carhire-home-page-supported-parameters-schema) | CarHire Home [Example Link](https://www.skyscanner.net/carhire) |

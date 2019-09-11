@@ -52,7 +52,7 @@ Number of adult passengers. Adults have to be 16 years old or older.
 
 ### cabinclass
 
-Fare class
+Cabin class for the flight, possible values are: economy, premiumeconomy, business and first
 
 `cabinclass`
 
@@ -89,7 +89,7 @@ passenger
 
 ### currency
 
-The desired currency for the flights search results
+The desired currency for the page. Examples: GBP, EUR, USD
 
 `currency`
 
@@ -103,7 +103,7 @@ The desired currency for the flights search results
 
 ### date0
 
-Outbound date in the format YYYY-MM-DD
+Outbound date of the first flight in the format YYYY-MM-DD
 
 `date0`
 
@@ -117,7 +117,7 @@ Outbound date in the format YYYY-MM-DD
 
 ### date1
 
-Outbound date in the format YYYY-MM-DD
+Outbound date of the second flight in the format YYYY-MM-DD
 
 `date1`
 
@@ -131,7 +131,7 @@ Outbound date in the format YYYY-MM-DD
 
 ### date2
 
-Outbound date in the format YYYY-MM-DD
+Outbound date of the third flight in the format YYYY-MM-DD
 
 `date2`
 
@@ -145,7 +145,7 @@ Outbound date in the format YYYY-MM-DD
 
 ### date3
 
-Outbound date in the format YYYY-MM-DD
+Outbound date of the fourth flight in the format YYYY-MM-DD
 
 `date3`
 
@@ -159,7 +159,7 @@ Outbound date in the format YYYY-MM-DD
 
 ### date4
 
-Outbound date in the format YYYY-MM-DD
+Outbound date of the fifth flight in the format YYYY-MM-DD
 
 `date4`
 
@@ -173,7 +173,7 @@ Outbound date in the format YYYY-MM-DD
 
 ### date5
 
-Outbound date in the format YYYY-MM-DD
+Outbound date of the sixth flight in the format YYYY-MM-DD
 
 `date5`
 
@@ -187,7 +187,7 @@ Outbound date in the format YYYY-MM-DD
 
 ### destination0
 
-Location code for the destination
+Location code for the destination of the first flight
 
 `destination0`
 
@@ -201,7 +201,7 @@ Location code for the destination
 
 ### destination1
 
-Location code for the destination
+Location code for the destination of the second flight
 
 `destination1`
 
@@ -215,7 +215,7 @@ Location code for the destination
 
 ### destination2
 
-Location code for the destination
+Location code for the destination of the third flight
 
 `destination2`
 
@@ -229,7 +229,7 @@ Location code for the destination
 
 ### destination3
 
-Location code for the destination
+Location code for the destination of the fourth flight
 
 `destination3`
 
@@ -243,7 +243,7 @@ Location code for the destination
 
 ### destination4
 
-Location code for the destination
+Location code for the destination of the fifth flight
 
 `destination4`
 
@@ -257,7 +257,7 @@ Location code for the destination
 
 ### destination5
 
-Location code for the destination
+Location code for the destination of the sixth flight
 
 `destination5`
 
@@ -285,7 +285,7 @@ Number of infant passengers. An infant is 1 year old or younger.
 
 ### locale
 
-The desired locale for the flights search results
+The desired locale for the page. Examples: es-ES, en-GB, ru-RU
 
 `locale`
 
@@ -299,7 +299,7 @@ The desired locale for the flights search results
 
 ### market
 
-The market for which the flights search will be performed.
+The market of the user. Examples: UK, US, ES
 
 `market`
 
@@ -313,7 +313,7 @@ The market for which the flights search will be performed.
 
 ### origin0
 
-Location code for the origin
+Location code for the origin of the first flight
 
 `origin0`
 
@@ -327,7 +327,7 @@ Location code for the origin
 
 ### origin1
 
-Location code for the origin
+Location code for the origin of the second flight
 
 `origin1`
 
@@ -341,7 +341,7 @@ Location code for the origin
 
 ### origin2
 
-Location code for the origin
+Location code for the origin of the third flight
 
 `origin2`
 
@@ -355,7 +355,7 @@ Location code for the origin
 
 ### origin3
 
-Location code for the origin
+Location code for the origin of the fourth flight
 
 `origin3`
 
@@ -369,7 +369,7 @@ Location code for the origin
 
 ### origin4
 
-Location code for the origin
+Location code for the origin of the fifth flight
 
 `origin4`
 
@@ -383,7 +383,7 @@ Location code for the origin
 
 ### origin5
 
-Location code for the origin
+Location code for the origin of the sixth flight
 
 `origin5`
 

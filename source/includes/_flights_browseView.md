@@ -55,7 +55,7 @@ passenger
 
 ### currency
 
-The desired currency for the page
+The desired currency for the page. Examples: GBP, EUR, USD
 
 `currency`
 
@@ -125,7 +125,7 @@ Arrival date in the format: YYYY-MM
 
 ### locale
 
-The desired locale for the page
+The desired locale for the page. Examples: es-ES, en-GB, ru-RU
 
 `locale`
 
@@ -139,7 +139,7 @@ The desired locale for the page
 
 ### market
 
-The market of the user
+The market of the user. Examples: UK, US, ES
 
 `market`
 

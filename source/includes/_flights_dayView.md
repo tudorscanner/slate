@@ -76,7 +76,7 @@ All items must be of the type: `string`
 
 ### cabinclass
 
-Fare class
+Cabin class for the flight, possible values are: economy, premiumeconomy, business and first
 
 `cabinclass`
 
@@ -113,7 +113,7 @@ passenger
 
 ### currency
 
-The desired currency for the page
+The desired currency for the page. Examples: GBP, EUR, USD
 
 `currency`
 
@@ -155,7 +155,7 @@ Inbound date in the format YYYY-MM-DD
 
 ### inboundaltsenabled
 
-Inlcuding nearby airports as an inbound place
+Including nearby airports as an inbound place
 
 `inboundaltsenabled`
 
@@ -183,7 +183,7 @@ Number of infant passengers. An infant is 1 year old or younger.
 
 ### locale
 
-The desired locale for the page
+The desired locale for the page. Examples: es-ES, en-GB, ru-RU
 
 `locale`
 
@@ -197,7 +197,7 @@ The desired locale for the page
 
 ### market
 
-The market of the user
+The market of the user. Examples: UK, US, ES
 
 `market`
 
@@ -239,7 +239,7 @@ Outbound date in the format YYYY-MM-DD
 
 ### outboundaltsenabled
 
-Inlcuding nearby airports as an outbound place
+Including nearby airports as an outbound place
 
 `outboundaltsenabled`
 

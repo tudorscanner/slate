@@ -14,7 +14,7 @@
 
 ### currency
 
-The desired currency for the flights search results
+The desired currency for the page. Examples: GBP, EUR, USD
 
 `currency`
 
@@ -42,7 +42,7 @@ Location code for the destination
 
 ### locale
 
-The desired locale for the flights search results
+The desired locale for the page. Examples: es-ES, en-GB, ru-RU
 
 `locale`
 
@@ -56,7 +56,7 @@ The desired locale for the flights search results
 
 ### market
 
-The market for which the flights search will be performed.
+The market of the user. Examples: UK, US, ES
 
 `market`
 
