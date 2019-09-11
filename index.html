@@ -5089,7 +5089,7 @@ check the tables below.</p>
 </thead><tbody>
 <tr>
 <td><code class="prettyprint">vertical</code> <br><span class="required">REQUIRED</span></td>
-<td>The vertical you want to redirect to. Allowed values: flights, hotels, cars</td>
+<td>The vertical you want to redirect to. Allowed values: flights, cars</td>
 </tr>
 <tr>
 <td><code class="prettyprint">pagetype</code> <br><span class="required">OPTIONAL</span></td>
@@ -5118,10 +5118,6 @@ check the tables below.</p>
 <td>home, day-view, calendar-month-view, browse-view, multicity, cheap-flights-to, flights-airline</td>
 </tr>
 <tr>
-<td>hotels</td>
-<td>day-view, home-view, hotel-details</td>
-</tr>
-<tr>
 <td>cars</td>
 <td>home, day-view</td>
 </tr>
@@ -5129,13 +5125,11 @@ check the tables below.</p>
 
 <p>An example including some of the parameters looks like:</p>
 
-<p><code class="prettyprint">GET /flights/day-view/?market=UK&amp;currency=GBP&amp;locale=en-GB&amp;origin=cdg&amp;destination=edi&amp;outboundDate=2019-10-14&amp;utm_term=summer&amp;associateid=MY_ID_123</code></p>
+<p><code class="prettyprint">GET https://skyscanner.net/g/referrals/v1/flights/day-view/?market=UK&amp;currency=GBP&amp;locale=en-GB&amp;origin=cdg&amp;destination=edi&amp;outboundDate=2019-10-14&amp;utm_term=summer&amp;associateid=MY_ID_123</code></p>
 
-<p><code class="prettyprint">GET /flights/calendar-month-view/?market=UK&amp;currency=GBP&amp;locale=en-GB&amp;origin=cdg&amp;destination=edi&amp;iym=1910&amp;utm_term=summer&amp;associateid=MY_ID_123</code></p>
+<p><code class="prettyprint">GET https://skyscanner.net/g/referrals/v1/flights/calendar-month-view/?market=UK&amp;currency=GBP&amp;locale=en-GB&amp;origin=cdg&amp;destination=edi&amp;iym=1910&amp;utm_term=summer&amp;associateid=MY_ID_123</code></p>
 
-<p><code class="prettyprint">GET /cars/day-view/?pickupPlace=BCN&amp;dropoffPlace=BCN&amp;pickupTime=2019-09-10T10:00&amp;dropoffTime=2019-09-15T10:00&amp;driverAge=42&amp;associateid=MY_ID_123</code></p>
-
-<p><code class="prettyprint">GET /hotels/day-view?entity_id=27536561&amp;checkin=2019-09-10&amp;checkout=2019-09-15&amp;adults=2&amp;rooms=1&amp;associateid=MY_ID_123</code></p>
+<p><code class="prettyprint">GET https://skyscanner.net/g/referrals/v1/cars/day-view/?pickupPlace=BCN&amp;dropoffPlace=BCN&amp;pickupTime=2019-09-10T10:00&amp;dropoffTime=2019-09-15T10:00&amp;driverAge=42&amp;associateid=MY_ID_123</code></p>
 
 <p>Specific request query parameters are provided in tables below.</p>
 
@@ -5148,9 +5142,49 @@ The URL to redirect to is provided in the Location header of the response.</p>
 Please refer to our <a href="#response-codes">response codes</a> in case of unsuccessful response.
 </aside>
 
-<h2 id="flights-query-parameters">Flights Query Parameters</h2>
+<h2 id="flights-parameters">Flights Parameters</h2>
 
-<p><em>Flights - API</em></p>
+<p><em>Flights - Referral</em></p>
+
+<table><thead>
+<tr>
+<th>Page type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><a href="#flights-day-view-supported-query-parameters-schema">day-view</a></td>
+<td>Flights Day View <a href="https://www.skyscanner.net/transport/flights/sof/ams/200813/200819/?adults=1&amp;children=2&amp;adultsv2=1&amp;childrenv2=3%7c2&amp;infants=0&amp;cabinclass=economy&amp;rtn=1&amp;preferdirects=false&amp;outboundaltsenabled=false&amp;inboundaltsenabled=false&amp;ref=home#/">Example Link</a></td>
+</tr>
+<tr>
+<td><a href="#flights-calendar-month-view-supported-query-parameters-schema">calendar-month-view</a></td>
+<td>Flights MonthView <a href="https://www.skyscanner.net/transport/flights/sof/ams/?adults=1&amp;children=2&amp;adultsv2=1&amp;childrenv2=3%7C2&amp;infants=0&amp;cabinclass=economy&amp;rtn=1&amp;preferdirects=false&amp;outboundaltsenabled=false&amp;inboundaltsenabled=false&amp;oym=2008&amp;iym=2008&amp;ref=home&amp;selectedoday=01&amp;selectediday=01">Example Link</a></td>
+</tr>
+<tr>
+<td><a href="#flights-browse-view-supported-parameters-schema">browse-view</a></td>
+<td>Flights BrowseView <a href="https://www.skyscanner.net/transport/flights-from/edi/?adults=1&amp;children=2&amp;adultsv2=1&amp;childrenv2=3%7c2&amp;infants=0&amp;cabinclass=economy&amp;rtn=1&amp;preferdirects=false&amp;outboundaltsenabled=false&amp;inboundaltsenabled=false&amp;oym=2008&amp;iym=2008&amp;ref=home">Example Link</a></td>
+</tr>
+<tr>
+<td><a href="#flights-day-view-for-multicity-search-schema">multicity</a></td>
+<td>Flights Multicity <a href="https://www.skyscanner.net/transport/d/sof/2020-08-13/ams/ams/2020-08-19/lond/lond/2020-08-20/sof?adults=1&amp;children=2&amp;adultsv2=1&amp;childrenv2=3%7c2&amp;infants=0&amp;cabinclass=economy&amp;ref=home#/">Example Link</a></td>
+</tr>
+<tr>
+<td><a href="#flights-home-page-supported-parameters-schema">home</a></td>
+<td>Skyscanner&rsquo;s Home <a href="https://www.skyscanner.net/">Example Link</a></td>
+</tr>
+<tr>
+<td><a href="#cheap-flights-to-supported-query-parameters-schema">cheap-flights-to</a></td>
+<td>Cheap Flights To <a href="https://www.skyscanner.net/za/en-gb/zar/flights-to/bom/cheap-flights-to-mumbai-airport.html">Example Link</a></td>
+</tr>
+<tr>
+<td><a href="#flights-airline-contents-schema">flights-airline</a></td>
+<td>Flights Airline <a href="https://www.skyscanner.net/airline/airline-emirates-ek.html">Example Link</a></td>
+</tr>
+</tbody></table>
+
+<h2 id="cars-parameters">Cars Parameters</h2>
+
+<p><em>Cars - Referral</em></p>
 
 <table><thead>
 <tr>
@@ -5159,108 +5193,18 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 </tr>
 </thead><tbody>
 <tr>
-<td><a href="#flights-day-view-supported-query-parameters-schema">Flights Day View supported query parameters Schema</a></td>
-<td>Schema and Query Parameters Properties for Flights DayView</td>
+<td><a href="#carhire-day-view-supported-query-parameters-schema">day-view</a></td>
+<td>CarHire DayView <a href="https://www.skyscanner.net/carhire/results/95565041/95565041/2020-08-20T10:00/2020-08-21T10:00/30">Example Link</a></td>
 </tr>
 <tr>
-<td><a href="#flights-calendar-month-view-supported-query-parameters-schema">Flights Calendar Month View supported parameters Schema</a></td>
-<td>Schema and Query Parameters Properties for Flights MonthView</td>
-</tr>
-<tr>
-<td><a href="#flights-browse-view-supported-parameters-schema">Flights Browse View supported parameters Schema</a></td>
-<td>Schema and Query Parameters Properties for Flights BrowseView</td>
-</tr>
-<tr>
-<td><a href="#flights-day-view-for-multicity-search-schema">Flights Day View for multicity search Schema</a></td>
-<td>Schema and Query Parameters Properties for Flights Multicity</b></td>
-</tr>
-<tr>
-<td><a href="#flights-home-page-supported-parameters-schema">Flights Home Page supported parameters Schema</a></td>
-<td>Schema and Query Parameters Properties for Skyscanner&rsquo;s home page</td>
-</tr>
-<tr>
-<td><a href="#cheap-flights-to-supported-query-parameters-schema">Flights Cheap Flights to supported parameters Schema</a></td>
-<td>Schema and Query Parameters Properties for Cheap Flights To</td>
-</tr>
-<tr>
-<td><a href="#flights-airline-contents-schema">Flights Airline to supported parameters Schema</a></td>
-<td>Schema and Query Parameters Properties for Flights Airline</td>
+<td><a href="#carhire-home-page-supported-query-parameters-schema">home</a></td>
+<td>CarHire Home <a href="https://www.skyscanner.net/carhire">Example Link</a></td>
 </tr>
 </tbody></table>
 
-<h2 id="hotels-query-parameters">Hotels Query Parameters</h2>
-
-<p><em>Hotels - API</em></p>
-
-<table><thead>
-<tr>
-<th>API endpoint</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><a href="#hotels-day-view-supported-query-parameters-schema">Hotels Day View supported query parameters Schema</a></td>
-<td>Schema and Query Parameters Properties for Hotels DayView</b></td>
-</tr>
-<tr>
-<td><a href="#hotels-home-view-supported-query-parameters-schema">Hotels Home View supported query parameters Schema</a></td>
-<td>Schema and Query Parameters Properties for Hotels Home View</b></td>
-</tr>
-<tr>
-<td><a href="#hotel-details-supported-query-parameters-schema">Hotel Details supported query parameters Schema</a></td>
-<td>Schema and Query Parameters Properties for Hotel Details</b></td>
-</tr>
-</tbody></table>
-
-<h2 id="cars-query-parameters">Cars Query Parameters</h2>
-
-<p><em>Cars - API</em></p>
-
-<table><thead>
-<tr>
-<th>API endpoint</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><a href="#carhire-day-view-supported-query-parameters-schema">Carhire Day View supported query parameters Schema</a></td>
-<td>Schema and Query Parameters Properties for CarHire DayView</b></td>
-</tr>
-<tr>
-<td><a href="#carhire-home-page-supported-query-parameters-schema">Carhire Home Page supported query parameters Schema</a></td>
-<td>Schema and Query Parameters Properties for CarHire Home</b></td>
-</tr>
-</tbody></table>
-
-          <h2 id="flights-day-view-supported-query-parameters-schema">Flights Day View supported query parameters Schema</h2>
+          <h2 id="flights-day-view-supported-parameters-schema">Flights Day View supported parameters Schema</h2>
 <pre class="highlight plaintext"><code>/flights/day-view
 </code></pre>
-<p>A schema definition for the flights day-view microsite supported query parameters</p>
-
-<table><thead>
-<tr>
-<th>Abstract</th>
-<th>Extensible</th>
-<th>Status</th>
-<th>Identifiable</th>
-<th>Custom Properties</th>
-<th>Additional Properties</th>
-<th>Defined In</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>Can be instantiated</td>
-<td>No</td>
-<td>Experimental</td>
-<td>No</td>
-<td>Forbidden</td>
-<td>Permitted</td>
-<td></td>
-</tr>
-</tbody></table>
-
-<h2 id="flights-day-view-supported-query-parameters-properties">Flights Day View supported query parameters Properties</h2>
-
 <table><thead>
 <tr>
 <th>Property</th>
@@ -5277,7 +5221,7 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 <td><strong>Required</strong></td>
 <td>No</td>
 <td><code class="prettyprint">1</code></td>
-<td>Flights Day View supported query parameters (this schema)</td>
+<td>Flights Day View supported parameters (this schema)</td>
 </tr>
 <tr>
 <td><a href="#alternativedestinations">alternativedestinations</a></td>
@@ -5285,7 +5229,7 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 <td>Optional</td>
 <td>No</td>
 <td></td>
-<td>Flights Day View supported query parameters (this schema)</td>
+<td>Flights Day View supported parameters (this schema)</td>
 </tr>
 <tr>
 <td><a href="#alternativeorigins">alternativeorigins</a></td>
@@ -5293,7 +5237,7 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 <td>Optional</td>
 <td>No</td>
 <td></td>
-<td>Flights Day View supported query parameters (this schema)</td>
+<td>Flights Day View supported parameters (this schema)</td>
 </tr>
 <tr>
 <td><a href="#cabinclass">cabinclass</a></td>
@@ -5301,7 +5245,7 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 <td><strong>Required</strong></td>
 <td>No</td>
 <td><code class="prettyprint">&quot;economy&quot;</code></td>
-<td>Flights Day View supported query parameters (this schema)</td>
+<td>Flights Day View supported parameters (this schema)</td>
 </tr>
 <tr>
 <td><a href="#childrenv2">childrenv2</a></td>
@@ -5309,7 +5253,7 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 <td>Optional</td>
 <td>No</td>
 <td></td>
-<td>Flights Day View supported query parameters (this schema)</td>
+<td>Flights Day View supported parameters (this schema)</td>
 </tr>
 <tr>
 <td><a href="#currency">currency</a></td>
@@ -5317,7 +5261,7 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 <td>Optional</td>
 <td>No</td>
 <td></td>
-<td>Flights Day View supported query parameters (this schema)</td>
+<td>Flights Day View supported parameters (this schema)</td>
 </tr>
 <tr>
 <td><a href="#destination">destination</a></td>
@@ -5325,7 +5269,7 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 <td><strong>Required</strong></td>
 <td>No</td>
 <td></td>
-<td>Flights Day View supported query parameters (this schema)</td>
+<td>Flights Day View supported parameters (this schema)</td>
 </tr>
 <tr>
 <td><a href="#inbounddate">inboundDate</a></td>
@@ -5333,7 +5277,7 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 <td>Optional</td>
 <td>No</td>
 <td></td>
-<td>Flights Day View supported query parameters (this schema)</td>
+<td>Flights Day View supported parameters (this schema)</td>
 </tr>
 <tr>
 <td><a href="#inboundaltsenabled">inboundaltsenabled</a></td>
@@ -5341,7 +5285,7 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 <td>Optional</td>
 <td>No</td>
 <td></td>
-<td>Flights Day View supported query parameters (this schema)</td>
+<td>Flights Day View supported parameters (this schema)</td>
 </tr>
 <tr>
 <td><a href="#infants">infants</a></td>
@@ -5349,7 +5293,7 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 <td>Optional</td>
 <td>No</td>
 <td></td>
-<td>Flights Day View supported query parameters (this schema)</td>
+<td>Flights Day View supported parameters (this schema)</td>
 </tr>
 <tr>
 <td><a href="#locale">locale</a></td>
@@ -5357,7 +5301,7 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 <td>Optional</td>
 <td>No</td>
 <td></td>
-<td>Flights Day View supported query parameters (this schema)</td>
+<td>Flights Day View supported parameters (this schema)</td>
 </tr>
 <tr>
 <td><a href="#market">market</a></td>
@@ -5365,7 +5309,7 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 <td>Optional</td>
 <td>No</td>
 <td></td>
-<td>Flights Day View supported query parameters (this schema)</td>
+<td>Flights Day View supported parameters (this schema)</td>
 </tr>
 <tr>
 <td><a href="#origin">origin</a></td>
@@ -5373,7 +5317,7 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 <td><strong>Required</strong></td>
 <td>No</td>
 <td></td>
-<td>Flights Day View supported query parameters (this schema)</td>
+<td>Flights Day View supported parameters (this schema)</td>
 </tr>
 <tr>
 <td><a href="#outbounddate">outboundDate</a></td>
@@ -5381,7 +5325,7 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 <td><strong>Required</strong></td>
 <td>No</td>
 <td></td>
-<td>Flights Day View supported query parameters (this schema)</td>
+<td>Flights Day View supported parameters (this schema)</td>
 </tr>
 <tr>
 <td><a href="#outboundaltsenabled">outboundaltsenabled</a></td>
@@ -5389,15 +5333,15 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 <td>Optional</td>
 <td>No</td>
 <td></td>
-<td>Flights Day View supported query parameters (this schema)</td>
+<td>Flights Day View supported parameters (this schema)</td>
 </tr>
 <tr>
-<td><a href="#preferdirects">preferdirects</a></td>
+<td><a href="#preferdirects">preferDirects</a></td>
 <td><code class="prettyprint">boolean</code></td>
 <td>Optional</td>
 <td>No</td>
 <td></td>
-<td>Flights Day View supported query parameters (this schema)</td>
+<td>Flights Day View supported parameters (this schema)</td>
 </tr>
 <tr>
 <td><a href="#rtn">rtn</a></td>
@@ -5405,7 +5349,7 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 <td>Optional</td>
 <td>No</td>
 <td></td>
-<td>Flights Day View supported query parameters (this schema)</td>
+<td>Flights Day View supported parameters (this schema)</td>
 </tr>
 <tr>
 <td><code class="prettyprint">*</code></td>
@@ -5566,7 +5510,7 @@ passenger</p>
 
 <h3 id="inbounddate">inboundDate</h3>
 
-<p>Inbound date in the format yymmdd</p>
+<p>Inbound date in the format YYYY-MM-DD</p>
 
 <p><code class="prettyprint">inboundDate</code></p>
 
@@ -5662,7 +5606,7 @@ passenger</p>
 
 <h3 id="outbounddate">outboundDate</h3>
 
-<p>Outbound date in the format yymmdd</p>
+<p>Outbound date in the format YYYY-MM-DD</p>
 
 <p><code class="prettyprint">outboundDate</code></p>
 
@@ -5692,11 +5636,11 @@ passenger</p>
 
 <p><code class="prettyprint">boolean</code></p>
 
-<h3 id="preferdirects">preferdirects</h3>
+<h3 id="preferdirects">preferDirects</h3>
 
 <p>Will search only for direct flights if the value is true</p>
 
-<p><code class="prettyprint">preferdirects</code></p>
+<p><code class="prettyprint">preferDirects</code></p>
 
 <ul>
 <li>is optional</li>
@@ -5704,7 +5648,7 @@ passenger</p>
 <li>defined in this schema</li>
 </ul>
 
-<h4 id="preferdirects-type">preferdirects Type</h4>
+<h4 id="preferdirects-type">preferDirects Type</h4>
 
 <p><code class="prettyprint">boolean</code></p>
 
@@ -5743,32 +5687,6 @@ passenger</p>
           <h2 id="flights-browse-view-supported-parameters-schema">Flights Browse View supported parameters Schema</h2>
 <pre class="highlight plaintext"><code>/flights/browse-view
 </code></pre>
-<p>A schema definition for the flights browse view microsite supported path and query parameters</p>
-
-<table><thead>
-<tr>
-<th>Abstract</th>
-<th>Extensible</th>
-<th>Status</th>
-<th>Identifiable</th>
-<th>Custom Properties</th>
-<th>Additional Properties</th>
-<th>Defined In</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>Can be instantiated</td>
-<td>No</td>
-<td>Experimental</td>
-<td>No</td>
-<td>Forbidden</td>
-<td>Permitted</td>
-<td></td>
-</tr>
-</tbody></table>
-
-<h2 id="flights-browse-view-supported-parameters-properties">Flights Browse View supported parameters Properties</h2>
-
 <table><thead>
 <tr>
 <th>Property</th>
@@ -5863,7 +5781,7 @@ passenger</p>
 <td>Flights Browse View supported parameters (this schema)</td>
 </tr>
 <tr>
-<td><a href="#preferdirects">preferdirects</a></td>
+<td><a href="#preferdirects">preferDirects</a></td>
 <td><code class="prettyprint">boolean</code></td>
 <td>Optional</td>
 <td>No</td>
@@ -5956,7 +5874,7 @@ passenger</p>
 
 <h3 id="inbounddate">inboundDate</h3>
 
-<p>Inbound date in the format yymmdd</p>
+<p>Inbound date in the format YYYY-MM-DD</p>
 
 <p><code class="prettyprint">inboundDate</code></p>
 
@@ -5988,7 +5906,7 @@ passenger</p>
 
 <h3 id="iym">iym</h3>
 
-<p>Arrival date in the format: yymm</p>
+<p>Arrival date in the format: YYYY-MM</p>
 
 <p><code class="prettyprint">iym</code></p>
 
@@ -6052,7 +5970,7 @@ passenger</p>
 
 <h3 id="outbounddate">outboundDate</h3>
 
-<p>Outbound date in the format yymmdd</p>
+<p>Outbound date in the format YYYY-MM-DD</p>
 
 <p><code class="prettyprint">outboundDate</code></p>
 
@@ -6068,7 +5986,7 @@ passenger</p>
 
 <h3 id="oym">oym</h3>
 
-<p>Departure date in the format: yymm</p>
+<p>Departure date in the format: YYYY-MM</p>
 
 <p><code class="prettyprint">oym</code></p>
 
@@ -6082,11 +6000,11 @@ passenger</p>
 
 <p><code class="prettyprint">string</code></p>
 
-<h3 id="preferdirects">preferdirects</h3>
+<h3 id="preferdirects">preferDirects</h3>
 
 <p>Will search only for direct flights if the value is true</p>
 
-<p><code class="prettyprint">preferdirects</code></p>
+<p><code class="prettyprint">preferDirects</code></p>
 
 <ul>
 <li>is optional</li>
@@ -6094,7 +6012,7 @@ passenger</p>
 <li>defined in this schema</li>
 </ul>
 
-<h4 id="preferdirects-type">preferdirects Type</h4>
+<h4 id="preferdirects-type">preferDirects Type</h4>
 
 <p><code class="prettyprint">boolean</code></p>
 
@@ -6133,32 +6051,6 @@ passenger</p>
           <h2 id="flights-calendar-month-view-supported-parameters-schema">Flights Calendar Month View supported parameters Schema</h2>
 <pre class="highlight plaintext"><code>/flights/calendar-month-view
 </code></pre>
-<p>A schema definition for the flights calendar month view microsite supported path and query parameters</p>
-
-<table><thead>
-<tr>
-<th>Abstract</th>
-<th>Extensible</th>
-<th>Status</th>
-<th>Identifiable</th>
-<th>Custom Properties</th>
-<th>Additional Properties</th>
-<th>Defined In</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>Can be instantiated</td>
-<td>No</td>
-<td>Experimental</td>
-<td>No</td>
-<td>Forbidden</td>
-<td>Permitted</td>
-<td></td>
-</tr>
-</tbody></table>
-
-<h2 id="flights-calendar-month-view-supported-parameters-properties">Flights Calendar Month View supported parameters Properties</h2>
-
 <table><thead>
 <tr>
 <th>Property</th>
@@ -6348,7 +6240,7 @@ passenger</p>
 
 <h3 id="iym">iym</h3>
 
-<p>Arrival date in the format: yymm</p>
+<p>Arrival date in the format: YYYY-MM</p>
 
 <p><code class="prettyprint">iym</code></p>
 
@@ -6412,7 +6304,7 @@ passenger</p>
 
 <h3 id="oym">oym</h3>
 
-<p>Departure date in the format: yymm</p>
+<p>Departure date in the format: YYYY-MM</p>
 
 <p><code class="prettyprint">oym</code></p>
 
@@ -6477,32 +6369,6 @@ passenger</p>
           <h2 id="flights-day-view-for-multicity-search-schema">Flights Day View for multicity search Schema</h2>
 <pre class="highlight plaintext"><code>/flights/multicity
 </code></pre>
-<p>A schema definition for the flights day-view microsite supported query parameters</p>
-
-<table><thead>
-<tr>
-<th>Abstract</th>
-<th>Extensible</th>
-<th>Status</th>
-<th>Identifiable</th>
-<th>Custom Properties</th>
-<th>Additional Properties</th>
-<th>Defined In</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>Can be instantiated</td>
-<td>No</td>
-<td>Experimental</td>
-<td>No</td>
-<td>Forbidden</td>
-<td>Permitted</td>
-<td></td>
-</tr>
-</tbody></table>
-
-<h2 id="flights-day-view-for-multicity-search-properties">Flights Day View for multicity search Properties</h2>
-
 <table><thead>
 <tr>
 <th>Property</th>
@@ -6820,7 +6686,7 @@ passenger</p>
 
 <h3 id="date0">date0</h3>
 
-<p>Outbound date in the format yymmdd</p>
+<p>Outbound date in the format YYYY-MM-DD</p>
 
 <p><code class="prettyprint">date0</code></p>
 
@@ -6836,7 +6702,7 @@ passenger</p>
 
 <h3 id="date1">date1</h3>
 
-<p>Outbound date in the format yymmdd</p>
+<p>Outbound date in the format YYYY-MM-DD</p>
 
 <p><code class="prettyprint">date1</code></p>
 
@@ -6852,7 +6718,7 @@ passenger</p>
 
 <h3 id="date2">date2</h3>
 
-<p>Outbound date in the format yymmdd</p>
+<p>Outbound date in the format YYYY-MM-DD</p>
 
 <p><code class="prettyprint">date2</code></p>
 
@@ -6868,7 +6734,7 @@ passenger</p>
 
 <h3 id="date3">date3</h3>
 
-<p>Outbound date in the format yymmdd</p>
+<p>Outbound date in the format YYYY-MM-DD</p>
 
 <p><code class="prettyprint">date3</code></p>
 
@@ -6884,7 +6750,7 @@ passenger</p>
 
 <h3 id="date4">date4</h3>
 
-<p>Outbound date in the format yymmdd</p>
+<p>Outbound date in the format YYYY-MM-DD</p>
 
 <p><code class="prettyprint">date4</code></p>
 
@@ -6900,7 +6766,7 @@ passenger</p>
 
 <h3 id="date5">date5</h3>
 
-<p>Outbound date in the format yymmdd</p>
+<p>Outbound date in the format YYYY-MM-DD</p>
 
 <p><code class="prettyprint">date5</code></p>
 
@@ -7157,32 +7023,6 @@ passenger</p>
           <h2 id="flights-home-page-supported-parameters-schema">Flights Home Page supported parameters Schema</h2>
 <pre class="highlight plaintext"><code>/flights/home
 </code></pre>
-<p>A schema definition for the flights home page microsite supported path and query parameters</p>
-
-<table><thead>
-<tr>
-<th>Abstract</th>
-<th>Extensible</th>
-<th>Status</th>
-<th>Identifiable</th>
-<th>Custom Properties</th>
-<th>Additional Properties</th>
-<th>Defined In</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>Can be instantiated</td>
-<td>No</td>
-<td>Experimental</td>
-<td>No</td>
-<td>Forbidden</td>
-<td>Permitted</td>
-<td></td>
-</tr>
-</tbody></table>
-
-<h2 id="flights-home-page-supported-parameters-properties">Flights Home Page supported parameters Properties</h2>
-
 <table><thead>
 <tr>
 <th>Property</th>
@@ -7270,35 +7110,9 @@ passenger</p>
 
 <p><code class="prettyprint">string</code></p>
 
-          <h2 id="cheap-flights-to-supported-query-parameters-schema">Cheap Flights To supported query parameters Schema</h2>
+          <h2 id="cheap-flights-to-supported-parameters-schema">Cheap Flights To supported parameters Schema</h2>
 <pre class="highlight plaintext"><code>/flights/cheap-flights-to
 </code></pre>
-<p>A schema definition for the cheap flights to microsite supported query parameters</p>
-
-<table><thead>
-<tr>
-<th>Abstract</th>
-<th>Extensible</th>
-<th>Status</th>
-<th>Identifiable</th>
-<th>Custom Properties</th>
-<th>Additional Properties</th>
-<th>Defined In</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>Can be instantiated</td>
-<td>No</td>
-<td>Experimental</td>
-<td>No</td>
-<td>Forbidden</td>
-<td>Permitted</td>
-<td><a href="cheapFlightsTo.json">cheapFlightsTo.json</a></td>
-</tr>
-</tbody></table>
-
-<h2 id="cheap-flights-to-supported-query-parameters-properties">Cheap Flights To supported query parameters Properties</h2>
-
 <table><thead>
 <tr>
 <th>Property</th>
@@ -7313,28 +7127,28 @@ passenger</p>
 <td><code class="prettyprint">string</code></td>
 <td>Optional</td>
 <td>No</td>
-<td>Cheap Flights To supported query parameters (this schema)</td>
+<td>Cheap Flights To supported parameters (this schema)</td>
 </tr>
 <tr>
 <td><a href="#destination">destination</a></td>
 <td><code class="prettyprint">string</code></td>
 <td><strong>Required</strong></td>
 <td>No</td>
-<td>Cheap Flights To supported query parameters (this schema)</td>
+<td>Cheap Flights To supported parameters (this schema)</td>
 </tr>
 <tr>
 <td><a href="#locale">locale</a></td>
 <td><code class="prettyprint">string</code></td>
 <td>Optional</td>
 <td>No</td>
-<td>Cheap Flights To supported query parameters (this schema)</td>
+<td>Cheap Flights To supported parameters (this schema)</td>
 </tr>
 <tr>
 <td><a href="#market">market</a></td>
 <td><code class="prettyprint">string</code></td>
 <td>Optional</td>
 <td>No</td>
-<td>Cheap Flights To supported query parameters (this schema)</td>
+<td>Cheap Flights To supported parameters (this schema)</td>
 </tr>
 <tr>
 <td><code class="prettyprint">*</code></td>
@@ -7409,35 +7223,9 @@ passenger</p>
 
 <p><code class="prettyprint">string</code></p>
 
-          <h2 id="flights-airline-contents-schema">Flights Airline contents Schema</h2>
+          <h2 id="flights-airline-supported-parameters-schema">Flights Airline supported parameters Schema</h2>
 <pre class="highlight plaintext"><code>/flights/flights-airline
 </code></pre>
-<p>A schema definition for the flights airline microsite supported query parameters</p>
-
-<table><thead>
-<tr>
-<th>Abstract</th>
-<th>Extensible</th>
-<th>Status</th>
-<th>Identifiable</th>
-<th>Custom Properties</th>
-<th>Additional Properties</th>
-<th>Defined In</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>Can be instantiated</td>
-<td>No</td>
-<td>Experimental</td>
-<td>No</td>
-<td>Forbidden</td>
-<td>Permitted</td>
-<td></td>
-</tr>
-</tbody></table>
-
-<h2 id="flights-airline-contents-properties">Flights Airline contents Properties</h2>
-
 <table><thead>
 <tr>
 <th>Property</th>
@@ -7452,35 +7240,35 @@ passenger</p>
 <td><code class="prettyprint">string</code></td>
 <td><strong>Required</strong></td>
 <td>No</td>
-<td>Flights Airline contents (this schema)</td>
+<td>Flights Airline supported parameters (this schema)</td>
 </tr>
 <tr>
 <td><a href="#airlinename">airlineName</a></td>
 <td><code class="prettyprint">string</code></td>
 <td>Optional</td>
 <td>No</td>
-<td>Flights Airline contents (this schema)</td>
+<td>Flights Airline supported parameters (this schema)</td>
 </tr>
 <tr>
 <td><a href="#currency">currency</a></td>
 <td><code class="prettyprint">string</code></td>
 <td>Optional</td>
 <td>No</td>
-<td>Flights Airline contents (this schema)</td>
+<td>Flights Airline supported parameters (this schema)</td>
 </tr>
 <tr>
 <td><a href="#locale">locale</a></td>
 <td><code class="prettyprint">string</code></td>
 <td>Optional</td>
 <td>No</td>
-<td>Flights Airline contents (this schema)</td>
+<td>Flights Airline supported parameters (this schema)</td>
 </tr>
 <tr>
 <td><a href="#market">market</a></td>
 <td><code class="prettyprint">string</code></td>
 <td>Optional</td>
 <td>No</td>
-<td>Flights Airline contents (this schema)</td>
+<td>Flights Airline supported parameters (this schema)</td>
 </tr>
 <tr>
 <td><code class="prettyprint">*</code></td>
@@ -7571,804 +7359,9 @@ passenger</p>
 
 <p><code class="prettyprint">string</code></p>
 
-          <h2 id="hotels-day-view-supported-query-parameters-schema">Hotels Day View supported query parameters Schema</h2>
-<pre class="highlight plaintext"><code>/hotels/day-view
-</code></pre>
-<p>A schema definition for the hotels day-view microsite supported query parameters</p>
-
-<table><thead>
-<tr>
-<th>Abstract</th>
-<th>Extensible</th>
-<th>Status</th>
-<th>Identifiable</th>
-<th>Custom Properties</th>
-<th>Additional Properties</th>
-<th>Defined In</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>Can be instantiated</td>
-<td>No</td>
-<td>Experimental</td>
-<td>No</td>
-<td>Forbidden</td>
-<td>Permitted</td>
-<td></td>
-</tr>
-</tbody></table>
-
-<h2 id="hotels-day-view-supported-query-parameters-properties">Hotels Day View supported query parameters Properties</h2>
-
-<table><thead>
-<tr>
-<th>Property</th>
-<th>Type</th>
-<th>Required</th>
-<th>Nullable</th>
-<th>Default</th>
-<th>Defined by</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><a href="#adults">adults</a></td>
-<td><code class="prettyprint">integer</code></td>
-<td>Optional</td>
-<td>No</td>
-<td><code class="prettyprint">2</code></td>
-<td>Hotels Day View supported query parameters (this schema)</td>
-</tr>
-<tr>
-<td><a href="#checkin">checkin</a></td>
-<td><code class="prettyprint">string</code></td>
-<td>Optional</td>
-<td>No</td>
-<td></td>
-<td>Hotels Day View supported query parameters (this schema)</td>
-</tr>
-<tr>
-<td><a href="#checkout">checkout</a></td>
-<td><code class="prettyprint">string</code></td>
-<td>Optional</td>
-<td>No</td>
-<td></td>
-<td>Hotels Day View supported query parameters (this schema)</td>
-</tr>
-<tr>
-<td><a href="#currency">currency</a></td>
-<td><code class="prettyprint">string</code></td>
-<td>Optional</td>
-<td>No</td>
-<td></td>
-<td>Hotels Day View supported query parameters (this schema)</td>
-</tr>
-<tr>
-<td><a href="#entity_id">entity_id</a></td>
-<td><code class="prettyprint">string</code></td>
-<td><strong>Required</strong></td>
-<td>No</td>
-<td></td>
-<td>Hotels Day View supported query parameters (this schema)</td>
-</tr>
-<tr>
-<td><a href="#locale">locale</a></td>
-<td><code class="prettyprint">string</code></td>
-<td>Optional</td>
-<td>No</td>
-<td></td>
-<td>Hotels Day View supported query parameters (this schema)</td>
-</tr>
-<tr>
-<td><a href="#market">market</a></td>
-<td><code class="prettyprint">string</code></td>
-<td>Optional</td>
-<td>No</td>
-<td></td>
-<td>Hotels Day View supported query parameters (this schema)</td>
-</tr>
-<tr>
-<td><a href="#rooms">rooms</a></td>
-<td><code class="prettyprint">integer</code></td>
-<td>Optional</td>
-<td>No</td>
-<td><code class="prettyprint">1</code></td>
-<td>Hotels Day View supported query parameters (this schema)</td>
-</tr>
-<tr>
-<td><a href="#sort">sort</a></td>
-<td><code class="prettyprint">enum</code></td>
-<td>Optional</td>
-<td>No</td>
-<td></td>
-<td>Hotels Day View supported query parameters (this schema)</td>
-</tr>
-<tr>
-<td><code class="prettyprint">*</code></td>
-<td>any</td>
-<td>Additional</td>
-<td>Yes</td>
-<td>this schema <em>allows</em> additional properties</td>
-<td></td>
-</tr>
-</tbody></table>
-
-<h3 id="adults">adults</h3>
-
-<p>Number of adults. Adults number should be greater than or equal to the rooms number.</p>
-
-<p><code class="prettyprint">adults</code></p>
-
-<ul>
-<li>is optional</li>
-<li>type: <code class="prettyprint">integer</code></li>
-<li>default: <code class="prettyprint">2</code></li>
-<li>defined in this schema</li>
-</ul>
-
-<h4 id="adults-type">adults Type</h4>
-
-<p><code class="prettyprint">integer</code></p>
-
-<ul>
-<li>minimum value: <code class="prettyprint">1</code></li>
-</ul>
-
-<h3 id="checkin">checkin</h3>
-
-<p>Checkin date in the formats: <code class="prettyprint">YYYY-MM-DD</code>, <code class="prettyprint">YYMMDD</code> or <code class="prettyprint">YYYYMMDD</code></p>
-
-<p><code class="prettyprint">checkin</code></p>
-
-<ul>
-<li>is optional</li>
-<li>type: <code class="prettyprint">string</code></li>
-<li>defined in this schema</li>
-</ul>
-
-<h4 id="checkin-type">checkin Type</h4>
-
-<p><code class="prettyprint">string</code></p>
-
-<h3 id="checkout">checkout</h3>
-
-<p>Checkout date in the formats: <code class="prettyprint">YYYY-MM-DD</code>, <code class="prettyprint">YYMMDD</code> or <code class="prettyprint">YYYYMMDD</code></p>
-
-<p><code class="prettyprint">checkout</code></p>
-
-<ul>
-<li>is optional</li>
-<li>type: <code class="prettyprint">string</code></li>
-<li>defined in this schema</li>
-</ul>
-
-<h4 id="checkout-type">checkout Type</h4>
-
-<p><code class="prettyprint">string</code></p>
-
-<h3 id="currency">currency</h3>
-
-<p>The desired currency for the page</p>
-
-<p><code class="prettyprint">currency</code></p>
-
-<ul>
-<li>is optional</li>
-<li>type: <code class="prettyprint">string</code></li>
-<li>defined in this schema</li>
-</ul>
-
-<h4 id="currency-type">currency Type</h4>
-
-<p><code class="prettyprint">string</code></p>
-
-<h3 id="entity_id">entity_id</h3>
-
-<p>The id of the geo location for which the search will be performed.</p>
-
-<p><code class="prettyprint">entity_id</code></p>
-
-<ul>
-<li>is <strong>required</strong></li>
-<li>type: <code class="prettyprint">string</code></li>
-<li>defined in this schema</li>
-</ul>
-
-<h4 id="entity_id-type">entity_id Type</h4>
-
-<p><code class="prettyprint">string</code></p>
-
-<h3 id="locale">locale</h3>
-
-<p>The desired locale for the page</p>
-
-<p><code class="prettyprint">locale</code></p>
-
-<ul>
-<li>is optional</li>
-<li>type: <code class="prettyprint">string</code></li>
-<li>defined in this schema</li>
-</ul>
-
-<h4 id="locale-type">locale Type</h4>
-
-<p><code class="prettyprint">string</code></p>
-
-<h3 id="market">market</h3>
-
-<p>The market of the user</p>
-
-<p><code class="prettyprint">market</code></p>
-
-<ul>
-<li>is optional</li>
-<li>type: <code class="prettyprint">string</code></li>
-<li>defined in this schema</li>
-</ul>
-
-<h4 id="market-type">market Type</h4>
-
-<p><code class="prettyprint">string</code></p>
-
-<h3 id="rooms">rooms</h3>
-
-<p>Number of rooms. Rooms number should be less than or equal to the adults number.</p>
-
-<p><code class="prettyprint">rooms</code></p>
-
-<ul>
-<li>is optional</li>
-<li>type: <code class="prettyprint">integer</code></li>
-<li>default: <code class="prettyprint">1</code></li>
-<li>defined in this schema</li>
-</ul>
-
-<h4 id="rooms-type">rooms Type</h4>
-
-<p><code class="prettyprint">integer</code></p>
-
-<ul>
-<li>minimum value: <code class="prettyprint">1</code></li>
-</ul>
-
-<h3 id="sort">sort</h3>
-
-<p>Defines the order in which search results will appear. Options are: price, -price, distance, -rating, stars, -stars.</p>
-
-<p><code class="prettyprint">sort</code></p>
-
-<ul>
-<li>is optional</li>
-<li>type: <code class="prettyprint">enum</code></li>
-<li>defined in this schema</li>
-</ul>
-
-<p>The value of this property <strong>must</strong> be equal to one of the <a href="#sort-known-values">known values below</a>.</p>
-
-<h4 id="sort-known-values">sort Known Values</h4>
-
-<table><thead>
-<tr>
-<th>Value</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><code class="prettyprint">price</code></td>
-<td></td>
-</tr>
-<tr>
-<td><code class="prettyprint">-price</code></td>
-<td></td>
-</tr>
-<tr>
-<td><code class="prettyprint">distance</code></td>
-<td></td>
-</tr>
-<tr>
-<td><code class="prettyprint">-rating</code></td>
-<td></td>
-</tr>
-<tr>
-<td><code class="prettyprint">stars</code></td>
-<td></td>
-</tr>
-<tr>
-<td><code class="prettyprint">-stars</code></td>
-<td></td>
-</tr>
-</tbody></table>
-
-          <h2 id="hotels-home-view-supported-query-parameters-schema">Hotels Home View supported query parameters Schema</h2>
-<pre class="highlight plaintext"><code>/hotels/home-view
-</code></pre>
-<p>A schema definition for the hotels home-view microsite supported query parameters.</p>
-
-<table><thead>
-<tr>
-<th>Abstract</th>
-<th>Extensible</th>
-<th>Status</th>
-<th>Identifiable</th>
-<th>Custom Properties</th>
-<th>Additional Properties</th>
-<th>Defined In</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>Can be instantiated</td>
-<td>No</td>
-<td>Experimental</td>
-<td>No</td>
-<td>Forbidden</td>
-<td>Permitted</td>
-<td></td>
-</tr>
-</tbody></table>
-
-<h2 id="hotels-home-view-supported-query-parameters-properties">Hotels Home View supported query parameters Properties</h2>
-
-<table><thead>
-<tr>
-<th>Property</th>
-<th>Type</th>
-<th>Required</th>
-<th>Nullable</th>
-<th>Defined by</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><a href="#adults">adults</a></td>
-<td><code class="prettyprint">integer</code></td>
-<td>Optional</td>
-<td>No</td>
-<td>Hotels Home View supported query parameters (this schema)</td>
-</tr>
-<tr>
-<td><a href="#checkin">checkin</a></td>
-<td><code class="prettyprint">string</code></td>
-<td>Optional</td>
-<td>No</td>
-<td>Hotels Home View supported query parameters (this schema)</td>
-</tr>
-<tr>
-<td><a href="#checkout">checkout</a></td>
-<td><code class="prettyprint">string</code></td>
-<td>Optional</td>
-<td>No</td>
-<td>Hotels Home View supported query parameters (this schema)</td>
-</tr>
-<tr>
-<td><a href="#currency">currency</a></td>
-<td><code class="prettyprint">string</code></td>
-<td>Optional</td>
-<td>No</td>
-<td>Hotels Home View supported query parameters (this schema)</td>
-</tr>
-<tr>
-<td><a href="#locale">locale</a></td>
-<td><code class="prettyprint">string</code></td>
-<td>Optional</td>
-<td>No</td>
-<td>Hotels Home View supported query parameters (this schema)</td>
-</tr>
-<tr>
-<td><a href="#market">market</a></td>
-<td><code class="prettyprint">string</code></td>
-<td>Optional</td>
-<td>No</td>
-<td>Hotels Home View supported query parameters (this schema)</td>
-</tr>
-<tr>
-<td><a href="#rooms">rooms</a></td>
-<td><code class="prettyprint">integer</code></td>
-<td>Optional</td>
-<td>No</td>
-<td>Hotels Home View supported query parameters (this schema)</td>
-</tr>
-<tr>
-<td><a href="#skyscanner_node_code">skyscanner_node_code</a></td>
-<td><code class="prettyprint">string</code></td>
-<td>Optional</td>
-<td>No</td>
-<td>Hotels Home View supported query parameters (this schema)</td>
-</tr>
-<tr>
-<td><code class="prettyprint">*</code></td>
-<td>any</td>
-<td>Additional</td>
-<td>Yes</td>
-<td>this schema <em>allows</em> additional properties</td>
-</tr>
-</tbody></table>
-
-<h3 id="adults">adults</h3>
-
-<p>Number of adults. Adults number should be greater than or equal to the rooms number.</p>
-
-<p><code class="prettyprint">adults</code></p>
-
-<ul>
-<li>is optional</li>
-<li>type: <code class="prettyprint">integer</code></li>
-<li>defined in this schema</li>
-</ul>
-
-<h4 id="adults-type">adults Type</h4>
-
-<p><code class="prettyprint">integer</code></p>
-
-<h3 id="checkin">checkin</h3>
-
-<p>Checkin date in the formats: <code class="prettyprint">YYYY-MM-DD</code>, <code class="prettyprint">YYMMDD</code> or <code class="prettyprint">YYYYMMDD</code>.</p>
-
-<p><code class="prettyprint">checkin</code></p>
-
-<ul>
-<li>is optional</li>
-<li>type: <code class="prettyprint">string</code></li>
-<li>defined in this schema</li>
-</ul>
-
-<h4 id="checkin-type">checkin Type</h4>
-
-<p><code class="prettyprint">string</code></p>
-
-<h3 id="checkout">checkout</h3>
-
-<p>Checkout date in the formats: <code class="prettyprint">YYYY-MM-DD</code>, <code class="prettyprint">YYMMDD</code> or <code class="prettyprint">YYYYMMDD</code>.</p>
-
-<p><code class="prettyprint">checkout</code></p>
-
-<ul>
-<li>is optional</li>
-<li>type: <code class="prettyprint">string</code></li>
-<li>defined in this schema</li>
-</ul>
-
-<h4 id="checkout-type">checkout Type</h4>
-
-<p><code class="prettyprint">string</code></p>
-
-<h3 id="currency">currency</h3>
-
-<p>The desired currency for the page</p>
-
-<p><code class="prettyprint">currency</code></p>
-
-<ul>
-<li>is optional</li>
-<li>type: <code class="prettyprint">string</code></li>
-<li>defined in this schema</li>
-</ul>
-
-<h4 id="currency-type">currency Type</h4>
-
-<p><code class="prettyprint">string</code></p>
-
-<h3 id="locale">locale</h3>
-
-<p>The desired locale for the page</p>
-
-<p><code class="prettyprint">locale</code></p>
-
-<ul>
-<li>is optional</li>
-<li>type: <code class="prettyprint">string</code></li>
-<li>defined in this schema</li>
-</ul>
-
-<h4 id="locale-type">locale Type</h4>
-
-<p><code class="prettyprint">string</code></p>
-
-<h3 id="market">market</h3>
-
-<p>The market of the user</p>
-
-<p><code class="prettyprint">market</code></p>
-
-<ul>
-<li>is optional</li>
-<li>type: <code class="prettyprint">string</code></li>
-<li>defined in this schema</li>
-</ul>
-
-<h4 id="market-type">market Type</h4>
-
-<p><code class="prettyprint">string</code></p>
-
-<h3 id="rooms">rooms</h3>
-
-<p>Number of rooms. Rooms number should be less than or equal to the adults number.</p>
-
-<p><code class="prettyprint">rooms</code></p>
-
-<ul>
-<li>is optional</li>
-<li>type: <code class="prettyprint">integer</code></li>
-<li>defined in this schema</li>
-</ul>
-
-<h4 id="rooms-type">rooms Type</h4>
-
-<p><code class="prettyprint">integer</code></p>
-
-<h3 id="skyscanner_node_code">skyscanner_node_code</h3>
-
-<p>The IATA code of the destination.</p>
-
-<p><code class="prettyprint">skyscanner_node_code</code></p>
-
-<ul>
-<li>is optional</li>
-<li>type: <code class="prettyprint">string</code></li>
-<li>defined in this schema</li>
-</ul>
-
-<h4 id="skyscanner_node_code-type">skyscanner_node_code Type</h4>
-
-<p><code class="prettyprint">string</code></p>
-
-          <h2 id="hotel-details-supported-query-parameters-schema">Hotel Details supported query parameters Schema</h2>
-<pre class="highlight plaintext"><code>/hotels/hotel-details
-</code></pre>
-<p>A schema definition for the hotel details microsite supported query parameters</p>
-
-<table><thead>
-<tr>
-<th>Abstract</th>
-<th>Extensible</th>
-<th>Status</th>
-<th>Identifiable</th>
-<th>Custom Properties</th>
-<th>Additional Properties</th>
-<th>Defined In</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>Can be instantiated</td>
-<td>No</td>
-<td>Experimental</td>
-<td>No</td>
-<td>Forbidden</td>
-<td>Permitted</td>
-<td><a href="hotelDetails.json">hotelDetails.json</a></td>
-</tr>
-</tbody></table>
-
-<h2 id="hotel-details-supported-query-parameters-properties">Hotel Details supported query parameters Properties</h2>
-
-<table><thead>
-<tr>
-<th>Property</th>
-<th>Type</th>
-<th>Required</th>
-<th>Nullable</th>
-<th>Defined by</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><a href="#adults">adults</a></td>
-<td><code class="prettyprint">integer</code></td>
-<td>Optional</td>
-<td>No</td>
-<td>Hotel Details supported query parameters (this schema)</td>
-</tr>
-<tr>
-<td><a href="#checkin">checkin</a></td>
-<td><code class="prettyprint">string</code></td>
-<td>Optional</td>
-<td>No</td>
-<td>Hotel Details supported query parameters (this schema)</td>
-</tr>
-<tr>
-<td><a href="#checkout">checkout</a></td>
-<td><code class="prettyprint">string</code></td>
-<td>Optional</td>
-<td>No</td>
-<td>Hotel Details supported query parameters (this schema)</td>
-</tr>
-<tr>
-<td><a href="#currency">currency</a></td>
-<td><code class="prettyprint">string</code></td>
-<td>Optional</td>
-<td>No</td>
-<td>Hotel Details supported query parameters (this schema)</td>
-</tr>
-<tr>
-<td><a href="#hotelid">hotelId</a></td>
-<td><code class="prettyprint">string</code></td>
-<td><strong>Required</strong></td>
-<td>No</td>
-<td>Hotel Details supported query parameters (this schema)</td>
-</tr>
-<tr>
-<td><a href="#locale">locale</a></td>
-<td><code class="prettyprint">string</code></td>
-<td>Optional</td>
-<td>No</td>
-<td>Hotel Details supported query parameters (this schema)</td>
-</tr>
-<tr>
-<td><a href="#market">market</a></td>
-<td><code class="prettyprint">string</code></td>
-<td>Optional</td>
-<td>No</td>
-<td>Hotel Details supported query parameters (this schema)</td>
-</tr>
-<tr>
-<td><a href="#rooms">rooms</a></td>
-<td><code class="prettyprint">integer</code></td>
-<td>Optional</td>
-<td>No</td>
-<td>Hotel Details supported query parameters (this schema)</td>
-</tr>
-<tr>
-<td><code class="prettyprint">*</code></td>
-<td>any</td>
-<td>Additional</td>
-<td>Yes</td>
-<td>this schema <em>allows</em> additional properties</td>
-</tr>
-</tbody></table>
-
-<h3 id="adults">adults</h3>
-
-<p>Number of adults</p>
-
-<p><code class="prettyprint">adults</code></p>
-
-<ul>
-<li>is optional</li>
-<li>type: <code class="prettyprint">integer</code></li>
-<li>defined in this schema</li>
-</ul>
-
-<h4 id="adults-type">adults Type</h4>
-
-<p><code class="prettyprint">integer</code></p>
-
-<h3 id="checkin">checkin</h3>
-
-<p>Date in the format YYYY-MM-DD</p>
-
-<p><code class="prettyprint">checkin</code></p>
-
-<ul>
-<li>is optional</li>
-<li>type: <code class="prettyprint">string</code></li>
-<li>defined in this schema</li>
-</ul>
-
-<h4 id="checkin-type">checkin Type</h4>
-
-<p><code class="prettyprint">string</code></p>
-
-<h3 id="checkout">checkout</h3>
-
-<p>Date in the format YYYY-MM-DD</p>
-
-<p><code class="prettyprint">checkout</code></p>
-
-<ul>
-<li>is optional</li>
-<li>type: <code class="prettyprint">string</code></li>
-<li>defined in this schema</li>
-</ul>
-
-<h4 id="checkout-type">checkout Type</h4>
-
-<p><code class="prettyprint">string</code></p>
-
-<h3 id="currency">currency</h3>
-
-<p>The desired currency for the page</p>
-
-<p><code class="prettyprint">currency</code></p>
-
-<ul>
-<li>is optional</li>
-<li>type: <code class="prettyprint">string</code></li>
-<li>defined in this schema</li>
-</ul>
-
-<h4 id="currency-type">currency Type</h4>
-
-<p><code class="prettyprint">string</code></p>
-
-<h3 id="hotelid">hotelId</h3>
-
-<p>The entity id of the hotel.</p>
-
-<p><code class="prettyprint">hotelId</code></p>
-
-<ul>
-<li>is <strong>required</strong></li>
-<li>type: <code class="prettyprint">string</code></li>
-<li>defined in this schema</li>
-</ul>
-
-<h4 id="hotelid-type">hotelId Type</h4>
-
-<p><code class="prettyprint">string</code></p>
-
-<h3 id="locale">locale</h3>
-
-<p>The desired locale for the page</p>
-
-<p><code class="prettyprint">locale</code></p>
-
-<ul>
-<li>is optional</li>
-<li>type: <code class="prettyprint">string</code></li>
-<li>defined in this schema</li>
-</ul>
-
-<h4 id="locale-type">locale Type</h4>
-
-<p><code class="prettyprint">string</code></p>
-
-<h3 id="market">market</h3>
-
-<p>The market of the user</p>
-
-<p><code class="prettyprint">market</code></p>
-
-<ul>
-<li>is optional</li>
-<li>type: <code class="prettyprint">string</code></li>
-<li>defined in this schema</li>
-</ul>
-
-<h4 id="market-type">market Type</h4>
-
-<p><code class="prettyprint">string</code></p>
-
-<h3 id="rooms">rooms</h3>
-
-<p>Number of rooms</p>
-
-<p><code class="prettyprint">rooms</code></p>
-
-<ul>
-<li>is optional</li>
-<li>type: <code class="prettyprint">integer</code></li>
-<li>defined in this schema</li>
-</ul>
-
-<h4 id="rooms-type">rooms Type</h4>
-
-<p><code class="prettyprint">integer</code></p>
-
-          <h2 id="carhire-day-view-supported-query-parameters-schema">Carhire Day View supported query parameters Schema</h2>
+          <h2 id="carhire-day-view-supported-parameters-schema">Carhire Day View supported parameters Schema</h2>
 <pre class="highlight plaintext"><code>/cars/day-view
 </code></pre>
-<p>A schema definition for the carhire day-view microsite supported query parameters</p>
-
-<table><thead>
-<tr>
-<th>Abstract</th>
-<th>Extensible</th>
-<th>Status</th>
-<th>Identifiable</th>
-<th>Custom Properties</th>
-<th>Additional Properties</th>
-<th>Defined In</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>Can be instantiated</td>
-<td>No</td>
-<td>Experimental</td>
-<td>No</td>
-<td>Forbidden</td>
-<td>Permitted</td>
-<td></td>
-</tr>
-</tbody></table>
-
-<h2 id="carhire-day-view-supported-query-parameters-properties">Carhire Day View supported query parameters Properties</h2>
-
 <table><thead>
 <tr>
 <th>Property</th>
@@ -8383,56 +7376,56 @@ passenger</p>
 <td><code class="prettyprint">string</code></td>
 <td>Optional</td>
 <td>No</td>
-<td>Carhire Day View supported query parameters (this schema)</td>
+<td>Carhire Day View supported parameters (this schema)</td>
 </tr>
 <tr>
 <td><a href="#driverage">driverAge</a></td>
 <td><code class="prettyprint">integer</code></td>
 <td><strong>Required</strong></td>
 <td>No</td>
-<td>Carhire Day View supported query parameters (this schema)</td>
+<td>Carhire Day View supported parameters (this schema)</td>
 </tr>
 <tr>
 <td><a href="#dropoffplace">dropoffPlace</a></td>
 <td><code class="prettyprint">string</code></td>
 <td>Optional</td>
 <td>No</td>
-<td>Carhire Day View supported query parameters (this schema)</td>
+<td>Carhire Day View supported parameters (this schema)</td>
 </tr>
 <tr>
 <td><a href="#dropofftime">dropoffTime</a></td>
 <td><code class="prettyprint">string</code></td>
 <td><strong>Required</strong></td>
 <td>No</td>
-<td>Carhire Day View supported query parameters (this schema)</td>
+<td>Carhire Day View supported parameters (this schema)</td>
 </tr>
 <tr>
 <td><a href="#locale">locale</a></td>
 <td><code class="prettyprint">string</code></td>
 <td>Optional</td>
 <td>No</td>
-<td>Carhire Day View supported query parameters (this schema)</td>
+<td>Carhire Day View supported parameters (this schema)</td>
 </tr>
 <tr>
 <td><a href="#market">market</a></td>
 <td><code class="prettyprint">string</code></td>
 <td>Optional</td>
 <td>No</td>
-<td>Carhire Day View supported query parameters (this schema)</td>
+<td>Carhire Day View supported parameters (this schema)</td>
 </tr>
 <tr>
 <td><a href="#pickupplace">pickupPlace</a></td>
 <td><code class="prettyprint">string</code></td>
 <td><strong>Required</strong></td>
 <td>No</td>
-<td>Carhire Day View supported query parameters (this schema)</td>
+<td>Carhire Day View supported parameters (this schema)</td>
 </tr>
 <tr>
 <td><a href="#pickuptime">pickupTime</a></td>
 <td><code class="prettyprint">string</code></td>
 <td><strong>Required</strong></td>
 <td>No</td>
-<td>Carhire Day View supported query parameters (this schema)</td>
+<td>Carhire Day View supported parameters (this schema)</td>
 </tr>
 <tr>
 <td><code class="prettyprint">*</code></td>
@@ -8461,7 +7454,7 @@ passenger</p>
 
 <h3 id="driverage">driverAge</h3>
 
-<p>Driver age between 18 and 99</p>
+<p>Driver age between 21 and 99</p>
 
 <p><code class="prettyprint">driverAge</code></p>
 
@@ -8571,35 +7564,9 @@ passenger</p>
 
 <p><code class="prettyprint">string</code></p>
 
-          <h2 id="carhire-home-page-supported-query-parameters-schema">Carhire Home page supported query parameters Schema</h2>
+          <h2 id="carhire-home-page-supported-parameters-schema">Carhire Home page supported parameters Schema</h2>
 <pre class="highlight plaintext"><code>/cars/home
 </code></pre>
-<p>A schema definition for the carhire home page microsite supported query parameters</p>
-
-<table><thead>
-<tr>
-<th>Abstract</th>
-<th>Extensible</th>
-<th>Status</th>
-<th>Identifiable</th>
-<th>Custom Properties</th>
-<th>Additional Properties</th>
-<th>Defined In</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>Can be instantiated</td>
-<td>No</td>
-<td>Experimental</td>
-<td>No</td>
-<td>Forbidden</td>
-<td>Permitted</td>
-<td></td>
-</tr>
-</tbody></table>
-
-<h2 id="carhire-home-page-supported-query-parameters-properties">Carhire Home page supported query parameters Properties</h2>
-
 <table><thead>
 <tr>
 <th>Property</th>
@@ -8614,21 +7581,21 @@ passenger</p>
 <td><code class="prettyprint">string</code></td>
 <td>Optional</td>
 <td>No</td>
-<td>Carhire Home page supported query parameters (this schema)</td>
+<td>Carhire Home page supported parameters (this schema)</td>
 </tr>
 <tr>
 <td><a href="#locale">locale</a></td>
 <td><code class="prettyprint">string</code></td>
 <td>Optional</td>
 <td>No</td>
-<td>Carhire Home page supported query parameters (this schema)</td>
+<td>Carhire Home page supported parameters (this schema)</td>
 </tr>
 <tr>
 <td><a href="#market">market</a></td>
 <td><code class="prettyprint">string</code></td>
 <td>Optional</td>
 <td>No</td>
-<td>Carhire Home page supported query parameters (this schema)</td>
+<td>Carhire Home page supported parameters (this schema)</td>
 </tr>
 <tr>
 <td><code class="prettyprint">*</code></td>
