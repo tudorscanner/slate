@@ -5153,11 +5153,11 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 </tr>
 </thead><tbody>
 <tr>
-<td><a href="#flights-day-view-supported-query-parameters-schema">day-view</a></td>
+<td><a href="#flights-day-view-supported-parameters-schema">day-view</a></td>
 <td>Flights Day View <a href="https://www.skyscanner.net/transport/flights/sof/ams/200813/200819/?adults=1&amp;children=2&amp;adultsv2=1&amp;childrenv2=3%7c2&amp;infants=0&amp;cabinclass=economy&amp;rtn=1&amp;preferdirects=false&amp;outboundaltsenabled=false&amp;inboundaltsenabled=false&amp;ref=home#/">Example Link</a></td>
 </tr>
 <tr>
-<td><a href="#flights-calendar-month-view-supported-query-parameters-schema">calendar-month-view</a></td>
+<td><a href="#flights-calendar-month-view-supported-parameters-schema">calendar-month-view</a></td>
 <td>Flights MonthView <a href="https://www.skyscanner.net/transport/flights/sof/ams/?adults=1&amp;children=2&amp;adultsv2=1&amp;childrenv2=3%7C2&amp;infants=0&amp;cabinclass=economy&amp;rtn=1&amp;preferdirects=false&amp;outboundaltsenabled=false&amp;inboundaltsenabled=false&amp;oym=2008&amp;iym=2008&amp;ref=home&amp;selectedoday=01&amp;selectediday=01">Example Link</a></td>
 </tr>
 <tr>
@@ -5173,11 +5173,11 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 <td>Skyscanner&rsquo;s Home <a href="https://www.skyscanner.net/">Example Link</a></td>
 </tr>
 <tr>
-<td><a href="#cheap-flights-to-supported-query-parameters-schema">cheap-flights-to</a></td>
+<td><a href="#cheap-flights-to-supported-parameters-schema">cheap-flights-to</a></td>
 <td>Cheap Flights To <a href="https://www.skyscanner.net/za/en-gb/zar/flights-to/bom/cheap-flights-to-mumbai-airport.html">Example Link</a></td>
 </tr>
 <tr>
-<td><a href="#flights-airline-contents-schema">flights-airline</a></td>
+<td><a href="#flights-airline-supported-parameters-schema">flights-airline</a></td>
 <td>Flights Airline <a href="https://www.skyscanner.net/airline/airline-emirates-ek.html">Example Link</a></td>
 </tr>
 </tbody></table>
@@ -5193,11 +5193,11 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 </tr>
 </thead><tbody>
 <tr>
-<td><a href="#carhire-day-view-supported-query-parameters-schema">day-view</a></td>
+<td><a href="#carhire-day-view-supported-parameters-schema">day-view</a></td>
 <td>CarHire DayView <a href="https://www.skyscanner.net/carhire/results/95565041/95565041/2020-08-20T10:00/2020-08-21T10:00/30">Example Link</a></td>
 </tr>
 <tr>
-<td><a href="#carhire-home-page-supported-query-parameters-schema">home</a></td>
+<td><a href="#carhire-home-page-supported-parameters-schema">home</a></td>
 <td>CarHire Home <a href="https://www.skyscanner.net/carhire">Example Link</a></td>
 </tr>
 </tbody></table>
@@ -5420,7 +5420,7 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 
 <h3 id="cabinclass">cabinclass</h3>
 
-<p>Fare class</p>
+<p>Cabin class for the flight, possible values are: economy, premiumeconomy, business and first</p>
 
 <p><code class="prettyprint">cabinclass</code></p>
 
@@ -5478,7 +5478,7 @@ passenger</p>
 
 <h3 id="currency">currency</h3>
 
-<p>The desired currency for the page</p>
+<p>The desired currency for the page. Examples: GBP, EUR, USD</p>
 
 <p><code class="prettyprint">currency</code></p>
 
@@ -5526,7 +5526,7 @@ passenger</p>
 
 <h3 id="inboundaltsenabled">inboundaltsenabled</h3>
 
-<p>Inlcuding nearby airports as an inbound place</p>
+<p>Including nearby airports as an inbound place</p>
 
 <p><code class="prettyprint">inboundaltsenabled</code></p>
 
@@ -5558,7 +5558,7 @@ passenger</p>
 
 <h3 id="locale">locale</h3>
 
-<p>The desired locale for the page</p>
+<p>The desired locale for the page. Examples: es-ES, en-GB, ru-RU</p>
 
 <p><code class="prettyprint">locale</code></p>
 
@@ -5574,7 +5574,7 @@ passenger</p>
 
 <h3 id="market">market</h3>
 
-<p>The market of the user</p>
+<p>The market of the user. Examples: UK, US, ES</p>
 
 <p><code class="prettyprint">market</code></p>
 
@@ -5622,7 +5622,7 @@ passenger</p>
 
 <h3 id="outboundaltsenabled">outboundaltsenabled</h3>
 
-<p>Inlcuding nearby airports as an outbound place</p>
+<p>Including nearby airports as an outbound place</p>
 
 <p><code class="prettyprint">outboundaltsenabled</code></p>
 
@@ -5842,7 +5842,7 @@ passenger</p>
 
 <h3 id="currency">currency</h3>
 
-<p>The desired currency for the page</p>
+<p>The desired currency for the page. Examples: GBP, EUR, USD</p>
 
 <p><code class="prettyprint">currency</code></p>
 
@@ -5922,7 +5922,7 @@ passenger</p>
 
 <h3 id="locale">locale</h3>
 
-<p>The desired locale for the page</p>
+<p>The desired locale for the page. Examples: es-ES, en-GB, ru-RU</p>
 
 <p><code class="prettyprint">locale</code></p>
 
@@ -5938,7 +5938,7 @@ passenger</p>
 
 <h3 id="market">market</h3>
 
-<p>The market of the user</p>
+<p>The market of the user. Examples: UK, US, ES</p>
 
 <p><code class="prettyprint">market</code></p>
 
@@ -6192,7 +6192,7 @@ passenger</p>
 
 <h3 id="currency">currency</h3>
 
-<p>The desired currency for the page</p>
+<p>The desired currency for the page. Examples: GBP, EUR, USD</p>
 
 <p><code class="prettyprint">currency</code></p>
 
@@ -6256,7 +6256,7 @@ passenger</p>
 
 <h3 id="locale">locale</h3>
 
-<p>The desired locale for the page</p>
+<p>The desired locale for the page. Examples: es-ES, en-GB, ru-RU</p>
 
 <p><code class="prettyprint">locale</code></p>
 
@@ -6272,7 +6272,7 @@ passenger</p>
 
 <h3 id="market">market</h3>
 
-<p>The market of the user</p>
+<p>The market of the user. Examples: UK, US, ES</p>
 
 <p><code class="prettyprint">market</code></p>
 
@@ -6612,7 +6612,7 @@ passenger</p>
 
 <h3 id="cabinclass">cabinclass</h3>
 
-<p>Fare class</p>
+<p>Cabin class for the flight, possible values are: economy, premiumeconomy, business and first</p>
 
 <p><code class="prettyprint">cabinclass</code></p>
 
@@ -6670,7 +6670,7 @@ passenger</p>
 
 <h3 id="currency">currency</h3>
 
-<p>The desired currency for the flights search results</p>
+<p>The desired currency for the page. Examples: GBP, EUR, USD</p>
 
 <p><code class="prettyprint">currency</code></p>
 
@@ -6686,7 +6686,7 @@ passenger</p>
 
 <h3 id="date0">date0</h3>
 
-<p>Outbound date in the format YYYY-MM-DD</p>
+<p>Outbound date of the first flight in the format YYYY-MM-DD</p>
 
 <p><code class="prettyprint">date0</code></p>
 
@@ -6702,7 +6702,7 @@ passenger</p>
 
 <h3 id="date1">date1</h3>
 
-<p>Outbound date in the format YYYY-MM-DD</p>
+<p>Outbound date of the second flight in the format YYYY-MM-DD</p>
 
 <p><code class="prettyprint">date1</code></p>
 
@@ -6718,7 +6718,7 @@ passenger</p>
 
 <h3 id="date2">date2</h3>
 
-<p>Outbound date in the format YYYY-MM-DD</p>
+<p>Outbound date of the third flight in the format YYYY-MM-DD</p>
 
 <p><code class="prettyprint">date2</code></p>
 
@@ -6734,7 +6734,7 @@ passenger</p>
 
 <h3 id="date3">date3</h3>
 
-<p>Outbound date in the format YYYY-MM-DD</p>
+<p>Outbound date of the fourth flight in the format YYYY-MM-DD</p>
 
 <p><code class="prettyprint">date3</code></p>
 
@@ -6750,7 +6750,7 @@ passenger</p>
 
 <h3 id="date4">date4</h3>
 
-<p>Outbound date in the format YYYY-MM-DD</p>
+<p>Outbound date of the fifth flight in the format YYYY-MM-DD</p>
 
 <p><code class="prettyprint">date4</code></p>
 
@@ -6766,7 +6766,7 @@ passenger</p>
 
 <h3 id="date5">date5</h3>
 
-<p>Outbound date in the format YYYY-MM-DD</p>
+<p>Outbound date of the sixth flight in the format YYYY-MM-DD</p>
 
 <p><code class="prettyprint">date5</code></p>
 
@@ -6782,7 +6782,7 @@ passenger</p>
 
 <h3 id="destination0">destination0</h3>
 
-<p>Location code for the destination</p>
+<p>Location code for the destination of the first flight</p>
 
 <p><code class="prettyprint">destination0</code></p>
 
@@ -6798,7 +6798,7 @@ passenger</p>
 
 <h3 id="destination1">destination1</h3>
 
-<p>Location code for the destination</p>
+<p>Location code for the destination of the second flight</p>
 
 <p><code class="prettyprint">destination1</code></p>
 
@@ -6814,7 +6814,7 @@ passenger</p>
 
 <h3 id="destination2">destination2</h3>
 
-<p>Location code for the destination</p>
+<p>Location code for the destination of the third flight</p>
 
 <p><code class="prettyprint">destination2</code></p>
 
@@ -6830,7 +6830,7 @@ passenger</p>
 
 <h3 id="destination3">destination3</h3>
 
-<p>Location code for the destination</p>
+<p>Location code for the destination of the fourth flight</p>
 
 <p><code class="prettyprint">destination3</code></p>
 
@@ -6846,7 +6846,7 @@ passenger</p>
 
 <h3 id="destination4">destination4</h3>
 
-<p>Location code for the destination</p>
+<p>Location code for the destination of the fifth flight</p>
 
 <p><code class="prettyprint">destination4</code></p>
 
@@ -6862,7 +6862,7 @@ passenger</p>
 
 <h3 id="destination5">destination5</h3>
 
-<p>Location code for the destination</p>
+<p>Location code for the destination of the sixth flight</p>
 
 <p><code class="prettyprint">destination5</code></p>
 
@@ -6894,7 +6894,7 @@ passenger</p>
 
 <h3 id="locale">locale</h3>
 
-<p>The desired locale for the flights search results</p>
+<p>The desired locale for the page. Examples: es-ES, en-GB, ru-RU</p>
 
 <p><code class="prettyprint">locale</code></p>
 
@@ -6910,7 +6910,7 @@ passenger</p>
 
 <h3 id="market">market</h3>
 
-<p>The market for which the flights search will be performed.</p>
+<p>The market of the user. Examples: UK, US, ES</p>
 
 <p><code class="prettyprint">market</code></p>
 
@@ -6926,7 +6926,7 @@ passenger</p>
 
 <h3 id="origin0">origin0</h3>
 
-<p>Location code for the origin</p>
+<p>Location code for the origin of the first flight</p>
 
 <p><code class="prettyprint">origin0</code></p>
 
@@ -6942,7 +6942,7 @@ passenger</p>
 
 <h3 id="origin1">origin1</h3>
 
-<p>Location code for the origin</p>
+<p>Location code for the origin of the second flight</p>
 
 <p><code class="prettyprint">origin1</code></p>
 
@@ -6958,7 +6958,7 @@ passenger</p>
 
 <h3 id="origin2">origin2</h3>
 
-<p>Location code for the origin</p>
+<p>Location code for the origin of the third flight</p>
 
 <p><code class="prettyprint">origin2</code></p>
 
@@ -6974,7 +6974,7 @@ passenger</p>
 
 <h3 id="origin3">origin3</h3>
 
-<p>Location code for the origin</p>
+<p>Location code for the origin of the fourth flight</p>
 
 <p><code class="prettyprint">origin3</code></p>
 
@@ -6990,7 +6990,7 @@ passenger</p>
 
 <h3 id="origin4">origin4</h3>
 
-<p>Location code for the origin</p>
+<p>Location code for the origin of the fifth flight</p>
 
 <p><code class="prettyprint">origin4</code></p>
 
@@ -7006,7 +7006,7 @@ passenger</p>
 
 <h3 id="origin5">origin5</h3>
 
-<p>Location code for the origin</p>
+<p>Location code for the origin of the sixth flight</p>
 
 <p><code class="prettyprint">origin5</code></p>
 
@@ -7064,7 +7064,7 @@ passenger</p>
 
 <h3 id="currency">currency</h3>
 
-<p>The desired currency for the page.</p>
+<p>The desired currency for the page. Examples: GBP, EUR, USD</p>
 
 <p><code class="prettyprint">currency</code></p>
 
@@ -7080,7 +7080,7 @@ passenger</p>
 
 <h3 id="locale">locale</h3>
 
-<p>The desired locale for the page.</p>
+<p>The desired locale for the page. Examples: es-ES, en-GB, ru-RU</p>
 
 <p><code class="prettyprint">locale</code></p>
 
@@ -7096,7 +7096,7 @@ passenger</p>
 
 <h3 id="market">market</h3>
 
-<p>The market of the user.</p>
+<p>The market of the user. Examples: UK, US, ES</p>
 
 <p><code class="prettyprint">market</code></p>
 
@@ -7161,7 +7161,7 @@ passenger</p>
 
 <h3 id="currency">currency</h3>
 
-<p>The desired currency for the flights search results</p>
+<p>The desired currency for the page. Examples: GBP, EUR, USD</p>
 
 <p><code class="prettyprint">currency</code></p>
 
@@ -7193,7 +7193,7 @@ passenger</p>
 
 <h3 id="locale">locale</h3>
 
-<p>The desired locale for the flights search results</p>
+<p>The desired locale for the page. Examples: es-ES, en-GB, ru-RU</p>
 
 <p><code class="prettyprint">locale</code></p>
 
@@ -7209,7 +7209,7 @@ passenger</p>
 
 <h3 id="market">market</h3>
 
-<p>The market for which the flights search will be performed.</p>
+<p>The market of the user. Examples: UK, US, ES</p>
 
 <p><code class="prettyprint">market</code></p>
 
@@ -7313,7 +7313,7 @@ passenger</p>
 
 <h3 id="currency">currency</h3>
 
-<p>The desired currency for the page.</p>
+<p>The desired currency for the page. Examples: GBP, EUR, USD</p>
 
 <p><code class="prettyprint">currency</code></p>
 
@@ -7329,7 +7329,7 @@ passenger</p>
 
 <h3 id="locale">locale</h3>
 
-<p>The desired locale for the page.</p>
+<p>The desired locale for the page. Examples: es-ES, en-GB, ru-RU</p>
 
 <p><code class="prettyprint">locale</code></p>
 
@@ -7345,7 +7345,7 @@ passenger</p>
 
 <h3 id="market">market</h3>
 
-<p>The market of the user.</p>
+<p>The market of the user. Examples: UK, US, ES</p>
 
 <p><code class="prettyprint">market</code></p>
 
@@ -7438,7 +7438,7 @@ passenger</p>
 
 <h3 id="currency">currency</h3>
 
-<p>The desired currency for the page</p>
+<p>The desired currency for the page. Examples: GBP, EUR, USD</p>
 
 <p><code class="prettyprint">currency</code></p>
 
@@ -7502,7 +7502,7 @@ passenger</p>
 
 <h3 id="locale">locale</h3>
 
-<p>The desired locale for the page</p>
+<p>The desired locale for the page. Examples: es-ES, en-GB, ru-RU</p>
 
 <p><code class="prettyprint">locale</code></p>
 
@@ -7518,7 +7518,7 @@ passenger</p>
 
 <h3 id="market">market</h3>
 
-<p>The market of the user</p>
+<p>The market of the user. Examples: UK, US, ES</p>
 
 <p><code class="prettyprint">market</code></p>
 
@@ -7608,7 +7608,7 @@ passenger</p>
 
 <h3 id="currency">currency</h3>
 
-<p>The desired currency for the carhire search results</p>
+<p>The desired currency for the page. Examples: GBP, EUR, USD</p>
 
 <p><code class="prettyprint">currency</code></p>
 
@@ -7624,7 +7624,7 @@ passenger</p>
 
 <h3 id="locale">locale</h3>
 
-<p>The desired locale for the carhire search results</p>
+<p>The desired locale for the page. Examples: es-ES, en-GB, ru-RU</p>
 
 <p><code class="prettyprint">locale</code></p>
 
@@ -7640,7 +7640,7 @@ passenger</p>
 
 <h3 id="market">market</h3>
 
-<p>The market for which the carhire search will be performed.</p>
+<p>The market of the user. Examples: UK, US, ES</p>
 
 <p><code class="prettyprint">market</code></p>
 
