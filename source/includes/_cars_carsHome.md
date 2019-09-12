@@ -13,7 +13,7 @@
 
 ### currency
 
-The desired currency for the carhire search results
+The desired currency for the page. Examples: GBP, EUR, USD
 
 `currency`
 
@@ -27,7 +27,7 @@ The desired currency for the carhire search results
 
 ### locale
 
-The desired locale for the carhire search results
+The desired locale for the page. Examples: es-ES, en-GB, ru-RU
 
 `locale`
 
@@ -41,7 +41,7 @@ The desired locale for the carhire search results
 
 ### market
 
-The market for which the carhire search will be performed.
+The market of the user. Examples: UK, US, ES
 
 `market`
 

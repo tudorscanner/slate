@@ -3,6 +3,7 @@
 ```
 /cars/day-view
 ```
+
 | Property                      | Type      | Required     | Nullable | Defined by                                          |
 | ----------------------------- | --------- | ------------ | -------- | --------------------------------------------------- |
 | [currency](#currency)         | `string`  | Optional     | No       | Carhire Day View supported parameters (this schema) |
@@ -17,7 +18,7 @@
 
 ### currency
 
-The desired currency for the page
+The desired currency for the page. Examples: GBP, EUR, USD
 
 `currency`
 
@@ -73,7 +74,7 @@ Drop Off Datetime in ISO 8601 standard. I.e YYYY-MM-DDTHH:MM
 
 ### locale
 
-The desired locale for the page
+The desired locale for the page. Examples: es-ES, en-GB, ru-RU
 
 `locale`
 
@@ -87,7 +88,7 @@ The desired locale for the page
 
 ### market
 
-The market of the user
+The market of the user. Examples: UK, US, ES
 
 `market`
 
