@@ -23,6 +23,7 @@
 | [outboundaltsenabled](#outboundaltsenabled)         | `boolean`  | Optional     | No       |                                            | Flights Day View supported parameters (this schema) |
 | [preferDirects](#preferdirects)                     | `boolean`  | Optional     | No       |                                            | Flights Day View supported parameters (this schema) |
 | [rtn](#rtn)                                         | `enum`     | Optional     | No       |                                            | Flights Day View supported parameters (this schema) |
+| [sortby](#sortby)                                   | `enum`     | Optional     | No       |                                            | Flights Day View supported parameters (this schema) |
 | `*`                                                 | any        | Additional   | Yes      | this schema _allows_ additional properties |
 
 ### adultsv2
@@ -283,3 +284,23 @@ The value of this property **must** be equal to one of the [known values below](
 | ----- | ----------- |
 | `0`   |             |
 | `1`   |             |
+
+### sortby
+
+Sets the sorting order for the results. Possible values are: best, cheapest and fastest.
+
+`sortby`
+
+- is optional
+- type: `enum`
+- defined in this schema
+
+The value of this property **must** be equal to one of the [known values below](#sortby-known-values).
+
+#### sortby Known Values
+
+| Value      | Description |
+| ---------- | ----------- |
+| `best`     |             |
+| `cheapest` |             |
+| `fastest`  |             |
