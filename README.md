@@ -2,7 +2,7 @@ Getting Started with the Slate Skyscanner API documentation
 -----------------------------------------------------------
 ### Production address
 
-The docs can be found at [here](https://skyscanner.github.io/slate/)
+The docs can be found at [skyscanner.github.io/slate](https://skyscanner.github.io/slate/)
 
 ### Getting Set Up
 
