@@ -5352,6 +5352,14 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 <td>Flights Day View supported parameters (this schema)</td>
 </tr>
 <tr>
+<td><a href="#sortby">sortby</a></td>
+<td><code class="prettyprint">enum</code></td>
+<td>Optional</td>
+<td>No</td>
+<td></td>
+<td>Flights Day View supported parameters (this schema)</td>
+</tr>
+<tr>
 <td><code class="prettyprint">*</code></td>
 <td>any</td>
 <td>Additional</td>
@@ -5680,6 +5688,42 @@ passenger</p>
 </tr>
 <tr>
 <td><code class="prettyprint">1</code></td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="sortby">sortby</h3>
+
+<p>Sets the sorting order for the results. Possible values are: best, cheapest and fastest.</p>
+
+<p><code class="prettyprint">sortby</code></p>
+
+<ul>
+<li>is optional</li>
+<li>type: <code class="prettyprint">enum</code></li>
+<li>defined in this schema</li>
+</ul>
+
+<p>The value of this property <strong>must</strong> be equal to one of the <a href="#sortby-known-values">known values below</a>.</p>
+
+<h4 id="sortby-known-values">sortby Known Values</h4>
+
+<table><thead>
+<tr>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">best</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code class="prettyprint">cheapest</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code class="prettyprint">fastest</code></td>
 <td></td>
 </tr>
 </tbody></table>
