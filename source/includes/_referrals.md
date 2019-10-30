@@ -40,7 +40,7 @@ check the tables below.
 
 An example including some of the parameters looks like:
 
-Please don't use `locale`, `market` and `currency` unless you're absolutely sure. Skyscanner will add these parameters using location, IP and history of the user.
+Please try to avoid using `locale`, `market` and `currency`, as these values will be governed by Skyscanner market detection logic on the Skyscanner site. If you believe you need to use these, please discuss with your account manager.
 
 `GET https://skyscanner.net/g/referrals/v1/flights/day-view/?origin=cdg&destination=edi&outboundDate=2019-10-14&utm_term=summer&associateid=MY_ID_123`
 

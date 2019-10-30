@@ -90,7 +90,7 @@ passenger
 ### currency
 
 The desired currency for the page. Examples: GBP, EUR, USD  
-Skyscanner will add this parameter using location, IP and history of the user - please don't enter unless you're absolutely sure
+Please try to avoid using `locale`, `market` and `currency`, as these values will be governed by Skyscanner market detection logic on the Skyscanner site. If you believe you need to use these, please discuss with your account manager.
 
 `currency`
 
@@ -287,7 +287,7 @@ Number of infant passengers. An infant is 1 year old or younger.
 ### locale
 
 The desired locale for the page. Examples: es-ES, en-GB, ru-RU  
-Skyscanner will set this parameter based on location, IP and history of the user. Please do not use it unless you are absolutely sure
+Please try to avoid using `locale`, `market` and `currency`, as these values will be governed by Skyscanner market detection logic on the Skyscanner site. If you believe you need to use these, please discuss with your account manager.
 
 `locale`
 
@@ -302,7 +302,7 @@ Skyscanner will set this parameter based on location, IP and history of the user
 ### market
 
 The market of the user. Examples: UK, US, ES  
-Skyscanner will set this parameter based on location, IP and history of the user. Please do not use it unless you are absolutely sure
+Please try to avoid using `locale`, `market` and `currency`, as these values will be governed by Skyscanner market detection logic on the Skyscanner site. If you believe you need to use these, please discuss with your account manager.
 
 `market`
 
