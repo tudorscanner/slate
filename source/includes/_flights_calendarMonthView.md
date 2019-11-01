@@ -53,7 +53,8 @@ passenger
 
 ### currency
 
-The desired currency for the page. Examples: GBP, EUR, USD
+The desired currency for the page. Examples: GBP, EUR, USD  
+Please try to avoid using `locale`, `market` and `currency`, as these values will be governed by Skyscanner market detection logic on the Skyscanner site. If you believe you need to use these, please discuss with your account manager.
 
 `currency`
 
@@ -109,7 +110,8 @@ Arrival date in the format: YYYY-MM
 
 ### locale
 
-The desired locale for the page. Examples: es-ES, en-GB, ru-RU
+The desired locale for the page. Examples: es-ES, en-GB, ru-RU  
+Please try to avoid using `locale`, `market` and `currency`, as these values will be governed by Skyscanner market detection logic on the Skyscanner site. If you believe you need to use these, please discuss with your account manager.
 
 `locale`
 
@@ -123,7 +125,8 @@ The desired locale for the page. Examples: es-ES, en-GB, ru-RU
 
 ### market
 
-The market of the user. Examples: UK, US, ES
+The market of the user. Examples: UK, US, ES  
+Please try to avoid using `locale`, `market` and `currency`, as these values will be governed by Skyscanner market detection logic on the Skyscanner site. If you believe you need to use these, please discuss with your account manager.
 
 `market`
 

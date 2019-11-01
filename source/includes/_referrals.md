@@ -40,9 +40,11 @@ check the tables below.
 
 An example including some of the parameters looks like:
 
-`GET https://skyscanner.net/g/referrals/v1/flights/day-view/?market=UK&currency=GBP&locale=en-GB&origin=cdg&destination=edi&outboundDate=2019-10-14&utm_term=summer&associateid=MY_ID_123`
+Please try to avoid using `locale`, `market` and `currency`, as these values will be governed by Skyscanner market detection logic on the Skyscanner site. If you believe you need to use these, please discuss with your account manager.
 
-`GET https://skyscanner.net/g/referrals/v1/flights/calendar-month-view/?market=UK&currency=GBP&locale=en-GB&origin=cdg&destination=edi&iym=1910&utm_term=summer&associateid=MY_ID_123`
+`GET https://skyscanner.net/g/referrals/v1/flights/day-view/?origin=cdg&destination=edi&outboundDate=2019-10-14&utm_term=summer&associateid=MY_ID_123`
+
+`GET https://skyscanner.net/g/referrals/v1/flights/calendar-month-view/?origin=cdg&destination=edi&iym=1910&utm_term=summer&associateid=MY_ID_123`
 
 `GET https://skyscanner.net/g/referrals/v1/cars/day-view/?pickupPlace=BCN&dropoffPlace=BCN&pickupTime=2019-09-10T10:00&dropoffTime=2019-09-15T10:00&driverAge=42&associateid=MY_ID_123`
 
