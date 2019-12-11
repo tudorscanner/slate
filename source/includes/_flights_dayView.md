@@ -4,15 +4,29 @@
 /flights/day-view
 ```
 
+A schema definition for the flights day-view microsite supported parameters
+
+| Abstract            | Extensible | Status       | Identifiable | Custom Properties | Additional Properties | Defined In                   |
+| ------------------- | ---------- | ------------ | ------------ | ----------------- | --------------------- | ---------------------------- |
+| Can be instantiated | No         | Experimental | No           | Forbidden         | Permitted             |  |
+
+## Flights Day View supported parameters Properties
+
+For more details, please see our [Examples](#examples) 
+
 | Property                                            | Type       | Required     | Nullable | Default                                    | Defined by                                          |
 | --------------------------------------------------- | ---------- | ------------ | -------- | ------------------------------------------ | --------------------------------------------------- |
 | [adultsv2](#adultsv2)                               | `integer`  | **Required** | No       | `1`                                        | Flights Day View supported parameters (this schema) |
+| [airlines](#airlines)                               | `string`   | Optional     | No       |                                            | Flights Day View supported parameters (this schema) |
+| [alliances](#alliances)                             | `string`   | Optional     | No       |                                            | Flights Day View supported parameters (this schema) |
 | [alternativedestinations](#alternativedestinations) | `string[]` | Optional     | No       |                                            | Flights Day View supported parameters (this schema) |
 | [alternativeorigins](#alternativeorigins)           | `string[]` | Optional     | No       |                                            | Flights Day View supported parameters (this schema) |
 | [cabinclass](#cabinclass)                           | `enum`     | **Required** | No       | `"economy"`                                | Flights Day View supported parameters (this schema) |
 | [childrenv2](#childrenv2)                           | `string`   | Optional     | No       |                                            | Flights Day View supported parameters (this schema) |
 | [currency](#currency)                               | `string`   | Optional     | No       |                                            | Flights Day View supported parameters (this schema) |
+| [departure-times](#departure-times)                 | `string`   | Optional     | No       |                                            | Flights Day View supported parameters (this schema) |
 | [destination](#destination)                         | `string`   | **Required** | No       |                                            | Flights Day View supported parameters (this schema) |
+| [duration](#duration)                               | `integer`  | Optional     | No       |                                            | Flights Day View supported parameters (this schema) |
 | [inboundDate](#inbounddate)                         | `string`   | Optional     | No       |                                            | Flights Day View supported parameters (this schema) |
 | [inboundaltsenabled](#inboundaltsenabled)           | `boolean`  | Optional     | No       |                                            | Flights Day View supported parameters (this schema) |
 | [infants](#infants)                                 | `integer`  | Optional     | No       |                                            | Flights Day View supported parameters (this schema) |
@@ -42,6 +56,35 @@ Number of adult passengers. Adults have to be 16 years old or older.
 `integer`
 
 - minimum value: `1`
+
+### airlines
+
+List of comma separated IATA carrier codes to be passed to the dayview filters. For example: &airlines=AA,KL,LH. To
+unselect airline from the filters, the code must be specified with exclamation mark. For example: &airlines=AA,!KL,!LH
+
+`airlines`
+
+- is optional
+- type: `string`
+- defined in this schema
+
+#### airlines Type
+
+`string`
+
+### alliances
+
+Comma separated list of alliance names passed to the dayview filters. For example: &alliances=oneworld,Star%20Alliance
+
+`alliances`
+
+- is optional
+- type: `string`
+- defined in this schema
+
+#### alliances Type
+
+`string`
 
 ### alternativedestinations
 
@@ -117,6 +160,8 @@ passenger
 The desired currency for the page. Examples: GBP, EUR, USD  
 Please try to avoid using `locale`, `market` and `currency`, as these values will be governed by Skyscanner market detection logic on the Skyscanner site. If you believe you need to use these, please discuss with your account manager.
 
+The desired currency for the page. Examples: GBP, EUR, USD
+
 `currency`
 
 - is optional
@@ -124,6 +169,21 @@ Please try to avoid using `locale`, `market` and `currency`, as these values wil
 - defined in this schema
 
 #### currency Type
+
+`string`
+
+### departure-times
+
+Sets the dayview departure time filters in minutes. For example: &departure-times=00-90,30-990 (first leg departs
+between 00 and 1:30 and second leg departs between 00:30 and 16:30).
+
+`departure-times`
+
+- is optional
+- type: `string`
+- defined in this schema
+
+#### departure-times Type
 
 `string`
 
@@ -140,6 +200,20 @@ Location code for the destination
 #### destination Type
 
 `string`
+
+### duration
+
+Sets the dayview duration filters in minutes. For example: &duration=1320 (22 hours)
+
+`duration`
+
+- is optional
+- type: `integer`
+- defined in this schema
+
+#### duration Type
+
+`integer`
 
 ### inboundDate
 
@@ -200,7 +274,7 @@ Please try to avoid using `locale`, `market` and `currency`, as these values wil
 
 ### market
 
-The market of the user. Examples: UK, US, ES  
+The market of the user. Examples: UK, US, ES
 Please try to avoid using `locale`, `market` and `currency`, as these values will be governed by Skyscanner market detection logic on the Skyscanner site. If you believe you need to use these, please discuss with your account manager.
 
 `market`
