@@ -51,6 +51,7 @@ Please try to avoid using `locale`, `market` and `currency`, as these values wil
 `GET https://skyscanner.net/g/referrals/v1/cars/day-view/?pickupPlace=BCN&dropoffPlace=BCN&pickupTime=2019-09-10T10:00&dropoffTime=2019-09-15T10:00&driverAge=42&associateid=MY_ID_123`
 
 Preferred airlines:
+You can find IATA airline codes [here](https://www.iata.org/publications/pages/code-search.aspx)
 
 `GET https://skyscanner.net/g/referrals/v1/flights/day-view?airlines=AA,!FB&market=UK&currency=GBP&locale=en-GB&origin=cdg&destination=edi&outboundDate=2020-10-14&inboundDate=2020-10-21`
 
