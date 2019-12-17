@@ -60,8 +60,8 @@ Number of adult passengers. Adults have to be 16 years old or older.
 ### airlines
 
 List of comma separated IATA carrier codes to be passed to the dayview filters. For example: &airlines=AA,KL,LH. To
-unselect airline from the filters, the code must be specified with exclamation mark. For example: &airlines=AA,!KL,!LH
-You can search for IATA airline codes at IATA website [here](https://www.iata.org/publications/pages/code-search.aspx)
+unselect airline from the filters, the code must be specified with exclamation mark. For example: &airlines=AA,!KL,!LH  
+You can search for IATA airline codes at the IATA website [here](https://www.iata.org/publications/pages/code-search.aspx)
 
 `airlines`
 
