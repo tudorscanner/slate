@@ -38,6 +38,8 @@ check the tables below.
 | flights | home, day-view, calendar-month-view, browse-view, multicity, cheap-flights-to, flights-airline |
 | cars | home, day-view |
 
+## Examples
+
 An example including some of the parameters looks like:
 
 Please try to avoid using `locale`, `market` and `currency`, as these values will be governed by Skyscanner market detection logic on the Skyscanner site. If you believe you need to use these, please discuss with your account manager.
@@ -47,6 +49,23 @@ Please try to avoid using `locale`, `market` and `currency`, as these values wil
 `GET https://skyscanner.net/g/referrals/v1/flights/calendar-month-view/?origin=cdg&destination=edi&iym=1910&utm_term=summer&associateid=MY_ID_123`
 
 `GET https://skyscanner.net/g/referrals/v1/cars/day-view/?pickupPlace=BCN&dropoffPlace=BCN&pickupTime=2019-09-10T10:00&dropoffTime=2019-09-15T10:00&driverAge=42&associateid=MY_ID_123`
+
+Preferred airlines:  
+You can find IATA airline codes [here](https://www.iata.org/publications/pages/code-search.aspx)
+
+`GET https://skyscanner.net/g/referrals/v1/flights/day-view?airlines=AA,!FB&market=UK&currency=GBP&locale=en-GB&origin=cdg&destination=edi&outboundDate=2020-10-14&inboundDate=2020-10-21`
+
+Preferred alliances:
+
+`GET https://skyscanner.net/g/referrals/v1/flights/day-view?alliances=oneworld,Star%20Alliance&market=UK&currency=GBP&locale=en-GB&origin=cdg&destination=edi&outboundDate=2020-10-14&inboundDate=2020-10-21`
+
+Departure times - In this example the query paramter configures the filters to have the first leg's departure time as default (-), and the second leg between 0 (00:00) and 990 minutes (16:30).
+
+`GET https://skyscanner.net/g/referrals/v1/flights/day-view?departure-times=-%7C0-990&market=UK&currency=GBP&locale=en-GB&origin=cdg&destination=edi&outboundDate=2020-10-14&inboundDate=2020-10-21`
+
+Duration:
+
+`GET https://skyscanner.net/g/referrals/v1/flights/day-view?duration=1320&market=UK&currency=GBP&locale=en-GB&origin=cdg&destination=edi&outboundDate=2020-10-14&inboundDate=2020-10-21`
 
 
 Specific request query parameters are provided in tables below.
@@ -73,6 +92,8 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 | [home](#flights-home-page-supported-parameters-schema) | Skyscanner's Home [Example Link](https://www.skyscanner.net/)|
 | [cheap-flights-to](#cheap-flights-to-supported-parameters-schema) | Cheap Flights To [Example Link](https://www.skyscanner.net/za/en-gb/zar/flights-to/bom/cheap-flights-to-mumbai-airport.html)|
 | [flights-airline](#flights-airline-supported-parameters-schema) | Flights Airline [Example Link](https://www.skyscanner.net/airline/airline-emirates-ek.html)|
+
+For more details, please see our [Examples](#examples) 
 
 ## Cars Parameters
 
