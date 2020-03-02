@@ -14,7 +14,7 @@ risk of exposing account API keys.
 ### Request
 
 ```shell
-curl "http://partners.api.skyscanner.net/apiservices/pricing/v1.0"
+curl "https://partners.api.skyscanner.net/apiservices/pricing/v1.0"
     -X POST
     -H "Content-Type: application/x-www-form-urlencoded"
     -d 'cabinclass=Economy
@@ -42,7 +42,7 @@ curl "http://partners.api.skyscanner.net/apiservices/pricing/v1.0"
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/31ff523d2ff9186107e1)
 
-or go to our [test harness](http://business.skyscanner.net/portal/en-GB/Documentation/FlightsLivePricingQuickStart)
+or go to our [test harness](https://business.skyscanner.net/portal/en-GB/Documentation/FlightsLivePricingQuickStart)
 
 
 *HEADER VALUES*
@@ -79,7 +79,7 @@ or go to our [test harness](http://business.skyscanner.net/portal/en-GB/Document
 > Example response with polling url:
 
 ```shell
-Location "http://partners.api.skyscanner.net/apiservices/pricing/uk1/v1.0/
+Location "https://partners.api.skyscanner.net/apiservices/pricing/uk1/v1.0/
     {SessionKey}"
 ```
 
@@ -108,7 +108,7 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 > Example request with polling url:
 
 ```shell
-Location "http://partners.api.skyscanner.net/apiservices/pricing/uk1/v1.0/
+Location "https://partners.api.skyscanner.net/apiservices/pricing/uk1/v1.0/
     {SessionKey}?apiKey={apiKey}
     &stops=0
     &duration=360
@@ -124,7 +124,7 @@ Location "http://partners.api.skyscanner.net/apiservices/pricing/uk1/v1.0/
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/31ff523d2ff9186107e1)
 
-or go to our [test harness](http://business.skyscanner.net/portal/en-GB/Documentation/FlightsLivePricingQuickStart)
+or go to our [test harness](https://business.skyscanner.net/portal/en-GB/Documentation/FlightsLivePricingQuickStart)
 
 
 *HEADER VALUES*
@@ -159,7 +159,7 @@ or go to our [test harness](http://business.skyscanner.net/portal/en-GB/Document
 > Example polling request with pagination:
 
 ```shell
-Location "http://partners.api.skyscanner.net/apiservices/pricing/uk1/v1.0/
+Location "https://partners.api.skyscanner.net/apiservices/pricing/uk1/v1.0/
     {SessionKey}?apiKey={apiKey}
     &pageIndex=0
     &pageSize=10"
@@ -387,7 +387,7 @@ Please add the no-follow attribute when you link to the deeplink. See <a href="h
 ### Request
 
 ```shell
-curl "http://partners.api.skyscanner.net/apiservices/pricing/v1.0/
+curl "https://partners.api.skyscanner.net/apiservices/pricing/v1.0/
     {SessionKey}/booking&apikey={apiKey}"
     -d 'OutboundLegId={OutboundLegId}&InboundLegId={InboundLegId}'
     -X PUT
@@ -421,7 +421,7 @@ The full url and body content are provided in the response from the live pricing
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/31ff523d2ff9186107e1)
 
- or go to our [test harness](http://business.skyscanner.net/portal/en-GB/Documentation/FlightsLivePricingQuickStart)
+ or go to our [test harness](https://business.skyscanner.net/portal/en-GB/Documentation/FlightsLivePricingQuickStart)
 
 *REQUEST PARAMETERS*
 
@@ -445,7 +445,7 @@ The full url and body content are provided in the response from the live pricing
 > Example response:
 
 ```shell
-Location "http://partners.api.skyscanner.net/apiservices/pricing/uk1/v1.0/
+Location "https://partners.api.skyscanner.net/apiservices/pricing/uk1/v1.0/
     {SessionKey}/booking/
     {OutboundLegId};{InboundLegId}"
 ```
@@ -469,7 +469,7 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 ### Request
 
 ```shell
-curl "http://partners.api.skyscanner.net/{URL returned in Location header}
+curl "https://partners.api.skyscanner.net/{URL returned in Location header}
     ?apiKey={apiKey}"
     -X GET
 ```
@@ -494,7 +494,7 @@ Previous versions of the Flights Pricing API returned the same polling URL as th
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/31ff523d2ff9186107e1)
 
-or go to our [test harness](http://business.skyscanner.net/portal/en-GB/Documentation/FlightsLivePricingQuickStart)
+or go to our [test harness](https://business.skyscanner.net/portal/en-GB/Documentation/FlightsLivePricingQuickStart)
 
 
 *REQUEST PARAMETERS*

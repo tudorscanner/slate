@@ -14,7 +14,7 @@ You can redirect your users directly to the supplier's website (airline or trave
           ],
           "QuoteAgeInMinutes": 0,
           "Price": 83.41,
-          "DeeplinkUrl": "http://partners.api.skyscanner.net/apiservices/deeplink/v2?_cje=jzj5DawL5zJyT%2bnfe1..."
+          "DeeplinkUrl": "https://partners.api.skyscanner.net/apiservices/deeplink/v2?_cje=jzj5DawL5zJyT%2bnfe1..."
         },
       
 ```

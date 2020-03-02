@@ -4,6 +4,8 @@ Skyscanner uses API keys to allow access to the APIs. To request an API key plea
 
 You must include the API key in all API requests to the server, either as a parameter in the query or in the query header. Please refer to each endpoint for details.
 
+<aside class="warning">Make sure that you are accessing the APIs through <b>HTTPS</b></aside>
+
 <aside class="warning">
 Be careful when sharing API keys. Do not publish them in public code repositories or add them to client-side API calls. When you need to make a client-side call (e.g. redirect) please insure that you use your short API key (the first 16 characters of you key). Please note that *not* all API endpoints supports short API keys.
 </aside>
@@ -14,7 +16,7 @@ Be careful when sharing API keys. Do not publish them in public code repositorie
 Get authentication token. Expiration time is 30 minutes.
 
 ```shell
-GET "http://partners.api.skyscanner.net/apiservices/
+GET "https://partners.api.skyscanner.net/apiservices/
 	token/v2/gettoken?
     apiKey={apiKey}"
 ```
