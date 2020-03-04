@@ -3,7 +3,7 @@
 Retrieve the cheapest dates for a given route from our cache.
 
 ```shell
-curl "http://partners.api.skyscanner.net/apiservices/browsedates/v1.0/{country}/{currency}/{locale}/
+curl "https://partners.api.skyscanner.net/apiservices/browsedates/v1.0/{country}/{currency}/{locale}/
   {originPlace}/
   {destinationPlace}/
   {outboundPartialDate}/

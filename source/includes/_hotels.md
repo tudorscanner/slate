@@ -1,16 +1,10 @@
 # Hotels Live Prices
 
-<aside class="warning">
-    Please note that the first Skyscanner Hotels API will be depricated in December 2017.
-    Legacy documentation is available <a href="https://support.business.skyscanner.net/hc/en-us/articles/212098705-Hotels-Price-List-and-Hotels-Details-service" target="_blank">here</a> but please insure you migrate your application to the new API before that date.
-    All the documentation below is for the new Hotels API.
-</aside>
-
 This service responsible for finding the best hotels with rates around a given entity. It provides endpoints to search prices, a map version of it and a hotel prices one.
 
 ## Endpoint
 
-The Hotels API provides a global endpoint: https://www.skyscanner.net/g/hotels/v{version}/ where version points to a specific release.
+The Hotels API provides a global endpoint: https://www.skyscanner.net/g/hotels/{version}/ where version points to a specific release.
 
 ## Headers
 

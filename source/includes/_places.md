@@ -26,7 +26,7 @@ The country and language must be included in the Autosuggest query so that the m
 Get a list of places that match a query string.
 
 ```shell
-GET "http://partners.api.skyscanner.net/apiservices/
+GET "https://partners.api.skyscanner.net/apiservices/
     autosuggest/v1.0/{country}/{currency}/{locale}?
     query={query}&
     apiKey={apiKey}"
@@ -112,7 +112,7 @@ Get information about a country, city or airport using its ID.
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/9c973db787e866c966f2)
 
 ```shell
-GET "http://partners.api.skyscanner.net/apiservices/
+GET "https://partners.api.skyscanner.net/apiservices/
     autosuggest/v1.0/{market}/{currency}/{locale}?
     id={place_id}&
     apiKey={apiKey}"
@@ -184,7 +184,7 @@ GET "http://partners.api.skyscanner.net/apiservices/
 
 <aside class="notice">
 You can use this endpoint to retrieve the user's location from their IP address:
-<code>http://partners.api.skyscanner.net/apiservices/autosuggest/v1.0/UK/GBP/en-GB?id=188.39.95.140-ip&apikey=&lt;apiKey&gt;</code>
+<code>https://partners.api.skyscanner.net/apiservices/autosuggest/v1.0/UK/GBP/en-GB?id=188.39.95.140-ip&apikey=&lt;apiKey&gt;</code>
 </aside>
 
 ## Geo Catalog
@@ -196,7 +196,7 @@ Please <a href="https://partners.skyscanner.net/contact/" target="_blank"> conta
 Get the full list of all the places that we support.
 
 ```shell
-GET "http://partners.api.skyscanner.net/apiservices/
+GET "https://partners.api.skyscanner.net/apiservices/
     geo/v1.0?
     apiKey={apiKey}"
 ```

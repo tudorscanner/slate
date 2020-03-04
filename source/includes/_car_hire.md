@@ -13,7 +13,7 @@ The Poll Session (HTTP GET) should be used to poll the session at a suitable int
 ## Creating the session
 
 ```shell
-curl "http://partners.api.skyscanner.net/apiservices/carhire/liveprices/v2/
+curl "https://partners.api.skyscanner.net/apiservices/carhire/liveprices/v2/
   {market}/{currency}/{locale}/
   {pickupplace}/{dropoffplace}/
   {pickupdatetime}/{dropoffdatetime}/
@@ -34,7 +34,7 @@ curl "http://partners.api.skyscanner.net/apiservices/carhire/liveprices/v2/
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/eb787038fadc6e9607d6)
 
-or go to the [test harness](http://business.skyscanner.net/portal/en-GB/Documentation/CarHireLivePricingQuickStart)
+or go to the [test harness](https://business.skyscanner.net/portal/en-GB/Documentation/CarHireLivePricingQuickStart)
 
 *HEADER VALUES*
 
@@ -92,7 +92,7 @@ In your polling requests you may specify a parameter called 'deltaExcludeWebsite
 
 
 ```shell
-curl "http://partners.api.skyscanner.net/apiservices/carhire/liveprices/v2/{sessionKey}?apiKey={apiKey}&deltaExcludeWebsites={a,b,c...}""
+curl "https://partners.api.skyscanner.net/apiservices/carhire/liveprices/v2/{sessionKey}?apiKey={apiKey}&deltaExcludeWebsites={a,b,c...}""
 ```
 
 ### Request
@@ -106,7 +106,7 @@ curl "http://partners.api.skyscanner.net/apiservices/carhire/liveprices/v2/{sess
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/eb787038fadc6e9607d6)
 
-or go to the [test harness](http://business.skyscanner.net/portal/en-GB/Documentation/CarHireLivePricingQuickStart)
+or go to the [test harness](https://business.skyscanner.net/portal/en-GB/Documentation/CarHireLivePricingQuickStart)
 
 
 *REQUEST PARAMETERS*

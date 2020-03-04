@@ -7,7 +7,7 @@ All Skyscanner services are localised by market, language and currency, so these
 Retrieve the locales that we support to translate your content.
 
 ```shell
-GET "http://partners.api.skyscanner.net/apiservices/
+GET "https://partners.api.skyscanner.net/apiservices/
     reference/v1.0/locales?
     apiKey={apiKey}"
 ```
@@ -66,7 +66,7 @@ GET "http://partners.api.skyscanner.net/apiservices/
 Retrieve the currencies that we support.
 
 ```shell
-GET "http://partners.api.skyscanner.net/apiservices/
+GET "https://partners.api.skyscanner.net/apiservices/
     reference/v1.0/currencies?
     apiKey={apiKey}"
 ```
@@ -120,7 +120,7 @@ Retrieve the market countries that we support.
 Most suppliers (airlines, travel agents and car hire dealers) set their fares based on the market (or country of purchase). It is therefore necessary to specify the market country in every query.
 
 ```shell
-GET "http://partners.api.skyscanner.net/apiservices/
+GET "https://partners.api.skyscanner.net/apiservices/
     reference/v1.0/countries/
     {locale}?
     apiKey={apiKey}"

@@ -41,7 +41,7 @@ search: false
 > API endpoint
 
 ```shell
-http://partners.api.skyscanner.net/apiservices/
+https://partners.api.skyscanner.net/apiservices/
 
 ```
 Skyscanner Travel APIs connect you to all the data you need to build an innovative website or app.
