@@ -125,7 +125,7 @@
 <blockquote>
 <p>API endpoint</p>
 </blockquote>
-<pre class="highlight shell"><code>http://partners.api.skyscanner.net/apiservices/
+<pre class="highlight shell"><code>https://partners.api.skyscanner.net/apiservices/
 
 </code></pre>
 <p>Skyscanner Travel APIs connect you to all the data you need to build an innovative website or app.</p>
@@ -144,6 +144,8 @@ If you need more help you can find more information and answers to questions in 
 
 <p>You must include the API key in all API requests to the server, either as a parameter in the query or in the query header. Please refer to each endpoint for details.</p>
 
+<aside class="warning">Make sure that you are accessing the APIs through <b>HTTPS</b></aside>
+
 <aside class="warning">
 Be careful when sharing API keys. Do not publish them in public code repositories or add them to client-side API calls. When you need to make a client-side call (e.g. redirect) please insure that you use your short API key (the first 16 characters of you key). Please note that *not* all API endpoints supports short API keys.
 </aside>
@@ -151,7 +153,7 @@ Be careful when sharing API keys. Do not publish them in public code repositorie
 <h2 id="token-generation">Token generation</h2>
 
 <p>Get authentication token. Expiration time is 30 minutes.</p>
-<pre class="highlight shell"><code>GET <span class="s2">"http://partners.api.skyscanner.net/apiservices/
+<pre class="highlight shell"><code>GET <span class="s2">"https://partners.api.skyscanner.net/apiservices/
     token/v2/gettoken?
     apiKey={apiKey}"</span>
 </code></pre>
@@ -268,16 +270,12 @@ Unless you require exact prices, we recommend you start with the cache prices AP
 </tr>
 </tbody></table>
 
-<aside class="warning">
-    This is the new Skyscanner Hotels API. Legacy documentation is available <a href="https://support.business.skyscanner.net/hc/en-us/articles/212098705-Hotels-Price-List-and-Hotels-Details-service" target="_blank">here</a>
-</aside>
-
           <h1 id="flights-browse-prices">Flights Browse Prices</h1>
 
 <h2 id="browse-quotes">Browse Quotes</h2>
 
 <p>Retrieve the cheapest quotes from our cache prices.</p>
-<pre class="highlight shell"><code>curl <span class="s2">"http://partners.api.skyscanner.net/apiservices/browsequotes/v1.0/{country}/{currency}/{locale}/
+<pre class="highlight shell"><code>curl <span class="s2">"https://partners.api.skyscanner.net/apiservices/browsequotes/v1.0/{country}/{currency}/{locale}/
   {originPlace}/
   {destinationPlace}/
   {outboundPartialDate}/
@@ -449,7 +447,7 @@ Unless you require exact prices, we recommend you start with the cache prices AP
           <h2 id="browse-routes">Browse Routes</h2>
 
 <p>Retrieve the cheapest routes from our cache prices. Similar to the Browse Quotes API but with the routes built for you from the individual quotes.</p>
-<pre class="highlight shell"><code>curl <span class="s2">"http://partners.api.skyscanner.net/apiservices/browseroutes/v1.0/{country}/{currency}/{locale}/
+<pre class="highlight shell"><code>curl <span class="s2">"https://partners.api.skyscanner.net/apiservices/browseroutes/v1.0/{country}/{currency}/{locale}/
   {originPlace}/
   {destinationPlace}/
   {outboundPartialDate}/
@@ -647,7 +645,7 @@ Unless you require exact prices, we recommend you start with the cache prices AP
           <h2 id="browse-dates">Browse Dates</h2>
 
 <p>Retrieve the cheapest dates for a given route from our cache.</p>
-<pre class="highlight shell"><code>curl <span class="s2">"http://partners.api.skyscanner.net/apiservices/browsedates/v1.0/{country}/{currency}/{locale}/
+<pre class="highlight shell"><code>curl <span class="s2">"https://partners.api.skyscanner.net/apiservices/browsedates/v1.0/{country}/{currency}/{locale}/
   {originPlace}/
   {destinationPlace}/
   {outboundPartialDate}/
@@ -851,7 +849,7 @@ Unless you require exact prices, we recommend you start with the cache prices AP
           <h2 id="browse-dates-grid">Browse Dates (grid)</h2>
 
 <p>Retrieve the cheapest dates for a given route from our cache, with the results formatted as a two-dimensional array to be easily displayed as a calendar.</p>
-<pre class="highlight shell"><code>curl <span class="s2">"http://partners.api.skyscanner.net/apiservices/browsegrid/v1.0/{country}/{currency}/{locale}/
+<pre class="highlight shell"><code>curl <span class="s2">"https://partners.api.skyscanner.net/apiservices/browsegrid/v1.0/{country}/{currency}/{locale}/
   {originPlace}/
   {destinationPlace}/
   {outboundPartialDate}/
@@ -1025,7 +1023,7 @@ risk of exposing account API keys.
 <h2 id="creating-the-session">Creating the session</h2>
 
 <h3 id="request">Request</h3>
-<pre class="highlight shell"><code>curl <span class="s2">"http://partners.api.skyscanner.net/apiservices/pricing/v1.0"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://partners.api.skyscanner.net/apiservices/pricing/v1.0"</span>
     -X POST
     -H <span class="s2">"Content-Type: application/x-www-form-urlencoded"</span>
     -d <span class="s1">'cabinclass=Economy
@@ -1051,7 +1049,7 @@ risk of exposing account API keys.
 
 <p><a href="https://app.getpostman.com/run-collection/31ff523d2ff9186107e1"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
 
-<p>or go to our <a href="http://business.skyscanner.net/portal/en-GB/Documentation/FlightsLivePricingQuickStart">test harness</a></p>
+<p>or go to our <a href="https://business.skyscanner.net/portal/en-GB/Documentation/FlightsLivePricingQuickStart">test harness</a></p>
 
 <p><em>HEADER VALUES</em></p>
 
@@ -1150,7 +1148,7 @@ risk of exposing account API keys.
 <blockquote>
 <p>Example response with polling url:</p>
 </blockquote>
-<pre class="highlight shell"><code>Location <span class="s2">"http://partners.api.skyscanner.net/apiservices/pricing/uk1/v1.0/
+<pre class="highlight shell"><code>Location <span class="s2">"https://partners.api.skyscanner.net/apiservices/pricing/uk1/v1.0/
     {SessionKey}"</span>
 </code></pre>
 <p>A successful response contains no content. The URL to poll the results is provided in the Location header of the response.</p>
@@ -1180,7 +1178,7 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 <blockquote>
 <p>Example request with polling url:</p>
 </blockquote>
-<pre class="highlight shell"><code>Location <span class="s2">"http://partners.api.skyscanner.net/apiservices/pricing/uk1/v1.0/
+<pre class="highlight shell"><code>Location <span class="s2">"https://partners.api.skyscanner.net/apiservices/pricing/uk1/v1.0/
     {SessionKey}?apiKey={apiKey}
     &amp;stops=0
     &amp;duration=360
@@ -1194,7 +1192,7 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 
 <p><a href="https://app.getpostman.com/run-collection/31ff523d2ff9186107e1"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
 
-<p>or go to our <a href="http://business.skyscanner.net/portal/en-GB/Documentation/FlightsLivePricingQuickStart">test harness</a></p>
+<p>or go to our <a href="https://business.skyscanner.net/portal/en-GB/Documentation/FlightsLivePricingQuickStart">test harness</a></p>
 
 <p><em>HEADER VALUES</em></p>
 
@@ -1285,7 +1283,7 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 <blockquote>
 <p>Example polling request with pagination:</p>
 </blockquote>
-<pre class="highlight shell"><code>Location <span class="s2">"http://partners.api.skyscanner.net/apiservices/pricing/uk1/v1.0/
+<pre class="highlight shell"><code>Location <span class="s2">"https://partners.api.skyscanner.net/apiservices/pricing/uk1/v1.0/
     {SessionKey}?apiKey={apiKey}
     &amp;pageIndex=0
     &amp;pageSize=10"</span>
@@ -1567,7 +1565,7 @@ Please add the no-follow attribute when you link to the deeplink. See <a href="h
 <h2 id="get-booking-details">Get booking details</h2>
 
 <h3 id="request">Request</h3>
-<pre class="highlight shell"><code>curl <span class="s2">"http://partners.api.skyscanner.net/apiservices/pricing/v1.0/
+<pre class="highlight shell"><code>curl <span class="s2">"https://partners.api.skyscanner.net/apiservices/pricing/v1.0/
     {SessionKey}/booking&amp;apikey={apiKey}"</span>
     -d <span class="s1">'OutboundLegId={OutboundLegId}&amp;InboundLegId={InboundLegId}'</span>
     -X PUT
@@ -1596,7 +1594,7 @@ Please add the no-follow attribute when you link to the deeplink. See <a href="h
 
 <p><a href="https://app.getpostman.com/run-collection/31ff523d2ff9186107e1"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
 
-<p>or go to our <a href="http://business.skyscanner.net/portal/en-GB/Documentation/FlightsLivePricingQuickStart">test harness</a></p>
+<p>or go to our <a href="https://business.skyscanner.net/portal/en-GB/Documentation/FlightsLivePricingQuickStart">test harness</a></p>
 
 <p><em>REQUEST PARAMETERS</em></p>
 
@@ -1647,7 +1645,7 @@ Please add the no-follow attribute when you link to the deeplink. See <a href="h
 <blockquote>
 <p>Example response:</p>
 </blockquote>
-<pre class="highlight shell"><code>Location <span class="s2">"http://partners.api.skyscanner.net/apiservices/pricing/uk1/v1.0/
+<pre class="highlight shell"><code>Location <span class="s2">"https://partners.api.skyscanner.net/apiservices/pricing/uk1/v1.0/
     {SessionKey}/booking/
     {OutboundLegId};{InboundLegId}"</span>
 </code></pre>
@@ -1674,7 +1672,7 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 <h2 id="polling-the-booking-details">Polling the booking details</h2>
 
 <h3 id="request">Request</h3>
-<pre class="highlight shell"><code>curl <span class="s2">"http://partners.api.skyscanner.net/{URL returned in Location header}
+<pre class="highlight shell"><code>curl <span class="s2">"https://partners.api.skyscanner.net/{URL returned in Location header}
     ?apiKey={apiKey}"</span>
     -X GET
 </code></pre>
@@ -1697,7 +1695,7 @@ Previous versions of the Flights Pricing API returned the same polling URL as th
 
 <p><a href="https://app.getpostman.com/run-collection/31ff523d2ff9186107e1"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
 
-<p>or go to our <a href="http://business.skyscanner.net/portal/en-GB/Documentation/FlightsLivePricingQuickStart">test harness</a></p>
+<p>or go to our <a href="https://business.skyscanner.net/portal/en-GB/Documentation/FlightsLivePricingQuickStart">test harness</a></p>
 
 <p><em>REQUEST PARAMETERS</em></p>
 
@@ -1883,7 +1881,7 @@ Please note that it may take up to a minute to update all the results. After you
 <p>The Poll Session (HTTP GET) should be used to poll the session at a suitable interval (e.g. every 1-3 seconds) whilst there are still updates pending.</p>
 
 <h2 id="creating-the-session">Creating the session</h2>
-<pre class="highlight shell"><code>curl <span class="s2">"http://partners.api.skyscanner.net/apiservices/carhire/liveprices/v2/
+<pre class="highlight shell"><code>curl <span class="s2">"https://partners.api.skyscanner.net/apiservices/carhire/liveprices/v2/
   {market}/{currency}/{locale}/
   {pickupplace}/{dropoffplace}/
   {pickupdatetime}/{dropoffdatetime}/
@@ -1903,7 +1901,7 @@ Please note that it may take up to a minute to update all the results. After you
 
 <p><a href="https://app.getpostman.com/run-collection/eb787038fadc6e9607d6"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
 
-<p>or go to the <a href="http://business.skyscanner.net/portal/en-GB/Documentation/CarHireLivePricingQuickStart">test harness</a></p>
+<p>or go to the <a href="https://business.skyscanner.net/portal/en-GB/Documentation/CarHireLivePricingQuickStart">test harness</a></p>
 
 <p><em>HEADER VALUES</em></p>
 
@@ -2008,7 +2006,7 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 <p>A note about delta results</p>
 
 <p>In your polling requests you may specify a parameter called &lsquo;deltaExcludeWebsites&rsquo;. This is a CSV or semicolon-separated list of website IDs. The server will set this in the Location headers to exclude whatever websites have finished sending results (inProgress equal to false). Excluding any given provider will remove its cars and website information from your result. Merely supplying&amp;deltaExcludeWebsites= removes all images, the query, and the car classes lookup. The Location header in the first poll will include this parameter, even if it&rsquo;s an empty string, in order that you don&rsquo;t fetch that information multiple times.</p>
-<pre class="highlight shell"><code>curl <span class="s2">"http://partners.api.skyscanner.net/apiservices/carhire/liveprices/v2/{sessionKey}?apiKey={apiKey}&amp;deltaExcludeWebsites={a,b,c...}""
+<pre class="highlight shell"><code>curl <span class="s2">"https://partners.api.skyscanner.net/apiservices/carhire/liveprices/v2/{sessionKey}?apiKey={apiKey}&amp;deltaExcludeWebsites={a,b,c...}""
 </span></code></pre>
 <h3 id="request">Request</h3>
 
@@ -2020,7 +2018,7 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 
 <p><a href="https://app.getpostman.com/run-collection/eb787038fadc6e9607d6"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
 
-<p>or go to the <a href="http://business.skyscanner.net/portal/en-GB/Documentation/CarHireLivePricingQuickStart">test harness</a></p>
+<p>or go to the <a href="https://business.skyscanner.net/portal/en-GB/Documentation/CarHireLivePricingQuickStart">test harness</a></p>
 
 <p><em>REQUEST PARAMETERS</em></p>
 
@@ -2289,17 +2287,11 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 
           <h1 id="hotels-live-prices">Hotels Live Prices</h1>
 
-<aside class="warning">
-    Please note that the first Skyscanner Hotels API will be depricated in December 2017.
-    Legacy documentation is available <a href="https://support.business.skyscanner.net/hc/en-us/articles/212098705-Hotels-Price-List-and-Hotels-Details-service" target="_blank">here</a> but please insure you migrate your application to the new API before that date.
-    All the documentation below is for the new Hotels API.
-</aside>
-
 <p>This service responsible for finding the best hotels with rates around a given entity. It provides endpoints to search prices, a map version of it and a hotel prices one.</p>
 
 <h2 id="endpoint">Endpoint</h2>
 
-<p>The Hotels API provides a global endpoint: https://www.skyscanner.net/g/hotels/v{version}/ where version points to a specific release.</p>
+<p>The Hotels API provides a global endpoint: https://www.skyscanner.net/g/hotels/{version}/ where version points to a specific release.</p>
 
 <h2 id="headers">Headers</h2>
 
@@ -4329,7 +4321,7 @@ Is a regular practice following the user flow first of all search for prices usi
 <h2 id="locales">Locales</h2>
 
 <p>Retrieve the locales that we support to translate your content.</p>
-<pre class="highlight shell"><code>GET <span class="s2">"http://partners.api.skyscanner.net/apiservices/
+<pre class="highlight shell"><code>GET <span class="s2">"https://partners.api.skyscanner.net/apiservices/
     reference/v1.0/locales?
     apiKey={apiKey}"</span>
 </code></pre>
@@ -4397,7 +4389,7 @@ Is a regular practice following the user flow first of all search for prices usi
 <h2 id="currencies">Currencies</h2>
 
 <p>Retrieve the currencies that we support.</p>
-<pre class="highlight shell"><code>GET <span class="s2">"http://partners.api.skyscanner.net/apiservices/
+<pre class="highlight shell"><code>GET <span class="s2">"https://partners.api.skyscanner.net/apiservices/
     reference/v1.0/currencies?
     apiKey={apiKey}"</span>
 </code></pre>
@@ -4461,7 +4453,7 @@ Is a regular practice following the user flow first of all search for prices usi
 <p>Retrieve the market countries that we support.</p>
 
 <p>Most suppliers (airlines, travel agents and car hire dealers) set their fares based on the market (or country of purchase). It is therefore necessary to specify the market country in every query.</p>
-<pre class="highlight shell"><code>GET <span class="s2">"http://partners.api.skyscanner.net/apiservices/
+<pre class="highlight shell"><code>GET <span class="s2">"https://partners.api.skyscanner.net/apiservices/
     reference/v1.0/countries/
     {locale}?
     apiKey={apiKey}"</span>
@@ -4553,7 +4545,7 @@ The country and language must be included in the Autosuggest query so that the m
 <h2 id="list-of-places">List of places</h2>
 
 <p>Get a list of places that match a query string.</p>
-<pre class="highlight shell"><code>GET <span class="s2">"http://partners.api.skyscanner.net/apiservices/
+<pre class="highlight shell"><code>GET <span class="s2">"https://partners.api.skyscanner.net/apiservices/
     autosuggest/v1.0/{country}/{currency}/{locale}?
     query={query}&amp;
     apiKey={apiKey}"</span>
@@ -4659,7 +4651,7 @@ See <a href="#token-generation">token generation</a> section for more details.
 <p><em>Try it out</em></p>
 
 <p><a href="https://app.getpostman.com/run-collection/9c973db787e866c966f2"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
-<pre class="highlight shell"><code>GET <span class="s2">"http://partners.api.skyscanner.net/apiservices/
+<pre class="highlight shell"><code>GET <span class="s2">"https://partners.api.skyscanner.net/apiservices/
     autosuggest/v1.0/{market}/{currency}/{locale}?
     id={place_id}&amp;
     apiKey={apiKey}"</span>
@@ -4755,7 +4747,7 @@ See <a href="#token-generation">token generation</a> section for more details.
 
 <aside class="notice">
 You can use this endpoint to retrieve the user&rsquo;s location from their IP address:
-<code>http://partners.api.skyscanner.net/apiservices/autosuggest/v1.0/UK/GBP/en-GB?id=188.39.95.140-ip&apikey=&lt;apiKey&gt;</code>
+<code>https://partners.api.skyscanner.net/apiservices/autosuggest/v1.0/UK/GBP/en-GB?id=188.39.95.140-ip&apikey=&lt;apiKey&gt;</code>
 </aside>
 
 <h2 id="geo-catalog">Geo Catalog</h2>
@@ -4765,7 +4757,7 @@ Please <a href="https://partners.skyscanner.net/contact/" target="_blank"> conta
 </aside>
 
 <p>Get the full list of all the places that we support.</p>
-<pre class="highlight shell"><code>GET <span class="s2">"http://partners.api.skyscanner.net/apiservices/
+<pre class="highlight shell"><code>GET <span class="s2">"https://partners.api.skyscanner.net/apiservices/
     geo/v1.0?
     apiKey={apiKey}"</span>
 </code></pre>
@@ -5030,7 +5022,7 @@ Please <a href="https://partners.skyscanner.net/contact/" target="_blank"> conta
           </span><span class="p">],</span><span class="w">
           </span><span class="s2">"QuoteAgeInMinutes"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
           </span><span class="s2">"Price"</span><span class="p">:</span><span class="w"> </span><span class="mf">83.41</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"DeeplinkUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://partners.api.skyscanner.net/apiservices/deeplink/v2?_cje=jzj5DawL5zJyT%2bnfe1..."</span><span class="w">
+          </span><span class="s2">"DeeplinkUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://partners.api.skyscanner.net/apiservices/deeplink/v2?_cje=jzj5DawL5zJyT%2bnfe1..."</span><span class="w">
         </span><span class="p">},</span><span class="w">
 
 </span></code></pre>
