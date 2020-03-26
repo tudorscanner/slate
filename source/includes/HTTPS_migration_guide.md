@@ -1,20 +1,20 @@
 #  HTTPS migration guide
 
-As of April 2020 in order to improve the security of the Skyscanner APIs we're requiring all partners to **only** use 
-the `https` protocol for making requests to any of the APIs.
+As of April 2020 in order to improve the [security](https://www.cloudflare.com/learning/ssl/why-is-http-not-secure/) of our Skyscanner Travel APIs we're requiring all partners to **only** use 
+the `https` protocol for making requests to our APIs.
 
-## What will change?
+## What is changing?
 
-The fields of requests and responses will remain the same. The only change is that partners should always use the TLS `https` protocol for making requests to the APIs.
+Requests and response bodies will remain the same. The only change is that partners must always use the TLS `https` protocol for making requests to the APIs.
 
-## What needs to be done?
+## What do you need to do?
 
-Partners should replace all references of the `http` protocol with `https` in all API's urls in their codebases.
+Partners should replace all references to the `http` protocol with `https` in all usages of our API URLs in your codebases.
 
-## When should partners migrate?
+## What is the deadline for migration?
 
-Partners should migrate as soon as possible. The official deadline will be **30th April 2020**.
+The deadline is **30th April 2020**, but you should migrate as soon as possible to get the benefits of increased security with TLS.
 
 ## Need help?
 
-Partners can raise support tickets [here](https://skyscannerpartnersupport.zendesk.com/hc/en-us/requests/new)
+You can raise support tickets [here](https://skyscannerpartnersupport.zendesk.com/hc/en-us/requests/new)
