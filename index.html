@@ -7922,6 +7922,27 @@ Please try to avoid using <code class="prettyprint">locale</code>, <code class="
 <b>304</b><br>You may occasionally get a 304 status response. Please note that this is not an error and simply indicates that your cache has not expired and that there were no changes to the response. For more information please read our <a href="https://support.business.skyscanner.net/hc/en-us/articles/213646405?flash_digest=ed288242734b6a4dfe55488cf080c1e94e3fd100" target="_blank">FAQ</a>
 </aside>
 
+          <h1 id="https-migration-guide">HTTPS migration guide</h1>
+
+<p>As of April 2020 in order to improve the <a href="https://www.cloudflare.com/learning/ssl/why-is-http-not-secure/">security</a> of our Skyscanner Travel APIs we&rsquo;re requiring all partners to <strong>only</strong> use 
+the <code class="prettyprint">https</code> protocol for making requests to our APIs.</p>
+
+<h2 id="what-is-changing">What is changing?</h2>
+
+<p>Requests and response bodies will remain the same. The only change is that partners must always use the TLS <code class="prettyprint">https</code> protocol for making requests to the APIs.</p>
+
+<h2 id="what-do-you-need-to-do">What do you need to do?</h2>
+
+<p>Partners should replace all references to the <code class="prettyprint">http</code> protocol with <code class="prettyprint">https</code> in all usages of our API URLs in your codebases.</p>
+
+<h2 id="what-is-the-deadline-for-migration">What is the deadline for migration?</h2>
+
+<p>The deadline is <strong>30th April 2020</strong>, but you should migrate as soon as possible to get the benefits of increased security with TLS.</p>
+
+<h2 id="need-help">Need help?</h2>
+
+<p>You can raise support tickets <a href="https://skyscannerpartnersupport.zendesk.com/hc/en-us/requests/new">here</a></p>
+
       </div>
       <div class="dark-box">
       </div>
