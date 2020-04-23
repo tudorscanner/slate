@@ -70,7 +70,7 @@ or go to our [test harness](http://business.skyscanner.net/portal/en-GB/Document
 | ```infants``` <br><span class="optional">OPTIONAL</span> | Number of infants (under 12 months). Can be between 0 and 8.  |
 | ```includeCarriers``` <br><span class="optional">OPTIONAL</span> | Only return results from those carriers. Comma-separated list of carrier ids.  |
 | ```excludeCarriers``` <br><span class="optional">OPTIONAL</span> | Filter out results from those carriers. Comma-separated list of carrier ids.  |
-| ```groupPricing``` <br><span class="optional">OPTIONAL</span> | If set to `true`, prices will be obtained for the whole passenger group and if set to `false` it will be obtained for one adult. By default it is set to `false`. |
+| ```groupPricing``` <br><span class="optional">OPTIONAL</span> | If set to `true`, prices will be obtained for the whole passenger group and if set to `false` it will be obtained for one adult only - the other adults/children/infants will be ignored. By default it is set to `false`. |
 | ```apiKey``` <br><span class="required">REQUIRED</span> | Your API Key. |
 
 
@@ -394,7 +394,7 @@ curl "http://partners.api.skyscanner.net/apiservices/pricing/v1.0/
     -H "Content-Type: application/x-www-form-urlencoded"
 ```
 
-If you set `groupPricing` to `false` when creating the session, a Booking Details request must be made to get the deeplink with additional information such as number of passengers.
+A request for booking details will return the most up-to-date prices for the selected itinerary. Some of the prices returned in the previous requests might be cached and slightly older. By creating a booking details session you'll recieve the most up-to-date price which we can get from our partners.
 
 > The url is provided in the response of the live prices:
 
@@ -473,17 +473,7 @@ curl "http://partners.api.skyscanner.net/{URL returned in Location header}
     ?apiKey={apiKey}"
     -X GET
 ```
-
-<aside class="warning" name="booking-url-warning">
-Previous versions of the Flights Pricing API returned the same polling URL as the URL used to request booking details.
-<br/>
-<br/>
-<p>This will change over the second half of 2018. We recommend you use the URL returned in the <b>Location</b> header and do not make assumptions on what the URL will be.</p>
-
-<p>If you have a working integration with the Flights Pricing API and your integration is not reading the polling URL from the <b>Location</b> header, you will need to update your integration.</p>
-
-<p>If you do not update your integration, polling the booking details for a session will fail at some point during the second half of 2018.</p>
-</aside>
+Use the URL returned in the `Location` header
 
 *API endpoint*
 
