@@ -267,42 +267,9 @@ GET "https://partners.api.skyscanner.net/apiservices/
 | ```Airports``` | Contains the list of all the airports. |
 
 
+## Hotels And Carhire Autosuggest
 
-
-## Schemas
-
-> Example place codes:
-
-```shell
-EDIN-sky
-```
-```shell
-CDG-iata
-```
-```sell
--37.4849,144.5747-latlong
-```
-
-Each place can be referred to via different schemas, described below.
-
-*SCHEMAS*
-
-| Parameter | Description |
-| --- | --- |
-| sky | Skyscanner code. The response from [Autosuggest](#place-information) provides these ids. |
-| iata / iso | Airports and cities often use the internationally recognized IATA and ISO schemas.<br>For <b>Flights</b> we recommend that you use the Skyscanner code which is very similar but solves ambiguous cases where a city and one of its airports share the same code. For <b>Car Hire</b> please use the IATA code.|
-| latlong |	Latitude and longitude of the place in the following form: "latitude,longitude". The nearest city with airport will be used. |
-| ip | IP of a user. The nearest city with airport will be used. Format: `188.39.95.93`|
-| GeoNameCodes | GeoNameCodes from the GeoNames schema (see [geonames.org](www.geonames.org))|
-| GeoNameIDs | GeoNameIDs from the GeoNames schema (see [geonames.org](www.geonames.org))|
-
-
-If the default Skyscanner schema is not used, the schema name must be appended to the place id as follows:
-`placeCode-locationSchema`
-
-## Hotels Autosuggest
-
-Retrieve a list of hotels and/or geographical locations which can then be used witht the hotels and car hire APIs. In the case of car hire, use this if you want downtown (non-airport) searches.
+Retrieve a list of geographical locations which can be used with the hotels and car hire APIs.
 
 ```shell
 GET "https://www.skyscanner.net/g/autosuggest/v3/hotels?
@@ -357,8 +324,41 @@ GET "https://www.skyscanner.net/g/autosuggest/v3/hotels?
 | Parameter | Description |
 | --- | --- |
 | ```results``` | Contains a list of results for the query in order of relevance |
-| ```id``` | Can be used as an input to the Hotels Pricing Service or to query geo |
+| ```id``` | Can be used as an input to the Hotels or CarHire Pricing Services or to query geo |
 | ```localised_name``` | Entity name in the provided locale |
 | ```localised_type``` | Contains the `type` in the locale used in the query |
 | ```type``` | Identify the type of the entity (City, District, Hotel, ...) |
 | ```geo_containers``` | The list of parent locations that contain one another in order (e.g. England, United Kingdom for London) |
+
+
+## Schemas
+
+> Example place codes:
+
+```shell
+EDIN-sky
+```
+```shell
+CDG-iata
+```
+```sell
+-37.4849,144.5747-latlong
+```
+
+Each place can be referred to via different schemas, described below.
+
+*SCHEMAS*
+
+| Parameter | Description |
+| --- | --- |
+| sky | Skyscanner code. The response from [Autosuggest](#place-information) provides these ids. |
+| iata / iso | Airports and cities often use the internationally recognized IATA and ISO schemas.<br>For <b>Flights</b> we recommend that you use the Skyscanner code which is very similar but solves ambiguous cases where a city and one of its airports share the same code. For <b>Car Hire</b> please use the IATA code.|
+| latlong |	Latitude and longitude of the place in the following form: "latitude,longitude". The nearest city with airport will be used. |
+| ip | IP of a user. The nearest city with airport will be used. Format: `188.39.95.93`|
+| GeoNameCodes | GeoNameCodes from the GeoNames schema (see [geonames.org](www.geonames.org))|
+| GeoNameIDs | GeoNameIDs from the GeoNames schema (see [geonames.org](www.geonames.org))|
+
+
+If the default Skyscanner schema is not used, the schema name must be appended to the place id as follows:
+`placeCode-locationSchema`
+
