@@ -1934,11 +1934,11 @@ Please note that it may take up to a minute to update all the results. After you
 </tr>
 <tr>
 <td><code class="prettyprint">pickupPlace</code> <br><span class="required">REQUIRED</span></td>
-<td>The pickup location. <a href="#schemas">IATA code</a> or a latitude,longitude pair formatted as lat,lon-latlong e.g. <code class="prettyprint">/55.95,-3.37-latlong/</code></td>
+<td>The pickup location. A numerical ID returned by our <a href="#hotels-and-carhire-autosuggest">location Autosuggest API</a> or a latitude,longitude pair formatted as lat,lon-latlong e.g. <code class="prettyprint">/55.95,-3.37-latlong/</code></td>
 </tr>
 <tr>
 <td><code class="prettyprint">dropoffPlace</code> <br><span class="required">REQUIRED</span></td>
-<td>The dropoff location. <a href="#schemas">IATA code</a> or a latitude,longitude pair formatted as lat,lon-latlong e.g. <code class="prettyprint">/55.95,-3.37-latlong/</code></td>
+<td>The dropoff location. A numerical ID returned by our <a href="#hotels-and-carhire-autosuggest">location Autosuggest API</a> or a latitude,longitude pair formatted as lat,lon-latlong e.g. <code class="prettyprint">/55.95,-3.37-latlong/</code></td>
 </tr>
 <tr>
 <td><code class="prettyprint">pickupDateTime</code> <br><span class="required">REQUIRED</span></td>
@@ -4847,57 +4847,9 @@ Please <a href="https://partners.skyscanner.net/contact/" target="_blank"> conta
 </tr>
 </tbody></table>
 
-<h2 id="schemas">Schemas</h2>
+<h2 id="hotels-and-carhire-autosuggest">Hotels And Carhire Autosuggest</h2>
 
-<blockquote>
-<p>Example place codes:</p>
-</blockquote>
-<pre class="highlight shell"><code>EDIN-sky
-</code></pre><pre class="highlight shell"><code>CDG-iata
-</code></pre><pre class="highlight plaintext"><code>-37.4849,144.5747-latlong
-</code></pre>
-<p>Each place can be referred to via different schemas, described below.</p>
-
-<p><em>SCHEMAS</em></p>
-
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>sky</td>
-<td>Skyscanner code. The response from <a href="#place-information">Autosuggest</a> provides these ids.</td>
-</tr>
-<tr>
-<td>iata / iso</td>
-<td>Airports and cities often use the internationally recognized IATA and ISO schemas.<br>For <b>Flights</b> we recommend that you use the Skyscanner code which is very similar but solves ambiguous cases where a city and one of its airports share the same code. For <b>Car Hire</b> please use the IATA code.</td>
-</tr>
-<tr>
-<td>latlong</td>
-<td>Latitude and longitude of the place in the following form: &ldquo;latitude,longitude&rdquo;. The nearest city with airport will be used.</td>
-</tr>
-<tr>
-<td>ip</td>
-<td>IP of a user. The nearest city with airport will be used. Format: <code class="prettyprint">188.39.95.93</code></td>
-</tr>
-<tr>
-<td>GeoNameCodes</td>
-<td>GeoNameCodes from the GeoNames schema (see <a href="www.geonames.org">geonames.org</a>)</td>
-</tr>
-<tr>
-<td>GeoNameIDs</td>
-<td>GeoNameIDs from the GeoNames schema (see <a href="www.geonames.org">geonames.org</a>)</td>
-</tr>
-</tbody></table>
-
-<p>If the default Skyscanner schema is not used, the schema name must be appended to the place id as follows:
-<code class="prettyprint">placeCode-locationSchema</code></p>
-
-<h2 id="hotels-autosuggest">Hotels Autosuggest</h2>
-
-<p>Retrieve a list of hotels and/or geographical locations which can then be used witht the hotels and car hire APIs. In the case of car hire, use this if you want downtown (non-airport) searches.</p>
+<p>Retrieve a list of geographical locations which can be used with the hotels and car hire APIs.</p>
 <pre class="highlight shell"><code>GET <span class="s2">"https://www.skyscanner.net/g/autosuggest/v3/hotels?
     q=lond&amp;
     market=US&amp;
@@ -4977,7 +4929,7 @@ Please <a href="https://partners.skyscanner.net/contact/" target="_blank"> conta
 </tr>
 <tr>
 <td><code class="prettyprint">id</code></td>
-<td>Can be used as an input to the Hotels Pricing Service or to query geo</td>
+<td>Can be used as an input to the Hotels or CarHire Pricing Services or to query geo</td>
 </tr>
 <tr>
 <td><code class="prettyprint">localised_name</code></td>
@@ -4996,6 +4948,54 @@ Please <a href="https://partners.skyscanner.net/contact/" target="_blank"> conta
 <td>The list of parent locations that contain one another in order (e.g. England, United Kingdom for London)</td>
 </tr>
 </tbody></table>
+
+<h2 id="schemas">Schemas</h2>
+
+<blockquote>
+<p>Example place codes:</p>
+</blockquote>
+<pre class="highlight shell"><code>EDIN-sky
+</code></pre><pre class="highlight shell"><code>CDG-iata
+</code></pre><pre class="highlight plaintext"><code>-37.4849,144.5747-latlong
+</code></pre>
+<p>Each place can be referred to via different schemas, described below.</p>
+
+<p><em>SCHEMAS</em></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>sky</td>
+<td>Skyscanner code. The response from <a href="#place-information">Autosuggest</a> provides these ids.</td>
+</tr>
+<tr>
+<td>iata / iso</td>
+<td>Airports and cities often use the internationally recognized IATA and ISO schemas.<br>For <b>Flights</b> we recommend that you use the Skyscanner code which is very similar but solves ambiguous cases where a city and one of its airports share the same code. For <b>Car Hire</b> please use the IATA code.</td>
+</tr>
+<tr>
+<td>latlong</td>
+<td>Latitude and longitude of the place in the following form: &ldquo;latitude,longitude&rdquo;. The nearest city with airport will be used.</td>
+</tr>
+<tr>
+<td>ip</td>
+<td>IP of a user. The nearest city with airport will be used. Format: <code class="prettyprint">188.39.95.93</code></td>
+</tr>
+<tr>
+<td>GeoNameCodes</td>
+<td>GeoNameCodes from the GeoNames schema (see <a href="www.geonames.org">geonames.org</a>)</td>
+</tr>
+<tr>
+<td>GeoNameIDs</td>
+<td>GeoNameIDs from the GeoNames schema (see <a href="www.geonames.org">geonames.org</a>)</td>
+</tr>
+</tbody></table>
+
+<p>If the default Skyscanner schema is not used, the schema name must be appended to the place id as follows:
+<code class="prettyprint">placeCode-locationSchema</code></p>
 
           <h1 id="booking-redirects">Booking Redirects</h1>
 
