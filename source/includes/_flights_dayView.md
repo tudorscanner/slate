@@ -36,6 +36,7 @@ For more details, please see our [Examples](#examples)
 | [outboundDate](#outbounddate)                       | `string`   | **Required** | No       |                                            | Flights Day View supported parameters (this schema) |
 | [outboundaltsenabled](#outboundaltsenabled)         | `boolean`  | Optional     | No       |                                            | Flights Day View supported parameters (this schema) |
 | [preferDirects](#preferdirects)                     | `boolean`  | Optional     | No       |                                            | Flights Day View supported parameters (this schema) |
+| [showDirectDays](#showdirectdays)                   | `boolean`  | Optional     | No       | `true`                                     | Flights Day View supported parameters (this schema) |
 | [rtn](#rtn)                                         | `enum`     | Optional     | No       |                                            | Flights Day View supported parameters (this schema) |
 | [sortby](#sortby)                                   | `enum`     | Optional     | No       |                                            | Flights Day View supported parameters (this schema) |
 | `*`                                                 | any        | Additional   | Yes      | this schema _allows_ additional properties |
@@ -341,6 +342,20 @@ Will search only for direct flights if the value is true
 - defined in this schema
 
 #### preferDirects Type
+
+`boolean`
+
+### showDirectDays
+
+Controls the visibility of the day view screen, which presents the user with options for different dates with direct flights, when there are no direct flights for the currently selected dates.
+
+`showDirectDays`
+
+- is optional
+- type: `boolean`
+- defined in this schema
+
+#### showDirectDays Type
 
 `boolean`
 
