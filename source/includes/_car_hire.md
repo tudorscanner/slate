@@ -34,7 +34,7 @@ curl "https://partners.api.skyscanner.net/apiservices/carhire/liveprices/v2/
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/eb787038fadc6e9607d6)
 
-or go to the [test harness](https://business.skyscanner.net/portal/en-GB/Documentation/CarHireLivePricingQuickStart)
+or go to the [test harness](https://www.partners.skyscanner.net/carhirelivepricingquickstart)
 
 *HEADER VALUES*
 
@@ -106,7 +106,7 @@ curl "https://partners.api.skyscanner.net/apiservices/carhire/liveprices/v2/{ses
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/eb787038fadc6e9607d6)
 
-or go to the [test harness](https://business.skyscanner.net/portal/en-GB/Documentation/CarHireLivePricingQuickStart)
+or go to the [test harness](https://www.partners.skyscanner.net/carhirelivepricingquickstart)
 
 
 *REQUEST PARAMETERS*
