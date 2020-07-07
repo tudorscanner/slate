@@ -146,11 +146,11 @@ or go to our [test harness](https://www.partners.skyscanner.net/flightsliveprici
 | ```destinationAirports``` <br><span class="optional">OPTIONAL</span> | Destination airports to filter on. List of airport codes delimited by ‘;’  |
 | ```stops``` <br><span class="optional">OPTIONAL</span> | Filter for maximum number of stops.<br>0 for direct flights only<br>1 for flights with maximum one stop<br>omit for all flights (direct and indirect)  |
 | ```outboundDepartTime``` <br><span class="optional">OPTIONAL</span> | Filter for outbound departure time by time period of the day (i.e. morning, afternoon, evening). List of day time period delimited by ‘;’ (acceptable values are M, A, E) |
-| ```outboundDepartStartTime``` <br><span class="optional">OPTIONAL</span> | Filter for start of range for outbound departure time. Format ‘hh:mm’. |
-| ```outboundDepartEndTime``` <br><span class="optional">OPTIONAL</span> | Filter for end of range for outbound departure time. Format ‘hh:mm’. |
+| ```outboundDepartStartTime``` <br><span class="optional">OPTIONAL</span> | Filter for start of range for outbound departure time. Format ‘hh:mm’. Time is inclusive |
+| ```outboundDepartEndTime``` <br><span class="optional">OPTIONAL</span> | Filter for end of range for outbound departure time. Format ‘hh:mm’. Time is inclusive |
 | ```inboundDepartTime``` <br><span class="optional">OPTIONAL</span> | Filter for inbound departure time by time period of the day (i.e. morning, afternoon, evening). List of day time period delimited by ‘;’ (acceptable values are M, A, E)  |
-| ```inboundDepartStartTime``` <br><span class="optional">OPTIONAL</span> | Filter for start of range for inbound departure time. Format ‘hh:mm’. |
-| ```inboundDepartEndTime``` <br><span class="optional">OPTIONAL</span> | Filter for start of range for inbound departure time. Format ‘hh:mm’. |
+| ```inboundDepartStartTime``` <br><span class="optional">OPTIONAL</span> | Filter for start of range for inbound departure time. Format ‘hh:mm’. Time is inclusive|
+| ```inboundDepartEndTime``` <br><span class="optional">OPTIONAL</span> | Filter for end of range for inbound departure time. Format ‘hh:mm’. Time is inclusive |
 | ```apiKey``` <br><span class="required">REQUIRED</span> | Your API Key. |
 
 
