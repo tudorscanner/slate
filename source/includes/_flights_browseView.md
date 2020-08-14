@@ -212,7 +212,7 @@ Will search only for direct flights if the value is true
 
 ### rtn
 
-Trip type: 0 if oneway or 1 if return or multicity trip
+Trip type: 0 if oneway or 1 if return trip
 
 `rtn`
 
