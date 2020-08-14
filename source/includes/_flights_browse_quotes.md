@@ -120,8 +120,8 @@ The following tables show the level of precision supported for the origin and de
 
 | Parameter | Description |
 | --- | --- |
-| ```Quotes``` | Contains the list of markets (array of countries as name-value pairs). |
-| ```Places``` | Contains the list of markets (array of countries as name-value pairs). |
-| ```Carriers``` | Contains the list of markets (array of countries as name-value pairs). |
-| ```Currencies``` | Contains the list of markets (array of countries as name-value pairs). |
+| ```Quotes``` | Contains the list of cheapest quotes available for the search. |
+| ```Places``` | The list of places matching the search results. |
+| ```Carriers``` | The list of carriers specified in the list of quotes. |
+| ```Currencies``` | The currency of the quote prices. |
 
