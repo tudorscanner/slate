@@ -428,19 +428,19 @@ Unless you require exact prices, we recommend you start with the cache prices AP
 </thead><tbody>
 <tr>
 <td><code class="prettyprint">Quotes</code></td>
-<td>Contains the list of markets (array of countries as name-value pairs).</td>
+<td>Contains the list of cheapest quotes available for the search.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">Places</code></td>
-<td>Contains the list of markets (array of countries as name-value pairs).</td>
+<td>The list of places matching the search results.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">Carriers</code></td>
-<td>Contains the list of markets (array of countries as name-value pairs).</td>
+<td>The list of carriers specified in the list of quotes.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">Currencies</code></td>
-<td>Contains the list of markets (array of countries as name-value pairs).</td>
+<td>The currency of the quote prices.</td>
 </tr>
 </tbody></table>
 
@@ -626,19 +626,19 @@ Unless you require exact prices, we recommend you start with the cache prices AP
 </tr>
 <tr>
 <td><code class="prettyprint">Quotes</code></td>
-<td>Contains the list of markets (array of countries as name-value pairs).</td>
+<td>The list of quotes specified in the list of routes.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">Places</code></td>
-<td>Contains the list of markets (array of countries as name-value pairs).</td>
+<td>The list of places specified in the list of routes.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">Carriers</code></td>
-<td>Contains the list of markets (array of countries as name-value pairs).</td>
+<td>The list of carriers specified in the list of quotes.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">Currencies</code></td>
-<td>Contains the list of markets (array of countries as name-value pairs).</td>
+<td>The currency of the quote prices.</td>
 </tr>
 </tbody></table>
 
@@ -830,19 +830,19 @@ Unless you require exact prices, we recommend you start with the cache prices AP
 </tr>
 <tr>
 <td><code class="prettyprint">Quotes</code></td>
-<td>Contains the list of markets (array of countries as name-value pairs).</td>
+<td>The list of quotes specified in the list of Dates.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">Places</code></td>
-<td>Contains the list of markets (array of countries as name-value pairs).</td>
+<td>The list of places matching the search results.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">Carriers</code></td>
-<td>Contains the list of markets (array of countries as name-value pairs).</td>
+<td>The list of carriers specified in the list of quotes.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">Currencies</code></td>
-<td>Contains the list of markets (array of countries as name-value pairs).</td>
+<td>The currency of the quote prices.</td>
 </tr>
 </tbody></table>
 
@@ -993,19 +993,19 @@ Unless you require exact prices, we recommend you start with the cache prices AP
 </thead><tbody>
 <tr>
 <td><code class="prettyprint">Dates</code></td>
-<td>Matrix of all the dates available with associated price.</td>
+<td>Matrix of all the dates available with associated prices.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">Places</code></td>
-<td>Contains the list of markets (array of countries as name-value pairs).</td>
+<td>The list of places matching the search results.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">Carriers</code></td>
-<td>Contains the list of markets (array of countries as name-value pairs).</td>
+<td>The list of carriers specified in the list of quotes.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">Currencies</code></td>
-<td>Contains the list of markets (array of countries as name-value pairs).</td>
+<td>The currency of the quote prices.</td>
 </tr>
 </tbody></table>
 
@@ -4543,7 +4543,7 @@ The country and language must be included in the Autosuggest query so that the m
 </code></pre>
 <p><em>API endpoint</em></p>
 
-<p><code class="prettyprint">GET /autosuggest/v1.0/{market}/{currency}/{locale}</code></p>
+<p><code class="prettyprint">GET /autosuggest/v1.0/{country}/{currency}/{locale}</code></p>
 
 <p><em>Try it out</em></p>
 
@@ -4643,7 +4643,7 @@ See <a href="#token-generation">token generation</a> section for more details.
 
 <p><a href="https://app.getpostman.com/run-collection/9c973db787e866c966f2"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
 <pre class="highlight shell"><code>GET <span class="s2">"https://partners.api.skyscanner.net/apiservices/
-    autosuggest/v1.0/{market}/{currency}/{locale}?
+    autosuggest/v1.0/{country}/{currency}/{locale}?
     id={place_id}&amp;
     apiKey={apiKey}"</span>
 </code></pre>
@@ -6227,7 +6227,7 @@ Please try to avoid using <code class="prettyprint">locale</code>, <code class="
 
 <h3 id="rtn">rtn</h3>
 
-<p>Trip type: 0 if oneway or 1 if return or multicity trip</p>
+<p>Trip type: 0 if oneway or 1 if return trip</p>
 
 <p><code class="prettyprint">rtn</code></p>
 
@@ -6548,7 +6548,7 @@ Please try to avoid using <code class="prettyprint">locale</code>, <code class="
 
 <h3 id="rtn">rtn</h3>
 
-<p>Trip type: 0 if oneway or 1 if return or multicity trip</p>
+<p>Trip type: 0 if oneway or 1 if return trip</p>
 
 <p><code class="prettyprint">rtn</code></p>
 
