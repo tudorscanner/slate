@@ -33,7 +33,7 @@ GET "https://partners.api.skyscanner.net/apiservices/
 ```
 *API endpoint*
 
-`GET /autosuggest/v1.0/{market}/{currency}/{locale}`
+`GET /autosuggest/v1.0/{country}/{currency}/{locale}`
 
 *Try it out*
 
@@ -113,7 +113,7 @@ Get information about a country, city or airport using its ID.
 
 ```shell
 GET "https://partners.api.skyscanner.net/apiservices/
-    autosuggest/v1.0/{market}/{currency}/{locale}?
+    autosuggest/v1.0/{country}/{currency}/{locale}?
     id={place_id}&
     apiKey={apiKey}"
 ```

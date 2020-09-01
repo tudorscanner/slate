@@ -107,8 +107,8 @@ The following tables show the level of precision supported for the origin and de
 
 | Parameter | Description |
 | --- | --- |
-| ```Dates``` | Matrix of all the dates available with associated price. |
-| ```Places``` | Contains the list of markets (array of countries as name-value pairs). |
-| ```Carriers``` | Contains the list of markets (array of countries as name-value pairs). |
-| ```Currencies``` | Contains the list of markets (array of countries as name-value pairs). |
+| ```Dates``` | Matrix of all the dates available with associated prices. |
+| ```Places``` | The list of places matching the search results. |
+| ```Carriers``` | The list of carriers specified in the list of quotes. |
+| ```Currencies``` | The currency of the quote prices. |
 

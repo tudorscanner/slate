@@ -147,7 +147,7 @@ The following tables show the level of precision supported for the origin and de
 | Parameter | Description |
 | --- | --- |
 | `Dates`| The list of outbound and inbound dates for which quotes are available. |
-| ```Quotes``` | Contains the list of markets (array of countries as name-value pairs). |
-| ```Places``` | Contains the list of markets (array of countries as name-value pairs). |
-| ```Carriers``` | Contains the list of markets (array of countries as name-value pairs). |
-| ```Currencies``` | Contains the list of markets (array of countries as name-value pairs). |
+| ```Quotes``` | The list of quotes specified in the list of Dates. |
+| ```Places``` | The list of places matching the search results. |
+| ```Carriers``` | The list of carriers specified in the list of quotes. |
+| ```Currencies``` | The currency of the quote prices. |

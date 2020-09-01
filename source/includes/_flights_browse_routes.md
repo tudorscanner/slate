@@ -138,9 +138,9 @@ The following tables show the level of precision supported for the origin and de
 
 | Parameter | Description |
 | --- | --- |
-| `Routes`| Contains the list of routes available, assembled from the individual quotes. |
-| ```Quotes``` | Contains the list of markets (array of countries as name-value pairs). |
-| ```Places``` | Contains the list of markets (array of countries as name-value pairs). |
-| ```Carriers``` | Contains the list of markets (array of countries as name-value pairs). |
-| ```Currencies``` | Contains the list of markets (array of countries as name-value pairs). |
+| ```Routes``` | Contains the list of routes available, assembled from the individual quotes. |
+| ```Quotes``` | The list of quotes specified in the list of routes. |
+| ```Places``` | The list of places specified in the list of routes. |
+| ```Carriers``` | The list of carriers specified in the list of quotes. |
+| ```Currencies``` | The currency of the quote prices. |
 
