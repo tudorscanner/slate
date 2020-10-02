@@ -86,7 +86,7 @@ In order to do this
 
 2. Merge into master
 
-3. There's no 3 anymore. Travis will automatically deploy to Github Pages from master
+3. There's no 3 anymore. Github will automatically deploy to Github Pages from master
 
 
 
