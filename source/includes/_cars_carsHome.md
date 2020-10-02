@@ -14,7 +14,7 @@
 ### currency
 
 The desired currency for the page. Examples: GBP, EUR, USD  
-Please try to avoid using `locale`, `market` and `currency`, as these values will be governed by Skyscanner market detection logic on the Skyscanner site. If you believe you need to use these, please discuss with your account manager.
+Please try to avoid using `locale`, `market`, and `currency`, as these values will be governed by Skyscanner market detection logic on the Skyscanner site. If you believe you need to use these, please discuss with your account manager.
 
 `currency`
 

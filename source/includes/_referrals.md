@@ -1,7 +1,7 @@
 # Referrals
 
 The referral service is used to provide partner redirects
-to Skyscanner pages based to provided request parameters. 
+to Skyscanner pages based on provided request parameters. 
 It can redirect to different pages within Skyscanner based on the provided {pagetype} parameter 
 (for the full list of page types and examples see below).
 
@@ -15,8 +15,7 @@ There is one main endpoint with the following URL structure:
 
 The endpoint serves only GET requests and responds with HTTP status 301 redirecting to the desired Skyscanner page.
 
-For the different possible values of the parameters and for additional query parameters
-check the tables below.
+For the different possible values of the parameters and additional query parameters check the tables below.
 
 *TRY IT OUT*
 
@@ -59,7 +58,7 @@ Preferred alliances:
 
 `GET https://skyscanner.net/g/referrals/v1/flights/day-view?alliances=oneworld,Star%20Alliance&market=UK&currency=GBP&locale=en-GB&origin=cdg&destination=edi&outboundDate=2020-10-14&inboundDate=2020-10-21`
 
-Departure times - In this example the query paramter configures the filters to have the first leg's departure time as default (-), and the second leg between 0 (00:00) and 990 minutes (16:30).
+Departure times - in this example, the query parameter configures the filters to have the first leg's departure time as default (-), and the second leg between 0 (00:00) and 990 minutes (16:30).
 
 `GET https://skyscanner.net/g/referrals/v1/flights/day-view?departure-times=-%7C0-990&market=UK&currency=GBP&locale=en-GB&origin=cdg&destination=edi&outboundDate=2020-10-14&inboundDate=2020-10-21`
 
@@ -68,7 +67,7 @@ Duration:
 `GET https://skyscanner.net/g/referrals/v1/flights/day-view?duration=1320&market=UK&currency=GBP&locale=en-GB&origin=cdg&destination=edi&outboundDate=2020-10-14&inboundDate=2020-10-21`
 
 
-Specific request query parameters are provided in tables below.
+Specific request query parameters are provided in the tables below.
 
 *RESPONSE PARAMETERS*
 

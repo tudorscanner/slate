@@ -4,9 +4,9 @@ Two types of requests can be made:
 
 * list of places (with corresponding IDs) that match the query string
 
-* information about a specific place given its ID (for example city name and country name for an airport)
+* information about a specific place given its ID (for example, city name and country name for an airport)
 
-The country and language must be included in the query so that the most relevant results can be returned, in the correct language.
+The country and language must be included in the query so that the most relevant results can be returned in the correct language.
 
 *API endpoint*
 

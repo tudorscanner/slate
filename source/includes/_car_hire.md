@@ -88,7 +88,7 @@ Please allow at least one second between polls.
 
 A note about delta results
 
-In your polling requests you may specify a parameter called 'deltaExcludeWebsites'. This is a CSV or semicolon-separated list of website IDs. The server will set this in the Location headers to exclude whatever websites have finished sending results (inProgress equal to false). Excluding any given provider will remove its cars and website information from your result. Merely supplying&deltaExcludeWebsites= removes all images, the query, and the car classes lookup. The Location header in the first poll will include this parameter, even if it's an empty string, in order that you don't fetch that information multiple times.
+In your polling requests, you may specify a parameter called `deltaExcludeWebsites`. This is a CSV or semicolon-separated list of website IDs. The server will set this in the Location headers to exclude whatever websites have finished sending results (`inProgress` equal to false). Excluding any given provider will remove its cars and website information from your result. Merely supplying&deltaExcludeWebsites= removes all images, the query, and the car classes lookup. The Location header in the first poll will include this parameter, even if it's an empty string, so that you don't fetch that information multiple times.
 
 
 ```shell
@@ -221,7 +221,7 @@ or go to the [test harness](https://www.partners.skyscanner.net/carhireliveprici
 | --- | --- |
 | `submitted_query` | Contains the URL for polling the results. |
 | `cars` | The list of available cars. See Car Details below. |
-| `websites` | A reference list of websites where the cars can be hired, including website logo url. The boolean field "in_progress" indicates whether or not there are still updates pending for that website. |
+| `websites` | A reference list of websites where the cars can be hired, including website logo URL. The boolean field "in_progress" indicates whether or not there are still updates pending for that website. |
 | `images` | Contains the images of the car types. |
 | `car_classes` | Contains the URL for polling the results. |
 
