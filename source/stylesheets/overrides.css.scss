@@ -15,7 +15,7 @@ body {
   font-size: 14px;
 }
 
-.tocify-wrapper {
+.toc-wrapper {
   font-size: 15px;
   font-weight: normal;
 
@@ -35,7 +35,7 @@ body {
     text-decoration: none;
   }
 
-  .tocify-focus {
+  .toc-link.active {
     font-weight: bold;
     box-shadow: none;
     background-color: $nav-active-bg;
@@ -51,8 +51,8 @@ body {
     line-height: 38px;
   }
 
-  .tocify-subheader {
-    .tocify-item > a {
+  .toc-h2 {
+    li > a {
         font-size:14px;
     }
 
