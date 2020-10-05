@@ -1,6 +1,6 @@
 <h1 id="https-migration-guide">HTTPS migration guide</h1>
 
-<p>As of April 2020 in order to improve the <a href="https://www.cloudflare.com/learning/ssl/why-is-http-not-secure/">security</a> of our Skyscanner Travel APIs we&rsquo;re requiring all partners to <strong>only</strong> use 
+<p>As of April 2020 in order to improve the <a href="https://www.cloudflare.com/learning/ssl/why-is-http-not-secure/">security</a> of our Skyscanner Travel APIs, we&rsquo;re requiring all partners to <strong>only</strong> use 
 the <code class="prettyprint">https</code> protocol for making requests to our APIs.</p>
 
 <h2 id="what-is-changing">What is changing?</h2>

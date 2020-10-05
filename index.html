@@ -142,17 +142,17 @@ If you need more help you can find more information and answers to questions in 
 
 <p>Skyscanner uses API keys to allow access to the APIs. To request an API key please <a href="https://partners.skyscanner.net/contact/">contact us</a>.</p>
 
-<p>You must include the API key in all API requests to the server, either as a parameter in the query or in the query header. Please refer to each endpoint for details.</p>
+<p>You must include the API key in all API requests to the server, either as a parameter in the query or the request header. Please refer to each endpoint for details.</p>
 
 <aside class="warning">Make sure that you are accessing the APIs through <b>HTTPS</b></aside>
 
 <aside class="warning">
-Be careful when sharing API keys. Do not publish them in public code repositories or add them to client-side API calls. When you need to make a client-side call (e.g. redirect) please insure that you use your short API key (the first 16 characters of you key). Please note that *not* all API endpoints supports short API keys.
+Be careful when sharing API keys. Do not publish them in public code repositories or add them to client-side API calls. When you need to make a client-side call (e.g. redirect) please ensure that you use your short API key (the first 16 characters of your key). Please note that *not* all API endpoints support short API keys.
 </aside>
 
 <h2 id="token-generation">Token generation</h2>
 
-<p>Get authentication token. Expiration time is 30 minutes.</p>
+<p>Get authentication token. The expiration time is 30 minutes.</p>
 <pre class="highlight shell"><code>GET <span class="s2">"https://partners.api.skyscanner.net/apiservices/
     token/v2/gettoken?
     apiKey={apiKey}"</span>
@@ -182,10 +182,10 @@ Be careful when sharing API keys. Do not publish them in public code repositorie
 </blockquote>
 <pre class="highlight shell"><code>    _dR-ShOTX6w2SeENoXhHTsT9Z5N4UNqwReQqU_F8WkbgMDIuZx7ud7boHnngf4fT9bpPDFJh7nxB3hWsAT8x76w<span class="o">==</span>
 </code></pre>
-<p>A successful response contains string with token value.</p>
+<p>A successful response contains a string with token value.</p>
 
 <aside class="warning">
-Please don&rsquo;t forget to encode token with URL encoder to escape special characters before sending it as value for apiKey URL paramater.
+Please don&rsquo;t forget to encode the token with a URL encoder to escape special characters before sending it as a value for apiKey URL parameter.
 </aside>
 
           <h1 id="getting-started">Getting Started</h1>
@@ -1011,7 +1011,7 @@ Unless you require exact prices, we recommend you start with the cache prices AP
 
           <h1 id="flights-live-prices">Flights Live Prices</h1>
 
-<p>The Live Pricing Service Session must be created before any pricing data can be obtained. The request contains details of the locations, dates, passengers, cabin class and user details. These parameters define the session, and cannot be changed within the session (with the exception of passenger numbers).</p>
+<p>The Live Pricing Service Session must be created before any pricing data can be obtained. The request contains details of the locations, dates, passengers, cabin class, and user details. These parameters define the session, and cannot be changed within the session (except for passenger numbers).</p>
 
 <p><img src="images/Skyscanner_UMLDiagram_v3_EJ-01-01.png" alt="diagram" /></p>
 
@@ -1556,7 +1556,7 @@ You must keep polling the results until you get &lsquo;UpdatesComplete&rsquo;. T
 </tr>
 </tbody></table>
 
-<p>Please note that you must not force users to your <a href="#to-the-supplier">deeplink</a>. Once they have made a search you should provide them with a list of results, and an option to filter that list, in order to pick the flight that best suits their needs.</p>
+<p>Please note that you must not force users to your <a href="#to-the-supplier">deeplink</a>. Once they have made a search you should provide them with a list of results, and an option to filter that list, to pick the flight that best suits their needs.</p>
 
 <aside class="warning">
 Please add the no-follow attribute when you link to the deeplink. See <a href="https://support.business.skyscanner.net/hc/en-us/articles/206800309-How-do-I-add-the-nofollow-attribute-to-the-deeplinks-calls-" target="_blank">How do I add the nofollow attribute?</a> in the FAQ section.
@@ -1571,10 +1571,10 @@ Please add the no-follow attribute when you link to the deeplink. See <a href="h
     -X PUT
     -H <span class="s2">"Content-Type: application/x-www-form-urlencoded"</span>
 </code></pre>
-<p>A request for booking details will return the most up-to-date prices for the selected itinerary. Some of the prices returned in the previous requests might be cached and slightly older. By creating a booking details session you&rsquo;ll recieve the most up-to-date price which we can get from our partners.</p>
+<p>A request for booking details will return the most up-to-date prices for the selected itinerary. Some of the prices returned in the previous requests might be cached and slightly older. By creating a booking details session you&rsquo;ll receive the most up-to-date price which we can get from our partners.</p>
 
 <blockquote>
-<p>The url is provided in the response of the live prices:</p>
+<p>The URL is provided in the response of the live prices:</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"BookingDetailsLink"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -1584,7 +1584,7 @@ Please add the no-follow attribute when you link to the deeplink. See <a href="h
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>The full url and body content are provided in the response from the live pricing results.</p>
+<p>The full URL and body content are provided in the response from the live pricing results.</p>
 
 <p><em>API endpoint</em></p>
 
@@ -1996,7 +1996,7 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 
 <p>A note about delta results</p>
 
-<p>In your polling requests you may specify a parameter called &lsquo;deltaExcludeWebsites&rsquo;. This is a CSV or semicolon-separated list of website IDs. The server will set this in the Location headers to exclude whatever websites have finished sending results (inProgress equal to false). Excluding any given provider will remove its cars and website information from your result. Merely supplying&amp;deltaExcludeWebsites= removes all images, the query, and the car classes lookup. The Location header in the first poll will include this parameter, even if it&rsquo;s an empty string, in order that you don&rsquo;t fetch that information multiple times.</p>
+<p>In your polling requests, you may specify a parameter called <code class="prettyprint">deltaExcludeWebsites</code>. This is a CSV or semicolon-separated list of website IDs. The server will set this in the Location headers to exclude whatever websites have finished sending results (<code class="prettyprint">inProgress</code> equal to false). Excluding any given provider will remove its cars and website information from your result. Merely supplying&amp;deltaExcludeWebsites= removes all images, the query, and the car classes lookup. The Location header in the first poll will include this parameter, even if it&rsquo;s an empty string, so that you don&rsquo;t fetch that information multiple times.</p>
 <pre class="highlight shell"><code>curl <span class="s2">"https://partners.api.skyscanner.net/apiservices/carhire/liveprices/v2/{sessionKey}?apiKey={apiKey}&amp;deltaExcludeWebsites={a,b,c...}""
 </span></code></pre>
 <h3 id="request">Request</h3>
@@ -2144,7 +2144,7 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 </tr>
 <tr>
 <td><code class="prettyprint">websites</code></td>
-<td>A reference list of websites where the cars can be hired, including website logo url. The boolean field &ldquo;in_progress&rdquo; indicates whether or not there are still updates pending for that website.</td>
+<td>A reference list of websites where the cars can be hired, including website logo URL. The boolean field &ldquo;in_progress&rdquo; indicates whether or not there are still updates pending for that website.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">images</code></td>
@@ -2325,7 +2325,7 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 
 <p>Given an entity_id, this endpoint will give back hotels with prices around the provided entity. The supported entities are any, from cities, islands, nations, places to Hotels.</p>
 
-<p>The Hotels API, first of all, tries to search for the hotels related to an entity using an explicit relation - cities, administration zones and nations, and if the results are less than a minimum number of hotels the query turns out in a geographical query.
+<p>The Hotels API, first of all, tries to search for the hotels related to an entity using an explicit relation - cities, administration zones, and nations, and if the results are less than a minimum number of hotels the query turns out in a geographical query.
 This geographical query seeks for hotels using different distances, from 500 meters to 50km, till finding this minimum amount or get the maximum distance.</p>
 
 <p>When a Hotel is used as the entity queried for, the service will treat this as an ad-hoc case. The hotel used as an entity will be serialized into the <em>hotel_pivot</em> object with its offers. Meanwhile, it will be removed from the results object.</p>
@@ -2334,11 +2334,11 @@ This geographical query seeks for hotels using different distances, from 500 met
 
 <p><em>API endpoint</em></p>
 
-<p>B2B partner please use v1 endpoint</p>
+<p>B2B partner, please use v1 endpoint</p>
 
 <p><code class="prettyprint">GET /v1/prices/search/entity/{entity_id}</code></p>
 
-<p>V3 is a new endpoint which supports direct booking and cug overriding.</p>
+<p>V3 is a new endpoint that supports direct booking and cug overriding.</p>
 
 <p><code class="prettyprint">GET /v3/prices/search/entity/{entity_id}</code></p>
 <pre class="highlight shell"><code>GET <span class="s2">"https://www.skyscanner.net/g/hbe-bellboy/v1/prices/search/entity/{entity_id}
@@ -3068,7 +3068,7 @@ These differences can be summarized into the following points:</p>
 <ul>
 <li>Every hotel will have one price (the cheapest).</li>
 <li>The default total amount of hotels returned per page will be 100.</li>
-<li>Support for bounding box queries to filter hotels that are inside of an area, the coordinates passed are serialised as <em>left, bottom, right, top</em></li>
+<li>Support for bounding box queries to filter hotels that are inside of an area, the coordinates passed are serialized as <em>left, bottom, right, top</em></li>
 </ul>
 
 <p><em>API endpoint</em></p>
@@ -4307,7 +4307,7 @@ Is a regular practice following the user flow first of all search for prices usi
 
           <h1 id="localisation">Localisation</h1>
 
-<p>All Skyscanner services are localised by market, language and currency, so these three parameters must be added to every request.</p>
+<p>All Skyscanner services are localized by market, language, and currency, so these three parameters must be added to every request.</p>
 
 <h2 id="locales">Locales</h2>
 
@@ -4443,7 +4443,7 @@ Is a regular practice following the user flow first of all search for prices usi
 
 <p>Retrieve the market countries that we support.</p>
 
-<p>Most suppliers (airlines, travel agents and car hire dealers) set their fares based on the market (or country of purchase). It is therefore necessary to specify the market country in every query.</p>
+<p>Most suppliers (airlines, travel agents, and car hire dealers) set their fares based on the market (or country of purchase). It is therefore necessary to specify the market country in every query.</p>
 <pre class="highlight shell"><code>GET <span class="s2">"https://partners.api.skyscanner.net/apiservices/
     reference/v1.0/countries/
     {locale}?
@@ -4525,7 +4525,7 @@ Is a regular practice following the user flow first of all search for prices usi
 
 <ul>
 <li><p>our <a href="#list-of-places">Autosuggest</a> endpoint to obtain a list of places and corresponding IDs that match a query string</p></li>
-<li><p>our <a href="#place-information">Autosuggest</a> endpoint to get information about a specific place given its ID (for example city name and country name for an airport)</p></li>
+<li><p>our <a href="#place-information">Autosuggest</a> endpoint to get information about a specific place given its ID (for example, city name and country name for an airport)</p></li>
 <li><p>our <a href="#geo-catalog">Geo catalog</a> to get the full list of places that we support (please <a href="https://partners.skyscanner.net/contact/">contact us</a> to request access)</p></li>
 </ul>
 
@@ -4627,13 +4627,13 @@ The country and language must be included in the Autosuggest query so that the m
 </tbody></table>
 
 <aside class="notice">
-If you are using this endpoint from client-side code, we recommend to use a token as value for apiKey request parameter. This way you will overcome the potential security risk of exposing account API keys.
+If you are using this endpoint from client-side code, we recommend using a token as value for apiKey request parameter. This way you will overcome the potential security risk of exposing account API keys.
 See <a href="#token-generation">token generation</a> section for more details.
 </aside>
 
 <h2 id="place-information">Place Information</h2>
 
-<p>Get information about a country, city or airport using its ID.</p>
+<p>Get information about a country, city, or airport using its ID.</p>
 
 <p><em>API endpoint</em></p>
 
@@ -4999,7 +4999,7 @@ Please <a href="https://partners.skyscanner.net/contact/" target="_blank"> conta
 
           <h1 id="booking-redirects">Booking Redirects</h1>
 
-<p>In addition to price information, your users will need a url that redirects them to where they can book their ticket. </p>
+<p>In addition to price information, your users will need a URL that redirects them to where they can book their tickets. </p>
 
 <p>You can redirect your users directly to the supplier&rsquo;s website (airline or travel agent)</p>
 
@@ -5021,7 +5021,7 @@ Please <a href="https://partners.skyscanner.net/contact/" target="_blank"> conta
 
 <p><img src="images/deeplink.png" alt="deeplink page" /></p>
 
-<p>You can customise the redirect page by replacing the default logo with your own logo. Please see <a href="https://support.business.skyscanner.net/hc/en-us/articles/115005566769-How-can-I-put-my-logo-on-the-redirect-page-">How can I put my logo on the redirect page?</a> for more information.</p>
+<p>You can customize the redirect page by replacing the default logo with your logo. Please see <a href="https://support.business.skyscanner.net/hc/en-us/articles/115005566769-How-can-I-put-my-logo-on-the-redirect-page-">How can I put my logo on the redirect page?</a> for more information.</p>
 
 <p>See how it looks with your logo</p>
 
@@ -5031,7 +5031,7 @@ Please <a href="https://partners.skyscanner.net/contact/" target="_blank"> conta
 </form>
 
 <aside class="notice">
-Skyscanner has no control over the third-party website. In some cases the selected itinerary will be ready to book. In other cases the search criteria will be pre-populated but the end-user will have to search through the results to find their itinerary.
+Skyscanner has no control over the third-party website. In some cases, the selected itinerary will be ready to book. In other cases, the search criteria will be pre-populated but the end-user will have to search through the results to find their itinerary.
 </aside>
 
 <aside class="warning">
@@ -5041,7 +5041,7 @@ Please <b>do not cache the deeplinks</b> as they are only valid while your sessi
           <h1 id="referrals">Referrals</h1>
 
 <p>The referral service is used to provide partner redirects
-to Skyscanner pages based to provided request parameters. 
+to Skyscanner pages based on provided request parameters. 
 It can redirect to different pages within Skyscanner based on the provided {pagetype} parameter 
 (for the full list of page types and examples see below).</p>
 
@@ -5055,8 +5055,7 @@ It can redirect to different pages within Skyscanner based on the provided {page
 
 <p>The endpoint serves only GET requests and responds with HTTP status 301 redirecting to the desired Skyscanner page.</p>
 
-<p>For the different possible values of the parameters and for additional query parameters
-check the tables below.</p>
+<p>For the different possible values of the parameters and additional query parameters check the tables below.</p>
 
 <p><em>TRY IT OUT</em></p>
 
@@ -5127,7 +5126,7 @@ You can find IATA airline codes <a href="https://www.iata.org/publications/pages
 
 <p><code class="prettyprint">GET https://skyscanner.net/g/referrals/v1/flights/day-view?alliances=oneworld,Star%20Alliance&amp;market=UK&amp;currency=GBP&amp;locale=en-GB&amp;origin=cdg&amp;destination=edi&amp;outboundDate=2020-10-14&amp;inboundDate=2020-10-21</code></p>
 
-<p>Departure times - In this example the query paramter configures the filters to have the first leg&rsquo;s departure time as default (-), and the second leg between 0 (00:00) and 990 minutes (16:30).</p>
+<p>Departure times - in this example, the query parameter configures the filters to have the first leg&rsquo;s departure time as default (-), and the second leg between 0 (00:00) and 990 minutes (16:30).</p>
 
 <p><code class="prettyprint">GET https://skyscanner.net/g/referrals/v1/flights/day-view?departure-times=-%7C0-990&amp;market=UK&amp;currency=GBP&amp;locale=en-GB&amp;origin=cdg&amp;destination=edi&amp;outboundDate=2020-10-14&amp;inboundDate=2020-10-21</code></p>
 
@@ -5135,7 +5134,7 @@ You can find IATA airline codes <a href="https://www.iata.org/publications/pages
 
 <p><code class="prettyprint">GET https://skyscanner.net/g/referrals/v1/flights/day-view?duration=1320&amp;market=UK&amp;currency=GBP&amp;locale=en-GB&amp;origin=cdg&amp;destination=edi&amp;outboundDate=2020-10-14&amp;inboundDate=2020-10-21</code></p>
 
-<p>Specific request query parameters are provided in tables below.</p>
+<p>Specific request query parameters are provided in the tables below.</p>
 
 <p><em>RESPONSE PARAMETERS</em></p>
 
@@ -5466,8 +5465,8 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 
 <h3 id="airlines">airlines</h3>
 
-<p>List of comma separated IATA carrier codes to be passed to the dayview filters. For example: &amp;airlines=AA,KL,LH. To
-unselect airline from the filters, the code must be specified with exclamation mark. For example: &amp;airlines=AA,!KL,!LH<br>
+<p>A list of comma-separated IATA carrier codes to be passed to the dayview filters. For example: &amp;airlines=AA,KL,LH. To
+unselect airline from the filters, the code must be specified with an exclamation mark. For example: &amp;airlines=AA,!KL,!LH<br>
 You can search for IATA airline codes at the IATA website <a href="https://www.iata.org/publications/pages/code-search.aspx">here</a></p>
 
 <p><code class="prettyprint">airlines</code></p>
@@ -5484,7 +5483,7 @@ You can search for IATA airline codes at the IATA website <a href="https://www.i
 
 <h3 id="alliances">alliances</h3>
 
-<p>Comma separated list of alliance names passed to the dayview filters. For example: &amp;alliances=oneworld,Star%20Alliance</p>
+<p>A comma-separated list of alliance names passed to the dayview filters. For example: &amp;alliances=oneworld,Star%20Alliance</p>
 
 <p><code class="prettyprint">alliances</code></p>
 
@@ -5536,7 +5535,7 @@ You can search for IATA airline codes at the IATA website <a href="https://www.i
 
 <h3 id="cabinclass">cabinclass</h3>
 
-<p>Cabin class for the flight, possible values are: economy, premiumeconomy, business and first</p>
+<p>Cabin class for the flight, possible values are: <code class="prettyprint">economy</code>, <code class="prettyprint">premiumeconomy</code>, <code class="prettyprint">business</code> and <code class="prettyprint">first</code></p>
 
 <p><code class="prettyprint">cabinclass</code></p>
 
@@ -7662,7 +7661,7 @@ Please try to avoid using <code class="prettyprint">locale</code>, <code class="
 <h3 id="currency">currency</h3>
 
 <p>The desired currency for the page. Examples: GBP, EUR, USD<br>
-Please try to avoid using <code class="prettyprint">locale</code>, <code class="prettyprint">market</code> and <code class="prettyprint">currency</code>, as these values will be governed by Skyscanner market detection logic on the Skyscanner site. If you believe you need to use these, please discuss with your account manager.</p>
+Please try to avoid using <code class="prettyprint">locale</code>, <code class="prettyprint">market</code> and <code class="prettyprint">currency</code> as these values will be governed by Skyscanner market detection logic on the Skyscanner site. If you believe you need to use these, please discuss with your account manager.</p>
 
 <p><code class="prettyprint">currency</code></p>
 
@@ -7835,7 +7834,7 @@ Please try to avoid using <code class="prettyprint">locale</code>, <code class="
 <h3 id="currency">currency</h3>
 
 <p>The desired currency for the page. Examples: GBP, EUR, USD<br>
-Please try to avoid using <code class="prettyprint">locale</code>, <code class="prettyprint">market</code> and <code class="prettyprint">currency</code>, as these values will be governed by Skyscanner market detection logic on the Skyscanner site. If you believe you need to use these, please discuss with your account manager.</p>
+Please try to avoid using <code class="prettyprint">locale</code>, <code class="prettyprint">market</code>, and <code class="prettyprint">currency</code>, as these values will be governed by Skyscanner market detection logic on the Skyscanner site. If you believe you need to use these, please discuss with your account manager.</p>
 
 <p><code class="prettyprint">currency</code></p>
 
@@ -7939,7 +7938,7 @@ Please try to avoid using <code class="prettyprint">locale</code>, <code class="
 
           <h1 id="https-migration-guide">HTTPS migration guide</h1>
 
-<p>As of April 2020 in order to improve the <a href="https://www.cloudflare.com/learning/ssl/why-is-http-not-secure/">security</a> of our Skyscanner Travel APIs we&rsquo;re requiring all partners to <strong>only</strong> use 
+<p>As of April 2020 in order to improve the <a href="https://www.cloudflare.com/learning/ssl/why-is-http-not-secure/">security</a> of our Skyscanner Travel APIs, we&rsquo;re requiring all partners to <strong>only</strong> use 
 the <code class="prettyprint">https</code> protocol for making requests to our APIs.</p>
 
 <h2 id="what-is-changing">What is changing?</h2>
