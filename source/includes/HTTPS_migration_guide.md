@@ -1,6 +1,6 @@
 #  HTTPS migration guide
 
-As of April 2020 in order to improve the [security](https://www.cloudflare.com/learning/ssl/why-is-http-not-secure/) of our Skyscanner Travel APIs we're requiring all partners to **only** use 
+As of April 2020 in order to improve the [security](https://www.cloudflare.com/learning/ssl/why-is-http-not-secure/) of our Skyscanner Travel APIs, we're requiring all partners to **only** use 
 the `https` protocol for making requests to our APIs.
 
 ## What is changing?

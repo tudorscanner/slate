@@ -1,6 +1,6 @@
 # Localisation
 
-All Skyscanner services are localised by market, language and currency, so these three parameters must be added to every request.
+All Skyscanner services are localized by market, language, and currency, so these three parameters must be added to every request.
 
 ## Locales
 
@@ -117,7 +117,7 @@ Parameter | Description |
 
 Retrieve the market countries that we support.
 
-Most suppliers (airlines, travel agents and car hire dealers) set their fares based on the market (or country of purchase). It is therefore necessary to specify the market country in every query.
+Most suppliers (airlines, travel agents, and car hire dealers) set their fares based on the market (or country of purchase). It is therefore necessary to specify the market country in every query.
 
 ```shell
 GET "https://partners.api.skyscanner.net/apiservices/

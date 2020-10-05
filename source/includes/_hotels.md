@@ -37,7 +37,7 @@ All the /prices endpoints are intended to be queried using a polling mechanism u
 
 Given an entity_id, this endpoint will give back hotels with prices around the provided entity. The supported entities are any, from cities, islands, nations, places to Hotels.
 
-The Hotels API, first of all, tries to search for the hotels related to an entity using an explicit relation - cities, administration zones and nations, and if the results are less than a minimum number of hotels the query turns out in a geographical query.
+The Hotels API, first of all, tries to search for the hotels related to an entity using an explicit relation - cities, administration zones, and nations, and if the results are less than a minimum number of hotels the query turns out in a geographical query.
 This geographical query seeks for hotels using different distances, from 500 meters to 50km, till finding this minimum amount or get the maximum distance.
 
 When a Hotel is used as the entity queried for, the service will treat this as an ad-hoc case. The hotel used as an entity will be serialized into the *hotel_pivot* object with its offers. Meanwhile, it will be removed from the results object.
@@ -46,11 +46,11 @@ The following URL shows how the search prices endpoint can be used to retrieve p
 
 *API endpoint*
 
-B2B partner please use v1 endpoint
+B2B partner, please use v1 endpoint
 
 `GET /v1/prices/search/entity/{entity_id}`
 
-V3 is a new endpoint which supports direct booking and cug overriding.
+V3 is a new endpoint that supports direct booking and cug overriding.
 
 `GET /v3/prices/search/entity/{entity_id}`
 
@@ -476,7 +476,7 @@ These differences can be summarized into the following points:
 
 - Every hotel will have one price (the cheapest).
 - The default total amount of hotels returned per page will be 100.
-- Support for bounding box queries to filter hotels that are inside of an area, the coordinates passed are serialised as *left, bottom, right, top*
+- Support for bounding box queries to filter hotels that are inside of an area, the coordinates passed are serialized as *left, bottom, right, top*
 
 *API endpoint*
 

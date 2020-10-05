@@ -1,6 +1,6 @@
 # Booking Redirects
 
-In addition to price information, your users will need a url that redirects them to where they can book their ticket. 
+In addition to price information, your users will need a URL that redirects them to where they can book their tickets. 
 
 You can redirect your users directly to the supplier's website (airline or travel agent)
 
@@ -23,7 +23,7 @@ When using [flights live prices](#flights-live-prices) or [car hire live prices]
 
 ![deeplink page](/images/deeplink.png)
 
-You can customise the redirect page by replacing the default logo with your own logo. Please see [How can I put my logo on the redirect page?](https://support.business.skyscanner.net/hc/en-us/articles/115005566769-How-can-I-put-my-logo-on-the-redirect-page-) for more information.
+You can customize the redirect page by replacing the default logo with your logo. Please see [How can I put my logo on the redirect page?](https://support.business.skyscanner.net/hc/en-us/articles/115005566769-How-can-I-put-my-logo-on-the-redirect-page-) for more information.
 
 See how it looks with your logo
 
@@ -33,7 +33,7 @@ See how it looks with your logo
 </form>
 
 <aside class="notice">
-Skyscanner has no control over the third-party website. In some cases the selected itinerary will be ready to book. In other cases the search criteria will be pre-populated but the end-user will have to search through the results to find their itinerary.
+Skyscanner has no control over the third-party website. In some cases, the selected itinerary will be ready to book. In other cases, the search criteria will be pre-populated but the end-user will have to search through the results to find their itinerary.
 </aside>
 
 <aside class="warning">

@@ -60,8 +60,8 @@ Number of adult passengers. Adults have to be 16 years old or older.
 
 ### airlines
 
-List of comma separated IATA carrier codes to be passed to the dayview filters. For example: &airlines=AA,KL,LH. To
-unselect airline from the filters, the code must be specified with exclamation mark. For example: &airlines=AA,!KL,!LH  
+A list of comma-separated IATA carrier codes to be passed to the dayview filters. For example: &airlines=AA,KL,LH. To
+unselect airline from the filters, the code must be specified with an exclamation mark. For example: &airlines=AA,!KL,!LH  
 You can search for IATA airline codes at the IATA website [here](https://www.iata.org/publications/pages/code-search.aspx)
 
 `airlines`
@@ -76,7 +76,7 @@ You can search for IATA airline codes at the IATA website [here](https://www.iat
 
 ### alliances
 
-Comma separated list of alliance names passed to the dayview filters. For example: &alliances=oneworld,Star%20Alliance
+A comma-separated list of alliance names passed to the dayview filters. For example: &alliances=oneworld,Star%20Alliance
 
 `alliances`
 
@@ -122,7 +122,7 @@ All items must be of the type: `string`
 
 ### cabinclass
 
-Cabin class for the flight, possible values are: economy, premiumeconomy, business and first
+Cabin class for the flight, possible values are: `economy`, `premiumeconomy`, `business` and `first`
 
 `cabinclass`
 

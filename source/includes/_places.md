@@ -11,7 +11,7 @@ You can use any of the following endpoints to get information about places:
 
 * our [Autosuggest](#list-of-places) endpoint to obtain a list of places and corresponding IDs that match a query string
 
-* our [Autosuggest](#place-information) endpoint to get information about a specific place given its ID (for example city name and country name for an airport)
+* our [Autosuggest](#place-information) endpoint to get information about a specific place given its ID (for example, city name and country name for an airport)
 
 * our [Geo catalog](#geo-catalog) to get the full list of places that we support (please [contact us](https://partners.skyscanner.net/contact/) to request access)
 
@@ -93,7 +93,7 @@ GET "https://partners.api.skyscanner.net/apiservices/
 
 
 <aside class="notice">
-If you are using this endpoint from client-side code, we recommend to use a token as value for apiKey request parameter. This way you will overcome the potential security risk of exposing account API keys.
+If you are using this endpoint from client-side code, we recommend using a token as value for apiKey request parameter. This way you will overcome the potential security risk of exposing account API keys.
 See <a href="#token-generation">token generation</a> section for more details.
 </aside>
 
@@ -101,7 +101,7 @@ See <a href="#token-generation">token generation</a> section for more details.
 
 ## Place Information
 
-Get information about a country, city or airport using its ID.
+Get information about a country, city, or airport using its ID.
 
 *API endpoint*
 

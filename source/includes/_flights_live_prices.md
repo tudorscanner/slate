@@ -1,6 +1,6 @@
 # Flights Live Prices
 
-The Live Pricing Service Session must be created before any pricing data can be obtained. The request contains details of the locations, dates, passengers, cabin class and user details. These parameters define the session, and cannot be changed within the session (with the exception of passenger numbers).
+The Live Pricing Service Session must be created before any pricing data can be obtained. The request contains details of the locations, dates, passengers, cabin class, and user details. These parameters define the session, and cannot be changed within the session (except for passenger numbers).
 
 ![diagram](/images/Skyscanner_UMLDiagram_v3_EJ-01-01.png)
 
@@ -374,7 +374,7 @@ You must keep polling the results until you get 'UpdatesComplete'. The results m
 | `BookingDetailsLink` | In some cases such as for group prices you will need to make a second call to retrieve the deeplinks. See the next section [Get booking details](#get-booking-details) for details |
 
 
-Please note that you must not force users to your [deeplink](#to-the-supplier). Once they have made a search you should provide them with a list of results, and an option to filter that list, in order to pick the flight that best suits their needs.
+Please note that you must not force users to your [deeplink](#to-the-supplier). Once they have made a search you should provide them with a list of results, and an option to filter that list, to pick the flight that best suits their needs.
 
 <aside class="warning">
 Please add the no-follow attribute when you link to the deeplink. See <a href="https://support.business.skyscanner.net/hc/en-us/articles/206800309-How-do-I-add-the-nofollow-attribute-to-the-deeplinks-calls-" target="_blank">How do I add the nofollow attribute?</a> in the FAQ section.
@@ -394,9 +394,9 @@ curl "https://partners.api.skyscanner.net/apiservices/pricing/v1.0/
     -H "Content-Type: application/x-www-form-urlencoded"
 ```
 
-A request for booking details will return the most up-to-date prices for the selected itinerary. Some of the prices returned in the previous requests might be cached and slightly older. By creating a booking details session you'll recieve the most up-to-date price which we can get from our partners.
+A request for booking details will return the most up-to-date prices for the selected itinerary. Some of the prices returned in the previous requests might be cached and slightly older. By creating a booking details session you'll receive the most up-to-date price which we can get from our partners.
 
-> The url is provided in the response of the live prices:
+> The URL is provided in the response of the live prices:
 
 ```json
 {
@@ -408,7 +408,7 @@ A request for booking details will return the most up-to-date prices for the sel
 }
 ```
 
-The full url and body content are provided in the response from the live pricing results.
+The full URL and body content are provided in the response from the live pricing results.
 
 
 
