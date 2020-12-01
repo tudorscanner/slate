@@ -27,7 +27,7 @@ docker-compose up
 
 You can now see the docs at ```http://localhost:4567```
 
-> Please note that if you are on a MAC with MacOS Sierra you will need to insure you have Ruby 2.2+ and the latest Middleman
+> Please note that if you are on a MAC with MacOS Sierra you will need to ensure you have Ruby 2.2+ and the latest Middleman
 
 
 ### Add an API endpoint to the docs
