@@ -29,23 +29,30 @@ GET `/browsedates/v1.0/{country}/{currency}/{locale}/{originPlace}/{destinationP
 | --- | --- |
 | ```Accept```<br><span class="optional">OPTIONAL</span> | ```application/json``` or ```application/xml```<br>The default response format is XML |
 
-*REQUEST PARAMETERS*
+*REQUEST PATH PARAMETERS*
 
 | Parameter | Description |
 | --------- | ------- |
 | ```country``` <br><span class="required">REQUIRED</span> | The [market country](#markets) your user is in |
 | ```currency``` <br><span class="required">REQUIRED</span> | The [currency](#currencies) you want the prices in |
 | ```locale``` <br><span class="required">REQUIRED</span> | The [locale](#locales) you want the results in (ISO locale) |
-| ```originPlace``` <br><span class="required">REQUIRED</span> | The origin place (see [places](#places)) |
-| ```destinationPlace``` <br><span class="required">REQUIRED</span> | The destination place (see [places](#places)) |
+| ```originPlace``` <br><span class="required">REQUIRED</span> | The origin place (see [places](#origin-destination-place-in-browse-requests)) |
+| ```destinationPlace``` <br><span class="required">REQUIRED</span> | The destination place (see [places](#origin-destination-place-in-browse-requests)) |
 | ```outboundPartialDate``` <br><span class="required">REQUIRED</span> | The outbound date. Format "yyyy-mm-dd", "yyyy-mm" or "anytime". |
 | ```inboundPartialDate``` <br><span class="optional">OPTIONAL</span> | The return date. Format "yyyy-mm-dd", "yyyy-mm" or "anytime". Use empty string for oneway trip. |
+
+*REQUEST QUERY PARAMETERS*
+
+| Parameter | Description |
+| --------- | ------- |
 | ```apiKey``` <br><span class="required">REQUIRED</span> | The API Key to identify the customer |
 
 
-The following tables show the level of precision supported for the origin and destination places, and the outbound and return dates:
+The table below shows the level of precision supported for the origin and destination places. For more information on these, see [places](#origin-destination-place-in-browse-requests).
 
 ![diagram](/images/browsedates_places.png)
+
+The table below shows the combinations of date specificity allowed for the outbound and inbound dates of a return search. For more information on these, see [dates](#outbound-inbound-date-specificity-in-browse-requests).
 
 ![diagram](/images/browsedates_dates.png)
 

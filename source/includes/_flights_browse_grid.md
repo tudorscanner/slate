@@ -28,22 +28,29 @@ GET `/browsegrid/v1.0/{country}/{currency}/{locale}/{originPlace}/{destinationPl
 | --- | --- |
 | ```Accept```<br><span class="optional">OPTIONAL</span> | ```application/json``` or ```application/xml```<br>The default response format is XML |
 
-*REQUEST PARAMETERS*
+*REQUEST PATH PARAMETERS*
 
 | Parameter | Description |
 | --------- | ------- |
 | ```country``` <br><span class="required">REQUIRED</span> | The [market country](#markets) your user is in |
 | ```currency``` <br><span class="required">REQUIRED</span> | The [currency](#currencies) you want the prices in |
 | ```locale``` <br><span class="required">REQUIRED</span> | The [locale](#locales) you want the results in (ISO locale) |
-| ```originPlace``` <br><span class="required">REQUIRED</span> | The origin place (see [places](#places)) |
-| ```destinationPlace``` <br><span class="required">REQUIRED</span> | The destination place (see [places](#places)) |
+| ```originPlace``` <br><span class="required">REQUIRED</span> | The origin place (see [places](#origin-destination-place-in-browse-requests)) |
+| ```destinationPlace``` <br><span class="required">REQUIRED</span> | The destination place (see [places](#origin-destination-place-in-browse-requests)) |
 | ```outboundPartialDate``` <br><span class="required">REQUIRED</span> | The outbound date. Format "yyyy-mm-dd", "yyyy-mm" or "anytime". |
 | ```inboundPartialDate``` <br><span class="optional">OPTIONAL</span> | The return date. Format "yyyy-mm-dd", "yyyy-mm" or "anytime". Use empty string for oneway trip. |
+
+*REQUEST QUERY PARAMETERS*
+
+| Parameter | Description |
+| --------- | ------- |
 | ```apiKey``` <br><span class="required">REQUIRED</span> | The API Key to identify the customer |
 
-The following tables show the level of precision supported for the origin and destination places, and the outbound and return dates:
+The table below shows the level of precision supported for the origin and destination places. For more information on these, see [places](#origin-destination-place-in-browse-requests).
 
 ![diagram](/images/browsegrid_places.png)
+
+The table below shows the combinations of date specificity allowed for the outbound and inbound dates of a return search. For more information on these, see [dates](#outbound-inbound-date-specificity-in-browse-requests).
 
 ![diagram](/images/browsegrid_dates.png)
 
@@ -109,6 +116,6 @@ The following tables show the level of precision supported for the origin and de
 | --- | --- |
 | ```Dates``` | Matrix of all the dates available with associated prices. |
 | ```Places``` | The list of places matching the search results. |
-| ```Carriers``` | The list of carriers specified in the list of quotes. |
-| ```Currencies``` | The currency of the quote prices. |
+| ```Carriers``` | The list of carriers matching the search results. |
+| ```Currencies``` | The currency of the flight prices. |
 
