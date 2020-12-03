@@ -48,11 +48,11 @@ GET `/browsegrid/v1.0/{country}/{currency}/{locale}/{originPlace}/{destinationPl
 
 The table below shows the level of precision supported for the origin and destination places. For more information on these, see [places](#origin-destination-place-in-browse-requests).
 
-![diagram](/images/browsegrid_places.png)
+![diagram](/images/browsegrid_places_updated.png)
 
 The table below shows the combinations of date specificity allowed for the outbound and inbound dates of a return search. For more information on these, see [dates](#outbound-inbound-date-specificity-in-browse-requests).
 
-![diagram](/images/browsegrid_dates.png)
+![diagram](/images/browsegrid_dates_updated.png)
 
 > Example response from US to anywhere:
 
