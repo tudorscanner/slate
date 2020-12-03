@@ -341,6 +341,9 @@
                   <li>
                     <a href="#browse-dates-grid" class="toc-h2 toc-link" data-title="Browse Dates (grid)">Browse Dates (grid)</a>
                   </li>
+                  <li>
+                    <a href="#flights-browse-notes" class="toc-h2 toc-link" data-title="Flights Browse Notes">Flights Browse Notes</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -646,7 +649,7 @@ Unless you require exact prices, we recommend you start with the cache prices AP
 </tr>
 </tbody></table>
 <h1 id='flights-browse-prices'>Flights Browse Prices</h1><h2 id='browse-quotes'>Browse Quotes</h2>
-<p>Retrieve the cheapest quotes from our cache prices.</p>
+<p>Retrieve the cheapest quotes from our cached prices.</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://partners.api.skyscanner.net/apiservices/browsequotes/v1.0/{country}/{currency}/{locale}/
   {originPlace}/
   {destinationPlace}/
@@ -679,7 +682,7 @@ Unless you require exact prices, we recommend you start with the cache prices AP
 </tr>
 </tbody></table>
 
-<p><em>REQUEST PARAMETERS</em></p>
+<p><em>REQUEST PATH PARAMETERS</em></p>
 
 <table><thead>
 <tr>
@@ -701,11 +704,11 @@ Unless you require exact prices, we recommend you start with the cache prices AP
 </tr>
 <tr>
 <td><code>originPlace</code> <br><span class="required">REQUIRED</span></td>
-<td>The origin place (see <a href="#places">places</a>)</td>
+<td>The origin place (see <a href="#origin-destination-place-in-browse-requests">places</a>)</td>
 </tr>
 <tr>
 <td><code>destinationPlace</code> <br><span class="required">REQUIRED</span></td>
-<td>The destination place (see <a href="#places">places</a>)</td>
+<td>The destination place (see <a href="#origin-destination-place-in-browse-requests">places</a>)</td>
 </tr>
 <tr>
 <td><code>outboundPartialDate</code> <br><span class="required">REQUIRED</span></td>
@@ -715,15 +718,27 @@ Unless you require exact prices, we recommend you start with the cache prices AP
 <td><code>inboundPartialDate</code> <br><span class="optional">OPTIONAL</span></td>
 <td>The return date. Format &quot;yyyy-mm-dd&quot;, &quot;yyyy-mm&quot; or &quot;anytime&quot;. Use empty string for oneway trip.</td>
 </tr>
+</tbody></table>
+
+<p><em>REQUEST QUERY PARAMETERS</em></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
 <tr>
 <td><code>apiKey</code> <br><span class="required">REQUIRED</span></td>
 <td>The API Key to identify the customer</td>
 </tr>
 </tbody></table>
 
-<p>The following tables show the level of precision supported for the origin and destination places, and the outbound and return dates:</p>
+<p>The table below shows the level of precision supported for the origin and destination places. For more information on these, see <a href="#origin-destination-place-in-browse-requests">places</a>.</p>
 
 <p><img src="images/browsequotes_places-22512c0c.png" alt="diagram" /></p>
+
+<p>The table below shows the combinations of date specificity allowed for the outbound and inbound dates of a return search. For more information on these, see <a href="#outbound-inbound-date-specificity-in-browse-requests">dates</a>.</p>
 
 <p><img src="images/browsequotes_dates-04607133.png" alt="diagram" /></p>
 
@@ -849,7 +864,7 @@ Unless you require exact prices, we recommend you start with the cache prices AP
 </tr>
 </tbody></table>
 
-<p><em>REQUEST PARAMETERS</em></p>
+<p><em>REQUEST PATH PARAMETERS</em></p>
 
 <table><thead>
 <tr>
@@ -871,11 +886,11 @@ Unless you require exact prices, we recommend you start with the cache prices AP
 </tr>
 <tr>
 <td><code>originPlace</code> <br><span class="required">REQUIRED</span></td>
-<td>The origin place (see <a href="#places">places</a>)</td>
+<td>The origin place (see <a href="#origin-destination-place-in-browse-requests">places</a>)</td>
 </tr>
 <tr>
 <td><code>destinationPlace</code> <br><span class="required">REQUIRED</span></td>
-<td>The destination place (see <a href="#places">places</a>)</td>
+<td>The destination place (see <a href="#origin-destination-place-in-browse-requests">places</a>)</td>
 </tr>
 <tr>
 <td><code>outboundPartialDate</code> <br><span class="required">REQUIRED</span></td>
@@ -885,15 +900,27 @@ Unless you require exact prices, we recommend you start with the cache prices AP
 <td><code>inboundPartialDate</code> <br><span class="optional">OPTIONAL</span></td>
 <td>The return date. Format &quot;yyyy-mm-dd&quot;, &quot;yyyy-mm&quot; or &quot;anytime&quot;. Use empty string for oneway trip.</td>
 </tr>
+</tbody></table>
+
+<p><em>REQUEST QUERY PARAMETERS</em></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
 <tr>
 <td><code>apiKey</code> <br><span class="required">REQUIRED</span></td>
 <td>The API Key to identify the customer</td>
 </tr>
 </tbody></table>
 
-<p>The following tables show the level of precision supported for the origin and destination places, and the outbound and return dates:</p>
+<p>The table below shows the level of precision supported for the origin and destination places. For more information on these, see <a href="#origin-destination-place-in-browse-requests">places</a>.</p>
 
 <p><img src="images/browseroutes_places-e7d14aa5.png" alt="diagram" /></p>
+
+<p>The table below shows the combinations of date specificity allowed for the outbound and inbound dates of a return search. For more information on these, see <a href="#outbound-inbound-date-specificity-in-browse-requests">dates</a>.</p>
 
 <p><img src="images/browseroutes_dates-ada217d9.png" alt="diagram" /></p>
 
@@ -992,7 +1019,7 @@ Unless you require exact prices, we recommend you start with the cache prices AP
 </thead><tbody>
 <tr>
 <td><code>Routes</code></td>
-<td>Contains the list of routes available, assembled from the individual quotes.</td>
+<td>Contains the list of routes available for the search.</td>
 </tr>
 <tr>
 <td><code>Quotes</code></td>
@@ -1045,7 +1072,7 @@ Unless you require exact prices, we recommend you start with the cache prices AP
 </tr>
 </tbody></table>
 
-<p><em>REQUEST PARAMETERS</em></p>
+<p><em>REQUEST PATH PARAMETERS</em></p>
 
 <table><thead>
 <tr>
@@ -1067,11 +1094,11 @@ Unless you require exact prices, we recommend you start with the cache prices AP
 </tr>
 <tr>
 <td><code>originPlace</code> <br><span class="required">REQUIRED</span></td>
-<td>The origin place (see <a href="#places">places</a>)</td>
+<td>The origin place (see <a href="#origin-destination-place-in-browse-requests">places</a>)</td>
 </tr>
 <tr>
 <td><code>destinationPlace</code> <br><span class="required">REQUIRED</span></td>
-<td>The destination place (see <a href="#places">places</a>)</td>
+<td>The destination place (see <a href="#origin-destination-place-in-browse-requests">places</a>)</td>
 </tr>
 <tr>
 <td><code>outboundPartialDate</code> <br><span class="required">REQUIRED</span></td>
@@ -1081,15 +1108,27 @@ Unless you require exact prices, we recommend you start with the cache prices AP
 <td><code>inboundPartialDate</code> <br><span class="optional">OPTIONAL</span></td>
 <td>The return date. Format &quot;yyyy-mm-dd&quot;, &quot;yyyy-mm&quot; or &quot;anytime&quot;. Use empty string for oneway trip.</td>
 </tr>
+</tbody></table>
+
+<p><em>REQUEST QUERY PARAMETERS</em></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
 <tr>
 <td><code>apiKey</code> <br><span class="required">REQUIRED</span></td>
 <td>The API Key to identify the customer</td>
 </tr>
 </tbody></table>
 
-<p>The following tables show the level of precision supported for the origin and destination places, and the outbound and return dates:</p>
+<p>The table below shows the level of precision supported for the origin and destination places. For more information on these, see <a href="#origin-destination-place-in-browse-requests">places</a>.</p>
 
 <p><img src="images/browsedates_places-15687697.png" alt="diagram" /></p>
+
+<p>The table below shows the combinations of date specificity allowed for the outbound and inbound dates of a return search. For more information on these, see <a href="#outbound-inbound-date-specificity-in-browse-requests">dates</a>.</p>
 
 <p><img src="images/browsedates_dates-778c8640.png" alt="diagram" /></p>
 
@@ -1247,7 +1286,7 @@ Unless you require exact prices, we recommend you start with the cache prices AP
 </tr>
 </tbody></table>
 
-<p><em>REQUEST PARAMETERS</em></p>
+<p><em>REQUEST PATH PARAMETERS</em></p>
 
 <table><thead>
 <tr>
@@ -1269,11 +1308,11 @@ Unless you require exact prices, we recommend you start with the cache prices AP
 </tr>
 <tr>
 <td><code>originPlace</code> <br><span class="required">REQUIRED</span></td>
-<td>The origin place (see <a href="#places">places</a>)</td>
+<td>The origin place (see <a href="#origin-destination-place-in-browse-requests">places</a>)</td>
 </tr>
 <tr>
 <td><code>destinationPlace</code> <br><span class="required">REQUIRED</span></td>
-<td>The destination place (see <a href="#places">places</a>)</td>
+<td>The destination place (see <a href="#origin-destination-place-in-browse-requests">places</a>)</td>
 </tr>
 <tr>
 <td><code>outboundPartialDate</code> <br><span class="required">REQUIRED</span></td>
@@ -1283,15 +1322,27 @@ Unless you require exact prices, we recommend you start with the cache prices AP
 <td><code>inboundPartialDate</code> <br><span class="optional">OPTIONAL</span></td>
 <td>The return date. Format &quot;yyyy-mm-dd&quot;, &quot;yyyy-mm&quot; or &quot;anytime&quot;. Use empty string for oneway trip.</td>
 </tr>
+</tbody></table>
+
+<p><em>REQUEST QUERY PARAMETERS</em></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
 <tr>
 <td><code>apiKey</code> <br><span class="required">REQUIRED</span></td>
 <td>The API Key to identify the customer</td>
 </tr>
 </tbody></table>
 
-<p>The following tables show the level of precision supported for the origin and destination places, and the outbound and return dates:</p>
+<p>The table below shows the level of precision supported for the origin and destination places. For more information on these, see <a href="#origin-destination-place-in-browse-requests">places</a>.</p>
 
 <p><img src="images/browsegrid_places-350e5e51.png" alt="diagram" /></p>
+
+<p>The table below shows the combinations of date specificity allowed for the outbound and inbound dates of a return search. For more information on these, see <a href="#outbound-inbound-date-specificity-in-browse-requests">dates</a>.</p>
 
 <p><img src="images/browsegrid_dates-b62a4b8b.png" alt="diagram" /></p>
 
@@ -1367,11 +1418,85 @@ Unless you require exact prices, we recommend you start with the cache prices AP
 </tr>
 <tr>
 <td><code>Carriers</code></td>
-<td>The list of carriers specified in the list of quotes.</td>
+<td>The list of carriers matching the search results.</td>
 </tr>
 <tr>
 <td><code>Currencies</code></td>
-<td>The currency of the quote prices.</td>
+<td>The currency of the flight prices.</td>
+</tr>
+</tbody></table>
+<h2 id='flights-browse-notes'>Flights Browse Notes</h2><h3 id='origin-destination-place-in-browse-requests'>Origin/Destination Place in Browse Requests</h3>
+<p>The Place ID used in Browse Requests should be a combination of Place and Type, as shown below. If no type is specified, then it is assumed that the Place Id is a Skyscanner Code. See <a href="#places">places</a> for more information on Place Ids.</p>
+
+<table><thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Skyscanner Code (Default)</td>
+<td>e.g. <code>LHR-sky</code> for London Heathrow</td>
+</tr>
+<tr>
+<td>IATA Code</td>
+<td>e.g. <code>LHR-iata</code> for London Heathrow</td>
+</tr>
+<tr>
+<td>Skyscanner Route Node ID</td>
+<td>e.g. <code>65698-rnid</code> for London Heathrow</td>
+</tr>
+</tbody></table>
+
+<p>Origins and Destinations can also be more general than airports in Browse Requests:</p>
+
+<table><thead>
+<tr>
+<th>Origin/Destination</th>
+<th>Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Airport</td>
+<td>e.g. <code>LHR-sky</code></td>
+</tr>
+<tr>
+<td>City</td>
+<td>e.g. <code>LOND-sky</code></td>
+</tr>
+<tr>
+<td>Country</td>
+<td>e.g. <code>UK-sky</code></td>
+</tr>
+<tr>
+<td>Anywhere</td>
+<td><code>anywhere</code> or <code>everywhere</code></td>
+</tr>
+</tbody></table>
+<h3 id='outbound-inbound-date-specificity-in-browse-requests'>Outbound/Inbound Date Specificity in Browse Requests</h3>
+<p>The format of the Outbound/Inbound Dates used in Browse Requests should be one of the following:</p>
+
+<table><thead>
+<tr>
+<th>Date Specificity</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Day</td>
+<td>Format is <code>YYYY-MM-DD</code>, e.g. <code>2021-03-14</code></td>
+</tr>
+<tr>
+<td>Month</td>
+<td>Format is <code>YYYY-MM</code>, e.g. <code>2021-03</code></td>
+</tr>
+<tr>
+<td>Year</td>
+<td>Format is <code>YYYY</code>, e.g. <code>2021</code></td>
+</tr>
+<tr>
+<td>Anytime</td>
+<td>Value is <code>anytime</code></td>
 </tr>
 </tbody></table>
 <h1 id='flights-live-prices'>Flights Live Prices</h1>
