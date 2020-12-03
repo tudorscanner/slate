@@ -16,6 +16,7 @@ includes:
   - flights_browse_routes
   - flights_browse_dates
   - flights_browse_grid
+  - flights_browse_notes
   - flights_live_prices
   - car_hire
   - hotels
