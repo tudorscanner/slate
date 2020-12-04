@@ -16,7 +16,7 @@ You can use any of the following endpoints to get information about places:
 * our [Geo catalog](#geo-catalog) to get the full list of places that we support (please [contact us](https://partners.skyscanner.net/contact/) to request access)
 
 <aside class="warning">
-The country and language must be included in the Autosuggest query so that the most relevant results can be returned, in the correct language.
+The country and language must be included in the Autosuggest query so that the most relevant results can be returned in the correct language.
 </aside>
 
 
@@ -39,16 +39,23 @@ GET "https://partners.api.skyscanner.net/apiservices/
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/9c973db787e866c966f2)
 
-*REQUEST PARAMETERS*
+*REQUEST PATH PARAMETERS*
 
 | Parameter | Description |
-| --------- | ------- |
-| ```country``` <br><span class="required">REQUIRED</span> | The [market/country](#markets) your user is in |
-| ```currency``` <br><span class="required">REQUIRED</span> | The [currency](#currencies) you want the prices in |
-| ```locale``` <br><span class="required">REQUIRED</span> | The [locale](#locales) you want the results in (ISO locale) |
-| ```query``` <br><span class="required">REQUIRED</span> | The query string, must be at least 2 characters long. |
-| ```apiKey``` <br><span class="required">REQUIRED</span> | Your API Key. |
+| --------- | ----------- |
+| ```country``` <br><span class="required">REQUIRED</span> | The [market/country code](#markets) your user is in |
+| ```currency``` <br><span class="required">REQUIRED</span> | The [currency code](#currencies) you want the prices in |
+| ```locale``` <br><span class="required">REQUIRED</span> | The [locale code](#locales) you want the results in (ISO locale) |
 
+*REQUEST QUERY PARAMETERS*
+
+| Parameter | Description |
+| --------- | ----------- |
+| ```query``` <br><span class="required">REQUIRED</span> | The query string, must be at least 2 characters long. |
+| ```apiKey``` <br><span class="required">REQUIRED</span> | Your API Key or token. |
+| ```includeAirports``` <br><span class="optional">OPTIONAL</span> | If set to `true`, airports will be included in the result. If set to `false`, airports will be excluded. By default, it is set to `true`.  |
+| ```includeCities``` <br><span class="optional">OPTIONAL</span> | If set to `true`, cities will be included in the result. If set to `false`, cities will be excluded. By default, it is set to `true`.  |
+| ```includeCountries``` <br><span class="optional">OPTIONAL</span> | If set to `true`, countries will be included in the result. If set to `false`, countries will be excluded. By default, it is set to `true`.  |
 
 > Example response for query=pari
 
@@ -101,7 +108,7 @@ See <a href="#token-generation">token generation</a> section for more details.
 
 ## Place Information
 
-Get information about a country, city, or airport using its ID.
+Get information about a specific country, city, or airport using an ID, IP address or lat-long coordinates.
 
 *API endpoint*
 
@@ -118,15 +125,23 @@ GET "https://partners.api.skyscanner.net/apiservices/
     apiKey={apiKey}"
 ```
 
-*REQUEST PARAMETERS*
+*REQUEST PATH PARAMETERS*
 
 | Parameter | Description |
 | --------- | ------- |
-| ```country``` <br><span class="required">REQUIRED</span> | The [market/country](#markets) your user is in |
-| ```currency``` <br><span class="required">REQUIRED</span> | The [currency](#currencies) you want the prices in |
-| ```locale``` <br><span class="required">REQUIRED</span> | The [locale](#locales) you want the results in (ISO locale) |
-| ```id``` <br><span class="required">REQUIRED</span> | The place id (e.g. "CDG-sky") <b>or</b> the user's ip address (e.g. "188.39.95.140-ip") |
-| ```apiKey``` <br><span class="required">REQUIRED</span> | Your API Key |
+| ```country``` <br><span class="required">REQUIRED</span> | The [market/country code](#markets) your user is in |
+| ```currency``` <br><span class="required">REQUIRED</span> | The [currency code](#currencies) you want the prices in |
+| ```locale``` <br><span class="required">REQUIRED</span> | The [locale code](#locales) you want the results in (ISO locale) |
+
+*REQUEST QUERY PARAMETERS*
+
+| Parameter | Description |
+| --------- | ----------- |
+| ```id``` <br><span class="required">REQUIRED</span> | The place id (e.g. "CDG-sky") <br><b>or</b> an IP address (e.g. "188.39.95.140-ip") <br><b>or</b> lat-long coordinates (e.g. "35.2794,139.0436-latlong") |
+| ```apiKey``` <br><span class="required">REQUIRED</span> | Your API Key or token. |
+| ```includeAirports``` <br><span class="optional">OPTIONAL</span> | If set to `true`, airports will be included in the result. If set to `false`, airports will be excluded. By default, it is set to `true`.  |
+| ```includeCities``` <br><span class="optional">OPTIONAL</span> | If set to `true`, cities will be included in the result. If set to `false`, cities will be excluded. By default, it is set to `true`.  |
+| ```includeCountries``` <br><span class="optional">OPTIONAL</span> | If set to `true`, countries will be included in the result. If set to `false`, countries will be excluded. By default, it is set to `true`.  |
 
 > Example response for United Kingdom: id=uk
 
