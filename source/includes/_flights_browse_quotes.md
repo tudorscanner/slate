@@ -51,11 +51,11 @@ GET `/browsequotes/v1.0/{country}/{currency}/{locale}/{originPlace}/{destination
 
 The table below shows the level of precision supported for the origin and destination places. For more information on these, see [places](#origin-destination-place-in-browse-requests).
 
-![diagram](/images/browsequotes_places_updated.png)
+![diagram](/images/browsequotes_places.png)
 
 The table below shows the combinations of date specificity allowed for the outbound and inbound dates of a return search. For more information on these, see [dates](#outbound-inbound-date-specificity-in-browse-requests).
 
-![diagram](/images/browsequotes_dates_updated.png)
+![diagram](/images/browsequotes_dates.png)
 
 
 > Example response from US to anywhere:
