@@ -51,7 +51,7 @@ GET "https://partners.api.skyscanner.net/apiservices/
 
 | Parameter | Description |
 | --------- | ----------- |
-| ```query``` <br><span class="required">REQUIRED</span> | The query string, must be at least 2 characters long. |
+| ```query``` <br><span class="required">REQUIRED</span> | The query string. |
 | ```apiKey``` <br><span class="required">REQUIRED</span> | Your API Key or token. |
 | ```includeAirports``` <br><span class="optional">OPTIONAL</span> | If set to `true`, airports will be included in the result. If set to `false`, airports will be excluded. By default, it is set to `true`.  |
 | ```includeCities``` <br><span class="optional">OPTIONAL</span> | If set to `true`, cities will be included in the result. If set to `false`, cities will be excluded. By default, it is set to `true`.  |
