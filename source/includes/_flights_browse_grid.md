@@ -37,8 +37,8 @@ GET `/browsegrid/v1.0/{country}/{currency}/{locale}/{originPlace}/{destinationPl
 | ```locale``` <br><span class="required">REQUIRED</span> | The [locale](#locales) you want the results in (ISO locale) |
 | ```originPlace``` <br><span class="required">REQUIRED</span> | The origin place (see [places](#origin-destination-place-in-browse-requests)) |
 | ```destinationPlace``` <br><span class="required">REQUIRED</span> | The destination place (see [places](#origin-destination-place-in-browse-requests)) |
-| ```outboundPartialDate``` <br><span class="required">REQUIRED</span> | The outbound date. Format "yyyy-mm-dd", "yyyy-mm" or "anytime". |
-| ```inboundPartialDate``` <br><span class="optional">OPTIONAL</span> | The return date. Format "yyyy-mm-dd", "yyyy-mm" or "anytime". Use empty string for oneway trip. |
+| ```outboundPartialDate``` <br><span class="required">REQUIRED</span> | The outbound date (see [dates](#outbound-inbound-date-specificity-in-browse-requests)) |
+| ```inboundPartialDate``` <br><span class="optional">OPTIONAL</span> | The return date (see [dates](#outbound-inbound-date-specificity-in-browse-requests)). Use empty string for oneway trip. |
 
 *REQUEST QUERY PARAMETERS*
 
