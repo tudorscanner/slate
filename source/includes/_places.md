@@ -108,7 +108,7 @@ See <a href="#token-generation">token generation</a> section for more details.
 
 ## Place Information
 
-Get information about a specific country, city, or airport using a Skyscanner ID, IP address or lat-long coordinates.
+Get information about a specific country, city or airport using a Skyscanner Place ID. Alternatively, get information about the closest city using an IP address or lat-long coordinates.
 
 *API endpoint*
 
@@ -137,7 +137,7 @@ GET "https://partners.api.skyscanner.net/apiservices/
 
 | Parameter | Description |
 | --------- | ----------- |
-| ```id``` <br><span class="required">REQUIRED</span> | The Skyscanner place id (e.g. "CDG-sky") <br><b>or</b> an IP address (e.g. "188.39.95.140-ip") <br><b>or</b> lat-long coordinates (e.g. "35.2794,139.0436-latlong") |
+| ```id``` <br><span class="required">REQUIRED</span> | Should be one of the following: <br>- The Skyscanner place id (e.g. "CDG-sky"). Will return information about the place specified. <br>- An IP address (e.g. "188.39.95.140-ip"). Will return information about the city of the nearest airport to the IP specified.<br>- Lat-long coordinates (e.g. "35.2794,139.0436-latlong"). Will return information about the city of the nearest airport to the coordinates specified. |
 | ```apiKey``` <br><span class="required">REQUIRED</span> | Your API Key or token. |
 | ```includeAirports``` <br><span class="optional">OPTIONAL</span> | If set to `true`, airports will be included in the result. If set to `false`, airports will be excluded. By default, it is set to `true`.  |
 | ```includeCities``` <br><span class="optional">OPTIONAL</span> | If set to `true`, cities will be included in the result. If set to `false`, cities will be excluded. By default, it is set to `true`.  |
