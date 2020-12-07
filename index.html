@@ -4929,7 +4929,7 @@ Is a regular practice following the user flow first of all search for prices usi
 </ul>
 
 <aside class="warning">
-The country and language must be included in the Autosuggest query so that the most relevant results can be returned, in the correct language.
+The country and language must be included in the Autosuggest query so that the most relevant results can be returned in the correct language.
 </aside>
 <h2 id='list-of-places'>List of places</h2>
 <p>Get a list of places that match a query string.</p>
@@ -4946,7 +4946,7 @@ The country and language must be included in the Autosuggest query so that the m
 
 <p><a href="https://app.getpostman.com/run-collection/9c973db787e866c966f2"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
 
-<p><em>REQUEST PARAMETERS</em></p>
+<p><em>REQUEST PATH PARAMETERS</em></p>
 
 <table><thead>
 <tr>
@@ -4956,23 +4956,45 @@ The country and language must be included in the Autosuggest query so that the m
 </thead><tbody>
 <tr>
 <td><code>country</code> <br><span class="required">REQUIRED</span></td>
-<td>The <a href="#markets">market/country</a> your user is in</td>
+<td>The <a href="#markets">market/country code</a> your user is in</td>
 </tr>
 <tr>
 <td><code>currency</code> <br><span class="required">REQUIRED</span></td>
-<td>The <a href="#currencies">currency</a> you want the prices in</td>
+<td>The <a href="#currencies">currency code</a> you want the prices in</td>
 </tr>
 <tr>
 <td><code>locale</code> <br><span class="required">REQUIRED</span></td>
-<td>The <a href="#locales">locale</a> you want the results in (ISO locale)</td>
+<td>The <a href="#locales">locale code</a> you want the results in (ISO locale)</td>
 </tr>
+</tbody></table>
+
+<p><em>REQUEST QUERY PARAMETERS</em></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
 <tr>
 <td><code>query</code> <br><span class="required">REQUIRED</span></td>
-<td>The query string, must be at least 2 characters long.</td>
+<td>The query string.</td>
 </tr>
 <tr>
 <td><code>apiKey</code> <br><span class="required">REQUIRED</span></td>
-<td>Your API Key.</td>
+<td>Your API Key or token.</td>
+</tr>
+<tr>
+<td><code>includeAirports</code> <br><span class="optional">OPTIONAL</span></td>
+<td>If set to <code>true</code>, airports will be included in the result. If set to <code>false</code>, airports will be excluded. By default, it is set to <code>true</code>.</td>
+</tr>
+<tr>
+<td><code>includeCities</code> <br><span class="optional">OPTIONAL</span></td>
+<td>If set to <code>true</code>, cities will be included in the result. If set to <code>false</code>, cities will be excluded. By default, it is set to <code>true</code>.</td>
+</tr>
+<tr>
+<td><code>includeCountries</code> <br><span class="optional">OPTIONAL</span></td>
+<td>If set to <code>true</code>, countries will be included in the result. If set to <code>false</code>, countries will be excluded. By default, it is set to <code>true</code>.</td>
 </tr>
 </tbody></table>
 
@@ -5028,7 +5050,7 @@ If you are using this endpoint from client-side code, we recommend using a token
 See <a href="#token-generation">token generation</a> section for more details.
 </aside>
 <h2 id='place-information'>Place Information</h2>
-<p>Get information about a country, city, or airport using its ID.</p>
+<p>Get information about a specific country, city or airport using a Skyscanner Place ID. Alternatively, get information about the closest city using an IP address or lat-long coordinates.</p>
 
 <p><em>API endpoint</em></p>
 
@@ -5042,7 +5064,7 @@ See <a href="#token-generation">token generation</a> section for more details.
     id={place_id}&amp;
     apiKey={apiKey}"</span>
 </code></pre></div>
-<p><em>REQUEST PARAMETERS</em></p>
+<p><em>REQUEST PATH PARAMETERS</em></p>
 
 <table><thead>
 <tr>
@@ -5052,23 +5074,45 @@ See <a href="#token-generation">token generation</a> section for more details.
 </thead><tbody>
 <tr>
 <td><code>country</code> <br><span class="required">REQUIRED</span></td>
-<td>The <a href="#markets">market/country</a> your user is in</td>
+<td>The <a href="#markets">market/country code</a> your user is in</td>
 </tr>
 <tr>
 <td><code>currency</code> <br><span class="required">REQUIRED</span></td>
-<td>The <a href="#currencies">currency</a> you want the prices in</td>
+<td>The <a href="#currencies">currency code</a> you want the prices in</td>
 </tr>
 <tr>
 <td><code>locale</code> <br><span class="required">REQUIRED</span></td>
-<td>The <a href="#locales">locale</a> you want the results in (ISO locale)</td>
+<td>The <a href="#locales">locale code</a> you want the results in (ISO locale)</td>
 </tr>
+</tbody></table>
+
+<p><em>REQUEST QUERY PARAMETERS</em></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
 <tr>
 <td><code>id</code> <br><span class="required">REQUIRED</span></td>
-<td>The place id (e.g. &quot;CDG-sky&quot;) <b>or</b> the user&#39;s ip address (e.g. &quot;188.39.95.140-ip&quot;)</td>
+<td>Should be one of the following: <br>- The Skyscanner place id (e.g. &quot;CDG-sky&quot;). Will return information about the place specified. <br>- An IP address (e.g. &quot;188.39.95.140-ip&quot;). Will return information about the city of the nearest airport to the IP specified.<br>- Lat-long coordinates (e.g. &quot;35.2794,139.0436-latlong&quot;). Will return information about the city of the nearest airport to the coordinates specified.</td>
 </tr>
 <tr>
 <td><code>apiKey</code> <br><span class="required">REQUIRED</span></td>
-<td>Your API Key</td>
+<td>Your API Key or token.</td>
+</tr>
+<tr>
+<td><code>includeAirports</code> <br><span class="optional">OPTIONAL</span></td>
+<td>If set to <code>true</code>, airports will be included in the result. If set to <code>false</code>, airports will be excluded. By default, it is set to <code>true</code>.</td>
+</tr>
+<tr>
+<td><code>includeCities</code> <br><span class="optional">OPTIONAL</span></td>
+<td>If set to <code>true</code>, cities will be included in the result. If set to <code>false</code>, cities will be excluded. By default, it is set to <code>true</code>.</td>
+</tr>
+<tr>
+<td><code>includeCountries</code> <br><span class="optional">OPTIONAL</span></td>
+<td>If set to <code>true</code>, countries will be included in the result. If set to <code>false</code>, countries will be excluded. By default, it is set to <code>true</code>.</td>
 </tr>
 </tbody></table>
 
