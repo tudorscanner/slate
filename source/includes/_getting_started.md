@@ -24,14 +24,6 @@ Given the large number of suppliers that we query for quotes, the Live Pricing m
 Unless you require exact prices, we recommend you start with the cache prices API.
 </aside>
 
-## Car Hire
-
-*Car Hire Live Prices*
-
-| API endpoint | Description  |
-| --- | ---|
-| [Live prices](#car-hire-live-prices) | Returns live prices from all our suppliers for car hire deals (in the selected market). |
-
 ## Hotels
 
 *Hotels Live Prices*

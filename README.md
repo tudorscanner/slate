@@ -47,7 +47,6 @@ includes:
   - flights_browse_dates
   - flights_browse_grid
   - flights_live_prices
-  - car_hire
   - <new_api>
   - localisation
   - places

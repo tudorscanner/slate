@@ -18,7 +18,6 @@ includes:
   - flights_browse_grid
   - flights_browse_notes
   - flights_live_prices
-  - car_hire
   - hotels
   - localisation
   - places
