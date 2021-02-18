@@ -47,7 +47,6 @@ includes:
   - flights_browse_dates
   - flights_browse_grid
   - flights_live_prices
-  - car_hire
   - <new_api>
   - localisation
   - places
@@ -60,8 +59,6 @@ includes:
   - flights_multiCity
   - hotels_generic
   - hotels_dayView
-  - cars_generic
-  - cars_dayView
   - response_codes
 search: false
 ---
