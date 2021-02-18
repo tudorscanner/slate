@@ -25,7 +25,7 @@ For the different possible values of the parameters and additional query paramet
 
 | Parameter | Description |
 | --------- | ------- |
-| ```vertical``` <br><span class="required">REQUIRED</span> | The vertical you want to redirect to. Allowed values: flights|
+| ```vertical``` <br><span class="required">REQUIRED</span> | The vertical you want to redirect to. Allowed values: flights, cars|
 | ```pagetype``` <br><span class="required">OPTIONAL</span> | Page type supported by each vertical. E.g. for flights -> day-view, browse-view... take a look at the next table|
 | ```associateid``` <br><span class="required">OPTIONAL</span> | Associate partner id to attribute traffic to|
 | ```utm_term``` <br><span class="required">OPTIONAL</span> | Used to send through a unique variable that you can track back to your campaigns.|
@@ -35,6 +35,7 @@ For the different possible values of the parameters and additional query paramet
 | Vertical | Pagetypes |
 | --------- | ------- |
 | flights | home, day-view, calendar-month-view, browse-view, multicity, cheap-flights-to, flights-airline |
+| cars | home, day-view |
 
 ## Examples
 
@@ -45,6 +46,8 @@ Please try to avoid using `locale`, `market` and `currency`, as these values wil
 `GET https://skyscanner.net/g/referrals/v1/flights/day-view/?origin=cdg&destination=edi&outboundDate=2019-10-14&utm_term=summer&associateid=MY_ID_123`
 
 `GET https://skyscanner.net/g/referrals/v1/flights/calendar-month-view/?origin=cdg&destination=edi&iym=1910&utm_term=summer&associateid=MY_ID_123`
+
+`GET https://skyscanner.net/g/referrals/v1/cars/day-view/?pickupPlace=BCN&dropoffPlace=BCN&pickupTime=2019-09-10T10:00&dropoffTime=2019-09-15T10:00&driverAge=42&associateid=MY_ID_123`
 
 Preferred airlines:  
 You can find IATA airline codes [here](https://www.iata.org/publications/pages/code-search.aspx)
@@ -90,3 +93,12 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 | [flights-airline](#flights-airline-supported-parameters-schema) | Flights Airline [Example Link](https://www.skyscanner.net/airline/airline-emirates-ek.html)|
 
 For more details, please see our [Examples](#examples) 
+
+## Cars Parameters
+
+*Cars - Referral*
+
+| API endpoint | Description  |
+| --- | ---|
+| [day-view](#carhire-day-view-supported-parameters-schema) | CarHire DayView [Example Link](https://www.skyscanner.net/carhire/results/95565041/95565041/2020-08-20T10:00/2020-08-21T10:00/30)|
+| [home](#carhire-home-page-supported-parameters-schema) | CarHire Home [Example Link](https://www.skyscanner.net/carhire) |

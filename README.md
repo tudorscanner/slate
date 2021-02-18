@@ -59,6 +59,8 @@ includes:
   - flights_multiCity
   - hotels_generic
   - hotels_dayView
+  - cars_generic
+  - cars_dayView
   - response_codes
 search: false
 ---

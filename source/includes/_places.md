@@ -282,9 +282,9 @@ GET "https://partners.api.skyscanner.net/apiservices/
 | ```Airports``` | Contains the list of all the airports. |
 
 
-## Hotels Autosuggest
+## Hotels And Carhire Autosuggest
 
-Retrieve a list of geographical locations which can be used with the hotels API.
+Retrieve a list of geographical locations which can be used with the hotels and car hire APIs.
 
 ```shell
 GET "https://www.skyscanner.net/g/autosuggest/v3/hotels?
@@ -339,7 +339,7 @@ GET "https://www.skyscanner.net/g/autosuggest/v3/hotels?
 | Parameter | Description |
 | --- | --- |
 | ```results``` | Contains a list of results for the query in order of relevance |
-| ```id``` | Can be used as an input to the Hotels or to query geo |
+| ```id``` | Can be used as an input to the Hotels or CarHire Pricing Services or to query geo |
 | ```localised_name``` | Entity name in the provided locale |
 | ```localised_type``` | Contains the `type` in the locale used in the query |
 | ```type``` | Identify the type of the entity (City, District, Hotel, ...) |
@@ -364,7 +364,7 @@ Each place can be referred to via different schemas, described below.
 | Parameter | Description |
 | --- | --- |
 | sky | Skyscanner code. The response from [Autosuggest](#place-information) provides these ids. |
-| iata / iso | Airports and cities often use the internationally recognized IATA and ISO schemas.<br>For <b>Flights</b> we recommend that you use the Skyscanner code which is very similar but solves ambiguous cases where a city and one of its airports share the same code. |
+| iata / iso | Airports and cities often use the internationally recognized IATA and ISO schemas.<br>For <b>Flights</b> we recommend that you use the Skyscanner code which is very similar but solves ambiguous cases where a city and one of its airports share the same code. For <b>Car Hire</b> please use the IATA code.|
 | GeoNameCodes | GeoNameCodes from the GeoNames schema (see [geonames.org](www.geonames.org))|
 | GeoNameIDs | GeoNameIDs from the GeoNames schema (see [geonames.org](www.geonames.org))|
 
