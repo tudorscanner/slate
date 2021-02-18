@@ -19,7 +19,7 @@ You can redirect your users directly to the supplier's website (airline or trave
       
 ```
 
-When using [flights live prices](#flights-live-prices) urls (or deeplinks) are provided in the response to redirect users to the third-party supplier's website with the details of the itinerary that was selected. 
+When using [flights live prices](#flights-live-prices) or [car hire live prices](#car-hire-live-prices) urls (or deeplinks) are provided in the response to redirect users to the third-party supplier's website with the details of the itinerary that was selected. 
 
 ![deeplink page](/images/deeplink.png)
 

@@ -117,7 +117,7 @@ Parameter | Description |
 
 Retrieve the market countries that we support.
 
-Most suppliers (airlines and travel agents) set their fares based on the market (or country of purchase). It is therefore necessary to specify the market country in every query.
+Most suppliers (airlines, travel agents, and car hire dealers) set their fares based on the market (or country of purchase). It is therefore necessary to specify the market country in every query.
 
 ```shell
 GET "https://partners.api.skyscanner.net/apiservices/

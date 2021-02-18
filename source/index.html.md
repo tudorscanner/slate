@@ -18,6 +18,7 @@ includes:
   - flights_browse_grid
   - flights_browse_notes
   - flights_live_prices
+  - car_hire
   - hotels
   - localisation
   - places
@@ -30,6 +31,8 @@ includes:
   - flights_homeView
   - flights_cheapFlightsTo
   - flights_airline
+  - cars_dayView
+  - cars_carsHome
   - response_codes
   - HTTPS_migration_guide
 search: false
