@@ -111,6 +111,8 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 curl "{URL returned in Creating the session Location header}?apiKey={apiKey}" -X GET
 ```
 
+Please use the URL returned in the Creating the session `Location` header
+
 *API endpoint*
 
 `GET /pricing/v1.0/{SessionKey}`
@@ -470,6 +472,8 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 ```shell
 curl "{URL returned in Get booking details Location header}?apiKey={apiKey}" -X GET
 ```
+
+Please use the URL returned in the Get booking details `Location` header
 
 *API endpoint*
 
