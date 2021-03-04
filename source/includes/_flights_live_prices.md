@@ -111,7 +111,7 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 curl "{URL returned in Creating the session Location header}?apiKey={apiKey}" -X GET
 ```
 
-Please use the URL returned in the Creating the session `Location` header
+Use the polling endpoint provided in the successful response of the create request.
 
 *API endpoint*
 
@@ -473,7 +473,7 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 curl "{URL returned in Get booking details Location header}?apiKey={apiKey}" -X GET
 ```
 
-Please use the URL returned in the Get booking details `Location` header
+Use the polling endpoint provided in the successful response of the get booking details request.
 
 *API endpoint*
 
