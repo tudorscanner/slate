@@ -416,10 +416,6 @@ The full URL and body content are provided in the response from the live pricing
 `PUT /pricing/v1.0/{SessionKey}/booking`
 
 
-<aside class="notice">
-  Please note that the actual polling endpoint will be provided in the successful response of the <a href="#get-booking-details">Get booking details</a> request.
-</aside>
-
 *TRY IT OUT*
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/31ff523d2ff9186107e1)
@@ -474,12 +470,14 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 ```shell
 curl "{URL returned in Get booking details Location header}?apiKey={apiKey}" -X GET
 ```
-Use the URL returned in the `Location` header
 
 *API endpoint*
 
 `GET /pricing/v1.0/{SessionKey}/booking/{OutboundLegId};{InboundLegId}`
 
+<aside class="notice">
+  Please note that the actual polling endpoint will be provided in the successful response of the <a href="#get-booking-details">Get booking details</a> request.
+</aside>
 
 *TRY IT OUT*
 
