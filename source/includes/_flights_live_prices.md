@@ -158,7 +158,7 @@ or go to our [test harness](https://www.partners.skyscanner.net/flightsliveprici
 > Example polling request with pagination:
 
 ```shell
-Location "https://partners.api.skyscanner.net/apiservices/pricing/uk1/v1.0/
+Location "https://partners.api.skyscanner.net/apiservices/pricing/v1.0/
     {SessionKey}?apiKey={apiKey}
     &pageIndex=0
     &pageSize=10"
@@ -448,7 +448,7 @@ The full URL and body content are provided in the response from the live pricing
 > Example response:
 
 ```shell
-Location "https://partners.api.skyscanner.net/apiservices/pricing/uk1/v1.0/
+Location "https://partners.api.skyscanner.net/apiservices/pricing/v1.0/
     {SessionKey}/booking/
     {OutboundLegId};{InboundLegId}"
 ```
