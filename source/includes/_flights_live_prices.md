@@ -79,7 +79,7 @@ or go to our [test harness](https://www.partners.skyscanner.net/flightsliveprici
 > Example response with polling url:
 
 ```shell
-Location "https://partners.api.skyscanner.net/apiservices/pricing/uk1/v1.0/
+Location "https://partners.api.skyscanner.net/apiservices/pricing/v1.0/
     {SessionKey}"
 ```
 
@@ -108,7 +108,7 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 > Example request with polling url:
 
 ```shell
-Location "https://partners.api.skyscanner.net/apiservices/pricing/uk1/v1.0/
+Location "https://partners.api.skyscanner.net/apiservices/pricing/v1.0/
     {SessionKey}?apiKey={apiKey}
     &stops=0
     &duration=360
@@ -119,6 +119,9 @@ Location "https://partners.api.skyscanner.net/apiservices/pricing/uk1/v1.0/
 
 `GET /pricing/v1.0/{SessionKey}`
 
+<aside class="notice">
+  Please note that the actual polling endpoint will be provided in the successful response of the <a href="#creating-the-session">Create Request</a>.
+</aside>
 
 *TRY IT OUT*
 
