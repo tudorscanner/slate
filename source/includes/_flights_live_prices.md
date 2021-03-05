@@ -79,7 +79,7 @@ or go to our [test harness](https://www.partners.skyscanner.net/flightsliveprici
 > Example response with polling url:
 
 ```shell
-Location "https://partners.api.skyscanner.net/apiservices/pricing/uk1/v1.0/
+Location "https://partners.api.skyscanner.net/apiservices/pricing/v1.0/
     {SessionKey}"
 ```
 
@@ -108,17 +108,18 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 > Example request with polling url:
 
 ```shell
-Location "https://partners.api.skyscanner.net/apiservices/pricing/uk1/v1.0/
-    {SessionKey}?apiKey={apiKey}
-    &stops=0
-    &duration=360
-    &includeCarriers=ba;u2;af"
+curl "{URL returned in Creating the session Location header}?apiKey={apiKey}" -X GET
 ```
+
+Use the polling endpoint provided in the successful response of the create request.
 
 *API endpoint*
 
 `GET /pricing/v1.0/{SessionKey}`
 
+<aside class="notice">
+  Please note that the actual polling endpoint will be provided in the successful response of the <a href="#creating-the-session">Creating the session</a> request.
+</aside>
 
 *TRY IT OUT*
 
@@ -159,7 +160,7 @@ or go to our [test harness](https://www.partners.skyscanner.net/flightsliveprici
 > Example polling request with pagination:
 
 ```shell
-Location "https://partners.api.skyscanner.net/apiservices/pricing/uk1/v1.0/
+Location "https://partners.api.skyscanner.net/apiservices/pricing/v1.0/
     {SessionKey}?apiKey={apiKey}
     &pageIndex=0
     &pageSize=10"
@@ -445,7 +446,7 @@ The full URL and body content are provided in the response from the live pricing
 > Example response:
 
 ```shell
-Location "https://partners.api.skyscanner.net/apiservices/pricing/uk1/v1.0/
+Location "https://partners.api.skyscanner.net/apiservices/pricing/v1.0/
     {SessionKey}/booking/
     {OutboundLegId};{InboundLegId}"
 ```
@@ -469,16 +470,18 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 ### Request
 
 ```shell
-curl "https://partners.api.skyscanner.net/{URL returned in Location header}
-    ?apiKey={apiKey}"
-    -X GET
+curl "{URL returned in Get booking details Location header}?apiKey={apiKey}" -X GET
 ```
-Use the URL returned in the `Location` header
+
+Use the polling endpoint provided in the successful response of the get booking details request.
 
 *API endpoint*
 
 `GET /pricing/v1.0/{SessionKey}/booking/{OutboundLegId};{InboundLegId}`
 
+<aside class="notice">
+  Please note that the actual polling endpoint will be provided in the successful response of the <a href="#get-booking-details">Get booking details</a> request.
+</aside>
 
 *TRY IT OUT*
 
