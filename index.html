@@ -1603,7 +1603,7 @@ risk of exposing account API keys.
 <blockquote>
 <p>Example response with polling url:</p>
 </blockquote>
-<div class="highlight"><pre class="highlight shell tab-shell"><code>Location <span class="s2">"https://partners.api.skyscanner.net/apiservices/pricing/uk1/v1.0/
+<div class="highlight"><pre class="highlight shell tab-shell"><code>Location <span class="s2">"https://partners.api.skyscanner.net/apiservices/pricing/v1.0/
     {SessionKey}"</span>
 </code></pre></div>
 <p>A successful response contains no content. The URL to poll the results is provided in the Location header of the response.</p>
@@ -1629,15 +1629,17 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 <blockquote>
 <p>Example request with polling url:</p>
 </blockquote>
-<div class="highlight"><pre class="highlight shell tab-shell"><code>Location <span class="s2">"https://partners.api.skyscanner.net/apiservices/pricing/uk1/v1.0/
-    {SessionKey}?apiKey={apiKey}
-    &amp;stops=0
-    &amp;duration=360
-    &amp;includeCarriers=ba;u2;af"</span>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"{URL returned in Creating the session Location header}?apiKey={apiKey}"</span> <span class="nt">-X</span> GET
 </code></pre></div>
+<p>Use the polling endpoint provided in the successful response of the create request.</p>
+
 <p><em>API endpoint</em></p>
 
 <p><code>GET /pricing/v1.0/{SessionKey}</code></p>
+
+<aside class="notice">
+  Please note that the actual polling endpoint will be provided in the successful response of the <a href="#creating-the-session">Creating the session</a> request.
+</aside>
 
 <p><em>TRY IT OUT</em></p>
 
@@ -1732,7 +1734,7 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 <blockquote>
 <p>Example polling request with pagination:</p>
 </blockquote>
-<div class="highlight"><pre class="highlight shell tab-shell"><code>Location <span class="s2">"https://partners.api.skyscanner.net/apiservices/pricing/uk1/v1.0/
+<div class="highlight"><pre class="highlight shell tab-shell"><code>Location <span class="s2">"https://partners.api.skyscanner.net/apiservices/pricing/v1.0/
     {SessionKey}?apiKey={apiKey}
     &amp;pageIndex=0
     &amp;pageSize=10"</span>
@@ -2086,7 +2088,7 @@ Please add the no-follow attribute when you link to the deeplink. See <a href="h
 <blockquote>
 <p>Example response:</p>
 </blockquote>
-<div class="highlight"><pre class="highlight shell tab-shell"><code>Location <span class="s2">"https://partners.api.skyscanner.net/apiservices/pricing/uk1/v1.0/
+<div class="highlight"><pre class="highlight shell tab-shell"><code>Location <span class="s2">"https://partners.api.skyscanner.net/apiservices/pricing/v1.0/
     {SessionKey}/booking/
     {OutboundLegId};{InboundLegId}"</span>
 </code></pre></div>
@@ -2109,15 +2111,17 @@ Please refer to our <a href="#response-codes">response codes</a> in case of unsu
 <td>Contains the URL for polling the booking details results</td>
 </tr>
 </tbody></table>
-<h2 id='polling-the-booking-details'>Polling the booking details</h2><h3 id='request-4'>Request</h3><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://partners.api.skyscanner.net/{URL returned in Location header}
-    ?apiKey={apiKey}"</span>
-    <span class="nt">-X</span> GET
+<h2 id='polling-the-booking-details'>Polling the booking details</h2><h3 id='request-4'>Request</h3><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"{URL returned in Get booking details Location header}?apiKey={apiKey}"</span> <span class="nt">-X</span> GET
 </code></pre></div>
-<p>Use the URL returned in the <code>Location</code> header</p>
+<p>Use the polling endpoint provided in the successful response of the get booking details request.</p>
 
 <p><em>API endpoint</em></p>
 
 <p><code>GET /pricing/v1.0/{SessionKey}/booking/{OutboundLegId};{InboundLegId}</code></p>
+
+<aside class="notice">
+  Please note that the actual polling endpoint will be provided in the successful response of the <a href="#get-booking-details">Get booking details</a> request.
+</aside>
 
 <p><em>TRY IT OUT</em></p>
 
